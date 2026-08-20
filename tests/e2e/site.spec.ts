@@ -9,6 +9,9 @@ test("the 1440px home header matches the desktop design frame", async ({ page },
   const logo = header.getByRole("link", { name: "Gusto Italian Bar" });
 
   await expect(header).toHaveCSS("height", "132px");
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("background-image", "none");
+  await expect(header.locator(".site-header-inner")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
   await expect(logo).toBeVisible();
   await expect(page.getByRole("button", { name: "メニュー" })).toBeHidden();
 
@@ -18,6 +21,493 @@ test("the 1440px home header matches the desktop design frame", async ({ page },
   expect(logoBox!.y).toBeCloseTo(16, 1);
   expect(logoBox!.width).toBeCloseTo(230.708664, 1);
   expect(logoBox!.height).toBeCloseTo(100, 1);
+});
+
+test("the 768px home header uses desktop navigation at the breakpoint", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const header = page.getByRole("banner");
+  const logo = header.getByRole("link", { name: "Gusto Italian Bar" });
+  const menu = page.getByRole("button", { name: "メニュー" });
+
+  await expect(header).toHaveCSS("height", "120px");
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("background-image", "none");
+  await expect(header.locator(".site-header-inner")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header.locator(".site-header-inner")).toHaveCSS("background-image", "none");
+  await expect(page.locator("body")).toHaveCSS("background-image", /cotton01\.jpg/);
+  await expect(logo).toBeVisible();
+  await expect(menu).toBeHidden();
+
+  const logoBox = await logo.boundingBox();
+
+  expect(logoBox).not.toBeNull();
+  expect(logoBox!.x).toBeCloseTo(16, 1);
+  expect(logoBox!.y).toBeCloseTo(14, 1);
+  expect(logoBox!.width).toBeCloseTo(207.637802, 1);
+  expect(logoBox!.height).toBeCloseTo(90, 1);
+});
+
+test("the mobile menu is available below the 768px breakpoint", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only breakpoint check");
+  await page.setViewportSize({ width: 767, height: 900 });
+  await page.goto("/ja");
+
+  const header = page.getByRole("banner");
+  const trigger = page.getByRole("button", { name: "メニュー" });
+  const menuLines = trigger.locator("i");
+
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(trigger).toBeVisible();
+  await expect(trigger).toHaveCSS("color", "rgb(27, 40, 27)");
+  await expect(menuLines).toHaveCount(3);
+  for (const line of await menuLines.all()) {
+    await expect(line).toHaveCSS("background-color", "rgb(27, 40, 27)");
+    await expect(line).toHaveCSS("opacity", "1");
+  }
+
+  await trigger.click();
+  const menu = page.getByRole("dialog", { name: "メニュー" });
+  await expect(menu).toBeVisible();
+  await expect(menu).toHaveCSS("position", "fixed");
+  await expect(menu).toHaveCSS("opacity", "1");
+  await expect(menu).toHaveCSS("background-color", "rgb(27, 40, 27)");
+  await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+  const menuBox = await menu.boundingBox();
+  expect(menuBox).not.toBeNull();
+  expect(menuBox!.x).toBeCloseTo(0, 1);
+  expect(menuBox!.y).toBeCloseTo(0, 1);
+  expect(menuBox!.width).toBeCloseTo(767, 1);
+  expect(menuBox!.height).toBeCloseTo(900, 1);
+  await expect(menu.getByRole("link", { name: "Home" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "Menu" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "Our Story" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "Access" })).toBeVisible();
+  await expect(menu.getByText("Reserve", { exact: true })).toBeVisible();
+  const mobileLogo = menu.getByRole("link", { name: "Gusto Italian Bar" });
+  const close = menu.getByRole("button", { name: "メニューを閉じる" });
+  const home = menu.getByRole("link", { name: "Home" });
+  const reserve = menu.getByText("Reserve", { exact: true });
+  const mobileLogoBox = await mobileLogo.boundingBox();
+  const closeBox = await close.boundingBox();
+  const homeBox = await home.boundingBox();
+  const reserveBox = await reserve.boundingBox();
+
+  expect(mobileLogoBox).not.toBeNull();
+  expect(closeBox).not.toBeNull();
+  expect(homeBox).not.toBeNull();
+  expect(reserveBox).not.toBeNull();
+  expect(mobileLogoBox!.x).toBeCloseTo(278.5, 1);
+  expect(mobileLogoBox!.y).toBeCloseTo(20.976112, 1);
+  expect(mobileLogoBox!.width).toBeCloseTo(210, 1);
+  expect(mobileLogoBox!.height).toBeCloseTo(91.023888, 1);
+  expect(closeBox!.x).toBeCloseTo(719, 1);
+  expect(closeBox!.y).toBeCloseTo(44, 1);
+  expect(homeBox!.y).toBeCloseTo(220, 1);
+  expect(reserveBox!.x).toBeCloseTo(203.5, 1);
+  expect(reserveBox!.y).toBeCloseTo(628, 1);
+  expect(reserveBox!.width).toBeCloseTo(360, 1);
+  expect(reserveBox!.height).toBeCloseTo(54, 1);
+  await expect(close).toBeFocused();
+
+  await page.keyboard.press("Escape");
+  await expect(menu).toBeHidden();
+  await expect(trigger).toBeFocused();
+
+  await trigger.click();
+  await expect(page.getByRole("dialog", { name: "メニュー" })).toBeVisible();
+  await page.setViewportSize({ width: 768, height: 900 });
+  await expect(page.getByRole("dialog", { name: "メニュー" })).toBeHidden();
+  await expect(trigger).toBeHidden();
+});
+
+test("the 768px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const hero = page.locator(".gusto-hero");
+  const heading = hero.getByRole("heading", { level: 1 });
+  const dishes = hero.locator(".gusto-hero-dishes");
+  const vegetables = hero.locator(".gusto-hero-veg");
+  const marquee = hero.locator(".gusto-vertical");
+
+  await expect(hero.locator(".gusto-hero-nav")).toBeHidden();
+  await expect(hero.locator(".gusto-hero-caret")).toBeHidden();
+  await expect(hero.locator(".gusto-hero-brush")).toBeHidden();
+  await expect(heading.locator(".gusto-hero-title-emphasis")).toHaveCount(3);
+
+  const heroBox = await hero.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const dishesBox = await dishes.boundingBox();
+  const vegetablesBox = await vegetables.boundingBox();
+  const marqueeBox = await marquee.boundingBox();
+
+  expect(heroBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(dishesBox).not.toBeNull();
+  expect(vegetablesBox).not.toBeNull();
+  expect(marqueeBox).not.toBeNull();
+  expect(heroBox!.y).toBeCloseTo(120, 1);
+  expect(heroBox!.height).toBeCloseTo(844, 1);
+  expect(headingBox!.x - heroBox!.x).toBeCloseTo(86.237976, 1);
+  expect(headingBox!.y - heroBox!.y).toBeCloseTo(0, 1);
+  expect(headingBox!.width).toBeCloseTo(424, 1);
+  expect(headingBox!.height).toBeCloseTo(240, 1);
+  expect(dishesBox!.x - heroBox!.x).toBeCloseTo(141.321472, 1);
+  expect(dishesBox!.y - heroBox!.y).toBeCloseTo(-1.597839, 1);
+  expect(dishesBox!.width).toBeCloseTo(739.296631, 1);
+  expect(dishesBox!.height).toBeCloseTo(797.771484, 1);
+  expect(vegetablesBox!.x - heroBox!.x).toBeCloseTo(86.73233, 1);
+  expect(vegetablesBox!.y - heroBox!.y).toBeCloseTo(597.101837, 1);
+  expect(vegetablesBox!.width).toBeCloseTo(347.39679, 1);
+  expect(vegetablesBox!.height).toBeCloseTo(237.561798, 1);
+  expect(marqueeBox!.x - heroBox!.x).toBeCloseTo(0, 1);
+  expect(marqueeBox!.y - heroBox!.y).toBeCloseTo(0, 1);
+  expect(marqueeBox!.width).toBeCloseTo(60, 1);
+  expect(marqueeBox!.height).toBeCloseTo(527, 1);
+  await expect(marquee).toHaveCSS("font-size", "68px");
+  await expect(marquee).toHaveCSS("left", "-233.5px");
+  await expect(marquee).toHaveCSS("top", "233.5px");
+  await expect(marquee).toHaveCSS("transform-origin", "263.5px 30px");
+});
+
+test("the 768px About section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const about = page.locator("#about");
+  const brush = about.locator(".gusto-about-brush");
+  const title = about.locator(".gusto-about-title");
+  const body = about.locator(".gusto-about-body");
+  const more = about.locator(".gusto-about-more");
+  const image = about.locator(".gusto-about-image");
+
+  const aboutBox = await about.boundingBox();
+  const brushBox = await brush.boundingBox();
+  const titleBox = await title.boundingBox();
+  const bodyBox = await body.boundingBox();
+  const moreBox = await more.boundingBox();
+  const imageBox = await image.boundingBox();
+
+  expect(aboutBox).not.toBeNull();
+  expect(brushBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(bodyBox).not.toBeNull();
+  expect(moreBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(aboutBox!.y).toBeCloseTo(964, 1);
+  expect(aboutBox!.width).toBeCloseTo(768, 1);
+  expect(aboutBox!.height).toBeCloseTo(1239.476807, 1);
+  expect(brushBox!.x).toBeCloseTo(0, 1);
+  expect(brushBox!.y - aboutBox!.y).toBeCloseTo(0, 1);
+  expect(brushBox!.width).toBeCloseTo(768, 1);
+  expect(brushBox!.height).toBeCloseTo(56.62664, 1);
+  expect(titleBox!.x).toBeCloseTo(288, 1);
+  expect(titleBox!.y - aboutBox!.y).toBeCloseTo(120.62664, 1);
+  expect(titleBox!.width).toBeCloseTo(192, 1);
+  expect(titleBox!.height).toBeCloseTo(52.000023, 1);
+  expect(await title.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("192px");
+  expect(bodyBox!.x).toBeCloseTo(85.493042, 1);
+  expect(bodyBox!.y - aboutBox!.y).toBeCloseTo(220.626663, 1);
+  expect(bodyBox!.width).toBeCloseTo(597.013916, 1);
+  expect(bodyBox!.height).toBeCloseTo(144, 1);
+  expect(moreBox!.x).toBeCloseTo(24, 1);
+  expect(moreBox!.y - aboutBox!.y).toBeCloseTo(412.626671, 1);
+  expect(moreBox!.width).toBeCloseTo(720, 1);
+  expect(moreBox!.height).toBeCloseTo(60, 1);
+  expect(imageBox!.x).toBeCloseTo(78.001129, 1);
+  expect(imageBox!.y - aboutBox!.y).toBeCloseTo(504.626709, 1);
+  expect(imageBox!.width).toBeCloseTo(611.997742, 1);
+  expect(imageBox!.height).toBeCloseTo(670.850098, 1);
+  await expect(title.getByRole("heading", { name: "グストとは" })).toHaveCSS("font-size", "60px");
+  await expect(body).toHaveCSS("font-size", "22px");
+});
+
+test("the 768px Wine section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const wine = page.locator("#wine");
+  const topBrush = wine.locator(".gusto-wine-brush-top");
+  const bottomBrush = wine.locator(".gusto-wine-brush-bottom");
+  const copy = wine.locator(".gusto-wine-copy");
+  const title = wine.locator(".gusto-wine-title");
+  const text = wine.locator(".gusto-wine-text");
+  const more = wine.locator(".gusto-wine-more");
+  const visual = wine.locator(".gusto-wine-visual");
+  const artwork = visual.locator("img");
+
+  const wineBox = await wine.boundingBox();
+  const topBrushBox = await topBrush.boundingBox();
+  const bottomBrushBox = await bottomBrush.boundingBox();
+  const copyBox = await copy.boundingBox();
+  const titleBox = await title.boundingBox();
+  const textBox = await text.boundingBox();
+  const moreBox = await more.boundingBox();
+  const visualBox = await visual.boundingBox();
+  const artworkBox = await artwork.boundingBox();
+
+  expect(wineBox).not.toBeNull();
+  expect(topBrushBox).not.toBeNull();
+  expect(bottomBrushBox).not.toBeNull();
+  expect(copyBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(textBox).not.toBeNull();
+  expect(moreBox).not.toBeNull();
+  expect(visualBox).not.toBeNull();
+  expect(artworkBox).not.toBeNull();
+  expect(wineBox!.x).toBeCloseTo(0, 1);
+  expect(wineBox!.y).toBeCloseTo(2203.476807, 1);
+  expect(wineBox!.width).toBeCloseTo(768, 1);
+  expect(wineBox!.height).toBeCloseTo(1097.074585, 1);
+  expect(topBrushBox!.y - wineBox!.y).toBeCloseTo(0, 1);
+  expect(topBrushBox!.height).toBeCloseTo(72.251732, 1);
+  expect(bottomBrushBox!.y - wineBox!.y).toBeCloseTo(1021.251709, 1);
+  expect(bottomBrushBox!.height).toBeCloseTo(75.822929, 1);
+  expect(copyBox!.x).toBeCloseTo(24, 1);
+  expect(copyBox!.y - wineBox!.y).toBeCloseTo(144.251732, 1);
+  expect(copyBox!.width).toBeCloseTo(720, 1);
+  expect(copyBox!.height).toBeCloseTo(399.000031, 1);
+  expect(titleBox!.x).toBeCloseTo(270, 1);
+  expect(titleBox!.y - wineBox!.y).toBeCloseTo(144.251732, 1);
+  expect(titleBox!.width).toBeCloseTo(228, 1);
+  expect(await title.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("228px");
+  expect(textBox!.x).toBeCloseTo(85, 1);
+  expect(textBox!.y - wineBox!.y).toBeCloseTo(243.251763, 1);
+  expect(textBox!.width).toBeCloseTo(598, 1);
+  expect(textBox!.height).toBeCloseTo(192, 1);
+  expect(moreBox!.y - wineBox!.y).toBeCloseTo(483.251763, 1);
+  expect(moreBox!.height).toBeCloseTo(60, 1);
+  expect(visualBox!.x).toBeCloseTo(24, 1);
+  expect(visualBox!.y - wineBox!.y).toBeCloseTo(575.251763, 1);
+  expect(visualBox!.width).toBeCloseTo(720, 1);
+  expect(visualBox!.height).toBeCloseTo(382, 1);
+  expect(artworkBox!.x).toBeCloseTo(186.75, 1);
+  expect(artworkBox!.y - wineBox!.y).toBeCloseTo(575.251763, 1);
+  expect(artworkBox!.width).toBeCloseTo(394.5, 1);
+  expect(artworkBox!.height).toBeCloseTo(358.636383, 1);
+  await expect(title.getByRole("heading", { name: "ワインのこと" })).toHaveCSS("font-size", "60px");
+  await expect(text).toHaveCSS("font-size", "22px");
+});
+
+test("the first 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const recommendation = page.locator("#recommendation-1");
+  const copy = recommendation.locator(".gusto-feature-copy");
+  const heading = recommendation.locator(".gusto-feature-heading");
+  const headingText = heading.locator("p");
+  const content = recommendation.locator(".gusto-feature-content");
+  const title = content.getByRole("heading", { level: 3, name: "グストのパスタ" });
+  const description = content.locator(".gusto-feature-description");
+  const more = recommendation.getByRole("link", { name: "パスタメニューを見る" });
+  const image = recommendation.locator(".gusto-feature-image");
+
+  const recommendationBox = await recommendation.boundingBox();
+  const copyBox = await copy.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const headingTextBox = await headingText.boundingBox();
+  const contentBox = await content.boundingBox();
+  const titleBox = await title.boundingBox();
+  const descriptionBox = await description.boundingBox();
+  const moreBox = await more.boundingBox();
+  const imageBox = await image.boundingBox();
+
+  expect(recommendationBox).not.toBeNull();
+  expect(copyBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(headingTextBox).not.toBeNull();
+  expect(contentBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(descriptionBox).not.toBeNull();
+  expect(moreBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(recommendationBox!.x).toBeCloseTo(0, 1);
+  expect(recommendationBox!.y).toBeCloseTo(3300.551392, 1);
+  expect(recommendationBox!.width).toBeCloseTo(768, 1);
+  expect(recommendationBox!.height).toBeCloseTo(994.930908, 1);
+  expect(copyBox!.x).toBeCloseTo(86, 1);
+  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(copyBox!.width).toBeCloseTo(596, 1);
+  expect(copyBox!.height).toBeCloseTo(356.000031, 1);
+  expect(headingBox!.x).toBeCloseTo(86, 1);
+  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(headingBox!.width).toBeCloseTo(300, 1);
+  expect(headingBox!.height).toBeCloseTo(56.000034, 1);
+  expect(headingTextBox!.height).toBeCloseTo(48, 1);
+  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
+  expect(contentBox!.x).toBeCloseTo(86, 1);
+  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168.000031, 1);
+  expect(contentBox!.width).toBeCloseTo(596, 1);
+  expect(contentBox!.height).toBeCloseTo(252, 1);
+  expect(titleBox!.height).toBeCloseTo(32, 1);
+  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232.000031, 1);
+  expect(descriptionBox!.height).toBeCloseTo(96, 1);
+  expect(moreBox!.x).toBeCloseTo(86, 1);
+  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(360.000031, 1);
+  expect(moreBox!.width).toBeCloseTo(323.396759, 1);
+  expect(moreBox!.height).toBeCloseTo(60, 1);
+  expect(imageBox!.x).toBeCloseTo(139.5, 1);
+  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(444.000031, 1);
+  expect(imageBox!.width).toBeCloseTo(489, 1);
+  expect(imageBox!.height).toBeCloseTo(486.930878, 1);
+  await expect(headingText).toHaveCSS("font-size", "60px");
+  await expect(title).toHaveCSS("font-size", "42px");
+  await expect(description).toHaveCSS("font-size", "22px");
+  await expect(more).toHaveCSS("font-size", "22px");
+});
+
+test("the second 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const recommendation = page.locator("#recommendation-2");
+  const copy = recommendation.locator(".gusto-feature-copy");
+  const heading = recommendation.locator(".gusto-feature-heading");
+  const headingText = heading.locator("p");
+  const content = recommendation.locator(".gusto-feature-content");
+  const title = content.getByRole("heading", { level: 3, name: "ピザ・マルゲリータ" });
+  const description = content.locator(".gusto-feature-description");
+  const more = recommendation.getByRole("link", { name: "ピザメニューを見る" });
+  const image = recommendation.locator(".gusto-feature-image");
+  const decoration = recommendation.locator(".gusto-feature-2-deco");
+
+  const recommendationBox = await recommendation.boundingBox();
+  const copyBox = await copy.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const headingTextBox = await headingText.boundingBox();
+  const contentBox = await content.boundingBox();
+  const titleBox = await title.boundingBox();
+  const descriptionBox = await description.boundingBox();
+  const moreBox = await more.boundingBox();
+  const imageBox = await image.boundingBox();
+
+  expect(recommendationBox).not.toBeNull();
+  expect(copyBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(headingTextBox).not.toBeNull();
+  expect(contentBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(descriptionBox).not.toBeNull();
+  expect(moreBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(recommendationBox!.x).toBeCloseTo(0, 1);
+  expect(recommendationBox!.y).toBeCloseTo(4295.4823, 1);
+  expect(recommendationBox!.width).toBeCloseTo(768, 1);
+  expect(recommendationBox!.height).toBeCloseTo(1091.632813, 1);
+  expect(copyBox!.x).toBeCloseTo(86, 1);
+  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(copyBox!.width).toBeCloseTo(596, 1);
+  expect(copyBox!.height).toBeCloseTo(380, 1);
+  expect(headingBox!.x).toBeCloseTo(86, 1);
+  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(headingBox!.width).toBeCloseTo(300, 1);
+  expect(headingBox!.height).toBeCloseTo(56, 1);
+  expect(headingTextBox!.height).toBeCloseTo(48, 1);
+  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
+  expect(contentBox!.x).toBeCloseTo(86, 1);
+  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168, 1);
+  expect(contentBox!.width).toBeCloseTo(596, 1);
+  expect(contentBox!.height).toBeCloseTo(276, 1);
+  expect(titleBox!.height).toBeCloseTo(32, 1);
+  expect(await title.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232, 1);
+  expect(descriptionBox!.width).toBeCloseTo(596, 1);
+  expect(descriptionBox!.height).toBeCloseTo(120, 1);
+  expect(moreBox!.x).toBeCloseTo(86, 1);
+  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(384, 1);
+  expect(moreBox!.width).toBeCloseTo(305.396759, 1);
+  expect(moreBox!.height).toBeCloseTo(60, 1);
+  expect(imageBox!.x).toBeCloseTo(133, 1);
+  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(476, 1);
+  expect(imageBox!.width).toBeCloseTo(502, 1);
+  expect(imageBox!.height).toBeCloseTo(551.632751, 1);
+  await expect(decoration).toBeHidden();
+  await expect(headingText).toHaveCSS("font-size", "60px");
+  await expect(title).toHaveCSS("font-size", "42px");
+  await expect(description).toHaveCSS("font-size", "22px");
+  await expect(more).toHaveCSS("font-size", "22px");
+});
+
+test("the third 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const recommendation = page.locator("#recommendation-3");
+  const copy = recommendation.locator(".gusto-feature-copy");
+  const heading = recommendation.locator(".gusto-feature-heading");
+  const headingText = heading.locator("p");
+  const content = recommendation.locator(".gusto-feature-content");
+  const title = content.getByRole("heading", { level: 3, name: "海老のソーセージ" });
+  const description = content.locator(".gusto-feature-description");
+  const more = recommendation.getByRole("link", { name: "各メニューを見る" });
+  const image = recommendation.locator(".gusto-feature-image");
+  const decoration = recommendation.locator(".gusto-feature-3-deco");
+
+  const recommendationBox = await recommendation.boundingBox();
+  const copyBox = await copy.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const headingTextBox = await headingText.boundingBox();
+  const contentBox = await content.boundingBox();
+  const titleBox = await title.boundingBox();
+  const descriptionBox = await description.boundingBox();
+  const moreBox = await more.boundingBox();
+  const imageBox = await image.boundingBox();
+
+  expect(recommendationBox).not.toBeNull();
+  expect(copyBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(headingTextBox).not.toBeNull();
+  expect(contentBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(descriptionBox).not.toBeNull();
+  expect(moreBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(recommendationBox!.x).toBeCloseTo(0, 1);
+  expect(recommendationBox!.y).toBeCloseTo(5387.115113, 1);
+  expect(recommendationBox!.width).toBeCloseTo(768, 1);
+  expect(recommendationBox!.height).toBeCloseTo(1068, 1);
+  expect(copyBox!.x).toBeCloseTo(86, 1);
+  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(copyBox!.width).toBeCloseTo(596, 1);
+  expect(copyBox!.height).toBeCloseTo(356, 1);
+  expect(headingBox!.x).toBeCloseTo(86, 1);
+  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
+  expect(headingBox!.width).toBeCloseTo(300, 1);
+  expect(headingBox!.height).toBeCloseTo(56, 1);
+  expect(headingTextBox!.height).toBeCloseTo(48, 1);
+  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
+  expect(contentBox!.x).toBeCloseTo(86, 1);
+  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168, 1);
+  expect(contentBox!.width).toBeCloseTo(596.02063, 1);
+  expect(contentBox!.height).toBeCloseTo(252, 1);
+  expect(titleBox!.height).toBeCloseTo(32, 1);
+  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232, 1);
+  expect(descriptionBox!.width).toBeCloseTo(596.02063, 1);
+  expect(descriptionBox!.height).toBeCloseTo(96, 1);
+  expect(moreBox!.x).toBeCloseTo(86, 1);
+  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(360, 1);
+  expect(moreBox!.width).toBeCloseTo(287.396759, 1);
+  expect(moreBox!.height).toBeCloseTo(60, 1);
+  expect(await more.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect(imageBox!.x).toBeCloseTo(166.5, 1);
+  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(444, 1);
+  expect(imageBox!.width).toBeCloseTo(435, 1);
+  expect(imageBox!.height).toBeCloseTo(560, 1);
+  await expect(decoration).toBeHidden();
+  await expect(headingText).toHaveCSS("font-size", "60px");
+  await expect(title).toHaveCSS("font-size", "42px");
+  await expect(description).toHaveCSS("font-size", "22px");
+  await expect(more).toHaveCSS("font-size", "22px");
 });
 
 test("the 1440px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
@@ -74,6 +564,8 @@ test("the 1440px About section follows the supplied Pixso frame", async ({ page 
   expect(aboutBox!.height).toBeCloseTo(832, 1);
   expect(titleBox!.x).toBeCloseTo(96, 1);
   expect(titleBox!.y - aboutBox!.y).toBeCloseTo(60, 1);
+  expect(titleBox!.width).toBeCloseTo(320, 1);
+  expect(await title.evaluate((element) => getComputedStyle(element).getPropertyValue("--gusto-about-title-width").trim())).toBe("320px");
   expect(bodyBox!.x).toBeCloseTo(96, 1);
   expect(bodyBox!.y - aboutBox!.y).toBeCloseTo(192, 1);
   expect(imageBox!.x).toBeCloseTo(732, 1);
@@ -204,7 +696,7 @@ test("the third 1440px recommendation keeps its flex content centered", async ({
   const content = recommendation.locator(".gusto-feature-content");
   const image = recommendation.locator(".gusto-feature-image");
   const decoration = recommendation.locator(".gusto-feature-3-deco");
-  const link = recommendation.getByRole("link", { name: "アラカルトメニューを見る" });
+  const link = recommendation.getByRole("link", { name: "各メニューを見る" });
 
   const recommendationBox = await recommendation.boundingBox();
   const headingBox = await heading.boundingBox();
@@ -234,6 +726,72 @@ test("the third 1440px recommendation keeps its flex content centered", async ({
   expect(decorationBox!.y - recommendationBox!.y).toBeCloseTo(-126.476285, 1);
   expect(decorationBox!.width).toBeCloseTo(426.709015, 1);
   expect(decorationBox!.height).toBeCloseTo(442.898, 1);
+});
+
+test("the 768px social section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const social = page.locator("#social");
+  const brush = social.locator(".gusto-social-brush");
+  const gallery = social.locator(".gusto-gallery");
+  const galleryItem = social.locator(".gusto-gallery-item").first();
+  const links = social.locator(".gusto-social-links");
+  const firstLink = links.locator("a").first();
+  const firstCopy = firstLink.locator(".gusto-social-copy");
+  const firstHeading = firstLink.locator(".gusto-social-heading");
+  const firstDecoration = firstHeading.locator("img");
+  const firstTitle = firstHeading.locator("span");
+  const firstDescription = firstCopy.locator("p");
+  const firstIcon = firstLink.locator(":scope > svg");
+
+  const socialBox = await social.boundingBox();
+  const brushBox = await brush.boundingBox();
+  const galleryBox = await gallery.boundingBox();
+  const galleryItemBox = await galleryItem.boundingBox();
+  const linksBox = await links.boundingBox();
+  const firstLinkBox = await firstLink.boundingBox();
+  const firstCopyBox = await firstCopy.boundingBox();
+  const firstHeadingBox = await firstHeading.boundingBox();
+  const firstDecorationBox = await firstDecoration.boundingBox();
+  const firstIconBox = await firstIcon.boundingBox();
+
+  expect(socialBox).not.toBeNull();
+  expect(brushBox).not.toBeNull();
+  expect(galleryBox).not.toBeNull();
+  expect(galleryItemBox).not.toBeNull();
+  expect(linksBox).not.toBeNull();
+  expect(firstLinkBox).not.toBeNull();
+  expect(firstCopyBox).not.toBeNull();
+  expect(firstHeadingBox).not.toBeNull();
+  expect(firstDecorationBox).not.toBeNull();
+  expect(firstIconBox).not.toBeNull();
+  expect(socialBox!.height).toBeCloseTo(714.626709, 1);
+  expect(brushBox!.x).toBeCloseTo(0, 1);
+  expect(brushBox!.y - socialBox!.y).toBeCloseTo(0, 1);
+  expect(brushBox!.width).toBeCloseTo(768, 1);
+  expect(galleryBox!.x).toBeCloseTo(-690, 1);
+  expect(galleryBox!.y - socialBox!.y).toBeCloseTo(106.626709, 1);
+  expect(galleryBox!.width).toBeCloseTo(2148, 1);
+  expect(galleryBox!.height).toBeCloseTo(200, 1);
+  expect(galleryItemBox!.width).toBeCloseTo(300, 1);
+  expect(galleryItemBox!.height).toBeCloseTo(200, 1);
+  expect(linksBox!.x).toBeCloseTo(23, 1);
+  expect(linksBox!.y - socialBox!.y).toBeCloseTo(378.626709, 1);
+  expect(linksBox!.width).toBeCloseTo(722, 1);
+  expect(linksBox!.height).toBeCloseTo(286, 1);
+  expect(firstLinkBox!.width).toBeCloseTo(240.666667, 1);
+  expect(firstLinkBox!.height).toBeCloseTo(286, 1);
+  expect(firstCopyBox!.width).toBeCloseTo(176.666667, 1);
+  expect(firstCopyBox!.height).toBeCloseTo(110, 1);
+  expect(firstHeadingBox!.height).toBeCloseTo(72, 1);
+  expect(firstDecorationBox!.width).toBeCloseTo(57.6, 1);
+  expect(firstDecorationBox!.height).toBeCloseTo(32, 1);
+  expect(firstIconBox!.width).toBeCloseTo(64, 1);
+  expect(firstIconBox!.height).toBeCloseTo(64, 1);
+  await expect(firstTitle).toHaveCSS("font-size", "24px");
+  await expect(firstDescription).toHaveCSS("font-size", "14px");
 });
 
 test("the 1440px social links remain centered", async ({ page }, testInfo) => {
@@ -287,6 +845,78 @@ test("the 1440px social links remain centered", async ({ page }, testInfo) => {
   expect(firstIconBox!.height).toBeCloseTo(48, 1);
 });
 
+test("the 768px reservation section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const reservation = page.locator("#reservation");
+  const image = reservation.locator(".gusto-reservation-image");
+  const topBrush = reservation.locator(".gusto-reservation-brush-top");
+  const bottomBrush = reservation.locator(".gusto-reservation-brush-bottom");
+  const booking = reservation.locator(".gusto-booking");
+  const title = booking.locator(".gusto-booking-title");
+  const heading = title.locator("h2");
+  const label = title.locator("p");
+  const notes = booking.locator(".gusto-booking-notes");
+  const button = booking.locator(".gusto-booking-button");
+
+  const reservationBox = await reservation.boundingBox();
+  const imageBox = await image.boundingBox();
+  const bottomBrushBox = await bottomBrush.boundingBox();
+  const bookingBox = await booking.boundingBox();
+  const titleBox = await title.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const labelBox = await label.boundingBox();
+  const notesBox = await notes.boundingBox();
+  const buttonBox = await button.boundingBox();
+
+  expect(reservationBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(bottomBrushBox).not.toBeNull();
+  expect(bookingBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(labelBox).not.toBeNull();
+  expect(notesBox).not.toBeNull();
+  expect(buttonBox).not.toBeNull();
+  expect(reservationBox!.height).toBeCloseTo(832, 1);
+  expect(imageBox!.x).toBeCloseTo(0, 1);
+  expect(imageBox!.y - reservationBox!.y).toBeCloseTo(0, 1);
+  expect(imageBox!.width).toBeCloseTo(768, 1);
+  expect(imageBox!.height).toBeCloseTo(832, 1);
+  await expect(topBrush).toBeHidden();
+  expect(bottomBrushBox!.x).toBeCloseTo(0, 1);
+  expect(bottomBrushBox!.y - reservationBox!.y).toBeCloseTo(817.773438, 1);
+  expect(bottomBrushBox!.width).toBeCloseTo(768, 1);
+  expect(bottomBrushBox!.height).toBeCloseTo(14.235302, 1);
+  expect(bookingBox!.x).toBeCloseTo(192, 1);
+  expect(bookingBox!.y - reservationBox!.y).toBeCloseTo(76.999969, 1);
+  expect(bookingBox!.width).toBeCloseTo(384, 1);
+  expect(bookingBox!.height).toBeCloseTo(678.000061, 1);
+  expect(titleBox!.x - bookingBox!.x).toBeCloseTo(43.5, 1);
+  expect(titleBox!.y - bookingBox!.y).toBeCloseTo(16, 1);
+  expect(titleBox!.width).toBeCloseTo(297, 1);
+  expect(titleBox!.height).toBeCloseTo(80.000038, 1);
+  expect(headingBox!.width).toBeCloseTo(297, 1);
+  expect(headingBox!.height).toBeCloseTo(48, 1);
+  expect(labelBox!.width).toBeCloseTo(234, 1);
+  expect(labelBox!.height).toBeCloseTo(28, 1);
+  expect(notesBox!.x - bookingBox!.x).toBeCloseTo(16, 1);
+  expect(notesBox!.y - bookingBox!.y).toBeCloseTo(120.000038, 1);
+  expect(notesBox!.width).toBeCloseTo(352, 1);
+  expect(notesBox!.height).toBeCloseTo(462, 1);
+  expect(buttonBox!.x - bookingBox!.x).toBeCloseTo(16, 1);
+  expect(buttonBox!.y - bookingBox!.y).toBeCloseTo(606.000038, 1);
+  expect(buttonBox!.width).toBeCloseTo(352, 1);
+  expect(buttonBox!.height).toBeCloseTo(56, 1);
+  await expect(heading).toHaveCSS("font-size", "48px");
+  await expect(label).toHaveCSS("font-size", "18px");
+  await expect(notes).toHaveCSS("font-size", "14px");
+  await expect(notes).toHaveCSS("line-height", "27px");
+  await expect(button).toHaveCSS("font-size", "18px");
+});
+
 test("the 1440px reservation section follows the supplied Pixso frame", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -338,6 +968,63 @@ test("the 1440px reservation section follows the supplied Pixso frame", async ({
   expect(buttonBox!.height).toBeCloseTo(56, 1);
 });
 
+test("the 768px access section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const access = page.locator("#access");
+  const title = access.locator(".gusto-access-title");
+  const heading = title.locator("h2");
+  const label = title.locator("p");
+  const grid = access.locator(".gusto-access-grid");
+  const map = access.locator(".gusto-map");
+  const details = access.locator(".gusto-access-details");
+
+  const accessBox = await access.boundingBox();
+  const titleBox = await title.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const labelBox = await label.boundingBox();
+  const gridBox = await grid.boundingBox();
+  const mapBox = await map.boundingBox();
+  const detailsBox = await details.boundingBox();
+
+  expect(accessBox).not.toBeNull();
+  expect(titleBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(labelBox).not.toBeNull();
+  expect(gridBox).not.toBeNull();
+  expect(mapBox).not.toBeNull();
+  expect(detailsBox).not.toBeNull();
+  expect(accessBox!.height).toBeCloseTo(1137.248535, 1);
+  expect(titleBox!.x).toBeCloseTo(288.5, 1);
+  expect(titleBox!.y - accessBox!.y).toBeCloseTo(64, 1);
+  expect(titleBox!.width).toBeCloseTo(191, 1);
+  expect(titleBox!.height).toBeCloseTo(94.248497, 1);
+  expect(headingBox!.width).toBeCloseTo(191, 1);
+  expect(headingBox!.height).toBeCloseTo(52, 1);
+  expect(labelBox!.x).toBeCloseTo(312, 1);
+  expect(labelBox!.y - accessBox!.y).toBeCloseTo(124, 1);
+  expect(labelBox!.width).toBeCloseTo(144, 1);
+  expect(labelBox!.height).toBeCloseTo(34.248497, 1);
+  expect(gridBox!.x).toBeCloseTo(86, 1);
+  expect(gridBox!.y - accessBox!.y).toBeCloseTo(215.248497, 1);
+  expect(gridBox!.width).toBeCloseTo(596, 1);
+  expect(gridBox!.height).toBeCloseTo(858, 1);
+  expect(mapBox!.x).toBeCloseTo(86, 1);
+  expect(mapBox!.y - accessBox!.y).toBeCloseTo(215.248497, 1);
+  expect(mapBox!.width).toBeCloseTo(596, 1);
+  expect(mapBox!.height).toBeCloseTo(414, 1);
+  expect(detailsBox!.x).toBeCloseTo(86, 1);
+  expect(detailsBox!.y - accessBox!.y).toBeCloseTo(653.248497, 1);
+  expect(detailsBox!.width).toBeCloseTo(596, 1);
+  expect(detailsBox!.height).toBeCloseTo(420, 1);
+  await expect(heading).toHaveCSS("font-size", "52px");
+  await expect(label).toHaveCSS("font-size", "18px");
+  await expect(details).toHaveCSS("font-size", "16px");
+  await expect(details).toHaveCSS("line-height", "42px");
+});
+
 test("the 1440px access section follows the supplied Pixso frame", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -380,6 +1067,91 @@ test("the 1440px access section follows the supplied Pixso frame", async ({ page
   expect(detailsBox!.x).toBeCloseTo(733.26123, 1);
   expect(detailsBox!.width).toBeCloseTo(479, 1);
   expect(detailsBox!.height).toBeCloseTo(420, 1);
+});
+
+test("the 768px footer follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/ja");
+
+  const footer = page.getByRole("contentinfo");
+  const brush = footer.locator(".gusto-footer-brush");
+  const upper = footer.locator(".gusto-footer-upper");
+  const upperInner = footer.locator(".gusto-footer-upper-inner");
+  const logo = footer.locator(".gusto-footer-logo");
+  const nav = footer.locator(".gusto-footer-nav");
+  const social = footer.locator(".gusto-footer-social");
+  const lower = footer.locator(".gusto-footer-lower");
+  const lowerInner = footer.locator(".gusto-footer-lower-inner");
+  const phone = footer.locator(".gusto-footer-phone");
+  const hours = footer.locator(".gusto-footer-hours");
+  const copyright = footer.locator(".gusto-footer-copyright");
+
+  const footerBox = await footer.boundingBox();
+  const brushBox = await brush.boundingBox();
+  const upperBox = await upper.boundingBox();
+  const upperInnerBox = await upperInner.boundingBox();
+  const logoBox = await logo.boundingBox();
+  const navBox = await nav.boundingBox();
+  const socialBox = await social.boundingBox();
+  const lowerBox = await lower.boundingBox();
+  const lowerInnerBox = await lowerInner.boundingBox();
+  const phoneBox = await phone.boundingBox();
+  const hoursBox = await hours.boundingBox();
+  const copyrightBox = await copyright.boundingBox();
+
+  expect(footerBox).not.toBeNull();
+  expect(brushBox).not.toBeNull();
+  expect(upperBox).not.toBeNull();
+  expect(upperInnerBox).not.toBeNull();
+  expect(logoBox).not.toBeNull();
+  expect(navBox).not.toBeNull();
+  expect(socialBox).not.toBeNull();
+  expect(lowerBox).not.toBeNull();
+  expect(lowerInnerBox).not.toBeNull();
+  expect(phoneBox).not.toBeNull();
+  expect(hoursBox).not.toBeNull();
+  expect(copyrightBox).not.toBeNull();
+  expect(footerBox!.height).toBeCloseTo(420.235382, 1);
+  expect(brushBox!.x).toBeCloseTo(0, 1);
+  expect(brushBox!.y - footerBox!.y).toBeCloseTo(0, 1);
+  expect(brushBox!.width).toBeCloseTo(768, 1);
+  expect(brushBox!.height).toBeCloseTo(14.235302, 1);
+  expect(upperBox!.height).toBeCloseTo(300.235302, 1);
+  expect(upperInnerBox!.x).toBeCloseTo(0, 1);
+  expect(upperInnerBox!.y - footerBox!.y).toBeCloseTo(46.235302, 1);
+  expect(upperInnerBox!.width).toBeCloseTo(768, 1);
+  expect(upperInnerBox!.height).toBeCloseTo(222, 1);
+  expect(logoBox!.x).toBeCloseTo(280.181099, 1);
+  expect(logoBox!.y - footerBox!.y).toBeCloseTo(46.235302, 1);
+  expect(logoBox!.width).toBeCloseTo(207.637802, 1);
+  expect(logoBox!.height).toBeCloseTo(90, 1);
+  expect(navBox!.x).toBeCloseTo(158.5, 1);
+  expect(navBox!.y - footerBox!.y).toBeCloseTo(168.235302, 1);
+  expect(navBox!.width).toBeCloseTo(451, 1);
+  expect(navBox!.height).toBeCloseTo(20, 1);
+  expect(socialBox!.x).toBeCloseTo(260, 1);
+  expect(socialBox!.y - footerBox!.y).toBeCloseTo(220.235302, 1);
+  expect(socialBox!.width).toBeCloseTo(248, 1);
+  expect(socialBox!.height).toBeCloseTo(48, 1);
+  expect(lowerBox!.y - footerBox!.y).toBeCloseTo(300.235302, 1);
+  expect(lowerBox!.height).toBeCloseTo(120, 1);
+  expect(lowerInnerBox!.x).toBeCloseTo(0, 1);
+  expect(lowerInnerBox!.y - footerBox!.y).toBeCloseTo(316.235302, 1);
+  expect(lowerInnerBox!.width).toBeCloseTo(768, 1);
+  expect(lowerInnerBox!.height).toBeCloseTo(88, 1);
+  expect(phoneBox!.x).toBeCloseTo(314.5, 1);
+  expect(phoneBox!.y - footerBox!.y).toBeCloseTo(316.235302, 1);
+  expect(phoneBox!.width).toBeCloseTo(139, 1);
+  expect(phoneBox!.height).toBeCloseTo(24, 1);
+  expect(hoursBox!.x).toBeCloseTo(142, 1);
+  expect(hoursBox!.y - footerBox!.y).toBeCloseTo(348.235302, 1);
+  expect(hoursBox!.width).toBeCloseTo(484, 1);
+  expect(hoursBox!.height).toBeCloseTo(24, 1);
+  expect(copyrightBox!.x).toBeCloseTo(275, 1);
+  expect(copyrightBox!.y - footerBox!.y).toBeCloseTo(380.235302, 1);
+  expect(copyrightBox!.width).toBeCloseTo(218, 1);
+  expect(copyrightBox!.height).toBeCloseTo(14, 1);
 });
 
 test("the 1440px footer follows the supplied Pixso frame", async ({ page }, testInfo) => {
@@ -451,4 +1223,4 @@ test("reservation section exposes localized guidance and its call to action", as
 test("access section includes the map and complete localized travel details", async ({ page }) => { await page.goto("/ja"); const access = page.locator("#access"); await expect(access.getByRole("heading", { level: 2, name: "Access" })).toBeVisible(); await expect(access.getByTitle("グスト周辺の地図")).toBeVisible(); await expect(access.getByRole("link", { name: "Googleマップを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(access.getByText("大阪メトロ谷町線 関目高殿駅 3番出口 徒歩1分")).toBeVisible(); await expect(access.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); });
 test("footer exposes navigation, social links, contact hours, and copyright", async ({ page }) => { await page.goto("/ja"); const footer = page.getByRole("contentinfo"); await expect(footer.getByRole("link", { name: "Gusto Italian Bar" })).toHaveAttribute("href", "/ja"); await expect(footer.getByRole("navigation", { name: "フッターナビゲーション" }).getByRole("link")).toHaveCount(4); await expect(footer.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); await expect(footer.getByRole("link", { name: "Twitterを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(footer.getByText("Lunch: 12:00～15:00")).toBeVisible(); await expect(footer.getByText("© 2023 Masa Kondo. All Rights Reserved.")).toBeVisible(); });
 test("reservation page provides a graceful phone fallback without configuration", async ({ page }) => { await page.goto("/ja/reserve"); await expect(page.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); });
-test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "メニュー" })).toHaveAttribute("href", "/ja/menu"); });
+test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "Menu" })).toHaveAttribute("href", "/ja/menu"); });

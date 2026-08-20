@@ -165,7 +165,24 @@ export function HomeGusto({
         <section className='gusto-hero'>
           <p className='gusto-vertical'>{d.home.verticalTitle}</p>
           <div className='gusto-hero-copy'>
-            <h1>{d.hero.title}</h1>
+            <h1>
+              {d.hero.titleSegments.map((line, lineIndex) => (
+                <span className='gusto-hero-title-line' key={lineIndex}>
+                  {line.map((segment, segmentIndex) => (
+                    <span
+                      className={
+                        'emphasis' in segment && segment.emphasis
+                          ? 'gusto-hero-title-emphasis'
+                          : undefined
+                      }
+                      key={`${lineIndex}-${segmentIndex}`}
+                    >
+                      {segment.text}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </h1>
             <nav aria-label={d.home.heroNavLabel} className='gusto-hero-nav'>
               <a href=''>{d.home.heroNav.home}</a>
               <a href='#about'>{d.home.heroNav.about}</a>
@@ -206,6 +223,14 @@ export function HomeGusto({
           />
         </section>
         <section id='about' className='gusto-about gusto-dark'>
+          <Image
+            src='/images/b-1.png'
+            alt=''
+            width={3841}
+            height={284}
+            sizes='768px'
+            className='gusto-about-brush'
+          />
           <div className='gusto-about-left'>
             <div className='gusto-about-copy'>
               <div className='gusto-about-title'>
@@ -230,7 +255,7 @@ export function HomeGusto({
             <div className='gusto-about-image'>
               <Image
                 src='/images/inside.png'
-                alt='温かな照明の店内'
+                alt={d.home.aboutImageAlt}
                 fill
                 sizes='(max-width: 768px) 92vw, 51vw'
                 className='object-contain'

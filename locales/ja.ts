@@ -4,12 +4,29 @@ export const ja = {
     home: 'ホーム',
     menu: 'メニュー',
     closeMenu: 'メニューを閉じる',
+    mobileReserve: 'Reserve',
     access: '店舗情報',
     reserve: '予約する',
   },
   hero: {
     eyebrow: 'OSAKA ITALIAN BAR',
     title: 'だれでも気軽に\nワインと料理を\n楽しめるバル',
+    titleSegments: [
+      [
+        { text: 'だれでも' },
+        { text: '気軽', emphasis: true },
+        { text: 'に' },
+      ],
+      [
+        { text: 'ワインと' },
+        { text: '料理', emphasis: true },
+        { text: 'を' },
+      ],
+      [
+        { text: '楽', emphasis: true },
+        { text: 'しめるバル' },
+      ],
+    ],
     body: '気軽な一杯から、ゆっくり楽しむ食事まで。大阪の夜に寄り添うイタリアンバーです。',
   },
   home: {
@@ -34,6 +51,7 @@ export const ja = {
       'お手頃価格なものからご用意しております！',
     ],
     aboutMore: 'ワインのうんちくを読む',
+    aboutImageAlt: '温かな照明の店内',
     wineLabel: 'Menu',
     wineTitle: 'ワインのこと',
     wineBody: [
@@ -91,7 +109,7 @@ export const ja = {
     menuLinks: [
       'パスタメニューを見る',
       'ピザメニューを見る',
-      'アラカルトメニューを見る',
+      '各メニューを見る',
     ],
     previous: '前のおすすめ',
     next: '次のおすすめ',
