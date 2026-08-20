@@ -23,8 +23,8 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const mobileNav = [
     [d.home.heroNav.home, `/${locale}`],
     [d.home.heroNav.menu, `/${locale}/menu`],
-    [d.footer.nav.story, `/${locale}#about`],
     [d.home.heroNav.access, `/${locale}#access`],
+    [d.footer.nav.story, `/${locale}#about`],
   ];
   useEffect(() => {
     const mobileMenu = window.matchMedia('(max-width: 767px)');
@@ -163,6 +163,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   aria-hidden='true'
                   className='site-header-mobile-close-icon'
                 >
+                  <i />
                   <i />
                   <i />
                 </span>

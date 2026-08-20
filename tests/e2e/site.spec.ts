@@ -50,6 +50,118 @@ test("the 768px home header uses desktop navigation at the breakpoint", async ({
   expect(logoBox!.height).toBeCloseTo(90, 1);
 });
 
+test("the 393px home header matches the extra-small design frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
+  await page.setViewportSize({ width: 393, height: 852 });
+  await page.goto("/ja");
+
+  const header = page.getByRole("banner");
+  const inner = header.locator(".site-header-inner");
+  const logo = header.getByRole("link", { name: "Gusto Italian Bar" });
+  const menu = page.getByRole("button", { name: "メニュー" });
+  const menuLines = menu.locator("i");
+
+  await expect(header).toHaveCSS("height", "84px");
+  await expect(inner).toHaveCSS("height", "76px");
+  await expect(logo).toBeVisible();
+  await expect(menu).toBeVisible();
+  await expect(menuLines).toHaveCount(3);
+
+  const logoBox = await logo.boundingBox();
+  const menuBox = await menu.boundingBox();
+  const lineBoxes = await menuLines.evaluateAll((lines) =>
+    lines.map((line) => {
+      const { x, y, width, height } = line.getBoundingClientRect();
+      return { x, y, width, height };
+    }),
+  );
+
+  expect(logoBox).not.toBeNull();
+  expect(menuBox).not.toBeNull();
+  expect(logoBox!.x).toBeCloseTo(16, 1);
+  expect(logoBox!.y).toBeCloseTo(12, 1);
+  expect(logoBox!.width).toBeCloseTo(138.425201, 1);
+  expect(logoBox!.height).toBeCloseTo(60, 1);
+  expect(menuBox!.x).toBeCloseTo(353, 1);
+  expect(menuBox!.y).toBeCloseTo(26, 1);
+  expect(menuBox!.width).toBeCloseTo(32, 1);
+  expect(menuBox!.height).toBeCloseTo(32, 1);
+  expect(lineBoxes).toHaveLength(3);
+  expect(lineBoxes.map(({ x }) => x)).toEqual([358, 358, 358]);
+  expect(lineBoxes.map(({ y }) => y)).toEqual([34, 42, 50]);
+  expect(lineBoxes.map(({ width }) => width)).toEqual([22, 22, 22]);
+  expect(lineBoxes.map(({ height }) => height)).toEqual([3, 3, 3]);
+});
+
+test("the 393px hamburger menu matches the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
+  await page.setViewportSize({ width: 393, height: 820 });
+  await page.goto("/ja");
+  await page.getByRole("button", { name: "メニュー" }).click();
+
+  const menu = page.getByRole("dialog", { name: "メニュー" });
+  const menuHeader = menu.locator(".site-header-mobile-header");
+  const logo = menu.getByRole("link", { name: "Gusto Italian Bar" });
+  const close = menu.getByRole("button", { name: "メニューを閉じる" });
+  const closeLines = close.locator("i");
+  const links = menu.locator(".site-header-mobile-link-list a");
+  const reserve = menu.getByText("Reserve", { exact: true });
+
+  await expect(menu).toHaveCSS("background-color", "rgb(27, 40, 27)");
+  await expect(menu).toHaveCSS("color", "rgb(246, 230, 224)");
+  await expect(menu).toHaveCSS("transform", "none");
+  await expect(closeLines).toHaveCount(3);
+  await expect(links).toHaveText(["Home", "Menu", "Access", "Our Story"]);
+
+  const menuBox = await menu.boundingBox();
+  const menuHeaderBox = await menuHeader.boundingBox();
+  const logoBox = await logo.boundingBox();
+  const closeBox = await close.boundingBox();
+  const linkBoxes = await links.evaluateAll((items) =>
+    items.map((item) => {
+      const { x, y, width, height } = item.getBoundingClientRect();
+      return { x, y, width, height };
+    }),
+  );
+  const closeLineBoxes = await closeLines.evaluateAll((lines) =>
+    lines.map((line) => {
+      const { x, y, width, height } = line.getBoundingClientRect();
+      return { x, y, width, height };
+    }),
+  );
+  const reserveBox = await reserve.boundingBox();
+
+  expect(menuBox).not.toBeNull();
+  expect(menuHeaderBox).not.toBeNull();
+  expect(logoBox).not.toBeNull();
+  expect(closeBox).not.toBeNull();
+  expect(reserveBox).not.toBeNull();
+  expect(menuBox!.x).toBeCloseTo(0, 1);
+  expect(menuBox!.y).toBeCloseTo(0, 1);
+  expect(menuBox!.width).toBeCloseTo(393, 1);
+  expect(menuBox!.height).toBeCloseTo(820, 1);
+  expect(menuHeaderBox!.height).toBeCloseTo(84, 1);
+  expect(logoBox!.x).toBeCloseTo(16, 1);
+  expect(logoBox!.y).toBeCloseTo(12, 1);
+  expect(logoBox!.width).toBeCloseTo(138.425201, 1);
+  expect(logoBox!.height).toBeCloseTo(60, 1);
+  expect(closeBox!.x).toBeCloseTo(353, 1);
+  expect(closeBox!.y).toBeCloseTo(26, 1);
+  expect(closeBox!.width).toBeCloseTo(32, 1);
+  expect(closeBox!.height).toBeCloseTo(32, 1);
+  expect(closeLineBoxes.map(({ x }) => x)).toEqual([358, 358, 358]);
+  expect(closeLineBoxes.map(({ y }) => y)).toEqual([34, 42, 50]);
+  expect(closeLineBoxes.map(({ width }) => width)).toEqual([22, 22, 22]);
+  expect(closeLineBoxes.map(({ height }) => height)).toEqual([3, 3, 3]);
+  expect(linkBoxes.map(({ y }) => y)).toEqual([184, 257, 330, 403]);
+  expect(linkBoxes.map(({ height }) => height)).toEqual([45, 45, 45, 45]);
+  expect(reserveBox!.x).toBeCloseTo(16.5, 1);
+  expect(reserveBox!.y).toBeCloseTo(512, 1);
+  expect(reserveBox!.width).toBeCloseTo(360, 1);
+  expect(reserveBox!.height).toBeCloseTo(54, 1);
+  await expect(close).toBeFocused();
+});
+
 test("the mobile menu is available below the 768px breakpoint", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only breakpoint check");
   await page.setViewportSize({ width: 767, height: 900 });
@@ -172,6 +284,51 @@ test("the 768px hero follows the supplied Pixso frame", async ({ page }, testInf
   await expect(marquee).toHaveCSS("left", "-233.5px");
   await expect(marquee).toHaveCSS("top", "233.5px");
   await expect(marquee).toHaveCSS("transform-origin", "263.5px 30px");
+});
+
+test("the 393px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
+  await page.setViewportSize({ width: 393, height: 852 });
+  await page.goto("/ja");
+
+  const hero = page.locator(".gusto-hero");
+  const heading = hero.getByRole("heading", { level: 1 });
+  const dishes = hero.locator(".gusto-hero-dishes");
+  const vegetables = hero.locator(".gusto-hero-veg");
+
+  await expect(hero.locator(".gusto-hero-nav")).toBeHidden();
+  await expect(hero.locator(".gusto-hero-caret")).toBeHidden();
+  await expect(hero.locator(".gusto-hero-brush")).toBeHidden();
+  await expect(hero.locator(".gusto-vertical")).toBeHidden();
+  await expect(heading.locator(".gusto-hero-title-emphasis")).toHaveCount(3);
+  await expect(heading).toHaveCSS("font-size", "48px");
+  await expect(heading).toHaveCSS("line-height", "60px");
+  await expect(heading.locator(".gusto-hero-title-emphasis").first()).toHaveCSS("font-size", "68px");
+
+  const heroBox = await hero.boundingBox();
+  const headingBox = await heading.boundingBox();
+  const dishesBox = await dishes.boundingBox();
+  const vegetablesBox = await vegetables.boundingBox();
+
+  expect(heroBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(dishesBox).not.toBeNull();
+  expect(vegetablesBox).not.toBeNull();
+  expect(heroBox!.y).toBeCloseTo(84, 1);
+  expect(heroBox!.width).toBeCloseTo(393, 1);
+  expect(heroBox!.height).toBeCloseTo(675, 1);
+  expect(headingBox!.x - heroBox!.x).toBeCloseTo(16, 1);
+  expect(headingBox!.y - heroBox!.y).toBeCloseTo(0, 1);
+  expect(headingBox!.width).toBeCloseTo(361, 1);
+  expect(headingBox!.height).toBeCloseTo(180, 1);
+  expect(dishesBox!.x - heroBox!.x).toBeCloseTo(-17.040405, 1);
+  expect(dishesBox!.y - heroBox!.y).toBeCloseTo(123.562851, 1);
+  expect(dishesBox!.width).toBeCloseTo(464.832825, 1);
+  expect(dishesBox!.height).toBeCloseTo(501.597656, 1);
+  expect(vegetablesBox!.x - heroBox!.x).toBeCloseTo(16, 1);
+  expect(vegetablesBox!.y - heroBox!.y).toBeCloseTo(516.244629, 1);
+  expect(vegetablesBox!.width).toBeCloseTo(201.76062, 1);
+  expect(vegetablesBox!.height).toBeCloseTo(137.972656, 1);
 });
 
 test("the 768px About section follows the supplied Pixso frame", async ({ page }, testInfo) => {

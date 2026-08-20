@@ -107,6 +107,24 @@
   --gusto-header-menu-size-sm: 32px;
   --gusto-header-menu-line-width-sm: 22px;
 
+  /* Pixso 393px header frame: 1180:14910. */
+  --gusto-header-height-xs: 84px;
+  --gusto-header-inner-height-xs: 76px;
+  --gusto-header-padding-xs: 4px 0;
+  --gusto-header-inner-padding-xs: 8px 16px;
+  --gusto-header-logo-width-xs: 138.425201px;
+  --gusto-header-logo-height-xs: 60px;
+  --gusto-header-menu-inline-offset-xs: -8px;
+
+  /* Pixso 393px open menu frame: 996:11873. */
+  --gusto-menu-header-height-xs: 84px;
+  --gusto-menu-panel-height-xs: 736px;
+  --gusto-menu-links-top-xs: 100px;
+  --gusto-menu-link-gap-xs: 28px;
+  --gusto-menu-list-width-xs: 118px;
+  --gusto-menu-reservation-gap-xs: 64px;
+  --gusto-menu-reservation-width-xs: 360px;
+
   /* Pixso 1440px hero frame: 1711:21465. */
   --gusto-hero-1440-height: 952px;
   --gusto-hero-1440-copy-left: 202.271194px;
@@ -140,6 +158,20 @@
   --gusto-hero-768-marquee-font-size: 68px;
   --gusto-hero-768-marquee-text-left: -233.499996px;
   --gusto-hero-768-marquee-text-top: 233.500009px;
+
+  /* Pixso 393px hero frame: 1725:25524. */
+  --gusto-hero-393-height: 675px;
+  --gusto-hero-393-content-left: 16px;
+  --gusto-hero-393-content-width: 361px;
+  --gusto-hero-393-title-height: 180px;
+  --gusto-hero-393-dishes-left: -17.040405px;
+  --gusto-hero-393-dishes-top: 123.562851px;
+  --gusto-hero-393-dishes-width: 464.832825px;
+  --gusto-hero-393-dishes-height: 501.597656px;
+  --gusto-hero-393-veg-left: 16px;
+  --gusto-hero-393-veg-top: 516.244629px;
+  --gusto-hero-393-veg-width: 201.76062px;
+  --gusto-hero-393-veg-height: 137.972656px;
 
   /* Pixso 1440px About frame: 910:4508. */
   --gusto-about-1440-height: 832px;
@@ -709,11 +741,15 @@
     }
     .site-header-mobile-close-icon i {
       background: currentColor;
+      display: block;
       height: 3px;
       left: 7px;
       position: absolute;
       top: 14.5px;
       width: 18px;
+    }
+    .site-header-mobile-close-icon i:nth-child(2) {
+      display: none;
     }
     .site-header-mobile-close-icon i:first-child {
       transform: rotate(45deg);
@@ -3618,49 +3654,123 @@
   }
   @media (max-width: 480px) {
     body:has(.gusto-home) .site-header {
-      height: 84px;
-      padding: 4px 0;
+      height: var(--gusto-header-height-xs);
+      padding: var(--gusto-header-padding-xs);
+      position: relative;
     }
     body:has(.gusto-home) .site-header-inner {
-      height: 76px;
-      padding: 8px 16px;
+      height: var(--gusto-header-inner-height-xs);
+      padding: var(--gusto-header-inner-padding-xs);
     }
     body:has(.gusto-home) header .site-header-logo {
-      height: 60px;
-      width: 138px;
+      height: var(--gusto-header-logo-height-xs);
+      top: 0;
+      width: var(--gusto-header-logo-width-xs);
     }
     body:has(.gusto-home) header .site-header-logo img {
-      height: 60px;
-      width: 138px;
+      height: var(--gusto-header-logo-height-xs);
+      width: var(--gusto-header-logo-width-xs);
+    }
+    body:has(.gusto-home) .site-header-menu-button {
+      margin-right: var(--gusto-header-menu-inline-offset-xs);
     }
     .site-header-mobile-nav {
       inset: 0;
     }
+    .site-header-mobile-header {
+      flex-basis: var(--gusto-menu-header-height-xs);
+      height: var(--gusto-menu-header-height-xs);
+      justify-content: flex-start;
+      padding: 4px 0;
+    }
+    .site-header-mobile-logo {
+      height: var(--gusto-header-logo-height-xs);
+      left: 16px;
+      top: 12px;
+      transform: none;
+      width: var(--gusto-header-logo-width-xs);
+    }
+    .site-header-mobile-close {
+      right: 8px;
+      top: 26px;
+    }
+    .site-header-mobile-close-icon i {
+      left: 5px;
+      transform: none !important;
+      width: var(--gusto-header-menu-line-width-sm);
+    }
+    .site-header-mobile-close-icon i:nth-child(1) {
+      top: 8px;
+    }
+    .site-header-mobile-close-icon i:nth-child(2) {
+      display: block;
+      top: 16px;
+    }
+    .site-header-mobile-close-icon i:nth-child(3) {
+      top: 24px;
+    }
+    .site-header-mobile-links {
+      flex: 0 0 var(--gusto-menu-panel-height-xs);
+      gap: var(--gusto-menu-reservation-gap-xs);
+      height: var(--gusto-menu-panel-height-xs);
+      padding: var(--gusto-menu-links-top-xs) 16px 100px;
+    }
+    .site-header-mobile-link-list {
+      gap: var(--gusto-menu-link-gap-xs);
+      width: var(--gusto-menu-list-width-xs);
+    }
+    .site-header-mobile-reservation {
+      flex: 0 0 54px;
+      width: var(--gusto-menu-reservation-width-xs);
+    }
     .gusto-hero {
-      min-height: 420px;
-      padding: 3.7rem 14% 4rem 15%;
+      height: var(--gusto-hero-393-height);
+      min-height: var(--gusto-hero-393-height);
+      padding: 0 var(--gusto-hero-393-content-left);
+    }
+    .gusto-hero-copy {
+      left: var(--gusto-hero-393-content-left);
+      max-width: none;
+      position: absolute;
+      top: 0;
+      width: var(--gusto-hero-393-content-width);
     }
     .gusto-hero h1 {
-      font-size: 1.23rem;
-      line-height: 1.42;
+      font-size: 48px;
+      font-weight: 400;
+      height: var(--gusto-hero-393-title-height);
+      letter-spacing: -0.2em;
+      line-height: 60px;
+      text-align: center;
+      width: var(--gusto-hero-393-content-width);
     }
-    .gusto-hero-nav {
+    .gusto-hero-title-emphasis {
+      font-size: 68px;
+    }
+    .gusto-hero-nav,
+    .gusto-hero-caret,
+    .gusto-hero-brush,
+    .gusto-home .gusto-vertical {
       display: none;
     }
     .gusto-hero-dishes {
-      left: 19%;
-      width: 93% !important;
-      height: 54% !important;
+      bottom: auto !important;
+      height: var(--gusto-hero-393-dishes-height) !important;
+      left: var(--gusto-hero-393-dishes-left) !important;
+      max-width: none !important;
+      object-fit: fill;
+      object-position: center;
+      right: auto !important;
+      top: var(--gusto-hero-393-dishes-top) !important;
+      width: var(--gusto-hero-393-dishes-width) !important;
     }
     .gusto-hero-veg {
-      width: 105px;
-      bottom: 8%;
-      left: 7%;
-    }
-    .gusto-vertical {
-      font-size: 0.95rem;
-      left: 2%;
-      top: 28%;
+      bottom: auto;
+      height: var(--gusto-hero-393-veg-height);
+      left: var(--gusto-hero-393-veg-left);
+      opacity: 1;
+      top: var(--gusto-hero-393-veg-top);
+      width: var(--gusto-hero-393-veg-width);
     }
     .gusto-dark {
       padding: 3.8rem 9% 5rem;
