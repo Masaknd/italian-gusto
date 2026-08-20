@@ -194,6 +194,20 @@
   --gusto-about-768-image-width: 611.997742px;
   --gusto-about-768-image-height: 670.850098px;
 
+  /* Pixso 393px About frame: 1180:14924. */
+  --gusto-about-393-height: 961.976929px;
+  --gusto-about-393-brush-height: 28.976917px;
+  --gusto-about-393-panel-height: 933px;
+  --gusto-about-393-content-left: 16px;
+  --gusto-about-393-content-width: 361px;
+  --gusto-about-393-copy-top: 48px;
+  --gusto-about-393-copy-height: 408.000031px;
+  --gusto-about-393-title-width: 128px;
+  --gusto-about-393-title-height: 36.000019px;
+  --gusto-about-393-body-height: 216px;
+  --gusto-about-393-image-top: 488.000031px;
+  --gusto-about-393-image-height: 397px;
+
   /* Pixso 1440px Wine frame: 910:4529. */
   --gusto-wine-1440-height: 1068.639893px;
   --gusto-wine-1440-bg-height: 926.471985px;
@@ -220,6 +234,24 @@
   --gusto-wine-768-visual-height: 382px;
   --gusto-wine-768-art-width: 394.5px;
   --gusto-wine-768-art-height: 358.636383px;
+
+  /* Pixso 393px Wine frame: 1180:14940. */
+  --gusto-wine-393-height: 930.772583px;
+  --gusto-wine-393-panel-height: 891.972595px;
+  --gusto-wine-393-top-brush-height: 36.972569px;
+  --gusto-wine-393-bottom-brush-height: 38.800018px;
+  --gusto-wine-393-inner-top: 44.972569px;
+  --gusto-wine-393-inner-height: 815px;
+  --gusto-wine-393-content-left: 16px;
+  --gusto-wine-393-content-width: 361px;
+  --gusto-wine-393-copy-height: 503.000031px;
+  --gusto-wine-393-title-width: 152px;
+  --gusto-wine-393-title-height: 35.000023px;
+  --gusto-wine-393-text-height: 312px;
+  --gusto-wine-393-visual-top: 535px;
+  --gusto-wine-393-visual-height: 280px;
+  --gusto-wine-393-art-width: 308px;
+  --gusto-wine-393-art-height: 280px;
 
   /* Pixso 768px recommendation 1 frame: 910:7200. */
   --gusto-feature-1-768-height: 994.930908px;
@@ -3788,36 +3820,191 @@
       font-size: 0.95rem;
       margin-bottom: 0.75rem;
     }
+    .gusto-about {
+      background: transparent;
+      display: block;
+      height: var(--gusto-about-393-height);
+      min-height: var(--gusto-about-393-height);
+      padding: 0;
+      position: relative;
+    }
+    .gusto-about::after {
+      background: var(--color-brand-ink);
+      content: '';
+      height: var(--gusto-about-393-panel-height);
+      inset: var(--gusto-about-393-brush-height) 0 auto;
+      position: absolute;
+      z-index: 0;
+    }
+    .gusto-about-brush {
+      display: block;
+      height: var(--gusto-about-393-brush-height);
+      left: 0;
+      object-fit: fill;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+    .gusto-about-left {
+      height: var(--gusto-about-393-copy-height);
+      left: var(--gusto-about-393-content-left);
+      position: absolute;
+      top: calc(
+        var(--gusto-about-393-brush-height) +
+          var(--gusto-about-393-copy-top)
+      );
+      width: var(--gusto-about-393-content-width);
+      z-index: 2;
+    }
+    .gusto-about-copy {
+      align-items: center;
+      gap: 48px;
+      height: var(--gusto-about-393-copy-height);
+      width: var(--gusto-about-393-content-width);
+    }
+    .gusto-about-title {
+      --gusto-about-title-width: var(--gusto-about-393-title-width);
+      height: var(--gusto-about-393-title-height);
+    }
+    .gusto-about-title::after {
+      height: 3px;
+      width: var(--gusto-about-393-title-width);
+    }
+    .gusto-about-title h2 {
+      font-size: 48px;
+      height: 32px;
+      line-height: 32px;
+      white-space: nowrap;
+    }
+    .gusto-about-body {
+      font-size: 18px;
+      height: var(--gusto-about-393-body-height);
+      line-height: 24px;
+      overflow: hidden;
+      width: var(--gusto-about-393-content-width);
+    }
+    .gusto-about-more {
+      font-size: 18px;
+      gap: 32px;
+      height: 60px;
+      justify-content: center;
+      line-height: 24px;
+      text-decoration: none;
+      width: var(--gusto-about-393-content-width);
+    }
+    .gusto-about-more svg {
+      height: 60px;
+      width: 111.396759px;
+    }
+    .gusto-about-right {
+      height: var(--gusto-about-393-image-height);
+      left: var(--gusto-about-393-content-left);
+      position: absolute;
+      top: calc(
+        var(--gusto-about-393-brush-height) +
+          var(--gusto-about-393-image-top)
+      );
+      width: var(--gusto-about-393-content-width);
+      z-index: 2;
+    }
     .gusto-about-image {
-      height: 250px;
+      height: var(--gusto-about-393-image-height);
+      width: var(--gusto-about-393-content-width);
+    }
+    .gusto-about-image img {
+      object-fit: fill !important;
+    }
+    .gusto-about-deco {
+      display: none;
+    }
+    .gusto-wine {
+      height: var(--gusto-wine-393-height);
+      min-height: var(--gusto-wine-393-height);
+      padding: 0;
+    }
+    .gusto-wine::before {
+      height: var(--gusto-wine-393-panel-height);
     }
     .gusto-wine-inner {
-      padding: 5rem 9% 6rem;
-      gap: 2rem;
+      display: block;
+      gap: 0;
+      height: var(--gusto-wine-393-inner-height);
+      left: 0;
+      padding: 0;
+      position: absolute;
+      top: var(--gusto-wine-393-inner-top);
+      width: 100%;
+    }
+    .gusto-wine-copy {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      height: var(--gusto-wine-393-copy-height);
+      left: var(--gusto-wine-393-content-left);
+      order: initial;
+      position: absolute;
+      top: 0;
+      width: var(--gusto-wine-393-content-width);
     }
     .gusto-wine-title {
-      width: 152px;
-      height: 38px;
+      --gusto-wine-title-width: var(--gusto-wine-393-title-width);
+      height: var(--gusto-wine-393-title-height);
+      width: var(--gusto-wine-title-width);
     }
     .gusto-wine-title h2 {
-      font-size: 32px;
+      font-size: 48px;
+      height: 32px;
+      line-height: 32px;
+      white-space: nowrap;
     }
     .gusto-wine-title::after {
-      width: 145px;
+      height: 2px;
+      width: var(--gusto-wine-title-width);
     }
     .gusto-wine-text {
-      margin-top: 20px;
-      font-size: 12px;
+      font-size: 18px;
+      height: var(--gusto-wine-393-text-height);
+      line-height: 24px;
+      margin-top: 48px;
+      overflow: hidden;
+      width: var(--gusto-wine-393-content-width);
     }
     .gusto-wine-text p + p {
-      margin-top: 16px;
+      margin-top: 0;
     }
     .gusto-wine-more {
-      margin-top: 24px;
-      font-size: 12px;
+      font-size: 18px;
+      gap: 32px;
+      height: 60px;
+      justify-content: flex-start;
+      line-height: 24px;
+      margin-top: 48px;
+      text-decoration: none;
+      width: var(--gusto-wine-393-content-width);
     }
     .gusto-wine-more svg {
-      width: 60px;
+      height: 60px;
+      width: 111.396759px;
+    }
+    .gusto-wine-visual {
+      height: var(--gusto-wine-393-visual-height);
+      left: var(--gusto-wine-393-content-left);
+      position: absolute;
+      top: var(--gusto-wine-393-visual-top);
+      width: var(--gusto-wine-393-content-width);
+    }
+    .gusto-wine-visual img {
+      height: var(--gusto-wine-393-art-height) !important;
+      inset: 0 auto auto 0 !important;
+      transform: none;
+      width: var(--gusto-wine-393-art-width) !important;
+    }
+    .gusto-wine-brush-top {
+      height: var(--gusto-wine-393-top-brush-height);
+    }
+    .gusto-wine-brush-bottom {
+      height: var(--gusto-wine-393-bottom-brush-height);
     }
     .gusto-recommendations {
       padding: 0;
