@@ -236,22 +236,84 @@
   --gusto-wine-768-art-height: 358.636383px;
 
   /* Pixso 393px Wine frame: 1180:14940. */
-  --gusto-wine-393-height: 930.772583px;
-  --gusto-wine-393-panel-height: 891.972595px;
   --gusto-wine-393-top-brush-height: 36.972569px;
   --gusto-wine-393-bottom-brush-height: 38.800018px;
-  --gusto-wine-393-inner-top: 44.972569px;
-  --gusto-wine-393-inner-height: 815px;
-  --gusto-wine-393-content-left: 16px;
-  --gusto-wine-393-content-width: 361px;
-  --gusto-wine-393-copy-height: 503.000031px;
-  --gusto-wine-393-title-width: 152px;
-  --gusto-wine-393-title-height: 35.000023px;
-  --gusto-wine-393-text-height: 312px;
-  --gusto-wine-393-visual-top: 535px;
-  --gusto-wine-393-visual-height: 280px;
-  --gusto-wine-393-art-width: 308px;
-  --gusto-wine-393-art-height: 280px;
+  --gusto-wine-393-inline-padding: 16px;
+  --gusto-wine-393-content-gap: 32px;
+
+  /* Pixso 393px recommendation 1 frame: 1180:14961. */
+  --gusto-feature-1-393-height: 843.472534px;
+  --gusto-feature-1-393-inline-padding: 16px;
+  --gusto-feature-1-393-block-padding: 24px;
+  --gusto-feature-1-393-copy-height: 412.000031px;
+  --gusto-feature-1-393-heading-width: 200px;
+  --gusto-feature-1-393-heading-height: 40.000027px;
+  --gusto-feature-1-393-content-height: 348px;
+  --gusto-feature-1-393-image-height: 359.472534px;
+
+  /* Pixso 393px recommendation 2 frame: 1180:14975. */
+  --gusto-feature-2-393-height: 880.692139px;
+  --gusto-feature-2-393-inline-padding: 16px;
+  --gusto-feature-2-393-block-padding: 24px;
+  --gusto-feature-2-393-heading-width: 200px;
+  --gusto-feature-2-393-heading-height: 40px;
+  --gusto-feature-2-393-image-height: 396.692108px;
+
+  /* Pixso 393px recommendation 3 frame: 1180:14990. */
+  --gusto-feature-3-393-height: 916.735596px;
+  --gusto-feature-3-393-inline-padding: 16px;
+  --gusto-feature-3-393-block-padding: 24px;
+  --gusto-feature-3-393-heading-width: 200px;
+  --gusto-feature-3-393-heading-height: 32px;
+  --gusto-feature-3-393-image-height: 464.735626px;
+
+  /* Pixso 393px picture and social frame: 1180:15006. */
+  --gusto-social-393-height: 573px;
+  --gusto-social-393-brush-height: 38.800018px;
+  --gusto-social-393-gallery-top: 70.800018px;
+  --gusto-social-393-gallery-left: -340.5px;
+  --gusto-social-393-gallery-width: 1074px;
+  --gusto-social-393-gallery-height: 100px;
+  --gusto-social-393-links-top: 234px;
+  --gusto-social-393-links-width: 361px;
+  --gusto-social-393-links-height: 286px;
+
+  /* Pixso 393px reservation frame: 1180:15034. */
+  --gusto-reservation-393-brush-height: 7.284471px;
+  --gusto-reservation-393-card-left: 16px;
+  --gusto-reservation-393-card-top: 100px;
+  --gusto-reservation-393-card-width: 361px;
+  --gusto-reservation-393-title-width: 198px;
+  --gusto-reservation-393-title-height: 54.000042px;
+  --gusto-reservation-393-notes-width: 329px;
+  --gusto-reservation-393-button-width: 329px;
+  --gusto-reservation-393-button-height: 46px;
+
+  /* Pixso 393px access frame: 1180:15040. */
+  --gusto-access-393-height: 954.010742px;
+  --gusto-access-393-padding: 32px 16px;
+  --gusto-access-393-title-width: 191px;
+  --gusto-access-393-title-height: 64.010719px;
+  --gusto-access-393-content-width: 361px;
+  --gusto-access-393-content-height: 810px;
+  --gusto-access-393-map-height: 414px;
+  --gusto-access-393-details-height: 372px;
+  --gusto-access-393-label-width: 79px;
+
+  /* Pixso 393px footer frame: 1180:15062. */
+  --gusto-footer-393-height: 462.284515px;
+  --gusto-footer-393-brush-height: 7.284471px;
+  --gusto-footer-393-content-height: 455px;
+  --gusto-footer-393-upper-height: 346px;
+  --gusto-footer-393-upper-inner-height: 282px;
+  --gusto-footer-393-logo-width: 207.637802px;
+  --gusto-footer-393-nav-width: 124px;
+  --gusto-footer-393-social-width: 200px;
+  --gusto-footer-393-lower-height: 109px;
+  --gusto-footer-393-lower-inner-height: 77px;
+  --gusto-footer-393-phone-width: 119px;
+  --gusto-footer-393-hours-width: 272px;
+  --gusto-footer-393-copyright-width: 218px;
 
   /* Pixso 768px recommendation 1 frame: 910:7200. */
   --gusto-feature-1-768-height: 994.930908px;
@@ -3821,18 +3883,25 @@
       margin-bottom: 0.75rem;
     }
     .gusto-about {
+      align-items: flex-start;
       background: transparent;
-      display: block;
-      height: var(--gusto-about-393-height);
-      min-height: var(--gusto-about-393-height);
-      padding: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 32px 0;
+      height: auto;
+      min-height: 0;
+      padding: calc(
+          var(--gusto-about-393-brush-height) +
+            var(--gusto-about-393-copy-top)
+        )
+        var(--gusto-about-393-content-left) 48px;
       position: relative;
     }
     .gusto-about::after {
       background: var(--color-brand-ink);
       content: '';
-      height: var(--gusto-about-393-panel-height);
-      inset: var(--gusto-about-393-brush-height) 0 auto;
+      inset: var(--gusto-about-393-brush-height) 0 0;
       position: absolute;
       z-index: 0;
     }
@@ -3847,29 +3916,29 @@
       z-index: 1;
     }
     .gusto-about-left {
-      height: var(--gusto-about-393-copy-height);
-      left: var(--gusto-about-393-content-left);
-      position: absolute;
-      top: calc(
-        var(--gusto-about-393-brush-height) +
-          var(--gusto-about-393-copy-top)
-      );
-      width: var(--gusto-about-393-content-width);
+      flex: 0 0 100%;
+      height: auto;
+      min-width: 0;
+      order: -1;
+      position: relative;
+      width: auto;
       z-index: 2;
     }
     .gusto-about-copy {
       align-items: center;
       gap: 48px;
       height: var(--gusto-about-393-copy-height);
-      width: var(--gusto-about-393-content-width);
+      width: 100%;
     }
     .gusto-about-title {
-      --gusto-about-title-width: var(--gusto-about-393-title-width);
-      height: var(--gusto-about-393-title-height);
+      --gusto-about-title-width: 100%;
+      align-self: center;
+      height: 35px;
+      width: max-content;
     }
     .gusto-about-title::after {
-      height: 3px;
-      width: var(--gusto-about-393-title-width);
+      height: 2px;
+      width: var(--gusto-about-title-width);
     }
     .gusto-about-title h2 {
       font-size: 48px;
@@ -3882,35 +3951,36 @@
       height: var(--gusto-about-393-body-height);
       line-height: 24px;
       overflow: hidden;
-      width: var(--gusto-about-393-content-width);
+      width: 100%;
     }
     .gusto-about-more {
       font-size: 18px;
       gap: 32px;
       height: 60px;
-      justify-content: center;
+      justify-content: flex-start;
       line-height: 24px;
       text-decoration: none;
-      width: var(--gusto-about-393-content-width);
+      width: 100%;
+    }
+    .gusto-about-more span {
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .gusto-about-more svg {
       height: 60px;
       width: 111.396759px;
     }
     .gusto-about-right {
+      flex: 0 0 100%;
       height: var(--gusto-about-393-image-height);
-      left: var(--gusto-about-393-content-left);
-      position: absolute;
-      top: calc(
-        var(--gusto-about-393-brush-height) +
-          var(--gusto-about-393-image-top)
-      );
-      width: var(--gusto-about-393-content-width);
+      min-width: 0;
+      position: relative;
+      width: auto;
       z-index: 2;
     }
     .gusto-about-image {
       height: var(--gusto-about-393-image-height);
-      width: var(--gusto-about-393-content-width);
+      width: 100%;
     }
     .gusto-about-image img {
       object-fit: fill !important;
@@ -3919,38 +3989,44 @@
       display: none;
     }
     .gusto-wine {
-      height: var(--gusto-wine-393-height);
-      min-height: var(--gusto-wine-393-height);
+      height: auto;
+      min-height: 0;
       padding: 0;
     }
     .gusto-wine::before {
-      height: var(--gusto-wine-393-panel-height);
+      bottom: var(--gusto-wine-393-bottom-brush-height);
+      height: auto;
     }
     .gusto-wine-inner {
-      display: block;
-      gap: 0;
-      height: var(--gusto-wine-393-inner-height);
-      left: 0;
-      padding: 0;
-      position: absolute;
-      top: var(--gusto-wine-393-inner-top);
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--gusto-wine-393-content-gap) 0;
+      height: auto;
+      padding: calc(var(--gusto-wine-393-top-brush-height) + 8px)
+        var(--gusto-wine-393-inline-padding)
+        calc(var(--gusto-wine-393-bottom-brush-height) + 32px);
+      position: relative;
+      top: auto;
       width: 100%;
     }
     .gusto-wine-copy {
       align-items: flex-start;
       display: flex;
+      flex: 0 0 100%;
       flex-direction: column;
-      height: var(--gusto-wine-393-copy-height);
-      left: var(--gusto-wine-393-content-left);
-      order: initial;
-      position: absolute;
-      top: 0;
-      width: var(--gusto-wine-393-content-width);
+      height: auto;
+      min-width: 0;
+      order: -1;
+      position: relative;
+      width: auto;
     }
     .gusto-wine-title {
-      --gusto-wine-title-width: var(--gusto-wine-393-title-width);
-      height: var(--gusto-wine-393-title-height);
-      width: var(--gusto-wine-title-width);
+      --gusto-wine-title-width: 100%;
+      align-self: center;
+      height: 35px;
+      width: max-content;
     }
     .gusto-wine-title h2 {
       font-size: 48px;
@@ -3964,11 +4040,11 @@
     }
     .gusto-wine-text {
       font-size: 18px;
-      height: var(--gusto-wine-393-text-height);
+      height: auto;
       line-height: 24px;
       margin-top: 48px;
-      overflow: hidden;
-      width: var(--gusto-wine-393-content-width);
+      overflow: visible;
+      width: 100%;
     }
     .gusto-wine-text p + p {
       margin-top: 0;
@@ -3981,24 +4057,29 @@
       line-height: 24px;
       margin-top: 48px;
       text-decoration: none;
-      width: var(--gusto-wine-393-content-width);
+      width: 100%;
+    }
+    .gusto-wine-more span {
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .gusto-wine-more svg {
       height: 60px;
       width: 111.396759px;
     }
     .gusto-wine-visual {
-      height: var(--gusto-wine-393-visual-height);
-      left: var(--gusto-wine-393-content-left);
-      position: absolute;
-      top: var(--gusto-wine-393-visual-top);
-      width: var(--gusto-wine-393-content-width);
+      aspect-ratio: 308 / 280;
+      flex: 0 0 100%;
+      height: auto;
+      min-width: 0;
+      position: relative;
+      width: auto;
     }
     .gusto-wine-visual img {
-      height: var(--gusto-wine-393-art-height) !important;
+      height: 100% !important;
       inset: 0 auto auto 0 !important;
       transform: none;
-      width: var(--gusto-wine-393-art-width) !important;
+      width: 100% !important;
     }
     .gusto-wine-brush-top {
       height: var(--gusto-wine-393-top-brush-height);
@@ -4010,16 +4091,249 @@
       padding: 0;
     }
     .gusto-feature-1 {
-      padding: 40px 9%;
-      gap: 28px;
+      gap: var(--gusto-feature-1-393-block-padding);
+      height: var(--gusto-feature-1-393-height);
+      margin: 0;
+      padding: var(--gusto-feature-1-393-block-padding)
+        var(--gusto-feature-1-393-inline-padding);
     }
-    .gusto-feature-2 {
-      padding: 40px 9%;
-      gap: 28px;
+    .gusto-feature-1 .gusto-feature-copy {
+      height: var(--gusto-feature-1-393-copy-height);
+      width: 100%;
     }
-    .gusto-feature-3 {
-      padding: 40px 9%;
-      gap: 28px;
+    .gusto-feature-1 .gusto-feature-heading {
+      height: var(--gusto-feature-1-393-heading-height);
+      width: var(--gusto-feature-1-393-heading-width);
+    }
+    .gusto-feature-1 .gusto-feature-heading p {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-1 .gusto-feature-heading::after {
+      height: 2px;
+      width: var(--gusto-feature-1-393-heading-width);
+    }
+    .gusto-feature-1 .gusto-feature-content {
+      height: var(--gusto-feature-1-393-content-height);
+      margin-top: var(--gusto-feature-1-393-block-padding);
+    }
+    .gusto-feature.gusto-feature-1 .gusto-feature-content h3 {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-1 .gusto-feature-content .gusto-feature-description {
+      font-size: 18px;
+      height: 192px;
+      line-height: 24px;
+      margin-top: 32px;
+    }
+    .gusto-feature-1 .gusto-feature-more {
+      font-size: 18px;
+      gap: 32px;
+      height: 60px;
+      line-height: 24px;
+      margin-top: 32px;
+      text-decoration: none;
+      width: 100%;
+    }
+    .gusto-feature-1 .gusto-feature-more svg {
+      height: 60px;
+      width: 111.396759px;
+    }
+    .gusto-feature-1 .gusto-feature-image {
+      aspect-ratio: auto;
+      height: var(--gusto-feature-1-393-image-height);
+      width: 100%;
+    }
+    .gusto-feature.gusto-feature-2 {
+      gap: var(--gusto-feature-2-393-block-padding);
+      height: var(--gusto-feature-2-393-height);
+      margin: 0;
+      padding: var(--gusto-feature-2-393-block-padding)
+        var(--gusto-feature-2-393-inline-padding);
+    }
+    .gusto-feature-2 .gusto-feature-copy {
+      height: auto;
+      width: 100%;
+    }
+    .gusto-feature-2 .gusto-feature-heading {
+      height: var(--gusto-feature-2-393-heading-height);
+      width: var(--gusto-feature-2-393-heading-width);
+    }
+    .gusto-feature-2 .gusto-feature-heading p {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-2 .gusto-feature-heading::after {
+      height: 2px;
+      width: var(--gusto-feature-2-393-heading-width);
+    }
+    .gusto-feature-2 .gusto-feature-content {
+      height: auto;
+      margin-top: var(--gusto-feature-2-393-block-padding);
+    }
+    .gusto-feature.gusto-feature-2 .gusto-feature-content h3 {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-2 .gusto-feature-content .gusto-feature-description {
+      font-size: 18px;
+      height: auto;
+      line-height: 24px;
+      margin-top: 32px;
+    }
+    .gusto-feature-2 .gusto-feature-more {
+      font-size: 18px;
+      gap: 32px;
+      height: 60px;
+      line-height: 24px;
+      margin-top: 32px;
+      text-decoration: none;
+      width: 100%;
+    }
+    .gusto-feature-2 .gusto-feature-more svg {
+      height: 60px;
+      width: 111.396759px;
+    }
+    .gusto-feature-2 .gusto-feature-image {
+      aspect-ratio: auto;
+      height: var(--gusto-feature-2-393-image-height);
+      width: 100%;
+    }
+    .gusto-feature-2 .gusto-feature-2-deco {
+      display: none;
+    }
+    .gusto-feature.gusto-feature-3 {
+      gap: var(--gusto-feature-3-393-block-padding);
+      height: var(--gusto-feature-3-393-height);
+      margin: 0;
+      padding: var(--gusto-feature-3-393-block-padding)
+        var(--gusto-feature-3-393-inline-padding);
+    }
+    .gusto-feature-3 .gusto-feature-copy {
+      height: auto;
+      width: 100%;
+    }
+    .gusto-feature-3 .gusto-feature-heading {
+      height: var(--gusto-feature-3-393-heading-height);
+      width: var(--gusto-feature-3-393-heading-width);
+    }
+    .gusto-feature-3 .gusto-feature-heading p {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-3 .gusto-feature-heading::after {
+      bottom: auto;
+      height: 2px;
+      top: 32px;
+      width: var(--gusto-feature-3-393-heading-width);
+    }
+    .gusto-feature-3 .gusto-feature-content {
+      height: auto;
+      margin-top: var(--gusto-feature-3-393-block-padding);
+    }
+    .gusto-feature.gusto-feature-3 .gusto-feature-content h3 {
+      font-size: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .gusto-feature-3 .gusto-feature-content .gusto-feature-description {
+      font-size: 18px;
+      height: auto;
+      line-height: 24px;
+      margin-top: 32px;
+    }
+    .gusto-feature-3 .gusto-feature-more {
+      font-size: 18px;
+      gap: 32px;
+      height: 60px;
+      line-height: 24px;
+      margin-top: 32px;
+      text-decoration: none;
+      width: 100%;
+    }
+    .gusto-feature-3 .gusto-feature-more svg {
+      height: 60px;
+      width: 111.396759px;
+    }
+    .gusto-feature-3 .gusto-feature-image {
+      aspect-ratio: auto;
+      height: var(--gusto-feature-3-393-image-height);
+      width: 100%;
+    }
+    .gusto-feature-3 .gusto-feature-3-deco {
+      display: none;
+    }
+    .gusto-social {
+      height: var(--gusto-social-393-height);
+    }
+    .gusto-social::after {
+      inset: var(--gusto-social-393-brush-height) 0 0;
+    }
+    .gusto-social-brush {
+      height: calc(var(--gusto-social-393-brush-height) + 2px);
+    }
+    .gusto-gallery {
+      gap: 4px;
+      height: var(--gusto-social-393-gallery-height);
+      left: var(--gusto-social-393-gallery-left);
+      top: var(--gusto-social-393-gallery-top);
+      transform: none;
+      width: var(--gusto-social-393-gallery-width);
+    }
+    .gusto-gallery-item {
+      flex-basis: 150px;
+      height: var(--gusto-social-393-gallery-height);
+      padding: 2px 3px;
+      width: 150px;
+    }
+    .gusto-social-links {
+      height: var(--gusto-social-393-links-height);
+      top: var(--gusto-social-393-links-top);
+      width: var(--gusto-social-393-links-width);
+    }
+    .gusto-social-links a {
+      gap: 48px;
+      height: var(--gusto-social-393-links-height);
+      min-width: 0;
+      padding: 32px 8px;
+      width: calc(var(--gusto-social-393-links-width) / 3);
+    }
+    .gusto-social-copy {
+      height: 110px;
+      min-width: 0;
+      width: 100%;
+    }
+    .gusto-social-heading {
+      gap: 16px;
+      height: 72px;
+    }
+    .gusto-social-heading img {
+      height: 24px;
+      width: 43.2px;
+    }
+    .gusto-social-heading span {
+      font-size: 20px;
+      height: 24px;
+      letter-spacing: -0.2em;
+      line-height: 24px;
+      white-space: nowrap;
+    }
+    .gusto-social-copy p {
+      font-size: 14px;
+      height: 38px;
+      line-height: 19px;
+      overflow: hidden;
+    }
+    .gusto-social-links > a > svg {
+      flex: 0 0 32px;
+      height: 32px;
+      width: 32px;
     }
     .gusto-feature-heading {
       height: 38px;
@@ -4075,65 +4389,167 @@
       margin-bottom: 0.5rem;
     }
     .gusto-reservation {
+      display: block;
       height: auto;
-      min-height: 760px;
-      padding: 52px 16px;
+      min-height: 0;
+      padding: var(--gusto-reservation-393-card-top)
+        var(--gusto-reservation-393-card-left);
+    }
+    .gusto-reservation-image {
+      object-position: center;
+    }
+    .gusto-reservation-brush {
+      height: var(--gusto-reservation-393-brush-height);
+    }
+    .gusto-reservation-brush-bottom {
+      bottom: 0;
     }
     .gusto-booking {
+      gap: 24px;
+      height: auto;
       min-height: 0;
-      padding: 24px 16px;
-      gap: 20px;
+      padding: 16px;
+      position: relative;
+      left: auto;
+      top: auto;
+      width: var(--gusto-reservation-393-card-width);
+    }
+    .gusto-booking-title {
+      gap: 4px;
+      height: var(--gusto-reservation-393-title-height);
+      width: var(--gusto-reservation-393-title-width);
     }
     .gusto-booking h2 {
-      font-size: 36px;
+      font-size: 32px;
+      height: 32px;
+      letter-spacing: -0.25em;
+      line-height: 32px;
+      width: var(--gusto-reservation-393-title-width);
     }
     .gusto-booking-title p {
-      font-size: 15px;
+      font-size: 14px;
+      height: 18px;
+      line-height: 14px;
+      padding-bottom: 4px;
+      white-space: nowrap;
+      width: 182px;
     }
     .gusto-booking-notes {
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 14px;
+      height: auto;
+      line-height: 27px;
+      overflow: hidden;
+      padding-left: 24px;
+      width: var(--gusto-reservation-393-notes-width);
+    }
+    .gusto-booking-notes li + li {
+      margin-top: 0;
     }
     .gusto-booking-button {
-      min-height: 52px;
-      padding-inline: 16px;
       font-size: 14px;
+      height: var(--gusto-reservation-393-button-height);
+      line-height: 14px;
+      min-height: var(--gusto-reservation-393-button-height);
+      padding: 16px;
+      width: var(--gusto-reservation-393-button-width);
     }
     .gusto-access {
-      gap: 36px;
-      padding: 56px 24px 64px;
+      gap: 16px;
+      width: 100%;
+      height: var(--gusto-access-393-height);
+      min-height: var(--gusto-access-393-height);
+      padding: var(--gusto-access-393-padding);
     }
-    .gusto-access-grid {
-      gap: 28px;
+    .gusto-access-title {
+      gap: 8px;
+      width: var(--gusto-access-393-title-width);
+      height: var(--gusto-access-393-title-height);
     }
     .gusto-access-title h2 {
-      font-size: 38px;
+      width: var(--gusto-access-393-title-width);
+      height: 32px;
+      font-size: 32px;
+      letter-spacing: -0.25em;
+      line-height: 32px;
     }
     .gusto-access-title p {
-      font-size: 15px;
+      width: var(--gusto-access-393-title-width);
+      height: 24.010719px;
+      padding: 0 0 10.010719px;
+      font-size: 14px;
+      line-height: 14px;
+      white-space: nowrap;
+    }
+    .gusto-access-title p::after {
+      right: 31.1px;
+      left: 31.1px;
+      height: 2px;
+      transform: rotate(0.895deg);
+    }
+    .gusto-access-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows:
+        var(--gusto-access-393-map-height)
+        var(--gusto-access-393-details-height);
+      gap: 24px;
+      width: var(--gusto-access-393-content-width);
+      height: var(--gusto-access-393-content-height);
+      min-height: var(--gusto-access-393-content-height);
+    }
+    .gusto-map {
+      width: var(--gusto-access-393-content-width);
+      height: var(--gusto-access-393-map-height);
+      aspect-ratio: auto;
     }
     .gusto-access-details {
-      font-size: 13px;
-      line-height: 1.85;
+      grid-template-rows: 81px 125px 25px 50px 27px;
+      row-gap: 16px;
+      width: var(--gusto-access-393-content-width);
+      height: var(--gusto-access-393-details-height);
+      min-height: var(--gusto-access-393-details-height);
+      font-size: 16px;
+      line-height: 27px;
     }
     .gusto-access-row {
-      grid-template-columns: 76px 1fr;
+      grid-template-columns: var(--gusto-access-393-label-width) 1fr;
+      min-height: 0;
     }
     .gusto-access-routes {
-      margin-bottom: 20px;
+      margin-bottom: 0;
+    }
+    .gusto-footer {
+      --footer-brush-height: var(--gusto-footer-393-brush-height);
+      height: var(--gusto-footer-393-height);
+      padding-top: var(--gusto-footer-393-brush-height);
+    }
+    .gusto-footer-brush {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--gusto-footer-393-brush-height);
+    }
+    .gusto-footer-content {
+      height: var(--gusto-footer-393-content-height);
     }
     .gusto-footer-upper {
-      height: calc(346px + var(--footer-brush-height));
-      padding: calc(32px + var(--footer-brush-height)) 16px 32px;
+      height: var(--gusto-footer-393-upper-height);
+      padding: 32px 0;
     }
     .gusto-footer-upper-inner {
       gap: 24px;
-      height: 282px;
+      width: 100%;
+      height: var(--gusto-footer-393-upper-inner-height);
+      padding-inline: 16px;
+    }
+    .gusto-footer-logo {
+      width: var(--gusto-footer-393-logo-width);
+      height: 90px;
     }
     .gusto-footer-nav {
       flex-direction: column;
       gap: 16px;
-      width: 124px;
+      width: var(--gusto-footer-393-nav-width);
+      height: 112px;
     }
     .gusto-footer-nav a {
       padding-inline: 16px;
@@ -4146,23 +4562,31 @@
     }
     .gusto-footer-social {
       gap: 52px;
+      width: var(--gusto-footer-393-social-width);
+      height: 32px;
     }
     .gusto-footer-social a {
       width: 32px;
       height: 32px;
     }
     .gusto-footer-lower {
-      height: 109px;
-      padding: 16px;
+      height: var(--gusto-footer-393-lower-height);
+      padding: 16px 0;
     }
     .gusto-footer-lower-inner {
       gap: 8px;
-      height: 77px;
+      width: 100%;
+      height: var(--gusto-footer-393-lower-inner-height);
+      padding-inline: 16px;
     }
     .gusto-footer-phone,
     .gusto-footer-hours {
-      font-size: 18px;
-      line-height: 15px;
+      font-size: 16px;
+      line-height: 16px;
+    }
+    .gusto-footer-phone {
+      width: var(--gusto-footer-393-phone-width);
+      height: 16px;
     }
     .gusto-footer-phone svg,
     .gusto-footer-hours svg {
@@ -4174,6 +4598,8 @@
       grid-template-columns: 16px auto;
       row-gap: 1px;
       column-gap: 4px;
+      width: var(--gusto-footer-393-hours-width);
+      height: 31px;
     }
     .gusto-footer-hours svg {
       grid-column: 1;
@@ -4183,6 +4609,13 @@
       grid-column: 2;
       padding: 0;
       border: 0;
+    }
+    .gusto-footer-copyright {
+      width: var(--gusto-footer-393-copyright-width);
+      height: 14px;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
     }
   }
 }

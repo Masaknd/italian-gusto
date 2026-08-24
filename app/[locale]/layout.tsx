@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Analytics } from '@/components/analytics';
+import { PreviewBanner } from '@/components/preview-banner';
 import { SiteHeader } from '@/components/site-header';
 import { isLocale, locales, type Locale } from '@/lib/i18n';
 import { getDictionary } from '@/locales';
@@ -38,6 +39,7 @@ export default async function LocaleLayout({
       <Analytics />
       <SiteHeader locale={locale} />
       {children}
+      <PreviewBanner locale={locale} />
     </div>
   );
 }

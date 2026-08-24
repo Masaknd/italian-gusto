@@ -9,5 +9,6 @@ export const en = {
   footer: { navigation: "Footer navigation", nav: { menu: "Menu", story: "Our Story", access: "Access", reservation: "Reservation" }, socialExternal: "Open {name} in a new tab", lunch: "Lunch", dinner: "Dinner", copyright: "© 2023 Masa Kondo. All Rights Reserved." },
   reserve: { title: "Reservations", body: "Reserve your table through our reservation form.", cta: "Open reservation form", external: "Opens the reservation form in a new tab", unavailable: "Our reservation form is being prepared. Please contact us by phone." },
   errors: { dynamic: "We could not load the latest information. Please try again shortly." },
+  preview: { active: "Draft preview is active.", exit: "Exit preview" },
   seo: { homeTitle: "Italian bar in Osaka", homeDescription: "Gusto Italian Bar, a relaxed Italian bar in Osaka.", menuTitle: "Menu", reserveTitle: "Reservations" },
 } as const;

@@ -24,6 +24,15 @@ Create fields: `name` (text, required), `description` (textarea), `image` (image
 
 Configure a microCMS webhook after content publication to `POST https://YOUR-DOMAIN/api/revalidate?secret=YOUR_REVALIDATE_SECRET`, with the same secret in the `x-revalidate-secret` header if the webhook supports custom headers. This invalidates cached menu and translation content as well as all affected locale pages.
 
+### Draft preview
+
+In each microCMS list API, open **API settings > Preview** and configure the matching URL below. Replace `YOUR-DOMAIN` with the deployed site and `YOUR_REVALIDATE_SECRET` with the server-side `REVALIDATE_SECRET` value.
+
+- `menus`: `https://YOUR-DOMAIN/api/draft?secret=YOUR_REVALIDATE_SECRET&endpoint=menus&contentId={CONTENT_ID}&draftKey={DRAFT_KEY}`
+- `featured-menus`: `https://YOUR-DOMAIN/api/draft?secret=YOUR_REVALIDATE_SECRET&endpoint=featured-menus&contentId={CONTENT_ID}&draftKey={DRAFT_KEY}`
+
+The handler validates the secret and draft against microCMS before setting HTTP-only preview cookies. It then opens the Japanese page that renders that API. The on-page preview bar can end the session and return to the current page. For local testing, use the same URLs with `http://localhost:3000` while `pnpm dev` is running.
+
 Japanese is the sole owner-managed source. English natural-language menu fields are translated on the server through DeepL and cached with the CMS content tag; they fall back to Japanese if DeepL is unavailable. Food names and culinary descriptions require owner/maintainer review after automated translation before publishing.
 
 ## Reservations, analytics, and search

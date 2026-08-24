@@ -145,6 +145,10 @@ export const ja = {
   errors: {
     dynamic: '最新情報を読み込めませんでした。時間をおいて再度お試しください。',
   },
+  preview: {
+    active: '下書きをプレビューしています。',
+    exit: 'プレビューを終了',
+  },
   seo: {
     homeTitle: '大阪のイタリアンバー',
     homeDescription: '大阪で気軽に楽しめるイタリアンバー、Gusto Italian Bar。',

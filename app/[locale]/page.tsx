@@ -17,6 +17,9 @@ export default async function HomePage({
     locale === 'en'
       ? await translateManagedFields(content.featuredMenus)
       : content.featuredMenus;
-  const featured = cmsFeatured.length >= 3 ? cmsFeatured : homePreviewFeatured;
+  const featured =
+    content.isPreview || cmsFeatured.length >= 3
+      ? cmsFeatured
+      : homePreviewFeatured;
   return <HomeGusto locale={locale} featured={featured} />;
 }
