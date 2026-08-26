@@ -194,8 +194,6 @@
 
   /* Marquee. */
   --gusto-hero-1440-marquee-top: 163.935059px;
-  --gusto-hero-768-marquee-width: 60px;
-  --gusto-hero-768-marquee-height: 527px;
   --gusto-hero-768-marquee-font-size: 68px;
   --gusto-hero-768-marquee-text-left: -233.499996px;
   --gusto-hero-768-marquee-text-top: 233.500009px;
@@ -306,11 +304,7 @@
   --gusto-wine-768-art-width: 394.5px;
   --gusto-wine-768-art-height: 358.636383px;
 
-  /* Recommendation 1.
-   *  Pixso 393px recommendation 1 frame: 1180:14961.
-   *  Pixso 768px recommendation 1 frame: 910:7200.
-   *  Pixso 1440px recommendation 1 frame: 910:4554.
-   */
+  /* Recommendation 1. */
   /* Section. */
   --gusto-feature-1-393-height: 843.472534px;
   --gusto-feature-1-768-height: 994.930908px;
@@ -461,21 +455,7 @@
   --gusto-feature-3-1440-deco-width: 426.709015px;
   --gusto-feature-3-1440-deco-height: 442.898px;
 
-  /* Picture and social.
-   *  Pixso 393px picture and social frame: 1180:15006.
-   *  Pixso 768px picture and social frame: 910:7260.
-   *  Pixso 1440px picture and social frame: 1741:31389.
-   */
-  /* Section. */
-  --gusto-social-393-height: 573px;
-  --gusto-social-768-height: 714.626709px;
-  --gusto-social-1440-height: 814.17511px;
-
-  /* Brush. */
-  --gusto-social-393-brush-height: 38.800018px;
-  --gusto-social-768-brush-height: 56.62664px;
-  --gusto-social-1440-brush-height: 106.174957px;
-
+  /* Picture and social. */
   /* Gallery. */
   --gusto-social-393-gallery-top: 70.800018px;
   --gusto-social-768-gallery-top: 106.626709px;
@@ -493,23 +473,8 @@
   /* Links. */
   --gusto-social-393-links-top: 234px;
   --gusto-social-768-links-top: 378.626709px;
-  --gusto-social-393-links-width: 361px;
-  --gusto-social-768-links-width: 722px;
-  --gusto-social-1440-links-width: 1182px;
-  --gusto-social-393-links-height: 286px;
-  --gusto-social-768-links-height: 286px;
-  --gusto-social-1440-links-height: 286px;
 
-  /* Reservation.
-   *  Pixso 393px reservation frame: 1180:15034.
-   *  Pixso 768px reservation frame: 910:7310.
-   *  Pixso 1440px reservation frame: 910:4664.
-   */
-  /* Brush. */
-  --gusto-reservation-393-brush-height: 7.284471px;
-  --gusto-reservation-768-brush-height: 14.235302px;
-  --gusto-reservation-1440-brush-height: 26.691189px;
-
+  /* Reservation. */
   /* Card. */
   --gusto-reservation-393-card-left: 16px;
   --gusto-reservation-768-card-left: 192px;
@@ -522,14 +487,6 @@
   --gusto-reservation-1440-card-width: 710px;
   --gusto-reservation-768-card-height: 678.000061px;
   --gusto-reservation-1440-card-height: 514px;
-
-  /* Title. */
-  --gusto-reservation-393-title-width: 198px;
-  --gusto-reservation-768-title-width: 297px;
-  --gusto-reservation-1440-title-width: 322px;
-  --gusto-reservation-393-title-height: 54.000042px;
-  --gusto-reservation-768-title-height: 80.000038px;
-  --gusto-reservation-1440-title-height: 84px;
 
   /* Notes. */
   --gusto-reservation-393-notes-width: 329px;
@@ -548,34 +505,11 @@
   --gusto-reservation-768-height: 832px;
   --gusto-reservation-1440-height: 914px;
 
-  /* Access.
-   *  Pixso 393px access frame: 1180:15040.
-   *  Pixso 768px access frame: 910:7322.
-   *  Pixso 1440px access frame: 910:4676.
-   */
+  /* Access. */
   /* Section. */
-  --gusto-access-393-height: 954.010742px;
-  --gusto-access-768-height: 1137.248535px;
-  --gusto-access-1440-height: 671.248474px;
   --gusto-access-393-padding: 32px 16px;
   --gusto-access-768-padding: 64px 86px;
   --gusto-access-1440-padding: 50px 96px;
-
-  /* Title. */
-  --gusto-access-393-title-width: 191px;
-  --gusto-access-768-title-width: 191px;
-  --gusto-access-1440-title-width: 1248px;
-  --gusto-access-393-title-height: 64.010719px;
-  --gusto-access-768-title-height: 94.248497px;
-  --gusto-access-1440-title-height: 94.248497px;
-
-  /* Content. */
-  --gusto-access-393-content-width: 361px;
-  --gusto-access-768-content-width: 596px;
-  --gusto-access-1440-content-width: 1248px;
-  --gusto-access-393-content-height: 810px;
-  --gusto-access-768-content-height: 858px;
-  --gusto-access-1440-content-height: 420px;
 
   /* Map. */
   --gusto-access-393-map-height: 414px;
@@ -583,77 +517,9 @@
   --gusto-access-1440-map-height: 414px;
   --gusto-access-1440-map-width: 481.522461px;
 
-  /* Details. */
-  --gusto-access-393-details-height: 372px;
-  --gusto-access-768-details-height: 420px;
-  --gusto-access-1440-details-height: 420px;
-  --gusto-access-1440-details-width: 479px;
-
-  /* Label. */
-  --gusto-access-393-label-width: 79px;
-
-  /* Footer.
-   *  Pixso 393px footer frame: 1180:15062.
-   *  Pixso 768px footer frame: 947:8990.
-   *  Pixso 1440px footer frame: 947:8896.
-   */
+  /* Footer. */
   /* Section. */
-  --gusto-footer-393-height: 462.284515px;
-  --gusto-footer-768-height: 420.235382px;
-  --gusto-footer-1440-height: 287.691315px;
   --gusto-footer-1440-inline-padding: 96px;
-
-  /* Brush. */
-  --gusto-footer-393-brush-height: 7.284471px;
-  --gusto-footer-768-brush-height: 14.235302px;
-  --gusto-footer-1440-brush-height: 26.691189px;
-
-  /* Content. */
-  --gusto-footer-393-content-height: 455px;
-
-  /* Upper. */
-  --gusto-footer-393-upper-height: 346px;
-  --gusto-footer-768-upper-height: 286px;
-  --gusto-footer-1440-upper-height: 197px;
-  --gusto-footer-393-upper-inner-height: 282px;
-  --gusto-footer-768-upper-inner-height: 222px;
-
-  /* Logo. */
-  --gusto-footer-393-logo-width: 207.637802px;
-  --gusto-footer-768-logo-width: 207.637802px;
-  --gusto-footer-1440-logo-width: 230.708664px;
-
-  /* Nav. */
-  --gusto-footer-393-nav-width: 124px;
-  --gusto-footer-768-nav-width: 451px;
-  --gusto-footer-1440-nav-width: 479px;
-
-  /* Social. */
-  --gusto-footer-393-social-width: 200px;
-  --gusto-footer-768-social-width: 248px;
-  --gusto-footer-1440-social-width: 248px;
-
-  /* Lower. */
-  --gusto-footer-393-lower-height: 109px;
-  --gusto-footer-768-lower-height: 120px;
-  --gusto-footer-1440-lower-height: 64px;
-  --gusto-footer-393-lower-inner-height: 77px;
-  --gusto-footer-768-lower-inner-height: 88px;
-
-  /* Phone. */
-  --gusto-footer-393-phone-width: 119px;
-  --gusto-footer-768-phone-width: 139px;
-  --gusto-footer-1440-phone-width: 196px;
-
-  /* Hours. */
-  --gusto-footer-393-hours-width: 272px;
-  --gusto-footer-768-hours-width: 484px;
-  --gusto-footer-1440-hours-width: 667px;
-
-  /* Copyright. */
-  --gusto-footer-393-copyright-width: 218px;
-  --gusto-footer-768-copyright-width: 218px;
-  --gusto-footer-1440-copyright-width: 218px;
 
   --color-text-default: var(--primitive-gray-5); /* unused */
   --color-text-subtle: var(--primitive-gray-40);
@@ -684,6 +550,341 @@
 
   --background: var(--color-page-surface);
   --foreground: var(--color-page-text);
+}
+
+.gusto-marquee {
+  position: absolute;
+  margin: 0;
+  color: var(--color-brand-orange);
+  font-family: var(--font-family-display);
+  font-size: 86px;
+  font-weight: 400;
+  line-height: 90px;
+  letter-spacing: -0.25em;
+  text-shadow: var(--shadow-hero-title);
+  transform: rotate(90deg);
+  transform-origin: top left;
+  white-space: nowrap;
+}
+
+/* About page hero — supplied Pixso frames 1655:30009, 1717:15769,
+   1720:18086, and 1725:26286. */
+.gusto-about-page-hero {
+  position: relative;
+  width: 100%;
+  height: 1166px;
+  overflow: hidden;
+}
+
+.gusto-about-page-story {
+  position: absolute;
+  top: 24px;
+  left: 264px;
+  z-index: 2;
+  display: flex;
+  width: 585px;
+  height: 609px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.gusto-about-page-heading {
+  display: flex;
+  width: 320px;
+  height: 84px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-bottom: 2px dashed var(--color-brand-coral);
+}
+
+.gusto-about-page-heading h1 {
+  display: flex;
+  width: 320px;
+  height: 80px;
+  margin: 0;
+  align-items: center;
+  color: var(--color-brand-coral);
+  font-family: var(--font-family-display);
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 96px;
+  letter-spacing: -0.25em;
+  white-space: nowrap;
+}
+
+.gusto-about-page-content {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 477px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.gusto-about-page-copy,
+.gusto-about-page-details {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+  color: var(--color-brand-ink);
+  font-family: var(--font-family-accent);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.gusto-about-page-copy {
+  height: 231px;
+}
+
+.gusto-about-page-copy p {
+  margin: 0;
+  line-height: inherit;
+}
+
+.gusto-about-page-details {
+  display: flex;
+  height: 198px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gusto-about-page-details > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+}
+
+.gusto-about-page-details dt,
+.gusto-about-page-details dd {
+  margin: 0;
+  font: inherit;
+}
+
+.gusto-about-page-details dd span {
+  display: block;
+}
+
+.gusto-about-page-details a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gusto-about-page-barrel {
+  position: absolute;
+  top: 555px;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 552.71px;
+  height: 354.46px;
+  object-fit: contain;
+}
+
+.gusto-about-page-interior {
+  position: absolute;
+  top: 0;
+  left: 849px;
+  width: 973px;
+  height: 1066px;
+}
+
+.gusto-about-page-interior img {
+  object-fit: contain;
+}
+
+.gusto-about-page-marquee {
+  top: 262.01px;
+  left: 90px;
+  z-index: 3;
+}
+
+.gusto-about-page-caret {
+  position: absolute;
+  right: 72px;
+  bottom: 100px;
+  z-index: 4;
+  display: flex;
+  width: 74px;
+  height: 74px;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid var(--color-brand-coral);
+  border-radius: 50%;
+  color: var(--color-brand-coral);
+  font: 400 46px/1 var(--font-family-display);
+  text-decoration: none;
+}
+
+.gusto-about-page-caret span {
+  transform: translateY(4px);
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .gusto-about-page-hero {
+    height: 926px;
+  }
+
+  .gusto-about-page-story {
+    left: 120px;
+    width: 612px;
+  }
+
+  .gusto-about-page-interior {
+    top: 24px;
+    left: 732px;
+    width: 709px;
+    height: 776px;
+  }
+
+  .gusto-about-page-barrel {
+    top: 477.66px;
+    left: 220px;
+    width: 398.6px;
+    height: 255.62px;
+  }
+
+  .gusto-about-page-marquee {
+    top: 84px;
+  }
+
+  .gusto-about-page-caret {
+    right: 32px;
+    bottom: 100px;
+    width: 48px;
+    height: 48px;
+    border-width: 3px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .gusto-about-page-hero {
+    height: 1254px;
+  }
+
+  .gusto-about-page-story {
+    top: 24px;
+    left: 50%;
+    width: min(720px, calc(100% - 48px));
+    height: 404px;
+    gap: 48px;
+    transform: translateX(-50%);
+  }
+
+  .gusto-about-page-heading {
+    width: 192px;
+    height: 52px;
+  }
+
+  .gusto-about-page-heading h1 {
+    width: 192px;
+    height: 48px;
+    font-size: 48px;
+    line-height: 58px;
+  }
+
+  .gusto-about-page-content {
+    height: 304px;
+    gap: 16px;
+  }
+
+  .gusto-about-page-copy,
+  .gusto-about-page-details {
+    font-size: 18px;
+    line-height: 1.36;
+  }
+
+  .gusto-about-page-copy {
+    height: 144px;
+  }
+
+  .gusto-about-page-details {
+    width: 100%;
+    height: 144px;
+  }
+
+  .gusto-about-page-details > div {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .gusto-about-page-barrel {
+    top: 105px;
+    right: 0;
+    left: auto;
+    width: 310.31px;
+    height: 199px;
+  }
+
+  .gusto-about-page-interior {
+    top: 452px;
+    left: 50%;
+    width: 709px;
+    height: 776px;
+    transform: translateX(-50%);
+  }
+
+  .gusto-about-page-marquee,
+  .gusto-about-page-caret {
+    display: none;
+  }
+}
+
+@media (max-width: 480.02px) {
+  .gusto-about-page-hero {
+    height: 907px;
+  }
+
+  .gusto-about-page-story {
+    left: 16px;
+    width: 361px;
+    max-width: calc(100% - 32px);
+    height: 436px;
+    gap: 24px;
+    transform: none;
+  }
+
+  .gusto-about-page-heading {
+    width: 128px;
+    height: 36px;
+  }
+
+  .gusto-about-page-heading h1 {
+    width: 128px;
+    height: 32px;
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .gusto-about-page-content {
+    width: 360px;
+    max-width: 100%;
+    height: 376px;
+  }
+
+  .gusto-about-page-copy {
+    height: 216px;
+  }
+
+  .gusto-about-page-details {
+    height: 144px;
+  }
+
+  .gusto-about-page-barrel {
+    display: none;
+  }
+
+  .gusto-about-page-interior {
+    top: 484px;
+    left: 16px;
+    width: 361px;
+    max-width: calc(100% - 32px);
+    height: 397px;
+    transform: none;
+  }
 }
 
 /* Menu page: supplied 1920 / 1440 / 768 / 393 Pixso frames. */
@@ -906,26 +1107,11 @@
 }
 
 .gusto-menu__marquee {
-  position: absolute;
   top: 46px;
-  left: 0;
-  display: flex;
-  width: 90px;
-  height: 667px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  color: var(--color-brand-orange);
-  font-family: var(--font-family-display);
-  font-size: 86px;
-  font-weight: 400;
-  line-height: 90px;
-  letter-spacing: -0.25em;
-  text-orientation: upright;
-  writing-mode: vertical-rl;
+  left: 90px;
 }
 
-.gusto-menu__line-art {
+/* .gusto-menu__line-art {
   position: absolute;
   top: 46px;
   right: 1.999px;
@@ -941,7 +1127,7 @@
   height: 250px;
   border: 1px solid var(--color-brand-ink);
   transform: rotate(28deg);
-}
+} */
 
 .gusto-menu__line-art i:last-child {
   right: 0;
@@ -1413,17 +1599,8 @@
     opacity: 0.7;
   }
   .gusto-home .gusto-vertical {
-    @apply absolute whitespace-nowrap font-display;
     left: 90px;
     top: 304.5px;
-    color: var(--color-brand-orange);
-    font-weight: 400;
-    font-size: 86px;
-    line-height: 90px;
-    letter-spacing: -0.25em;
-    text-shadow: var(--shadow-hero-title);
-    transform: rotate(90deg);
-    transform-origin: top left;
   }
   .gusto-hero-caret {
     @apply absolute z-[4] flex items-center justify-center rounded-full no-underline;
@@ -2319,15 +2496,6 @@
     color: currentColor;
   }
   @media (min-width: 1200px) and (max-width: 1599px) {
-    .gusto-social {
-      height: var(--gusto-social-1440-height);
-    }
-    .gusto-social::after {
-      inset: var(--gusto-social-1440-brush-height) 0 0;
-    }
-    .gusto-social-brush {
-      height: calc(var(--gusto-social-1440-brush-height) + 2px);
-    }
     .gusto-gallery {
       top: var(--gusto-social-1440-gallery-top);
       left: var(--gusto-social-1440-gallery-left);
@@ -2343,8 +2511,6 @@
       padding: 4px 6px;
     }
     .gusto-social-links {
-      width: var(--gusto-social-1440-links-width);
-      height: var(--gusto-social-1440-links-height);
       transform: translateX(-50%);
     }
     .gusto-social-links a {
@@ -2498,9 +2664,6 @@
       display: block;
       height: var(--gusto-reservation-1440-height);
     }
-    .gusto-reservation-brush {
-      height: var(--gusto-reservation-1440-brush-height);
-    }
     .gusto-reservation-brush-bottom {
       bottom: 0;
     }
@@ -2515,11 +2678,8 @@
     }
     .gusto-booking-title {
       gap: 4px;
-      width: var(--gusto-reservation-1440-title-width);
-      height: var(--gusto-reservation-1440-title-height);
     }
     .gusto-booking h2 {
-      width: var(--gusto-reservation-1440-title-width);
       height: 52px;
       font-size: 52px;
       line-height: 1;
@@ -2652,17 +2812,12 @@
     .gusto-access {
       gap: 57px;
       width: 100%;
-      height: var(--gusto-access-1440-height);
-      min-height: var(--gusto-access-1440-height);
       padding: var(--gusto-access-1440-padding);
     }
     .gusto-access-title {
       gap: 8px;
-      width: var(--gusto-access-1440-title-width);
-      height: var(--gusto-access-1440-title-height);
     }
     .gusto-access-title h2 {
-      width: var(--gusto-access-1440-title-width);
       height: 52px;
       font-size: 52px;
       line-height: 1;
@@ -2681,22 +2836,13 @@
       height: 2px;
     }
     .gusto-access-grid {
-      grid-template-columns:
-        var(--gusto-access-1440-map-width)
-        var(--gusto-access-1440-details-width);
       gap: 24px;
-      width: var(--gusto-access-1440-content-width);
-      height: var(--gusto-access-1440-content-height);
-      min-height: var(--gusto-access-1440-content-height);
     }
     .gusto-map {
       width: var(--gusto-access-1440-map-width);
       height: var(--gusto-access-1440-map-height);
     }
     .gusto-access-details {
-      width: var(--gusto-access-1440-details-width);
-      height: var(--gusto-access-1440-details-height);
-      min-height: var(--gusto-access-1440-details-height);
       font-size: 16px;
       line-height: 42px;
     }
@@ -2836,25 +2982,13 @@
     white-space: nowrap;
   }
   @media (min-width: 1200px) and (max-width: 1599px) {
-    .gusto-footer {
-      --footer-brush-height: var(--gusto-footer-1440-brush-height);
-      height: var(--gusto-footer-1440-height);
-    }
     .gusto-footer-brush {
       top: 0;
       left: 0;
       width: 100%;
-      height: var(--gusto-footer-1440-brush-height);
-    }
-    .gusto-footer-content {
-      height: var(--gusto-footer-1440-height);
     }
     .gusto-footer-upper {
-      height: calc(
-        var(--gusto-footer-1440-brush-height) +
-          var(--gusto-footer-1440-upper-height)
-      );
-      padding: calc(var(--gusto-footer-1440-brush-height) + 32px)
+      padding: calc(var(--footer-brush-height) + 32px)
         var(--gusto-footer-1440-inline-padding) 32px;
     }
     .gusto-footer-upper-inner {
@@ -2862,11 +2996,9 @@
       height: 133px;
     }
     .gusto-footer-logo {
-      width: var(--gusto-footer-1440-logo-width);
       height: 100px;
     }
     .gusto-footer-nav {
-      width: var(--gusto-footer-1440-nav-width);
       height: 22px;
     }
     .gusto-footer-nav a {
@@ -2876,7 +3008,6 @@
     }
     .gusto-footer-social {
       gap: 52px;
-      width: var(--gusto-footer-1440-social-width);
       height: 48px;
     }
     .gusto-footer-social a {
@@ -2884,7 +3015,6 @@
       height: 48px;
     }
     .gusto-footer-lower {
-      height: var(--gusto-footer-1440-lower-height);
       padding: 16px var(--gusto-footer-1440-inline-padding);
     }
     .gusto-footer-lower-inner {
@@ -2893,13 +3023,11 @@
     }
     .gusto-footer-phone {
       gap: 16px;
-      width: var(--gusto-footer-1440-phone-width);
       height: 32px;
       font-size: 24px;
       line-height: 22px;
     }
     .gusto-footer-hours {
-      width: var(--gusto-footer-1440-hours-width);
       height: 32px;
       font-size: 24px;
       line-height: 22px;
@@ -2910,7 +3038,6 @@
       height: 32px;
     }
     .gusto-footer-copyright {
-      width: var(--gusto-footer-1440-copyright-width);
       height: 14px;
       font-size: 14px;
       line-height: 14px;
@@ -3405,7 +3532,6 @@
       align-items: center;
       display: flex;
       font-size: var(--gusto-hero-768-marquee-font-size);
-      height: var(--gusto-hero-768-marquee-width);
       justify-content: flex-start;
       left: var(--gusto-hero-768-marquee-text-left);
       letter-spacing: -0.25em;
@@ -3414,7 +3540,6 @@
       top: var(--gusto-hero-768-marquee-text-top);
       transform: rotate(90deg);
       transform-origin: center;
-      width: var(--gusto-hero-768-marquee-height);
     }
     .gusto-about {
       background: transparent;
@@ -3849,15 +3974,6 @@
     .gusto-feature-3-deco {
       display: none;
     }
-    .gusto-social {
-      height: var(--gusto-social-768-height);
-    }
-    .gusto-social::after {
-      inset: var(--gusto-social-768-brush-height) 0 0;
-    }
-    .gusto-social-brush {
-      height: calc(var(--gusto-social-768-brush-height) + 2px);
-    }
     .gusto-gallery {
       top: var(--gusto-social-768-gallery-top);
       left: var(--gusto-social-768-gallery-left);
@@ -3874,17 +3990,12 @@
     }
     .gusto-social-links {
       top: var(--gusto-social-768-links-top);
-      width: var(--gusto-social-768-links-width);
-      height: var(--gusto-social-768-links-height);
     }
     .gusto-social-links a {
       gap: 48px;
-      width: calc(var(--gusto-social-768-links-width) / 3);
-      height: var(--gusto-social-768-links-height);
       padding: 32px;
     }
     .gusto-social-copy {
-      width: calc(var(--gusto-social-768-links-width) / 3 - 64px);
       height: 110px;
     }
     .gusto-social-heading {
@@ -3923,7 +4034,6 @@
     }
     .gusto-reservation-brush-bottom {
       bottom: 0;
-      height: var(--gusto-reservation-768-brush-height);
     }
     .gusto-booking {
       position: absolute;
@@ -3937,11 +4047,8 @@
     }
     .gusto-booking-title {
       gap: 4px;
-      width: var(--gusto-reservation-768-title-width);
-      height: var(--gusto-reservation-768-title-height);
     }
     .gusto-booking h2 {
-      width: var(--gusto-reservation-768-title-width);
       height: 48px;
       font-size: 48px;
       letter-spacing: -0.25em;
@@ -3976,17 +4083,12 @@
     .gusto-access {
       gap: 57px;
       width: 100%;
-      height: var(--gusto-access-768-height);
-      min-height: var(--gusto-access-768-height);
       padding: var(--gusto-access-768-padding);
     }
     .gusto-access-title {
       gap: 8px;
-      width: var(--gusto-access-768-title-width);
-      height: var(--gusto-access-768-title-height);
     }
     .gusto-access-title h2 {
-      width: var(--gusto-access-768-title-width);
       height: 52px;
       font-size: 52px;
       letter-spacing: -15px;
@@ -4007,23 +4109,13 @@
     }
     .gusto-access-grid {
       grid-template-columns: 1fr;
-      grid-template-rows:
-        var(--gusto-access-768-map-height)
-        var(--gusto-access-768-details-height);
       gap: 24px;
-      width: var(--gusto-access-768-content-width);
-      height: var(--gusto-access-768-content-height);
-      min-height: var(--gusto-access-768-content-height);
     }
     .gusto-map {
-      width: var(--gusto-access-768-content-width);
       height: var(--gusto-access-768-map-height);
       aspect-ratio: auto;
     }
     .gusto-access-details {
-      width: var(--gusto-access-768-content-width);
-      height: var(--gusto-access-768-details-height);
-      min-height: var(--gusto-access-768-details-height);
       font-size: 16px;
       line-height: 42px;
     }
@@ -4033,40 +4125,25 @@
     .gusto-access-routes {
       margin-bottom: 42px;
     }
-    .gusto-footer {
-      --footer-brush-height: var(--gusto-footer-768-brush-height);
-      height: var(--gusto-footer-768-height);
-    }
     .gusto-footer-brush {
       top: 0;
       left: 0;
       width: 100%;
-      height: var(--gusto-footer-768-brush-height);
-    }
-    .gusto-footer-content {
-      height: var(--gusto-footer-768-height);
     }
     .gusto-footer-upper {
-      height: calc(
-        var(--gusto-footer-768-brush-height) +
-          var(--gusto-footer-768-upper-height)
-      );
-      padding: calc(var(--gusto-footer-768-brush-height) + 32px) 0 32px;
+      padding: calc(var(--footer-brush-height) + 32px) 0 32px;
     }
     .gusto-footer-upper-inner {
       flex-direction: column;
       justify-content: flex-start;
       gap: 32px;
       width: 768px;
-      height: var(--gusto-footer-768-upper-inner-height);
       padding-inline: 24px;
     }
     .gusto-footer-logo {
-      width: var(--gusto-footer-768-logo-width);
       height: 90px;
     }
     .gusto-footer-nav {
-      width: var(--gusto-footer-768-nav-width);
       height: 20px;
     }
     .gusto-footer-nav a {
@@ -4077,7 +4154,6 @@
     }
     .gusto-footer-social {
       gap: 52px;
-      width: var(--gusto-footer-768-social-width);
       height: 48px;
     }
     .gusto-footer-social a {
@@ -4085,7 +4161,6 @@
       height: 48px;
     }
     .gusto-footer-lower {
-      height: var(--gusto-footer-768-lower-height);
       padding: 16px 0;
     }
     .gusto-footer-lower-inner {
@@ -4093,18 +4168,15 @@
       justify-content: flex-start;
       gap: 8px;
       width: 768px;
-      height: var(--gusto-footer-768-lower-inner-height);
       padding-inline: 24px;
     }
     .gusto-footer-phone {
       gap: 4px;
-      width: var(--gusto-footer-768-phone-width);
       height: 24px;
       font-size: 24px;
       line-height: 16px;
     }
     .gusto-footer-hours {
-      width: var(--gusto-footer-768-hours-width);
       height: 24px;
       font-size: 24px;
       line-height: 16px;
@@ -4120,7 +4192,6 @@
       line-height: 16px;
     }
     .gusto-footer-copyright {
-      width: var(--gusto-footer-768-copyright-width);
       height: 14px;
       font-family: var(--font-noto-sans-jp), sans-serif;
       font-size: 12px;
@@ -4583,15 +4654,6 @@
     .gusto-feature-3 .gusto-feature-3-deco {
       display: none;
     }
-    .gusto-social {
-      height: var(--gusto-social-393-height);
-    }
-    .gusto-social::after {
-      inset: var(--gusto-social-393-brush-height) 0 0;
-    }
-    .gusto-social-brush {
-      height: calc(var(--gusto-social-393-brush-height) + 2px);
-    }
     .gusto-gallery {
       gap: 4px;
       height: var(--gusto-social-393-gallery-height);
@@ -4607,16 +4669,12 @@
       width: 150px;
     }
     .gusto-social-links {
-      height: var(--gusto-social-393-links-height);
       top: var(--gusto-social-393-links-top);
-      width: var(--gusto-social-393-links-width);
     }
     .gusto-social-links a {
       gap: 48px;
-      height: var(--gusto-social-393-links-height);
       min-width: 0;
       padding: 32px 8px;
-      width: calc(var(--gusto-social-393-links-width) / 3);
     }
     .gusto-social-copy {
       height: 110px;
@@ -4712,9 +4770,6 @@
     .gusto-reservation-image {
       object-position: center;
     }
-    .gusto-reservation-brush {
-      height: var(--gusto-reservation-393-brush-height);
-    }
     .gusto-reservation-brush-bottom {
       bottom: 0;
     }
@@ -4730,15 +4785,12 @@
     }
     .gusto-booking-title {
       gap: 4px;
-      height: var(--gusto-reservation-393-title-height);
-      width: var(--gusto-reservation-393-title-width);
     }
     .gusto-booking h2 {
       font-size: 32px;
       height: 32px;
       letter-spacing: -0.25em;
       line-height: 32px;
-      width: var(--gusto-reservation-393-title-width);
     }
     .gusto-booking-title p {
       font-size: 14px;
@@ -4770,24 +4822,18 @@
     .gusto-access {
       gap: 16px;
       width: 100%;
-      height: var(--gusto-access-393-height);
-      min-height: var(--gusto-access-393-height);
       padding: var(--gusto-access-393-padding);
     }
     .gusto-access-title {
       gap: 8px;
-      width: var(--gusto-access-393-title-width);
-      height: var(--gusto-access-393-title-height);
     }
     .gusto-access-title h2 {
-      width: var(--gusto-access-393-title-width);
       height: 32px;
       font-size: 32px;
       letter-spacing: -0.25em;
       line-height: 32px;
     }
     .gusto-access-title p {
-      width: var(--gusto-access-393-title-width);
       height: 24.010719px;
       padding: 0 0 10.010719px;
       font-size: 14px;
@@ -4802,67 +4848,43 @@
     }
     .gusto-access-grid {
       grid-template-columns: 1fr;
-      grid-template-rows:
-        var(--gusto-access-393-map-height)
-        var(--gusto-access-393-details-height);
       gap: 24px;
-      width: var(--gusto-access-393-content-width);
-      height: var(--gusto-access-393-content-height);
-      min-height: var(--gusto-access-393-content-height);
     }
     .gusto-map {
-      width: var(--gusto-access-393-content-width);
       height: var(--gusto-access-393-map-height);
       aspect-ratio: auto;
     }
     .gusto-access-details {
       grid-template-rows: 81px 125px 25px 50px 27px;
       row-gap: 16px;
-      width: var(--gusto-access-393-content-width);
-      height: var(--gusto-access-393-details-height);
-      min-height: var(--gusto-access-393-details-height);
       font-size: 16px;
       line-height: 27px;
     }
     .gusto-access-row {
-      grid-template-columns: var(--gusto-access-393-label-width) 1fr;
       min-height: 0;
     }
     .gusto-access-routes {
       margin-bottom: 0;
     }
-    .gusto-footer {
-      --footer-brush-height: var(--gusto-footer-393-brush-height);
-      height: var(--gusto-footer-393-height);
-      padding-top: var(--gusto-footer-393-brush-height);
-    }
     .gusto-footer-brush {
       top: 0;
       left: 0;
       width: 100%;
-      height: var(--gusto-footer-393-brush-height);
-    }
-    .gusto-footer-content {
-      height: var(--gusto-footer-393-content-height);
     }
     .gusto-footer-upper {
-      height: var(--gusto-footer-393-upper-height);
       padding: 32px 0;
     }
     .gusto-footer-upper-inner {
       gap: 24px;
       width: 100%;
-      height: var(--gusto-footer-393-upper-inner-height);
       padding-inline: 16px;
     }
     .gusto-footer-logo {
-      width: var(--gusto-footer-393-logo-width);
       height: 90px;
     }
     .gusto-footer-nav {
       flex-direction: column;
       gap: 16px;
-      width: var(--gusto-footer-393-nav-width);
       height: 112px;
     }
     .gusto-footer-nav a {
@@ -4876,7 +4898,6 @@
     }
     .gusto-footer-social {
       gap: 52px;
-      width: var(--gusto-footer-393-social-width);
       height: 32px;
     }
     .gusto-footer-social a {
@@ -4884,13 +4905,11 @@
       height: 32px;
     }
     .gusto-footer-lower {
-      height: var(--gusto-footer-393-lower-height);
       padding: 16px 0;
     }
     .gusto-footer-lower-inner {
       gap: 8px;
       width: 100%;
-      height: var(--gusto-footer-393-lower-inner-height);
       padding-inline: 16px;
     }
     .gusto-footer-phone,
@@ -4899,7 +4918,6 @@
       line-height: 16px;
     }
     .gusto-footer-phone {
-      width: var(--gusto-footer-393-phone-width);
       height: 16px;
     }
     .gusto-footer-phone svg,
@@ -4912,7 +4930,6 @@
       grid-template-columns: 16px auto;
       row-gap: 1px;
       column-gap: 4px;
-      width: var(--gusto-footer-393-hours-width);
       height: 31px;
     }
     .gusto-footer-hours svg {
@@ -4925,7 +4942,6 @@
       border: 0;
     }
     .gusto-footer-copyright {
-      width: var(--gusto-footer-393-copyright-width);
       height: 14px;
       font-size: 12px;
       line-height: 14px;

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Menu } from '@/lib/microcms/types';
 import { includingTax } from '@/lib/site-config';
 import type { getDictionary } from '@/locales';
+import { Marquee } from './marquee';
 
 type Copy = ReturnType<typeof getDictionary>;
 const yen = (value: number) =>
@@ -104,9 +105,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
         ))}
       </div>
 
-      <div className="gusto-menu__marquee" aria-hidden="true">
-        {copy.home.verticalTitle}
-      </div>
+      <Marquee className="gusto-menu__marquee" text={copy.home.verticalTitle} />
     </>
   );
 }

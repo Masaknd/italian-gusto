@@ -92,6 +92,9 @@ export const ja = {
     paymentLabel: '支払方法',
     paymentMethods: '現金、VISA、Mastercard',
   },
+  aboutPage: {
+    backToTop: 'ページ上部へ戻る',
+  },
   concept: {
     title: '心ほどける、イタリアの食卓。',
     body: '季節の食材とワインを、肩ひじ張らずに楽しめる場所。大切な人との時間に、少しだけ特別な余白を。',
@@ -156,6 +159,7 @@ export const ja = {
   seo: {
     homeTitle: '大阪のイタリアンバー',
     homeDescription: '大阪で気軽に楽しめるイタリアンバー、Gusto Italian Bar。',
+    aboutTitle: 'グストとは',
     menuTitle: 'メニュー',
     reserveTitle: 'ご予約',
   },

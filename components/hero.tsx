@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import type { HomePageCopy } from './types';
+import { Marquee } from './marquee';
 
 export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
   return (
     <section className='gusto-hero'>
-      <p className='gusto-vertical'>{copy.home.verticalTitle}</p>
+      <Marquee className='gusto-vertical' text={copy.home.verticalTitle} />
       <div className='gusto-hero-copy'>
         <h1>
           {copy.hero.titleSegments.map((line, lineIndex) => (

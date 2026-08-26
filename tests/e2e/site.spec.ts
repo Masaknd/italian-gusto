@@ -80,6 +80,9 @@ test("the 1920px menu hero uses the supplied title, nav, marquee, and botanical 
   await expect(marquee).toHaveCSS("font-size", "86px");
   await expect(marquee).toHaveCSS("line-height", "90px");
   await expect(marquee).toHaveCSS("letter-spacing", "-21.5px");
+  await expect(marquee).toHaveCSS("transform", "matrix(0, 1, -1, 0, 0, 0)");
+  await expect(marquee).toHaveCSS("transform-origin", "0px 0px");
+  await expect(marquee).toHaveCSS("white-space", "nowrap");
 
   const [titleBox, navBox, marqueeBox, botanicalBox] = await Promise.all([
     title.boundingBox(),
@@ -336,7 +339,7 @@ test("the menu page reuses the home social, reservation, access, and footer sect
     expect(accessBox?.height).toBeCloseTo(671.248, 1);
   }
 
-  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Our Story" })).toHaveAttribute("href", "/ja#about");
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Our Story" })).toHaveAttribute("href", "/ja/about");
 });
 
 test("the 393px hamburger menu matches the supplied Pixso frame", async ({ page }, testInfo) => {
@@ -2305,6 +2308,111 @@ test("the 1440px footer follows the supplied Pixso frame", async ({ page }, test
   expect(phoneBox!.width).toBeCloseTo(196, 1);
   expect(hoursBox!.x).toBeCloseTo(375.5, 1);
   expect(hoursBox!.width).toBeCloseTo(667, 1);
+});
+
+test("the about page follows the four supplied responsive hero frames", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop browser geometry check");
+
+  const frames = [
+    {
+      width: 1920,
+      headerHeight: 132,
+      heroHeight: 1166,
+      story: { x: 264, y: 156, width: 585, height: 609 },
+      interior: { x: 849, y: 132, width: 973, height: 1066 },
+      barrelWidth: 552.71,
+      titleSize: "80px",
+      socialY: 1298,
+    },
+    {
+      width: 1440,
+      headerHeight: 132,
+      heroHeight: 926,
+      story: { x: 120, y: 156, width: 612, height: 609 },
+      interior: { x: 732, y: 156, width: 709, height: 776 },
+      barrelWidth: 398.6,
+      titleSize: "80px",
+      socialY: 1058,
+    },
+    {
+      width: 768,
+      headerHeight: 120,
+      heroHeight: 1254,
+      story: { x: 24, y: 144, width: 720, height: 404 },
+      interior: { x: 29.5, y: 572, width: 709, height: 776 },
+      barrelWidth: 310.31,
+      titleSize: "48px",
+      socialY: 1374,
+    },
+    {
+      width: 393,
+      headerHeight: 84,
+      heroHeight: 907,
+      story: { x: 16, y: 108, width: 361, height: 436 },
+      interior: { x: 16, y: 568, width: 361, height: 397 },
+      barrelWidth: null,
+      titleSize: "32px",
+      socialY: 991,
+    },
+  ] as const;
+
+  for (const frame of frames) {
+    await page.setViewportSize({ width: frame.width, height: 1000 });
+    await page.goto("/ja/about");
+
+    const header = page.getByRole("banner");
+    const hero = page.locator(".gusto-about-page-hero");
+    const story = page.locator(".gusto-about-page-story");
+    const title = page.getByRole("heading", { level: 1, name: "グストとは" });
+    const interior = page.locator(".gusto-about-page-interior");
+    const barrel = page.locator(".gusto-about-page-barrel");
+    const social = page.locator(".gusto-social");
+    const marquee = page.locator(".gusto-about-page-marquee");
+
+    await expect(title).toHaveCSS("font-size", frame.titleSize);
+    await expect(title).toHaveCSS("font-family", /kirigirisu/);
+    await expect(page.locator(".gusto-about-page-copy")).toHaveCSS("font-family", /yamafont/);
+
+    if (frame.width >= 1200) {
+      await expect(marquee).toBeVisible();
+      await expect(marquee).toHaveCSS("transform", "matrix(0, 1, -1, 0, 0, 0)");
+      await expect(marquee).toHaveCSS("transform-origin", "0px 0px");
+      await expect(marquee).toHaveCSS("white-space", "nowrap");
+    } else {
+      await expect(marquee).toBeHidden();
+    }
+
+    const [headerBox, heroBox, storyBox, interiorBox, socialBox] = await Promise.all([
+      header.boundingBox(),
+      hero.boundingBox(),
+      story.boundingBox(),
+      interior.boundingBox(),
+      social.boundingBox(),
+    ]);
+
+    expect(headerBox?.height).toBeCloseTo(frame.headerHeight, 1);
+    expect(heroBox?.height).toBeCloseTo(frame.heroHeight, 1);
+    expect(storyBox).toMatchObject(frame.story);
+    expect(interiorBox).toMatchObject(frame.interior);
+    expect(socialBox?.y).toBeCloseTo(frame.socialY, 1);
+
+    if (frame.barrelWidth === null) {
+      await expect(barrel).toBeHidden();
+    } else {
+      await expect(barrel).toBeVisible();
+      expect((await barrel.boundingBox())?.width).toBeCloseTo(frame.barrelWidth, 1);
+    }
+  }
+});
+
+test("the About page is localized and linked from shared navigation", async ({ page }) => {
+  await page.goto("/ja/about");
+  await expect(page).toHaveTitle(/グストとは/);
+  await expect(page.getByRole("heading", { level: 1, name: "グストとは" })).toBeVisible();
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Our Story" })).toHaveAttribute("href", "/ja/about");
+
+  await page.goto("/en/about");
+  await expect(page.getByRole("heading", { level: 1, name: "About Gusto" })).toBeVisible();
 });
 
 test("Japanese and English pages use their matching dictionaries", async ({ page }) => { await page.goto("/ja"); await expect(page.getByRole("heading", { level: 1, name: "だれでも気軽に ワインと料理を 楽しめるバル" })).toBeVisible(); await page.goto("/en"); await expect(page.getByRole("heading", { level: 1, name: "Make tonight more delicious." })).toBeVisible(); });

@@ -86,7 +86,6 @@ export default async function MenuPage({ params, }: {
           copy={d}
           locale={locale}
           socialCards={socialCards}
-          storyHref={`/${locale}#about`}
         />
       </>
     );

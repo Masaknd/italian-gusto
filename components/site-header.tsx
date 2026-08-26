@@ -12,7 +12,8 @@ export function SiteHeader({ locale }: {
     locale: Locale;
 }) {
     const pathname = usePathname();
-    const isMenuPage = pathname === `/${locale}/menu`;
+    const isInnerPage =
+        pathname === `/${locale}/menu` || pathname === `/${locale}/about`;
     const [open, setOpen] = useState(false);
     const menuButtonRef = useRef<HTMLButtonElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export function SiteHeader({ locale }: {
         [d.home.heroNav.home, `/${locale}`],
         [d.home.heroNav.menu, `/${locale}/menu`],
         [d.home.heroNav.access, `/${locale}#access`],
-        [d.footer.nav.story, `/${locale}#about`],
+        [d.footer.nav.story, `/${locale}/about`],
     ];
     useEffect(() => {
         const mobileMenu = window.matchMedia('(max-width: 768px)');
@@ -72,7 +73,7 @@ export function SiteHeader({ locale }: {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [open]);
-    return (<header className={`site-header sticky top-0 z-[30] border-0 bg-none bg-transparent bg-none backdrop-filter-none shadow-none [body:has(.gusto-home)_&]:absolute [body:has(.gusto-home)_&]:inset-[0_0_auto] [body:has(.gusto-home)_&]:z-[40] [body:has(.gusto-home)_&]:h-[132px] [body:has(.gusto-home)_&]:border-0 [body:has(.gusto-home)_&]:bg-none [body:has(.gusto-home)_&]:bg-transparent [body:has(.gusto-home)_&]:bg-none [body:has(.gusto-home)_&]:backdrop-filter-none [body:has(.gusto-home)_&]:shadow-none max-[768.02px]:[body:has(.gusto-home)_&]:h-[120px]! max-[768.02px]:[body:has(.gusto-home)_&]:p-[8px_0]! min-[481px]:max-[768.02px]:[body:has(.gusto-home)_&]:relative! max-[480.02px]:[body:has(.gusto-home)_&]:h-[84px]! max-[480.02px]:[body:has(.gusto-home)_&]:p-[4px_0]! max-[480.02px]:[body:has(.gusto-home)_&]:relative!${isMenuPage ? ' site-header--menu' : ''}`}>
+    return (<header className={`site-header sticky top-0 z-[30] border-0 bg-none bg-transparent bg-none backdrop-filter-none shadow-none [body:has(.gusto-home)_&]:absolute [body:has(.gusto-home)_&]:inset-[0_0_auto] [body:has(.gusto-home)_&]:z-[40] [body:has(.gusto-home)_&]:h-[132px] [body:has(.gusto-home)_&]:border-0 [body:has(.gusto-home)_&]:bg-none [body:has(.gusto-home)_&]:bg-transparent [body:has(.gusto-home)_&]:bg-none [body:has(.gusto-home)_&]:backdrop-filter-none [body:has(.gusto-home)_&]:shadow-none max-[768.02px]:[body:has(.gusto-home)_&]:h-[120px]! max-[768.02px]:[body:has(.gusto-home)_&]:p-[8px_0]! min-[481px]:max-[768.02px]:[body:has(.gusto-home)_&]:relative! max-[480.02px]:[body:has(.gusto-home)_&]:h-[84px]! max-[480.02px]:[body:has(.gusto-home)_&]:p-[4px_0]! max-[480.02px]:[body:has(.gusto-home)_&]:relative!${isInnerPage ? ' site-header--menu' : ''}`}>
       <div className={"site-header-inner items-center flex justify-between mx-auto max-w-[var(--layout-container)] p-[16px_var(--layout-page-padding)] w-full bg-none bg-transparent bg-none [body:has(.gusto-home)_&]:h-[132px] [body:has(.gusto-home)_&]:max-w-none [body:has(.gusto-home)_&]:p-[16px_48px] min-[769px]:[body:has(.gusto-home)_&_>_nav]:hidden! max-[768.02px]:[body:has(.gusto-home)_&]:h-[104px]! max-[768.02px]:[body:has(.gusto-home)_&]:p-[8px_16px]! max-[480.02px]:[body:has(.gusto-home)_&]:h-[76px]! max-[480.02px]:[body:has(.gusto-home)_&]:p-[8px_16px]!"}>
         <Link href={`/${locale}`} className={"site-header-logo [body:has(.gusto-home)_header_&]:block [body:has(.gusto-home)_header_&]:w-[230.708664px] [body:has(.gusto-home)_header_&]:h-[100px] [body:has(.gusto-home)_header_&_img]:block [body:has(.gusto-home)_header_&_img]:w-full [body:has(.gusto-home)_header_&_img]:h-full max-[768.02px]:[body:has(.gusto-home)_header_&]:h-[90px]! max-[768.02px]:[body:has(.gusto-home)_header_&]:relative! max-[768.02px]:[body:has(.gusto-home)_header_&]:top-[-1px]! max-[768.02px]:[body:has(.gusto-home)_header_&]:w-[207.637802px]! max-[768.02px]:[body:has(.gusto-home)_header_&_img]:h-[90px]! max-[768.02px]:[body:has(.gusto-home)_header_&_img]:w-[207.637802px]! max-[480.02px]:[body:has(.gusto-home)_header_&]:h-[60px]! max-[480.02px]:[body:has(.gusto-home)_header_&]:top-0! max-[480.02px]:[body:has(.gusto-home)_header_&]:w-[138.425201px]! max-[480.02px]:[body:has(.gusto-home)_header_&_img]:h-[60px]! max-[480.02px]:[body:has(.gusto-home)_header_&_img]:w-[138.425201px]!"} onClick={() => setOpen(false)}>
           <Image src='/images/logo-w2@2x.png' alt='Gusto Italian Bar' width={692} height={300} priority/>
