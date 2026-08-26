@@ -7,95 +7,202 @@
 @import 'tailwindcss';
 
 :root {
-  /* Design tokens — sourced from the supplied variables export. */
-  --primitive-gray-5: #1f1f1f; /* unused */
-  --primitive-gray-10: #333333; /* unused */
+  /* Primitive colors — Mode 1. */
+  --primitive-gray-5: #1f1f1f;
+  --primitive-gray-10: #333333;
   --primitive-gray-20: #474747;
-  --primitive-gray-30: #5c5c5c; /* unused */
+  --primitive-gray-30: #5c5c5c;
   --primitive-gray-40: #757575;
-  --primitive-gray-50: #9e9e9e; /* unused */
-  --primitive-gray-60: #c2c2c2; /* unused */
-  --primitive-gray-70: #e0e0e0; /* unused */
-  --primitive-gray-80: #f4f4f4; /* unused */
+  --primitive-gray-50: #9e9e9e;
+  --primitive-gray-60: #c2c2c2;
+  --primitive-gray-70: #e0e0e0;
+  --primitive-gray-80: #f4f4f4;
   --primitive-gray-90: #fbfbfb;
   --primitive-gray-100: #ffffff;
-  --primitive-red-40: #ff000c; /* unused */
-  --primitive-red-50: #ff333d; /* unused */
-  --primitive-red-60: #ff666d; /* unused */
-  --primitive-green-40: #33ff00; /* unused */
-  --primitive-green-50: #5cff33; /* unused */
-  --primitive-green-60: #85ff66; /* unused */
-  --primitive-blue-40: #0065ff; /* unused */
-  --primitive-blue-50: #3384ff; /* unused */
-  --primitive-blue-60: #66a3ff; /* unused */
+  --primitive-cyan-5: #004d4d;
+  --primitive-cyan-10: #006666;
+  --primitive-cyan-20: #009999;
+  --primitive-cyan-30: #00cccc;
+  --primitive-cyan-40: #00ffff;
+  --primitive-cyan-50: #5cffff;
+  --primitive-cyan-60: #76ffff;
+  --primitive-cyan-70: #99ffff;
+  --primitive-cyan-80: #ccffff;
+  --primitive-cyan-90: #e6ffff;
+  --primitive-red-5: #66000e;
+  --primitive-red-10: #660005;
+  --primitive-red-20: #990007;
+  --primitive-red-30: #cc000a;
+  --primitive-red-40: #ff000c;
+  --primitive-red-50: #ff333d;
+  --primitive-red-60: #ff666d;
+  --primitive-red-70: #ff999e;
+  --primitive-red-80: #ffccce;
+  --primitive-red-90: #ffe6e7;
+  --primitive-green-5: #0f4d00;
+  --primitive-green-10: #146600;
+  --primitive-green-20: #1f9900;
+  --primitive-green-30: #29cc00;
+  --primitive-green-40: #33ff00;
+  --primitive-green-50: #5cff33;
+  --primitive-green-60: #85ff66;
+  --primitive-green-70: #adff99;
+  --primitive-green-80: #d6ffcc;
+  --primitive-green-90: #ebffe6;
+  --primitive-blue-5: #001e4d;
+  --primitive-blue-10: #002866;
+  --primitive-blue-20: #003d99;
+  --primitive-blue-30: #0051cc;
+  --primitive-blue-40: #0065ff;
+  --primitive-blue-50: #3384ff;
+  --primitive-blue-60: #66a3ff;
+  --primitive-blue-70: #99c1ff;
+  --primitive-blue-80: #cce0ff;
+  --primitive-blue-90: #e5f0ff;
 
+  /* Role colors — Mode 2. Primary and neutral intentionally share gray. */
+  --role-primary-5: var(--primitive-gray-5);
+  --role-primary-10: var(--primitive-gray-10);
+  --role-primary-20: var(--primitive-gray-20);
+  --role-primary-30: var(--primitive-gray-30);
+  --role-primary-40: var(--primitive-gray-40);
+  --role-primary-50: var(--primitive-gray-50);
+  --role-primary-60: var(--primitive-gray-60);
+  --role-primary-70: var(--primitive-gray-70);
+  --role-primary-80: var(--primitive-gray-80);
+  --role-primary-90: var(--primitive-gray-90);
+  --role-neutral-5: var(--primitive-gray-5);
+  --role-neutral-10: var(--primitive-gray-10);
+  --role-neutral-20: var(--primitive-gray-20);
+  --role-neutral-30: var(--primitive-gray-30);
+  --role-neutral-40: var(--primitive-gray-40);
+  --role-neutral-50: var(--primitive-gray-50);
+  --role-neutral-60: var(--primitive-gray-60);
+  --role-neutral-70: var(--primitive-gray-70);
+  --role-neutral-80: var(--primitive-gray-80);
+  --role-neutral-90: var(--primitive-gray-90);
+  --role-neutral-100: var(--primitive-gray-100);
+  --role-danger-5: var(--primitive-red-5);
+  --role-danger-10: var(--primitive-red-10);
+  --role-danger-20: var(--primitive-red-20);
+  --role-danger-30: var(--primitive-red-30);
+  --role-danger-40: var(--primitive-red-40);
+  --role-danger-50: var(--primitive-red-50);
+  --role-danger-60: var(--primitive-red-60);
+  --role-danger-70: var(--primitive-red-70);
+  --role-danger-80: var(--primitive-red-80);
+  --role-danger-90: var(--primitive-red-90);
+  --role-success-5: var(--primitive-blue-5);
+  --role-success-10: var(--primitive-blue-10);
+  --role-success-20: var(--primitive-blue-20);
+  --role-success-30: var(--primitive-blue-30);
+  --role-success-40: var(--primitive-blue-40);
+  --role-success-50: var(--primitive-blue-50);
+  --role-success-60: var(--primitive-blue-60);
+  --role-success-70: var(--primitive-blue-70);
+  --role-success-80: var(--primitive-blue-80);
+  --role-success-90: var(--primitive-blue-90);
+
+  /* Font families and weights — Type Family. */
   --font-family-display:
     var(--font-kirigirisu), var(--font-noto-sans-jp), sans-serif;
   --font-family-body: var(--font-noto-sans-jp), sans-serif;
   --font-family-accent:
-    var(--font-yamafont), var(--font-noto-sans-jp), sans-serif; /* unused */
+    var(--font-yamafont), var(--font-noto-sans-jp), sans-serif;
   --font-family-label: var(--font-kalam), var(--font-noto-sans-jp), sans-serif;
-  --font-weight-regular: 400; /* unused */
-  --font-weight-medium: 500; /* unused */
-  --font-weight-semibold: 700; /* unused */
-  --font-weight-bold: 800; /* unused */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 700;
+  --font-weight-bold: 700;
 
-  --font-size-display-xxl: 7.1875rem; /* unused */
-  --font-size-display-xl: 5.8125rem; /* unused */
-  --font-size-display-lg: 5.375rem; /* unused */
-  --font-size-display-md: 4.25rem; /* unused */
-  --font-size-heading-xxl: 5rem; /* unused */
-  --font-size-heading-xl: 3.75rem; /* unused */
-  --font-size-heading-lg: 3.25rem; /* unused */
-  --font-size-heading-md: 3rem; /* unused */
-  --font-size-heading-sm: 2rem; /* unused */
-  --font-size-title-xl: 3.25rem;
-  --font-size-title-lg: 2rem; /* unused */
-  --font-size-title-md: 1.75rem; /* unused */
-  --font-size-title-sm: 1.5rem; /* unused */
-  --font-size-body-xl: 1.5rem; /* unused */
-  --font-size-body-lg: 1rem; /* unused */
-  --font-size-body-md: 1rem; /* unused */
-  --font-size-body-sm: 0.75rem;
-  --font-size-body-xs: 0.625rem; /* unused */
-  --line-height-display: 0.7826; /* unused */
-  --line-height-body-xl: 1.36; /* unused */
-  --tracking-display: -0.2em; /* unused */
-  --tracking-heading: -0.25em; /* unused */
+  /* Locale-neutral type scale — EN and JA exports match except body sizes. */
+  --font-size-display-xxl: 7.1875rem;
+  --font-size-display-xl: 5.8125rem;
+  --font-size-display-lg: 5.375rem;
+  --font-size-display-md: 4.25rem;
+  --font-size-display-sm: 4rem;
+  --font-size-display-xs: 3rem;
+  --font-size-heading-xxl: 5rem;
+  --font-size-heading-xl: 3.75rem;
+  --font-size-heading-lg: 3.25rem;
+  --font-size-heading-md: 3rem;
+  --font-size-heading-sm: 2rem;
+  --font-size-title-xxl: 3.25rem;
+  --font-size-title-xl: 2.625rem;
+  --font-size-title-lg: 2rem;
+  --font-size-title-md: 1.75rem;
+  --font-size-title-sm: 1.5rem;
+  --font-size-title-xs: 1.25rem;
+  --font-size-title-xxs: 0.625rem;
+  --font-size-label-lg: 1.75rem;
+  --font-size-label-md: 1.5rem;
+  --font-size-label-sm: 1.375rem;
+  --font-size-label-xs: 1.125rem;
+  --font-size-label-xxs: 1rem;
+  --font-size-body-xxl: 1.5rem;
+  --font-size-body-xl: 1.375rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-body-xs: 0.75rem;
+  --font-size-body-xxs: 0.625rem;
+  --line-height-display-xxl: 0.9;
+  --line-height-display-xl: 0.9;
+  --line-height-display-lg: 0.9;
+  --line-height-display-md: 0.6;
+  --line-height-display-sm: 0.9;
+  --line-height-display-xs: 0.6;
+  --line-height-display: 0.9;
+  --line-height-body-xxl: 1.36;
+  --line-height-body-xl: normal;
+  --line-height-body-lg: normal;
+  --line-height-body-md: normal;
+  --line-height-body-sm: normal;
+  --line-height-body-xs: normal;
+  --line-height-body-xxs: normal;
+  --tracking-display: -0.2em;
+  --tracking-heading: -0.25em;
   --tracking-title: -0.15em;
 
-  --space-0: 0; /* unused */
-  --space-1: 0.125rem; /* unused */
-  --space-2: 0.25rem; /* unused */
-  --space-3: 0.5rem; /* unused */
-  --space-4: 1rem; /* unused */
-  --space-5: 1.5rem; /* unused */
-  --space-6: 3rem; /* unused */
-  --space-7: 3.25rem; /* unused */
-  --space-8: 4.25rem; /* unused */
-  --space-9: 7.0625rem; /* unused */
-  --space-10: 7.75rem; /* unused */
-  --radius-none: 0; /* unused */
-  --radius-xs: 0.125rem; /* unused */
-  --radius-sm: 0.25rem; /* unused */
-  --radius-md: 0.5rem; /* unused */
+  /* Dimensions — Mode 3. */
+  --space-none: 0;
+  --space-xxxxs: 0.125rem;
+  --space-xxxs: 0.25rem;
+  --space-xxs: 0.5rem;
+  --space-xs: 1rem;
+  --space-sm: 1.5rem;
+  --space-md: 3rem;
+  --space-lg: 3.25rem;
+  --space-xl: 4.25rem;
+  --space-xxl: 7.0625rem;
+  --space-xxxl: 7.75rem;
+  --radius-none: 0;
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-full: 999px;
-  --border-width-sm: 0.5px; /* unused */
-  --border-width-md: 1px; /* unused */
-  --border-width-lg: 2px; /* unused */
-  --opacity-subtle: 0.3; /* unused */
-  --opacity-muted: 0.5; /* unused */
-  --opacity-solid: 1; /* unused */
+  --border-width-none: 0;
+  --border-width-sm: 0.5px;
+  --border-width-md: 1px;
+  --border-width-lg: 2px;
+  --opacity-subtle: 0.3;
+  --opacity-muted: 0.5;
+  --opacity-solid: 1;
 
-  --layout-screen-xxxl: 1920px; /* unused */
-  --layout-screen-xxl: 1440px; /* unused */
-  --layout-screen-lg: 992px; /* unused */
-  --layout-screen-sm: 768px; /* unused */
-  --layout-screen-xs: 393px; /* unused */
+  /* Layout defaults — xxl (1440px). */
+  --layout-screen-xxxl: 1920px;
+  --layout-screen-xxl: 1440px;
+  --layout-screen-lg: 992px;
+  --layout-screen-sm: 768px;
+  --layout-screen-xs: 393px;
   --layout-container: 1336px;
-  --layout-page-padding: 96px;
+  --layout-title-padding: 96px;
+  --layout-body-padding: 96px;
+  --layout-body-secondary-padding: 96px;
+  --layout-page-padding: var(--layout-body-padding);
 
   /* Header.
    *  Pixso header variants: 1746:32408.
@@ -103,20 +210,20 @@
    *  Pixso 393px header frame: 1180:14910.
    */
   /* Section. */
-  --gusto-header-height-desktop: auto; /* unused */
-  --gusto-header-height-sm: auto; /* unused */
-  --gusto-header-height-xs: auto; /* unused */
-  --gusto-header-padding-desktop: 16px 48px; /* unused */
-  --gusto-header-padding-sm: 16px 16px; /* unused */
-  --gusto-header-padding-xs: 12px 16; /* unused */
+  --gusto-header-height-desktop: 132px;
+  --gusto-header-height-sm: 120px;
+  --gusto-header-height-xs: 84px;
+  --gusto-header-padding-desktop: 16px 48px;
+  --gusto-header-padding-sm: 8px 16px;
+  --gusto-header-padding-xs: 8px 16px;
 
   /* Logo. */
-  --gusto-header-logo-width-desktop: auto; /* unused */
-  --gusto-header-logo-width-sm: auto; /* unused */
-  --gusto-header-logo-width-xs: auto; /* unused */
-  --gusto-header-logo-height-desktop: 100px; /* unused */
-  --gusto-header-logo-height-sm: 90px; /* unused */
-  --gusto-header-logo-height-xs: 60px; /* unused */
+  --gusto-header-logo-width-desktop: 230.708664px;
+  --gusto-header-logo-width-sm: 207.637802px;
+  --gusto-header-logo-width-xs: 138.425201px;
+  --gusto-header-logo-height-desktop: 100px;
+  --gusto-header-logo-height-sm: 90px;
+  --gusto-header-logo-height-xs: 60px;
 
   /* Menu. */
   --gusto-header-menu-size-sm: 32px; /* unused */
@@ -194,6 +301,8 @@
 
   /* Marquee. */
   --gusto-hero-1440-marquee-top: 163.935059px;
+  --gusto-hero-768-marquee-width: 60px;
+  --gusto-hero-768-marquee-height: 527px;
   --gusto-hero-768-marquee-font-size: 68px;
   --gusto-hero-768-marquee-text-left: -233.499996px;
   --gusto-hero-768-marquee-text-top: 233.500009px;
@@ -456,6 +565,12 @@
   --gusto-feature-3-1440-deco-height: 442.898px;
 
   /* Picture and social. */
+  --gusto-social-393-height: 573px;
+  --gusto-social-768-height: 714.626709px;
+  --gusto-social-1440-height: 814.17511px;
+  --gusto-social-393-brush-height: 38.800018px;
+  --gusto-social-768-brush-height: 56.62664px;
+  --gusto-social-1440-brush-height: 106.174957px;
   /* Gallery. */
   --gusto-social-393-gallery-top: 70.800018px;
   --gusto-social-768-gallery-top: 106.626709px;
@@ -473,8 +588,17 @@
   /* Links. */
   --gusto-social-393-links-top: 234px;
   --gusto-social-768-links-top: 378.626709px;
+  --gusto-social-393-links-width: 361px;
+  --gusto-social-768-links-width: 722px;
+  --gusto-social-1440-links-width: 1182px;
+  --gusto-social-393-links-height: 286px;
+  --gusto-social-768-links-height: 286px;
+  --gusto-social-1440-links-height: 286px;
 
   /* Reservation. */
+  --gusto-reservation-393-brush-height: 7.284471px;
+  --gusto-reservation-768-brush-height: 14.235302px;
+  --gusto-reservation-1440-brush-height: 26.691189px;
   /* Card. */
   --gusto-reservation-393-card-left: 16px;
   --gusto-reservation-768-card-left: 192px;
@@ -487,6 +611,13 @@
   --gusto-reservation-1440-card-width: 710px;
   --gusto-reservation-768-card-height: 678.000061px;
   --gusto-reservation-1440-card-height: 514px;
+
+  --gusto-reservation-393-title-width: 198px;
+  --gusto-reservation-768-title-width: 297px;
+  --gusto-reservation-1440-title-width: 322px;
+  --gusto-reservation-393-title-height: 54.000042px;
+  --gusto-reservation-768-title-height: 80.000038px;
+  --gusto-reservation-1440-title-height: 84px;
 
   /* Notes. */
   --gusto-reservation-393-notes-width: 329px;
@@ -507,30 +638,118 @@
 
   /* Access. */
   /* Section. */
+  --gusto-access-393-height: 954.010742px;
+  --gusto-access-768-height: 1137.248535px;
+  --gusto-access-1440-height: 671.248474px;
   --gusto-access-393-padding: 32px 16px;
   --gusto-access-768-padding: 64px 86px;
   --gusto-access-1440-padding: 50px 96px;
+
+  --gusto-access-393-title-width: 191px;
+  --gusto-access-768-title-width: 191px;
+  --gusto-access-1440-title-width: 1248px;
+  --gusto-access-393-title-height: 64.010719px;
+  --gusto-access-768-title-height: 94.248497px;
+  --gusto-access-1440-title-height: 94.248497px;
+  --gusto-access-393-content-width: 361px;
+  --gusto-access-768-content-width: 596px;
+  --gusto-access-1440-content-width: 1248px;
+  --gusto-access-393-content-height: 810px;
+  --gusto-access-768-content-height: 858px;
+  --gusto-access-1440-content-height: 420px;
 
   /* Map. */
   --gusto-access-393-map-height: 414px;
   --gusto-access-768-map-height: 414px;
   --gusto-access-1440-map-height: 414px;
   --gusto-access-1440-map-width: 481.522461px;
+  --gusto-access-393-details-height: 372px;
+  --gusto-access-768-details-height: 420px;
+  --gusto-access-1440-details-height: 420px;
+  --gusto-access-1440-details-width: 479px;
+  --gusto-access-393-label-width: 79px;
 
   /* Footer. */
   /* Section. */
+  --gusto-footer-393-height: 462.284515px;
+  --gusto-footer-768-height: 420.235382px;
+  --gusto-footer-1440-height: 287.691315px;
+  --gusto-footer-393-brush-height: 7.284471px;
+  --gusto-footer-768-brush-height: 14.235302px;
+  --gusto-footer-1440-brush-height: 26.691189px;
+  --gusto-footer-393-content-height: 455px;
+  --gusto-footer-393-upper-height: 346px;
+  --gusto-footer-768-upper-height: 286px;
+  --gusto-footer-1440-upper-height: 197px;
+  --gusto-footer-393-upper-inner-height: 282px;
+  --gusto-footer-768-upper-inner-height: 222px;
+  --gusto-footer-393-logo-width: 207.637802px;
+  --gusto-footer-768-logo-width: 207.637802px;
+  --gusto-footer-1440-logo-width: 230.708664px;
+  --gusto-footer-393-nav-width: 124px;
+  --gusto-footer-768-nav-width: 451px;
+  --gusto-footer-1440-nav-width: 479px;
+  --gusto-footer-393-social-width: 200px;
+  --gusto-footer-768-social-width: 248px;
+  --gusto-footer-1440-social-width: 248px;
+  --gusto-footer-393-lower-height: 109px;
+  --gusto-footer-768-lower-height: 120px;
+  --gusto-footer-1440-lower-height: 64px;
+  --gusto-footer-393-lower-inner-height: 77px;
+  --gusto-footer-768-lower-inner-height: 88px;
+  --gusto-footer-393-phone-width: 119px;
+  --gusto-footer-768-phone-width: 139px;
+  --gusto-footer-1440-phone-width: 196px;
+  --gusto-footer-393-hours-width: 272px;
+  --gusto-footer-768-hours-width: 484px;
+  --gusto-footer-1440-hours-width: 667px;
+  --gusto-footer-393-copyright-width: 218px;
+  --gusto-footer-768-copyright-width: 218px;
+  --gusto-footer-1440-copyright-width: 218px;
   --gusto-footer-1440-inline-padding: 96px;
 
-  --color-text-default: var(--primitive-gray-5); /* unused */
-  --color-text-subtle: var(--primitive-gray-40);
-  --color-text-inverse: var(--primitive-gray-90); /* unused */
-  --color-surface-default: var(--primitive-gray-100);
-  --color-surface-subtle: var(--primitive-gray-90);
-  --color-border-default: var(--primitive-gray-40);
-  --color-action-primary: var(--primitive-gray-5); /* unused */
-  --color-action-primary-hover: var(--primitive-gray-20);
-  --color-danger: var(--primitive-red-40); /* unused */
-  --color-success: var(--primitive-green-40); /* unused */
+  /* Semantic colors — light mode. */
+  --semantic-text-default: var(--role-neutral-5);
+  --semantic-text-subtle: var(--role-neutral-30);
+  --semantic-text-subtler: var(--role-neutral-60);
+  --semantic-text-danger: var(--role-danger-20);
+  --semantic-text-success: var(--role-success-10);
+  --semantic-text-primary-action: var(--role-neutral-90);
+  --semantic-text-secondary-action: var(--role-neutral-5);
+  --semantic-text-tertiary-action: var(--role-neutral-90);
+  --semantic-background-default: var(--role-neutral-90);
+  --semantic-background-subtle: var(--role-neutral-80);
+  --semantic-background-subtler: var(--role-neutral-70);
+  --semantic-background-primary-action-enabled: var(--role-neutral-5);
+  --semantic-background-primary-action-hovered: var(--role-neutral-30);
+  --semantic-background-primary-action-pressed: var(--role-neutral-50);
+  --semantic-background-primary-action-danger: var(--role-danger-30);
+  --semantic-background-primary-action-disabled: var(--role-neutral-70);
+  --semantic-background-secondary-action-enabled: var(--role-neutral-90);
+  --semantic-background-secondary-action-hovered: var(--role-neutral-80);
+  --semantic-background-secondary-action-pressed: var(--role-neutral-70);
+  --semantic-background-secondary-action-danger: var(--role-danger-40);
+  --semantic-border-primary-action-focused: var(--role-neutral-5);
+  --semantic-border-secondary-action-enabled: var(--primitive-gray-70);
+  --semantic-border-secondary-action-focused: var(--role-neutral-20);
+  --semantic-border-secondary-action-default: var(--role-neutral-50);
+  --semantic-border-secondary-action-subtle: var(--role-neutral-20);
+  --semantic-border-secondary-action-bold: var(--role-neutral-20);
+  --semantic-border-secondary-action-inverse: var(--role-neutral-90);
+
+  /* Compatibility aliases used by the existing Gusto components. */
+  --color-text-default: var(--semantic-text-default);
+  --color-text-subtle: var(--semantic-text-subtle);
+  --color-text-inverse: var(--semantic-text-primary-action);
+  --color-surface-default: var(--semantic-background-default);
+  --color-surface-subtle: var(--semantic-background-subtle);
+  --color-border-default: var(--semantic-border-secondary-action-enabled);
+  --color-action-primary: var(--semantic-background-primary-action-enabled);
+  --color-action-primary-hover: var(
+    --semantic-background-primary-action-hovered
+  );
+  --color-danger: var(--semantic-text-danger);
+  --color-success: var(--semantic-text-success);
   --color-focus: #9c4b2e;
 
   --color-brand-paper: #fbf1db;
@@ -550,6 +769,358 @@
 
   --background: var(--color-page-surface);
   --foreground: var(--color-page-text);
+}
+
+/* Restored Pixso geometry contracts that were part of the original system. */
+@layer utilities {
+  .gusto-menu__line-art {
+    position: absolute;
+    top: 46px;
+    right: 1.999px;
+    width: 287.08px;
+    height: 297px;
+    pointer-events: none;
+  }
+  .gusto-menu__line-art i {
+    position: absolute;
+    display: block;
+    width: 170px;
+    height: 250px;
+    border: 1px solid var(--color-brand-ink);
+    transform: rotate(28deg);
+  }
+
+  @media (min-width: 1200px) and (max-width: 1599px) {
+    .gusto-social {
+      height: var(--gusto-social-1440-height);
+    }
+    .gusto-social::after {
+      inset: var(--gusto-social-1440-brush-height) 0 0;
+    }
+    .gusto-social-brush {
+      height: calc(var(--gusto-social-1440-brush-height) + 2px);
+    }
+    .gusto-social-links {
+      width: var(--gusto-social-1440-links-width);
+      height: var(--gusto-social-1440-links-height);
+    }
+    .gusto-reservation-brush {
+      height: var(--gusto-reservation-1440-brush-height);
+    }
+    .gusto-booking-title,
+    .gusto-booking-title h2 {
+      width: var(--gusto-reservation-1440-title-width);
+      height: var(--gusto-reservation-1440-title-height);
+    }
+    .gusto-access {
+      height: var(--gusto-access-1440-height);
+      min-height: var(--gusto-access-1440-height);
+    }
+    .gusto-access-title,
+    .gusto-access-title h2 {
+      width: var(--gusto-access-1440-title-width);
+      height: var(--gusto-access-1440-title-height);
+    }
+    .gusto-access-grid {
+      grid-template-columns:
+        var(--gusto-access-1440-map-width)
+        var(--gusto-access-1440-details-width);
+      width: var(--gusto-access-1440-content-width);
+      height: var(--gusto-access-1440-content-height);
+      min-height: var(--gusto-access-1440-content-height);
+    }
+    .gusto-access-details {
+      width: var(--gusto-access-1440-details-width);
+      height: var(--gusto-access-1440-details-height);
+      min-height: var(--gusto-access-1440-details-height);
+    }
+    .gusto-footer {
+      --footer-brush-height: var(--gusto-footer-1440-brush-height);
+      height: var(--gusto-footer-1440-height);
+    }
+    .gusto-footer-brush {
+      height: var(--gusto-footer-1440-brush-height);
+    }
+    .gusto-footer-content {
+      height: var(--gusto-footer-1440-height);
+    }
+    .gusto-footer-upper {
+      height: calc(
+        var(--gusto-footer-1440-brush-height) +
+          var(--gusto-footer-1440-upper-height)
+      );
+      padding: calc(var(--gusto-footer-1440-brush-height) + 32px)
+        var(--gusto-footer-1440-inline-padding) 32px;
+    }
+    .gusto-footer-logo {
+      width: var(--gusto-footer-1440-logo-width);
+    }
+    .gusto-footer-nav {
+      width: var(--gusto-footer-1440-nav-width);
+    }
+    .gusto-footer-social {
+      width: var(--gusto-footer-1440-social-width);
+    }
+    .gusto-footer-lower {
+      height: var(--gusto-footer-1440-lower-height);
+    }
+    .gusto-footer-phone {
+      width: var(--gusto-footer-1440-phone-width);
+    }
+    .gusto-footer-hours {
+      width: var(--gusto-footer-1440-hours-width);
+    }
+    .gusto-footer-copyright {
+      width: var(--gusto-footer-1440-copyright-width);
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .gusto-home .gusto-vertical {
+      top: var(--gusto-hero-768-marquee-text-top);
+      left: var(--gusto-hero-768-marquee-text-left);
+      width: var(--gusto-hero-768-marquee-height);
+      height: var(--gusto-hero-768-marquee-width);
+      font-size: var(--gusto-hero-768-marquee-font-size) !important;
+      transform: rotate(90deg) !important;
+      transform-origin: center !important;
+    }
+    .gusto-social {
+      height: var(--gusto-social-768-height);
+    }
+    .gusto-social::after {
+      inset: var(--gusto-social-768-brush-height) 0 0;
+    }
+    .gusto-social-brush {
+      height: calc(var(--gusto-social-768-brush-height) + 2px);
+    }
+    .gusto-social-links {
+      width: var(--gusto-social-768-links-width);
+      height: var(--gusto-social-768-links-height);
+    }
+    .gusto-social-links a {
+      width: calc(var(--gusto-social-768-links-width) / 3);
+      height: var(--gusto-social-768-links-height);
+    }
+    .gusto-social-copy {
+      width: calc(var(--gusto-social-768-links-width) / 3 - 64px);
+    }
+    .gusto-reservation-brush {
+      height: var(--gusto-reservation-768-brush-height);
+    }
+    .gusto-booking-title,
+    .gusto-booking-title h2 {
+      width: var(--gusto-reservation-768-title-width);
+      height: var(--gusto-reservation-768-title-height);
+    }
+    .gusto-access {
+      height: var(--gusto-access-768-height);
+      min-height: var(--gusto-access-768-height);
+    }
+    .gusto-access-title,
+    .gusto-access-title h2 {
+      width: var(--gusto-access-768-title-width);
+      height: var(--gusto-access-768-title-height);
+    }
+    .gusto-access-grid {
+      grid-template-rows:
+        var(--gusto-access-768-map-height)
+        var(--gusto-access-768-details-height);
+      width: var(--gusto-access-768-content-width);
+      height: var(--gusto-access-768-content-height);
+      min-height: var(--gusto-access-768-content-height);
+    }
+    .gusto-map,
+    .gusto-access-details {
+      width: var(--gusto-access-768-content-width);
+    }
+    .gusto-access-details {
+      height: var(--gusto-access-768-details-height);
+      min-height: var(--gusto-access-768-details-height);
+    }
+    .gusto-footer {
+      --footer-brush-height: var(--gusto-footer-768-brush-height);
+      height: var(--gusto-footer-768-height);
+    }
+    .gusto-footer-brush {
+      height: var(--gusto-footer-768-brush-height);
+    }
+    .gusto-footer-content {
+      height: var(--gusto-footer-768-height);
+    }
+    .gusto-footer-upper {
+      height: calc(
+        var(--gusto-footer-768-brush-height) + var(--gusto-footer-768-upper-height)
+      );
+      padding: calc(var(--gusto-footer-768-brush-height) + 32px) 0 32px;
+    }
+    .gusto-footer-upper-inner {
+      height: var(--gusto-footer-768-upper-inner-height);
+    }
+    .gusto-footer-logo {
+      width: var(--gusto-footer-768-logo-width);
+    }
+    .gusto-footer-nav {
+      width: var(--gusto-footer-768-nav-width);
+    }
+    .gusto-footer-social {
+      width: var(--gusto-footer-768-social-width);
+    }
+    .gusto-footer-lower {
+      height: var(--gusto-footer-768-lower-height);
+    }
+    .gusto-footer-lower-inner {
+      height: var(--gusto-footer-768-lower-inner-height);
+    }
+    .gusto-footer-phone {
+      width: var(--gusto-footer-768-phone-width);
+    }
+    .gusto-footer-hours {
+      width: var(--gusto-footer-768-hours-width);
+    }
+    .gusto-footer-copyright {
+      width: var(--gusto-footer-768-copyright-width);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gusto-social {
+      height: var(--gusto-social-393-height);
+    }
+    .gusto-social::after {
+      inset: var(--gusto-social-393-brush-height) 0 0;
+    }
+    .gusto-social-brush {
+      height: calc(var(--gusto-social-393-brush-height) + 2px);
+    }
+    .gusto-social-links {
+      width: var(--gusto-social-393-links-width);
+      height: var(--gusto-social-393-links-height);
+    }
+    .gusto-social-links a {
+      height: var(--gusto-social-393-links-height);
+    }
+    .gusto-reservation-brush {
+      height: var(--gusto-reservation-393-brush-height);
+    }
+    .gusto-booking-title,
+    .gusto-booking-title h2 {
+      width: var(--gusto-reservation-393-title-width);
+      height: var(--gusto-reservation-393-title-height);
+    }
+    .gusto-access {
+      height: var(--gusto-access-393-height);
+      min-height: var(--gusto-access-393-height);
+    }
+    .gusto-access-title,
+    .gusto-access-title h2 {
+      width: var(--gusto-access-393-title-width);
+      height: var(--gusto-access-393-title-height);
+    }
+    .gusto-access-title p {
+      width: var(--gusto-access-393-title-width);
+    }
+    .gusto-access-grid {
+      grid-template-rows:
+        var(--gusto-access-393-map-height)
+        var(--gusto-access-393-details-height);
+      width: var(--gusto-access-393-content-width);
+      height: var(--gusto-access-393-content-height);
+      min-height: var(--gusto-access-393-content-height);
+    }
+    .gusto-access-details {
+      height: var(--gusto-access-393-details-height);
+      min-height: var(--gusto-access-393-details-height);
+    }
+    .gusto-access-row {
+      grid-template-columns: var(--gusto-access-393-label-width) 1fr;
+    }
+    .gusto-footer {
+      --footer-brush-height: var(--gusto-footer-393-brush-height);
+      height: var(--gusto-footer-393-height);
+      padding-top: var(--gusto-footer-393-brush-height);
+    }
+    .gusto-footer-brush {
+      height: var(--gusto-footer-393-brush-height);
+    }
+    .gusto-footer-content {
+      height: var(--gusto-footer-393-content-height);
+    }
+    .gusto-footer-upper {
+      height: var(--gusto-footer-393-upper-height);
+    }
+    .gusto-footer-upper-inner {
+      height: var(--gusto-footer-393-upper-inner-height);
+    }
+    .gusto-footer-logo {
+      width: var(--gusto-footer-393-logo-width);
+    }
+    .gusto-footer-nav {
+      width: var(--gusto-footer-393-nav-width);
+    }
+    .gusto-footer-social {
+      width: var(--gusto-footer-393-social-width);
+    }
+    .gusto-footer-lower {
+      height: var(--gusto-footer-393-lower-height);
+    }
+    .gusto-footer-lower-inner {
+      height: var(--gusto-footer-393-lower-inner-height);
+    }
+    .gusto-footer-phone {
+      width: var(--gusto-footer-393-phone-width);
+    }
+    .gusto-footer-hours {
+      width: var(--gusto-footer-393-hours-width);
+    }
+    .gusto-footer-copyright {
+      width: var(--gusto-footer-393-copyright-width);
+    }
+  }
+}
+
+/* The body scale differs between the Japanese and English Pixso modes. */
+[lang='ja'] {
+  --font-size-body-xl: 1.375rem;
+  --font-size-body-lg: 1rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.75rem;
+  --font-size-body-xs: 0.625rem;
+  --font-size-body-xxs: 0.625rem;
+  --line-height-body-xl: 1.36;
+  --line-height-body-lg: 1.36;
+}
+
+/* Dark is explicit so the restaurant art direction never changes with the OS. */
+[data-theme='dark'] {
+  color-scheme: dark;
+  --semantic-text-default: var(--role-neutral-90);
+  --semantic-text-subtle: var(--role-neutral-70);
+  --semantic-text-subtler: var(--role-neutral-70);
+  --semantic-text-danger: var(--role-danger-50);
+  --semantic-text-success: var(--role-success-50);
+  --semantic-text-primary-action: var(--role-neutral-100);
+  --semantic-text-secondary-action: var(--role-neutral-90);
+  --semantic-text-tertiary-action: var(--primitive-gray-5);
+  --semantic-background-default: var(--role-neutral-5);
+  --semantic-background-subtle: var(--role-neutral-10);
+  --semantic-background-subtler: var(--role-neutral-20);
+  --semantic-background-primary-action-enabled: var(--role-neutral-90);
+  --semantic-background-primary-action-hovered: var(--role-neutral-70);
+  --semantic-background-primary-action-pressed: var(--role-neutral-20);
+  --semantic-background-primary-action-danger: var(--role-danger-50);
+  --semantic-background-primary-action-disabled: var(--role-neutral-50);
+  --semantic-background-secondary-action-enabled: var(--role-neutral-5);
+  --semantic-background-secondary-action-hovered: var(--role-neutral-10);
+  --semantic-background-secondary-action-pressed: var(--role-neutral-20);
+  --semantic-background-secondary-action-danger: var(--role-danger-60);
+  --semantic-border-primary-action-focused: var(--role-neutral-90);
+  --semantic-border-secondary-action-enabled: var(--role-neutral-40);
+  --semantic-border-secondary-action-focused: var(--role-neutral-80);
+  --semantic-border-secondary-action-default: var(--role-neutral-40);
+  --semantic-border-secondary-action-subtle: var(--role-neutral-80);
+  --semantic-border-secondary-action-bold: var(--role-neutral-80);
+  --semantic-border-secondary-action-inverse: var(--role-neutral-5);
 }
 
 .gusto-marquee {
@@ -1419,63 +1990,332 @@
 @media (min-width: 1920px) {
   :root {
     --layout-container: 1900px;
-    --layout-page-padding: 240px;
+    --layout-title-padding: 240px;
+    --layout-body-padding: 240px;
+    --layout-body-secondary-padding: 240px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1439px) {
+  :root {
+    --layout-container: 960px;
+    --layout-title-padding: 96px;
+    --layout-body-padding: 96px;
+    --layout-body-secondary-padding: 96px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   :root {
-    --layout-container: 960px;
-    --layout-page-padding: 24px;
+    --layout-container: 720px;
+    --layout-title-padding: 24px;
+    --layout-body-padding: 24px;
+    --layout-body-secondary-padding: 86px;
   }
 }
 
 @media (max-width: 767px) {
   :root {
-    --layout-container: 720px;
-    --layout-page-padding: 24px;
-  }
-}
-
-@media (max-width: 393px) {
-  :root {
-    --layout-container: 361px;
-    --layout-page-padding: 16px;
+    --layout-container: min(361px, calc(100vw - 32px));
+    --layout-title-padding: 16px;
+    --layout-body-padding: 16px;
+    --layout-body-secondary-padding: 16px;
   }
 }
 
 @theme inline {
-  /* Responsive utility aliases for the supplied Pixso frames. */
-  --breakpoint-gusto-xs: 393px; /* unused */
-  --breakpoint-gusto-tablet: 768px; /* unused */
-  --breakpoint-gusto-desktop: 992px; /* unused */
-  --breakpoint-gusto-wide: 1440px; /* unused */
-  --breakpoint-gusto-ultrawide: 1920px; /* unused */
+  /* Layout modes. */
+  --breakpoint-gusto-xs: 393px;
+  --breakpoint-gusto-tablet: 768px;
+  --breakpoint-gusto-desktop: 992px;
+  --breakpoint-gusto-wide: 1440px;
+  --breakpoint-gusto-ultrawide: 1920px;
+  --container-xs: 361px;
+  --container-sm: 720px;
+  --container-lg: 960px;
+  --container-xxl: 1336px;
+  --container-xxxl: 1900px;
 
-  /* Semantic colors and typefaces used directly in component class names. */
+  /* Primitive and role color utilities. */
+  --color-gray-5: var(--primitive-gray-5);
+  --color-gray-10: var(--primitive-gray-10);
+  --color-gray-20: var(--primitive-gray-20);
+  --color-gray-30: var(--primitive-gray-30);
+  --color-gray-40: var(--primitive-gray-40);
+  --color-gray-50: var(--primitive-gray-50);
+  --color-gray-60: var(--primitive-gray-60);
+  --color-gray-70: var(--primitive-gray-70);
+  --color-gray-80: var(--primitive-gray-80);
+  --color-gray-90: var(--primitive-gray-90);
+  --color-gray-100: var(--primitive-gray-100);
+  --color-cyan-5: var(--primitive-cyan-5);
+  --color-cyan-10: var(--primitive-cyan-10);
+  --color-cyan-20: var(--primitive-cyan-20);
+  --color-cyan-30: var(--primitive-cyan-30);
+  --color-cyan-40: var(--primitive-cyan-40);
+  --color-cyan-50: var(--primitive-cyan-50);
+  --color-cyan-60: var(--primitive-cyan-60);
+  --color-cyan-70: var(--primitive-cyan-70);
+  --color-cyan-80: var(--primitive-cyan-80);
+  --color-cyan-90: var(--primitive-cyan-90);
+  --color-red-5: var(--primitive-red-5);
+  --color-red-10: var(--primitive-red-10);
+  --color-red-20: var(--primitive-red-20);
+  --color-red-30: var(--primitive-red-30);
+  --color-red-40: var(--primitive-red-40);
+  --color-red-50: var(--primitive-red-50);
+  --color-red-60: var(--primitive-red-60);
+  --color-red-70: var(--primitive-red-70);
+  --color-red-80: var(--primitive-red-80);
+  --color-red-90: var(--primitive-red-90);
+  --color-green-5: var(--primitive-green-5);
+  --color-green-10: var(--primitive-green-10);
+  --color-green-20: var(--primitive-green-20);
+  --color-green-30: var(--primitive-green-30);
+  --color-green-40: var(--primitive-green-40);
+  --color-green-50: var(--primitive-green-50);
+  --color-green-60: var(--primitive-green-60);
+  --color-green-70: var(--primitive-green-70);
+  --color-green-80: var(--primitive-green-80);
+  --color-green-90: var(--primitive-green-90);
+  --color-blue-5: var(--primitive-blue-5);
+  --color-blue-10: var(--primitive-blue-10);
+  --color-blue-20: var(--primitive-blue-20);
+  --color-blue-30: var(--primitive-blue-30);
+  --color-blue-40: var(--primitive-blue-40);
+  --color-blue-50: var(--primitive-blue-50);
+  --color-blue-60: var(--primitive-blue-60);
+  --color-blue-70: var(--primitive-blue-70);
+  --color-blue-80: var(--primitive-blue-80);
+  --color-blue-90: var(--primitive-blue-90);
+  --color-primary-5: var(--role-primary-5);
+  --color-primary-10: var(--role-primary-10);
+  --color-primary-20: var(--role-primary-20);
+  --color-primary-30: var(--role-primary-30);
+  --color-primary-40: var(--role-primary-40);
+  --color-primary-50: var(--role-primary-50);
+  --color-primary-60: var(--role-primary-60);
+  --color-primary-70: var(--role-primary-70);
+  --color-primary-80: var(--role-primary-80);
+  --color-primary-90: var(--role-primary-90);
+  --color-neutral-5: var(--role-neutral-5);
+  --color-neutral-10: var(--role-neutral-10);
+  --color-neutral-20: var(--role-neutral-20);
+  --color-neutral-30: var(--role-neutral-30);
+  --color-neutral-40: var(--role-neutral-40);
+  --color-neutral-50: var(--role-neutral-50);
+  --color-neutral-60: var(--role-neutral-60);
+  --color-neutral-70: var(--role-neutral-70);
+  --color-neutral-80: var(--role-neutral-80);
+  --color-neutral-90: var(--role-neutral-90);
+  --color-neutral-100: var(--role-neutral-100);
+  --color-danger-5: var(--role-danger-5);
+  --color-danger-10: var(--role-danger-10);
+  --color-danger-20: var(--role-danger-20);
+  --color-danger-30: var(--role-danger-30);
+  --color-danger-40: var(--role-danger-40);
+  --color-danger-50: var(--role-danger-50);
+  --color-danger-60: var(--role-danger-60);
+  --color-danger-70: var(--role-danger-70);
+  --color-danger-80: var(--role-danger-80);
+  --color-danger-90: var(--role-danger-90);
+  --color-success-5: var(--role-success-5);
+  --color-success-10: var(--role-success-10);
+  --color-success-20: var(--role-success-20);
+  --color-success-30: var(--role-success-30);
+  --color-success-40: var(--role-success-40);
+  --color-success-50: var(--role-success-50);
+  --color-success-60: var(--role-success-60);
+  --color-success-70: var(--role-success-70);
+  --color-success-80: var(--role-success-80);
+  --color-success-90: var(--role-success-90);
+
+  /* Semantic color utilities respond to data-theme="dark". */
+  --color-fg-default: var(--semantic-text-default);
+  --color-fg-subtle: var(--semantic-text-subtle);
+  --color-fg-subtler: var(--semantic-text-subtler);
+  --color-fg-danger: var(--semantic-text-danger);
+  --color-fg-success: var(--semantic-text-success);
+  --color-fg-primary-action: var(--semantic-text-primary-action);
+  --color-fg-secondary-action: var(--semantic-text-secondary-action);
+  --color-fg-tertiary-action: var(--semantic-text-tertiary-action);
+  --color-bg-default: var(--semantic-background-default);
+  --color-bg-subtle: var(--semantic-background-subtle);
+  --color-bg-subtler: var(--semantic-background-subtler);
+  --color-bg-primary-action: var(
+    --semantic-background-primary-action-enabled
+  );
+  --color-bg-primary-action-hover: var(
+    --semantic-background-primary-action-hovered
+  );
+  --color-bg-primary-action-pressed: var(
+    --semantic-background-primary-action-pressed
+  );
+  --color-bg-primary-action-danger: var(
+    --semantic-background-primary-action-danger
+  );
+  --color-bg-primary-action-disabled: var(
+    --semantic-background-primary-action-disabled
+  );
+  --color-bg-secondary-action: var(
+    --semantic-background-secondary-action-enabled
+  );
+  --color-bg-secondary-action-hover: var(
+    --semantic-background-secondary-action-hovered
+  );
+  --color-bg-secondary-action-pressed: var(
+    --semantic-background-secondary-action-pressed
+  );
+  --color-bg-secondary-action-danger: var(
+    --semantic-background-secondary-action-danger
+  );
+  --color-border-primary-focus: var(
+    --semantic-border-primary-action-focused
+  );
+  --color-border-secondary: var(
+    --semantic-border-secondary-action-enabled
+  );
+  --color-border-secondary-focus: var(
+    --semantic-border-secondary-action-focused
+  );
+  --color-border-secondary-default: var(
+    --semantic-border-secondary-action-default
+  );
+  --color-border-secondary-subtle: var(
+    --semantic-border-secondary-action-subtle
+  );
+  --color-border-secondary-bold: var(
+    --semantic-border-secondary-action-bold
+  );
+  --color-border-secondary-inverse: var(
+    --semantic-border-secondary-action-inverse
+  );
+
+  /* Gusto brand aliases retained for the Pixso-built pages. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-page: var(--color-page-surface); /* unused */
+  --color-page: var(--color-page-surface);
   --color-paper: var(--color-brand-paper);
   --color-ink: var(--color-brand-ink);
   --color-coral: var(--color-brand-coral);
-  --color-warm-light: var(--color-brand-warm-light); /* unused */
-  --color-orange: var(--color-brand-orange); /* unused */
+  --color-warm-light: var(--color-brand-warm-light);
+  --color-orange: var(--color-brand-orange);
   --color-surface: var(--color-surface-default);
   --color-surface-muted: var(--color-surface-subtle);
   --color-content: var(--color-content-inverse);
   --color-muted: var(--color-text-subtle);
   --color-line: var(--color-border-default);
+
+  /* Font families, weights, and complete locale-aware type scale. */
   --font-sans: var(--font-family-body);
   --font-display: var(--font-family-display);
   --font-label: var(--font-family-label);
-  --font-accent: var(--font-family-accent); /* unused */
-  --text-body-xl: var(--font-size-body-xl); /* unused */
-  --text-body-lg: var(--font-size-body-lg); /* unused */
-  --text-body-md: var(--font-size-body-md); /* unused */
+  --font-accent: var(--font-family-accent);
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 700;
+  --font-weight-bold: 700;
+  --text-display-xxl: var(--font-size-display-xxl);
+  --text-display-xxl--line-height: var(--line-height-display-xxl);
+  --text-display-xxl--letter-spacing: var(--tracking-display);
+  --text-display-xl: var(--font-size-display-xl);
+  --text-display-xl--line-height: var(--line-height-display-xl);
+  --text-display-xl--letter-spacing: var(--tracking-display);
+  --text-display-lg: var(--font-size-display-lg);
+  --text-display-lg--line-height: var(--line-height-display-lg);
+  --text-display-lg--letter-spacing: var(--tracking-display);
+  --text-display-md: var(--font-size-display-md);
+  --text-display-md--line-height: var(--line-height-display-md);
+  --text-display-md--letter-spacing: var(--tracking-display);
+  --text-display-sm: var(--font-size-display-sm);
+  --text-display-sm--line-height: var(--line-height-display-sm);
+  --text-display-sm--letter-spacing: var(--tracking-display);
+  --text-display-xs: var(--font-size-display-xs);
+  --text-display-xs--line-height: var(--line-height-display-xs);
+  --text-display-xs--letter-spacing: var(--tracking-display);
+  --text-heading-xxl: var(--font-size-heading-xxl);
+  --text-heading-xxl--line-height: normal;
+  --text-heading-xxl--letter-spacing: var(--tracking-heading);
+  --text-heading-xl: var(--font-size-heading-xl);
+  --text-heading-xl--line-height: normal;
+  --text-heading-xl--letter-spacing: var(--tracking-heading);
+  --text-heading-lg: var(--font-size-heading-lg);
+  --text-heading-lg--line-height: normal;
+  --text-heading-lg--letter-spacing: var(--tracking-heading);
+  --text-heading-md: var(--font-size-heading-md);
+  --text-heading-md--line-height: normal;
+  --text-heading-md--letter-spacing: var(--tracking-heading);
+  --text-heading-sm: var(--font-size-heading-sm);
+  --text-heading-sm--line-height: normal;
+  --text-heading-sm--letter-spacing: var(--tracking-heading);
+  --text-title-xxl: var(--font-size-title-xxl);
+  --text-title-xxl--line-height: normal;
+  --text-title-xxl--letter-spacing: var(--tracking-title);
+  --text-title-xl: var(--font-size-title-xl);
+  --text-title-xl--line-height: normal;
+  --text-title-xl--letter-spacing: var(--tracking-title);
+  --text-title-lg: var(--font-size-title-lg);
+  --text-title-lg--line-height: normal;
+  --text-title-lg--letter-spacing: var(--tracking-title);
+  --text-title-md: var(--font-size-title-md);
+  --text-title-md--line-height: normal;
+  --text-title-md--letter-spacing: var(--tracking-title);
+  --text-title-sm: var(--font-size-title-sm);
+  --text-title-sm--line-height: normal;
+  --text-title-sm--letter-spacing: var(--tracking-title);
+  --text-title-xs: var(--font-size-title-xs);
+  --text-title-xs--line-height: normal;
+  --text-title-xs--letter-spacing: var(--tracking-title);
+  --text-title-xxs: var(--font-size-title-xxs);
+  --text-title-xxs--line-height: normal;
+  --text-title-xxs--letter-spacing: var(--tracking-title);
+  --text-label-lg: var(--font-size-label-lg);
+  --text-label-md: var(--font-size-label-md);
+  --text-label-sm: var(--font-size-label-sm);
+  --text-label-xs: var(--font-size-label-xs);
+  --text-label-xxs: var(--font-size-label-xxs);
+  --text-body-xxl: var(--font-size-body-xxl);
+  --text-body-xxl--line-height: var(--line-height-body-xxl);
+  --text-body-xl: var(--font-size-body-xl);
+  --text-body-xl--line-height: var(--line-height-body-xl);
+  --text-body-lg: var(--font-size-body-lg);
+  --text-body-lg--line-height: var(--line-height-body-lg);
+  --text-body-md: var(--font-size-body-md);
+  --text-body-md--line-height: var(--line-height-body-md);
   --text-body-sm: var(--font-size-body-sm);
-  --text-body-xs: var(--font-size-body-xs); /* unused */
+  --text-body-sm--line-height: var(--line-height-body-sm);
+  --text-body-xs: var(--font-size-body-xs);
+  --text-body-xs--line-height: var(--line-height-body-xs);
+  --text-body-xxs: var(--font-size-body-xxs);
+  --text-body-xxs--line-height: var(--line-height-body-xxs);
+
+  /* Spacing, radius, borders, and opacity. */
+  --spacing-xxxxs: var(--space-xxxxs);
+  --spacing-xxxs: var(--space-xxxs);
+  --spacing-xxs: var(--space-xxs);
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-xxl: var(--space-xxl);
+  --spacing-xxxl: var(--space-xxxl);
+  --radius-none: 0;
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 999px;
   --radius-card: var(--radius-xl);
+  --border-width-none: 0;
+  --border-width-sm: 0.5px;
+  --border-width-md: 1px;
+  --border-width-lg: 2px;
+  --opacity-30: 30%;
+  --opacity-50: 50%;
+  --opacity-100: 100%;
   --shadow-card: 0 8px 24px rgb(27 40 27 / 10%);
 }
 
@@ -1503,6 +2343,91 @@
 
 @layer components {
   /* Japanese home page — based on the supplied 1920, 1440, 768 and 393px frames. */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid rgb(27 40 27 / 10%);
+    background: transparent;
+    backdrop-filter: none;
+  }
+  .site-header-inner {
+    display: flex;
+    width: 100%;
+    max-width: var(--layout-container);
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: auto;
+    padding: 16px var(--layout-page-padding);
+  }
+  body:has(.gusto-home) .site-header {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 40;
+    height: var(--gusto-header-height-desktop);
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+  body:has(.gusto-home) .site-header-inner {
+    height: var(--gusto-header-height-desktop);
+    max-width: none;
+    padding: var(--gusto-header-padding-desktop);
+  }
+  body:has(.gusto-home) header .site-header-logo {
+    display: block;
+    width: var(--gusto-header-logo-width-desktop);
+    height: var(--gusto-header-logo-height-desktop);
+  }
+  body:has(.gusto-home) header .site-header-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  body:has(.gusto-home) .site-header-menu-button {
+    color: var(--color-brand-ink);
+  }
+  @media (min-width: 769px) {
+    body:has(.gusto-home) .site-header-inner > nav,
+    body:has(.gusto-home) .site-header-menu-button {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    body:has(.gusto-home) .site-header {
+      position: relative !important;
+      height: var(--gusto-header-height-sm);
+      padding: 8px 0;
+    }
+    body:has(.gusto-home) .site-header-inner {
+      height: 104px;
+      padding: var(--gusto-header-padding-sm);
+    }
+    body:has(.gusto-home) header .site-header-logo {
+      position: relative;
+      top: -1px;
+      width: var(--gusto-header-logo-width-sm);
+      height: var(--gusto-header-logo-height-sm);
+    }
+    body:has(.gusto-home) .site-header-menu-button {
+      display: flex;
+    }
+  }
+  @media (max-width: 480px) {
+    body:has(.gusto-home) .site-header {
+      height: var(--gusto-header-height-xs);
+      padding: 4px 0;
+    }
+    body:has(.gusto-home) .site-header-inner {
+      height: 76px;
+      padding: var(--gusto-header-padding-xs);
+    }
+    body:has(.gusto-home) header .site-header-logo {
+      top: 0;
+      width: var(--gusto-header-logo-width-xs);
+      height: var(--gusto-header-logo-height-xs);
+    }
+  }
   .gusto-home h1,
   .gusto-home h2,
   .gusto-home h3,
