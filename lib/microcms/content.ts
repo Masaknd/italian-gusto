@@ -1,7 +1,7 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import { cookies, draftMode } from 'next/headers';
 import { getMicroCmsClient } from './client';
-import type { FeaturedMenu, Menu } from './types';
+import type { CmsMenu, FeaturedMenu, Menu } from './types';
 
 export const CMS_TAG = 'gusto-menu-content';
 export const CMS_ENDPOINTS = ['menus', 'featured-menus'] as const;
@@ -20,6 +20,11 @@ const deterministicSort = <
     .filter((item) => item.isAvailable)
     .sort((a, b) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id));
 
+const normalizeCmsMenu = ({ category, ...menu }: CmsMenu): Menu => ({
+  ...menu,
+  category: category[0] ?? '',
+});
+
 async function getMenuContent() {
   'use cache';
   cacheLife('hours');
@@ -33,14 +38,14 @@ async function getMenuContent() {
     };
   try {
     const [menus, featuredMenus] = await Promise.all([
-      client.getList<Menu>({ endpoint: 'menus', queries: { limit: 100 } }),
+      client.getList<CmsMenu>({ endpoint: 'menus', queries: { limit: 100 } }),
       client.getList<FeaturedMenu>({
         endpoint: 'featured-menus',
         queries: { limit: 100 },
       }),
     ]);
     return {
-      menus: deterministicSort(menus.contents),
+      menus: deterministicSort(menus.contents.map(normalizeCmsMenu)),
       featuredMenus: deterministicSort(featuredMenus.contents).slice(0, 5),
       error: false,
     };
@@ -75,11 +80,13 @@ export async function getMenuContentForSite() {
 
   try {
     if (endpoint === 'menus') {
-      const draftMenu = await client.getListDetail<Menu>({
-        endpoint,
-        contentId,
-        queries: { draftKey },
-      });
+      const draftMenu = normalizeCmsMenu(
+        await client.getListDetail<CmsMenu>({
+          endpoint,
+          contentId,
+          queries: { draftKey },
+        }),
+      );
       const menus = content.menus.filter((menu) => menu.id !== draftMenu.id);
       return {
         ...content,

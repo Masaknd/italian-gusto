@@ -16,7 +16,16 @@ Create list APIs manually in microCMS; this code intentionally does not call an 
 
 ### `menus`
 
-Create fields: `name` (text, required), `category` (select, required), `priceExcludingTax` (number, required), `description` (textarea), `image` (image), `sortOrder` (number, required), and `isAvailable` (boolean, required). Publish content after editing. The public site shows only published, available entries, sorts by `sortOrder` then ID, and hides empty categories. Categories containing `drink` or `ドリンク` render compactly without descriptions or images. Prices including tax are calculated in [`lib/site-config.ts`](./lib/site-config.ts), where the tax rate and rounding policy live in one place.
+Create fields: `name` (text, required), `category` (select, required; choose one option), `priceExcludingTax` (number, required), `description` (textarea), `image` (image), `sortOrder` (number, required), and `isAvailable` (boolean, required). Publish content after editing. The public site shows only published, available entries, sorts by `sortOrder` then ID, and hides empty categories. Categories containing `drink` or `ドリンク` render compactly without descriptions or images. Prices including tax are calculated in [`lib/site-config.ts`](./lib/site-config.ts), where the tax rate and rounding policy live in one place.
+
+To import the mock menu data from `app/sample-menu-list.json`, first grant the configured `MICROCMS_API_KEY` GET and POST access to the `menus` API. Preview the idempotent import plan, then apply it:
+
+```sh
+pnpm import:menus
+pnpm import:menus --write
+```
+
+The importer maps `menuName` to `name`, `price` to `priceExcludingTax`, and the sample category strings to the configured microCMS select-option labels. It matches existing content by its unique Japanese menu name, creates missing content through the POST API, verifies the stored values after writing, and leaves unrelated content untouched. If the dry run reports updates, grant PATCH access and explicitly apply them with `pnpm import:menus --write --allow-updates`. The placeholder image URLs in the sample file are omitted; replace them with media-library URLs beginning with `https://images.microcms-assets.io/assets/` to import images.
 
 ### `featured-menus`
 

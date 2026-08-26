@@ -97,11 +97,15 @@ export const ja = {
     body: '季節の食材とワインを、肩ひじ張らずに楽しめる場所。大切な人との時間に、少しだけ特別な余白を。',
   },
   menu: {
-    title: 'MENU',
+    title: 'グストのメニュー',
+    titlePrefix: 'グストの',
+    titleMain: 'メニュー',
     viewAll: 'メニューを見る',
     unavailable: 'ただいまメニューを準備中です。',
     excludingTax: '税抜',
     includingTax: '税込',
+    categoryNavigation: 'メニューカテゴリー',
+    marquee: 'イタリアンバル グスト',
   },
   featured: {
     title: 'うちのおすすめ',

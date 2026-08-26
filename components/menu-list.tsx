@@ -5,64 +5,101 @@ import type { getDictionary } from '@/locales';
 
 type Copy = ReturnType<typeof getDictionary>;
 const yen = (value: number) =>
-  `¥${new Intl.NumberFormat('ja-JP').format(value)}`;
+  `¥${new Intl.NumberFormat('ja-JP', { useGrouping: false }).format(value)}`;
 const drinkCategory = (category: string) => /drink|ドリンク/i.test(category);
 
 export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
   const groups = Object.entries(Object.groupBy(menus, (menu) => menu.category));
   if (!groups.length)
-    return <p className='text-muted'>{copy.menu.unavailable}</p>;
+    return <p className="gusto-menu__status">{copy.menu.unavailable}</p>;
+
   return (
-    <div className='space-y-16'>
-      {groups.map(([category, items]) => (
-        <section key={category} aria-labelledby={`category-${category}`}>
-          <h2
-            id={`category-${category}`}
-            className='mb-6 border-b border-line pb-3 font-display text-3xl tracking-[var(--tracking-title)]'
+    <>
+      <nav className="gusto-menu__category-nav" aria-label={copy.menu.categoryNavigation}>
+        {groups.map(([category], index) => (
+          <a
+            key={category}
+            href={`#menu-category-${index + 1}`}
+            className={index === 0 ? 'is-current' : undefined}
           >
             {category}
-          </h2>
-          <div className='grid gap-5 sm:grid-cols-2'>
+          </a>
+        ))}
+      </nav>
+
+      <div className="gusto-menu__groups">
+        {groups.map(([category, items], index) => (
+          <section
+            key={category}
+            id={`menu-category-${index + 1}`}
+            className="gusto-menu__group"
+            aria-labelledby={`menu-category-heading-${index + 1}`}
+          >
+            <h2
+              id={`menu-category-heading-${index + 1}`}
+              className="gusto-menu__category-title"
+            >
+              {category}
+            </h2>
+            <div className={`gusto-menu__grid ${drinkCategory(category) ? 'gusto-menu__grid--drinks' : ''}`}>
             {items?.map((item) => {
               const drink = drinkCategory(item.category);
               return (
                 <article
                   key={item.id}
-                  className={`rounded-card bg-surface p-5 shadow-card ${drink ? 'flex items-baseline justify-between' : ''}`}
+                  className={`gusto-menu-card ${drink ? 'gusto-menu-card--drink' : ''}`}
                 >
                   {!drink && item.image && (
-                    <Image
-                      src={item.image.url}
-                      alt={item.image.alt ?? item.name}
-                      width={item.image.width ?? 720}
-                      height={item.image.height ?? 500}
-                      className='mb-4 aspect-[4/3] w-full rounded-lg object-cover'
-                    />
+                    <div className="gusto-menu-card__image">
+                      <Image
+                        src={item.image.url}
+                        alt={item.image.alt ?? item.name}
+                        fill
+                        sizes="(max-width: 767px) calc(100vw - 80px), (max-width: 1023px) 300px, (max-width: 1599px) 352px, 416px"
+                      />
+                    </div>
                   )}
-                  <div>
-                    <h3 className='text-lg font-semibold'>{item.name}</h3>
+                  <div className="gusto-menu-card__copy">
+                    <h3>{item.name}</h3>
                     {!drink && item.description && (
-                      <p className='mt-2 text-body-sm leading-6 text-muted'>
-                        {item.description}
+                      <p>{item.description}</p>
+                    )}
+                    {!drink && (
+                      <p className="gusto-menu-card__price">
+                        <span className="gusto-menu-card__price-excluding">
+                          {yen(item.priceExcludingTax)}
+                        </span>
+                        <span className="gusto-menu-card__price-including">
+                          <small>（{copy.menu.includingTax}</small>{' '}
+                          {yen(includingTax(item.priceExcludingTax))}
+                          <small>）</small>
+                        </span>
                       </p>
                     )}
                   </div>
-                  <p className={drink ? 'text-right text-body-sm' : 'mt-4 text-body-sm'}>
-                    <span>
-                      {yen(item.priceExcludingTax)}{' '}
-                      <small>{copy.menu.excludingTax}</small>
-                    </span>
-                    <span className='ml-2 font-semibold'>
-                      {yen(includingTax(item.priceExcludingTax))}{' '}
-                      <small>{copy.menu.includingTax}</small>
-                    </span>
-                  </p>
+                  {drink && (
+                    <p className="gusto-menu-card__price">
+                      <span className="gusto-menu-card__price-excluding">
+                        {yen(item.priceExcludingTax)}
+                      </span>
+                      <span className="gusto-menu-card__price-including">
+                        <small>（{copy.menu.includingTax}</small>{' '}
+                        {yen(includingTax(item.priceExcludingTax))}
+                        <small>）</small>
+                      </span>
+                    </p>
+                  )}
                 </article>
               );
             })}
-          </div>
-        </section>
-      ))}
-    </div>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div className="gusto-menu__marquee" aria-hidden="true">
+        {copy.home.verticalTitle}
+      </div>
+    </>
   );
 }

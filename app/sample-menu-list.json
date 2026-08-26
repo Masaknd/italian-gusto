@@ -1,0 +1,782 @@
+[
+  {
+    "menuName": "プロシュートと季節のフルーツ",
+    "category": "appetizer",
+    "price": 980,
+    "description": "パルマ産プロシュートの塩気とフルーツの甘みが絶妙にマッチした一品です。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 1,
+    "isAvailable": true
+  },
+  {
+    "menuName": "鮮魚のカルパッチョ シトラス風味",
+    "category": "appetizer",
+    "price": 1200,
+    "description": "市場直送の新鮮な魚介を、レモンとオリーブオイルでさっぱりと仕上げました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 2,
+    "isAvailable": true
+  },
+  {
+    "menuName": "水牛モッツァレラのカプレーゼ",
+    "category": "appetizer",
+    "price": 880,
+    "description": "濃厚な水牛のミルクで作られたモッツァレラと完熟トマト、バジルの定番前菜。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 3,
+    "isAvailable": true
+  },
+  {
+    "menuName": "自家製ピクルス盛り合わせ",
+    "category": "appetizer",
+    "price": 450,
+    "description": "数種類の季節野菜を白ワインビネガーとハーブでじっくり漬け込みました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 4,
+    "isAvailable": true
+  },
+  {
+    "menuName": "彩り野菜のバーニャカウダ",
+    "category": "appetizer",
+    "price": 1100,
+    "description": "にんにくとアンチョビを効かせた温かいソースに、新鮮な生野菜をつけてどうぞ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 5,
+    "isAvailable": true
+  },
+  {
+    "menuName": "トリッパのトマト煮込み",
+    "category": "appetizer",
+    "price": 850,
+    "description": "牛のハチノスをじっくり時間をかけて柔らかくトマトで煮込んだ伝統の味です。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 6,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ガーリックトースト（2枚）",
+    "category": "appetizer",
+    "price": 380,
+    "description": "青森県産のニンニクとEXVオリーブオイルをたっぷり塗って焼き上げました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 7,
+    "isAvailable": true
+  },
+  {
+    "menuName": "地だことオリーブのマリネ",
+    "category": "appetizer",
+    "price": 680,
+    "description": "ぷりぷりの地だこと2種のオリーブを、アンチョビ風味のマリネ液に合わせました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 8,
+    "isAvailable": true
+  },
+  {
+    "menuName": "イタリア産チーズの盛り合わせ",
+    "category": "appetizer",
+    "price": 1400,
+    "description": "ゴルゴンゾーラ、パルミジャーノなど、ワインに合う厳選チーズ3種です。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 9,
+    "isAvailable": true
+  },
+  {
+    "menuName": "マッシュルームのアヒージョ",
+    "category": "appetizer",
+    "price": 780,
+    "description": "肉厚なマッシュルームの旨味がオイルに溶け出した、熱々の定番おつまみ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 10,
+    "isAvailable": false
+  },
+  {
+    "menuName": "黒毛和牛のビステッカ（200g）",
+    "category": "a la carte",
+    "price": 3400,
+    "description": "厳選した黒毛和牛をシンプルに塩と胡椒、バルサミコソースで味わう極上ステーキ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 11,
+    "isAvailable": true
+  },
+  {
+    "menuName": "白身魚とアサリのアクアパッツァ",
+    "category": "a la carte",
+    "price": 2200,
+    "description": "本日の魚を一匹丸ごと、アサリやトマト、白ワインのスープで煮込みました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 12,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ミラノ風カツレツ",
+    "category": "a la carte",
+    "price": 1800,
+    "description": "薄く叩き伸ばした豚肉に細かなパン粉をつけ、バターでサクッと揚げ焼きにしました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 13,
+    "isAvailable": true
+  },
+  {
+    "menuName": "岩手県産プラチナポークのロースト",
+    "category": "a la carte",
+    "price": 2400,
+    "description": "極上の脂身を持つブランド豚を、低温でじっくりとジューシーに焼き上げました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 14,
+    "isAvailable": true
+  },
+  {
+    "menuName": "地鶏のインボルティーニ",
+    "category": "a la carte",
+    "price": 1650,
+    "description": "鶏肉でハーブやチーズを巻き込んでローストした、フィレンツェの郷土料理です。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 15,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ラムチョップのハーブグリル",
+    "category": "a la carte",
+    "price": 1980,
+    "description": "臭みのない仔羊の肉を、ローズマリー香る特製ハーブオイルで香ばしくグリル。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 16,
+    "isAvailable": true
+  },
+  {
+    "menuName": "エビとブロッコリーのフリット",
+    "category": "a la carte",
+    "price": 950,
+    "description": "メレンゲを加えた軽やかな衣で、サクサクフワフワに仕上げたイタリア風天ぷら。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 17,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ムール貝の白ワイン蒸し",
+    "category": "a la carte",
+    "price": 1100,
+    "description": "大ぶりのムール貝を白ワインとガーリックで一気に蒸し上げた、旨味たっぷりの一品。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 18,
+    "isAvailable": true
+  },
+  {
+    "menuName": "イカのセモリナ粉揚げ",
+    "category": "a la carte",
+    "price": 880,
+    "description": "セモリナ粉を使うことで、独特のカリカリ食感に仕上げたヤリイカのフリットです。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 19,
+    "isAvailable": true
+  },
+  {
+    "menuName": "自家製イタリアンソーセージ（サルシッチャ）",
+    "category": "a la carte",
+    "price": 1200,
+    "description": "ハーブとスパイスを肉の旨味に閉じ込めた、皮がパリッとジューシーな生ソーセージ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 20,
+    "isAvailable": false
+  },
+  {
+    "menuName": "クラシック・シーザーサラダ",
+    "category": "salad",
+    "price": 880,
+    "description": "シャキシャキのロメインレタスに、濃厚シーザードレッシングと削りたてパルミジャーノ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 21,
+    "isAvailable": true
+  },
+  {
+    "menuName": "生ハムとルッコラのグリーンサラダ",
+    "category": "salad",
+    "price": 980,
+    "description": "ほろ苦いルッコラとイタリア産生ハムを、特製のバルサミコドレッシングで。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 22,
+    "isAvailable": true
+  },
+  {
+    "menuName": "地中海風シーフードサラダ",
+    "category": "salad",
+    "price": 1280,
+    "description": "エビ、イカ、アサリをふんだんに使い、レモンドレッシングで和えた贅沢なサラダ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 23,
+    "isAvailable": true
+  },
+  {
+    "menuName": "焼きキノコとほうれん草の温サラダ",
+    "category": "salad",
+    "price": 900,
+    "description": "ガーリックバターでソテーしたキノコを、新鮮なベビーほうれん草に合わせた温サラダ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 24,
+    "isAvailable": true
+  },
+  {
+    "menuName": "農園直送 季節野菜のガーデンサラダ",
+    "category": "salad",
+    "price": 780,
+    "description": "契約農家から毎朝届く、みずみずしい旬の野菜をシンプルに自家製ビネグレットで。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 25,
+    "isAvailable": true
+  },
+  {
+    "menuName": "フィレンツェ風パンサラダ（パンツァネッラ）",
+    "category": "salad",
+    "price": 850,
+    "description": "トマトの旨味やドレッシングを吸い込ませたカリカリのパンが入ったトスカーナ伝統サラダ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 26,
+    "isAvailable": true
+  },
+  {
+    "menuName": "アボカドとエビのタルタルサラダ",
+    "category": "salad",
+    "price": 1050,
+    "description": "相性抜群のアボカドと海老を、タルタル仕立てにしてセルクルで美しく成形しました。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 27,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ローストチキンとゴルゴンゾーラのサラダ",
+    "category": "salad",
+    "price": 1150,
+    "description": "香ばしいチキンとクルミ、独特なコクのある青カビチーズを合わせた食べ応えあるサラダ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 28,
+    "isAvailable": true
+  },
+  {
+    "menuName": "タコとセロリのシチリア風サラダ",
+    "category": "salad",
+    "price": 950,
+    "description": "食感の楽しいタコとセロリを、ケッパーとオリーブオイルで和えた爽やかな南イタリア風。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 29,
+    "isAvailable": true
+  },
+  {
+    "menuName": "完熟トマトとオニオンのスライスサラダ",
+    "category": "salad",
+    "price": 600,
+    "description": "糖度の高い完熟トマトと丁寧に辛みを抜いた新玉ねぎの、素材を楽しむシンプルサラダ。",
+    "image": {
+      "url": "https://microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 30,
+    "isAvailable": false
+  },
+  {
+    "menuName": "王道ポモドーロ スパゲッティ",
+    "category": "pasta",
+    "price": 1100,
+    "description": "イタリア産トマトをじっくり煮込み、バジルとパルミジャーノを合わせた究極にシンプルなパスタ。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 31,
+    "isAvailable": true
+  },
+  {
+    "menuName": "濃厚カルボナーラ ローマ風",
+    "category": "pasta",
+    "price": 1380,
+    "description": "生クリームを使わず、卵黄とグアンチャーレ（豚頬肉）、ペコリーノチーズのみで仕上げた本場の味。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 32,
+    "isAvailable": true
+  },
+  {
+    "menuName": "燻製ベーコンのアマトリチャーナ",
+    "category": "pasta",
+    "price": 1250,
+    "description": "旨味たっぷりのベーコンと玉ねぎをトマトソースで煮込み、コクのあるチーズを乗せました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 33,
+    "isAvailable": true
+  },
+  {
+    "menuName": "本格ボロネーゼ リガトーニ",
+    "category": "pasta",
+    "price": 1450,
+    "description": "粗挽きの牛肉と赤ワインをじっくり煮込んだミートソースを、太めのショートパスタで。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 34,
+    "isAvailable": true
+  },
+  {
+    "menuName": "たっぷりアサリのボンゴレビアンコ",
+    "category": "pasta",
+    "price": 1300,
+    "description": "白ワインとアサリのだし汁が太めのスパゲッティによく絡む、にんにくとパセリ香るオイルパスタ。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 35,
+    "isAvailable": true
+  },
+  {
+    "menuName": "大分県産カボスとカラスミのペペロンチーノ",
+    "category": "pasta",
+    "price": 1500,
+    "description": "ピリッと辛いペペロンチーノに、贅沢なカラスミパウダーと爽やかなカボスを添えました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 36,
+    "isAvailable": true
+  },
+  {
+    "menuName": "渡り蟹の濃厚トマトクリーム スパゲッティ",
+    "category": "pasta",
+    "price": 1680,
+    "description": "渡り蟹の殻から出た強烈な旨味を、まろやかなトマトクリームソースに閉じ込めました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 37,
+    "isAvailable": true
+  },
+  {
+    "menuName": "4種チーズのニョッキ",
+    "category": "pasta",
+    "price": 1400,
+    "description": "ゴルゴンゾーラを含む4種のチーズを使ったソースを、もちもちの自家製ポテトニョッキと。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 38,
+    "isAvailable": true
+  },
+  {
+    "menuName": "生ウニの贅沢クリームパスタ",
+    "category": "pasta",
+    "price": 1980,
+    "description": "口当たり滑らかな特製クリームに、新鮮な生のウニを贅沢にトッピングした極上パスタ。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 39,
+    "isAvailable": true
+  },
+  {
+    "menuName": "イカスミの真っ黒スパゲッティ",
+    "category": "pasta",
+    "price": 1350,
+    "description": "海の香りが広がる濃厚なイカスミソース。トマトの酸味が隠し味のクセになる一皿。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 40,
+    "isAvailable": false
+  },
+  {
+    "menuName": "マルゲリータ",
+    "category": "pizza",
+    "price": 1200,
+    "description": "トマトソース、モッツァレラ、バジルを乗せて薪窯で一気に焼き上げたナポリピザの代表格。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 41,
+    "isAvailable": true
+  },
+  {
+    "menuName": "クアトロ・フォルマッジ（ハチミツ付き）",
+    "category": "pizza",
+    "price": 1580,
+    "description": "モッツァレラ、ゴルゴンゾーラ、タレッジョ、パルミジャーノ。お好みでハチミツをかけて。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 42,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ピッツァ・カプリチョーザ",
+    "category": "pizza",
+    "price": 1450,
+    "description": "気まぐれピザ。シェフが厳選したキノコ、アーティチョーク、生ハムなどをふんだんにトッピング。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 43,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ディアボラ（ピリ辛チキン）",
+    "category": "pizza",
+    "price": 1380,
+    "description": "旨辛く味付けしたチキンと、スパイシーなサラミが食欲をそそる刺激的なピザです。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 44,
+    "isAvailable": true
+  },
+  {
+    "menuName": "マリナーラ（チーズなし）",
+    "category": "pizza",
+    "price": 980,
+    "description": "トマトソース、にんにく、オレガノのみ。シンプルだからこそ生地の美味しさが引き立ちます。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 45,
+    "isAvailable": true
+  },
+  {
+    "menuName": "プロシュート・エ・ルッコラ",
+    "category": "pizza",
+    "price": 1650,
+    "description": "焼き上がったチーズピザの上に、贅沢に最高級生ハムとルッコラを山盛りに乗せました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 46,
+    "isAvailable": true
+  },
+  {
+    "menuName": "海鮮たっぷりジェノベーゼ",
+    "category": "pizza",
+    "price": 1600,
+    "description": "自家製の鮮やかなバジルペーストをベースに、エビやイカなどのシーフードをトッピング。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 47,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ビスマルク（半熟卵とアスパラ）",
+    "category": "pizza",
+    "price": 1500,
+    "description": "とろっとろの半熟卵と、相性の良いアスパラガス、ジューシーなベーコンが乗った人気のピザ。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 48,
+    "isAvailable": true
+  },
+  {
+    "menuName": "チチニエッリ（しらすと青海苔）",
+    "category": "pizza",
+    "price": 1280,
+    "description": "ナポリ発祥の磯の香り漂うピザ。たっぷりの釜揚げしらすとにんにくが相性抜群です。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 49,
+    "isAvailable": true
+  },
+  {
+    "menuName": "カラブリア風 ナスの激辛ピッツァ",
+    "category": "pizza",
+    "price": 1300,
+    "description": "イタリア南部カラブリア州の唐辛子ペーストと揚げナスを使った、激辛好きのためのピザ。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 50,
+    "isAvailable": false
+  },
+  {
+    "menuName": "自家製クラシック・ティラミス",
+    "category": "dessert",
+    "price": 650,
+    "description": "エスプレッソを染み込ませたスポンジと、濃厚なマスカルポーネクリームの極上層。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 51,
+    "isAvailable": true
+  },
+  {
+    "menuName": "濃厚パンナコッタ ベリーソース",
+    "category": "dessert",
+    "price": 550,
+    "description": "つるんとした口溶けの甘いミルクプリンに、きゅんと酸っぱい特製ラズベリーソース。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 52,
+    "isAvailable": true
+  },
+  {
+    "menuName": "カタラーナ（濃厚焼きプリン）",
+    "category": "dessert",
+    "price": 600,
+    "description": "表面のキャラメルをパリパリに焦がした、ひんやり冷たいフローズン仕立てのデザート。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 53,
+    "isAvailable": true
+  },
+  {
+    "menuName": "シチリア伝統のアイスケーキ（カッサータ）",
+    "category": "dessert",
+    "price": 680,
+    "description": "リコッタチーズのクリームに、ドライフルーツやナッツをたっぷり混ぜて冷やし固めました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 54,
+    "isAvailable": true
+  },
+  {
+    "menuName": "ガトーショコラ カプリ風",
+    "category": "dessert",
+    "price": 580,
+    "description": "小麦粉を一切使わず、アーモンドパウダーとチョコレートでしっとり焼き上げた伝統菓子。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 55,
+    "isAvailable": true
+  },
+  {
+    "menuName": "アフォガート",
+    "category": "dessert",
+    "price": 500,
+    "description": "冷たいバニラジェラートに、淹れたて熱々の濃密なエスプレッソをかけて楽しむ大人のデザート。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 56,
+    "isAvailable": true
+  },
+  {
+    "menuName": "季節のイタリアンジェラート（2種盛り）",
+    "category": "dessert",
+    "price": 480,
+    "description": "旬のフルーツや定番のピスタチオなど、その日おすすめのフレーバーから2つ選べます。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 57,
+    "isAvailable": true
+  },
+  {
+    "menuName": "洋梨のタルト（トルタ・ディ・ペーレ）",
+    "category": "dessert",
+    "price": 620,
+    "description": "サクサクのタルト生地に、白ワインでコンポートしたジューシーな洋梨を敷き詰めました。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 58,
+    "isAvailable": true
+  },
+  {
+    "menuName": "柑橘香るカンノーロ（1本）",
+    "category": "dessert",
+    "price": 450,
+    "description": "カリカリに揚げた筒状の生地に、チョコチップとオレンジピール入りのリコッタクリームを注入。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 59,
+    "isAvailable": true
+  },
+  {
+    "menuName": "栗のモンテビアンコ（イタリア風モンブラン）",
+    "category": "dessert",
+    "price": 720,
+    "description": "イタリア産の栗ペーストを使用し、アルプスの白い山（モンブラン）をイメージした冬限定品。",
+    "image": {
+      "url": "microcms-assets.io",
+      "height": 600,
+      "width": 800
+    },
+    "sortOrder": 60,
+    "isAvailable": false
+  }
+]

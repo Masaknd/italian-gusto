@@ -39,7 +39,7 @@ export default async function HomePage({
 
   return (
     <>
-      <main className='gusto-home'>
+      <main className='gusto-home overflow-hidden bg-paper bg-[url(/images/cotton01.jpg)] bg-cover bg-fixed bg-center font-sans text-ink [--coral:var(--color-brand-coral)] [--cream:var(--color-brand-paper)] [--ink:var(--color-brand-ink)]'>
         <HomeHeroSection copy={copy} />
         <HomeAboutSection copy={copy} />
         <HomeWineSection copy={copy} locale={locale} />

@@ -6,10 +6,10 @@ import { siteConfig } from '@/lib/site-config';
 import { HomeSocialIcon } from './social-icon';
 import type { HomePageCopy, SocialCard } from './types';
 
-export function HomeFooter({ copy, locale, socialCards }: { copy: HomePageCopy; locale: Locale; socialCards: SocialCard[] }) {
+export function HomeFooter({ copy, locale, socialCards, storyHref = '#about' }: { copy: HomePageCopy; locale: Locale; socialCards: SocialCard[]; storyHref?: string }) {
   const footerNav = [
     [copy.footer.nav.menu, `/${locale}/menu`],
-    [copy.footer.nav.story, '#about'],
+    [copy.footer.nav.story, storyHref],
     [copy.footer.nav.access, '#access'],
     [copy.footer.nav.reservation, '#reservation'],
   ];

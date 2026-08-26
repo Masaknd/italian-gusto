@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { FeaturedMenuCarousel } from '@/components/featured-menu';
+import { HomeAccessSection } from '@/components/access';
+import { HomeFooter } from '@/components/footer';
 import { MenuList } from '@/components/menu-list';
+import { HomeReservationSection } from '@/components/reservation';
+import { HomeSocialSection } from '@/components/social';
+import type { SocialCard } from '@/components/types';
 import { translateManagedFields } from '@/lib/deepl';
 import { isLocale } from '@/lib/i18n';
 import { getMenuContentForSite } from '@/lib/microcms/content';
@@ -36,21 +41,53 @@ export default async function MenuPage({ params, }: {
     const menus = locale === 'en'
         ? await translateManagedFields(content.menus)
         : content.menus;
-    const featured = locale === 'en'
-        ? await translateManagedFields(content.featuredMenus)
-        : content.featuredMenus;
-    return (<main className="mx-auto w-[min(100%,var(--layout-container))] px-[var(--layout-page-padding)] py-16 md:py-24">
-      <p className="font-label text-body-sm leading-[1.2] font-bold tracking-[0.25em] text-coral uppercase">
-        GUSTO ITALIAN BAR
-      </p>
-      <h1 className="mt-3 font-display text-[length:var(--font-size-title-xl)] leading-none font-normal tracking-[var(--tracking-title)] text-[var(--color-page-text)]">
-        {d.menu.title}
-      </h1>
-      {content.error ? (<p className="mt-8 text-muted" role='status'>
-          {d.errors.dynamic}
-        </p>) : (<div className="mt-12">
-          <MenuList menus={menus} copy={d}/>
-        </div>)}
-      {featured.length > 0 && (<FeaturedMenuCarousel items={featured} copy={d}/>)}
-    </main>);
+    const socialCards: SocialCard[] = [
+      { ...d.home.social.twitter, icon: 'x' },
+      { ...d.home.social.instagram, icon: 'instagram' },
+      { ...d.home.social.blog, icon: 'drink' },
+    ];
+
+    return (
+      <>
+        <main className="gusto-home gusto-menu-page overflow-hidden bg-paper bg-[url(/images/cotton01.jpg)] bg-cover bg-fixed bg-center font-sans text-ink [--coral:var(--color-brand-coral)] [--cream:var(--color-brand-paper)] [--ink:var(--color-brand-ink)]">
+          <section className="gusto-menu" aria-labelledby="gusto-menu-title">
+            <div className="gusto-menu__container">
+              <h1 id="gusto-menu-title" className="gusto-menu__title">
+                <span className="gusto-menu__title-prefix" aria-hidden="true">
+                  {d.menu.titlePrefix}
+                </span>
+                <span className="gusto-menu__title-main" aria-hidden="true">
+                  {d.menu.titleMain}
+                </span>
+                <span className="sr-only">{d.menu.title}</span>
+              </h1>
+              {content.error ? (
+                <p className="gusto-menu__status" role="status">
+                  {d.errors.dynamic}
+                </p>
+              ) : (
+                <MenuList menus={menus} copy={d} />
+              )}
+            </div>
+            <div className="gusto-menu__line-art" aria-hidden="true">
+              <Image
+                src="/images/menu-botanicals.svg"
+                alt=""
+                fill
+                sizes="287px"
+              />
+            </div>
+          </section>
+          <HomeSocialSection copy={d} socialCards={socialCards} />
+          <HomeReservationSection copy={d} />
+          <HomeAccessSection copy={d} />
+        </main>
+        <HomeFooter
+          copy={d}
+          locale={locale}
+          socialCards={socialCards}
+          storyHref={`/${locale}#about`}
+        />
+      </>
+    );
 }

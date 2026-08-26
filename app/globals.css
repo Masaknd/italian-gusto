@@ -1,516 +1,670 @@
+/* ============================================================================
+   Gusto — global design system
+   Keep this file for design tokens, base rules, and Pixso-only geometry.
+   Component layout and typography are composed from Tailwind utilities.
+   ========================================================================== */
+
 @import 'tailwindcss';
 
 :root {
   /* Design tokens — sourced from the supplied variables export. */
-  --primitive-gray-5: #1f1f1f;
-  --primitive-gray-10: #333333;
+  --primitive-gray-5: #1f1f1f; /* unused */
+  --primitive-gray-10: #333333; /* unused */
   --primitive-gray-20: #474747;
-  --primitive-gray-30: #5c5c5c;
+  --primitive-gray-30: #5c5c5c; /* unused */
   --primitive-gray-40: #757575;
-  --primitive-gray-50: #9e9e9e;
-  --primitive-gray-60: #c2c2c2;
-  --primitive-gray-70: #e0e0e0;
-  --primitive-gray-80: #f4f4f4;
+  --primitive-gray-50: #9e9e9e; /* unused */
+  --primitive-gray-60: #c2c2c2; /* unused */
+  --primitive-gray-70: #e0e0e0; /* unused */
+  --primitive-gray-80: #f4f4f4; /* unused */
   --primitive-gray-90: #fbfbfb;
   --primitive-gray-100: #ffffff;
-  --primitive-red-40: #ff000c;
-  --primitive-red-50: #ff333d;
-  --primitive-red-60: #ff666d;
-  --primitive-green-40: #33ff00;
-  --primitive-green-50: #5cff33;
-  --primitive-green-60: #85ff66;
-  --primitive-blue-40: #0065ff;
-  --primitive-blue-50: #3384ff;
-  --primitive-blue-60: #66a3ff;
+  --primitive-red-40: #ff000c; /* unused */
+  --primitive-red-50: #ff333d; /* unused */
+  --primitive-red-60: #ff666d; /* unused */
+  --primitive-green-40: #33ff00; /* unused */
+  --primitive-green-50: #5cff33; /* unused */
+  --primitive-green-60: #85ff66; /* unused */
+  --primitive-blue-40: #0065ff; /* unused */
+  --primitive-blue-50: #3384ff; /* unused */
+  --primitive-blue-60: #66a3ff; /* unused */
 
   --font-family-display:
     var(--font-kirigirisu), var(--font-noto-sans-jp), sans-serif;
   --font-family-body: var(--font-noto-sans-jp), sans-serif;
   --font-family-accent:
-    var(--font-yamafont), var(--font-noto-sans-jp), sans-serif;
+    var(--font-yamafont), var(--font-noto-sans-jp), sans-serif; /* unused */
   --font-family-label: var(--font-kalam), var(--font-noto-sans-jp), sans-serif;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 700;
-  --font-weight-bold: 700;
+  --font-weight-regular: 400; /* unused */
+  --font-weight-medium: 500; /* unused */
+  --font-weight-semibold: 700; /* unused */
+  --font-weight-bold: 800; /* unused */
 
-  --font-size-display-xxl: 7.1875rem;
-  --font-size-display-xl: 5.8125rem;
-  --font-size-display-lg: 5.375rem;
-  --font-size-display-md: 4.25rem;
-  --font-size-heading-xxl: 5rem;
-  --font-size-heading-xl: 3.75rem;
-  --font-size-heading-lg: 3.25rem;
-  --font-size-heading-md: 3rem;
-  --font-size-heading-sm: 2rem;
+  --font-size-display-xxl: 7.1875rem; /* unused */
+  --font-size-display-xl: 5.8125rem; /* unused */
+  --font-size-display-lg: 5.375rem; /* unused */
+  --font-size-display-md: 4.25rem; /* unused */
+  --font-size-heading-xxl: 5rem; /* unused */
+  --font-size-heading-xl: 3.75rem; /* unused */
+  --font-size-heading-lg: 3.25rem; /* unused */
+  --font-size-heading-md: 3rem; /* unused */
+  --font-size-heading-sm: 2rem; /* unused */
   --font-size-title-xl: 3.25rem;
-  --font-size-title-lg: 2rem;
-  --font-size-title-md: 1.75rem;
-  --font-size-title-sm: 1.5rem;
-  --font-size-body-xl: 1.5rem;
-  --font-size-body-lg: 1rem;
-  --font-size-body-md: 1rem;
+  --font-size-title-lg: 2rem; /* unused */
+  --font-size-title-md: 1.75rem; /* unused */
+  --font-size-title-sm: 1.5rem; /* unused */
+  --font-size-body-xl: 1.5rem; /* unused */
+  --font-size-body-lg: 1rem; /* unused */
+  --font-size-body-md: 1rem; /* unused */
   --font-size-body-sm: 0.75rem;
-  --font-size-body-xs: 0.625rem;
-  --line-height-display: 0.7826;
-  --line-height-body-xl: 1.36;
-  --tracking-display: -0.2em;
-  --tracking-heading: -0.25em;
+  --font-size-body-xs: 0.625rem; /* unused */
+  --line-height-display: 0.7826; /* unused */
+  --line-height-body-xl: 1.36; /* unused */
+  --tracking-display: -0.2em; /* unused */
+  --tracking-heading: -0.25em; /* unused */
   --tracking-title: -0.15em;
 
-  --space-0: 0;
-  --space-1: 0.125rem;
-  --space-2: 0.25rem;
-  --space-3: 0.5rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 3rem;
-  --space-7: 3.25rem;
-  --space-8: 4.25rem;
-  --space-9: 7.0625rem;
-  --space-10: 7.75rem;
-  --radius-none: 0;
-  --radius-xs: 0.125rem;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
+  --space-0: 0; /* unused */
+  --space-1: 0.125rem; /* unused */
+  --space-2: 0.25rem; /* unused */
+  --space-3: 0.5rem; /* unused */
+  --space-4: 1rem; /* unused */
+  --space-5: 1.5rem; /* unused */
+  --space-6: 3rem; /* unused */
+  --space-7: 3.25rem; /* unused */
+  --space-8: 4.25rem; /* unused */
+  --space-9: 7.0625rem; /* unused */
+  --space-10: 7.75rem; /* unused */
+  --radius-none: 0; /* unused */
+  --radius-xs: 0.125rem; /* unused */
+  --radius-sm: 0.25rem; /* unused */
+  --radius-md: 0.5rem; /* unused */
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-full: 999px;
-  --border-width-sm: 0.5px;
-  --border-width-md: 1px;
-  --border-width-lg: 2px;
-  --opacity-subtle: 0.3;
-  --opacity-muted: 0.5;
-  --opacity-solid: 1;
+  --border-width-sm: 0.5px; /* unused */
+  --border-width-md: 1px; /* unused */
+  --border-width-lg: 2px; /* unused */
+  --opacity-subtle: 0.3; /* unused */
+  --opacity-muted: 0.5; /* unused */
+  --opacity-solid: 1; /* unused */
 
-  --layout-screen-xxxl: 1920px;
-  --layout-screen-xxl: 1440px;
-  --layout-screen-lg: 992px;
-  --layout-screen-sm: 768px;
-  --layout-screen-xs: 393px;
+  --layout-screen-xxxl: 1920px; /* unused */
+  --layout-screen-xxl: 1440px; /* unused */
+  --layout-screen-lg: 992px; /* unused */
+  --layout-screen-sm: 768px; /* unused */
+  --layout-screen-xs: 393px; /* unused */
   --layout-container: 1336px;
   --layout-page-padding: 96px;
 
-  /* Pixso header variants: 1746:32408. */
-  --gusto-header-height-desktop: 132px;
-  --gusto-header-padding-desktop: 16px 48px;
-  --gusto-header-logo-width-desktop: 230.708664px;
-  --gusto-header-logo-height-desktop: 100px;
+  /* Header.
+   *  Pixso header variants: 1746:32408.
+   *  Pixso 768px header frame: 925:6485.
+   *  Pixso 393px header frame: 1180:14910.
+   */
+  /* Section. */
+  --gusto-header-height-desktop: auto; /* unused */
+  --gusto-header-height-sm: auto; /* unused */
+  --gusto-header-height-xs: auto; /* unused */
+  --gusto-header-padding-desktop: 16px 48px; /* unused */
+  --gusto-header-padding-sm: 16px 16px; /* unused */
+  --gusto-header-padding-xs: 12px 16; /* unused */
 
-  /* Pixso 768px header frame: 925:6485. */
-  --gusto-header-height-sm: 120px;
-  --gusto-header-inner-height-sm: 104px;
-  --gusto-header-padding-sm: 8px 0;
-  --gusto-header-inner-padding-sm: 8px 16px;
-  --gusto-header-logo-width-sm: 207.637802px;
-  --gusto-header-logo-height-sm: 90px;
-  --gusto-header-menu-size-sm: 32px;
-  --gusto-header-menu-line-width-sm: 22px;
+  /* Logo. */
+  --gusto-header-logo-width-desktop: auto; /* unused */
+  --gusto-header-logo-width-sm: auto; /* unused */
+  --gusto-header-logo-width-xs: auto; /* unused */
+  --gusto-header-logo-height-desktop: 100px; /* unused */
+  --gusto-header-logo-height-sm: 90px; /* unused */
+  --gusto-header-logo-height-xs: 60px; /* unused */
 
-  /* Pixso 393px header frame: 1180:14910. */
-  --gusto-header-height-xs: 84px;
-  --gusto-header-inner-height-xs: 76px;
-  --gusto-header-padding-xs: 4px 0;
-  --gusto-header-inner-padding-xs: 8px 16px;
-  --gusto-header-logo-width-xs: 138.425201px;
-  --gusto-header-logo-height-xs: 60px;
-  --gusto-header-menu-inline-offset-xs: -8px;
+  /* Menu. */
+  --gusto-header-menu-size-sm: 32px; /* unused */
+  --gusto-header-menu-line-width-sm: 22px; /* unused */
+  --gusto-header-menu-inline-offset-xs: -8px; /* unused */
 
-  /* Pixso 393px open menu frame: 996:11873. */
-  --gusto-menu-header-height-xs: 84px;
-  --gusto-menu-panel-height-xs: 736px;
-  --gusto-menu-links-top-xs: 100px;
-  --gusto-menu-link-gap-xs: 28px;
-  --gusto-menu-list-width-xs: 118px;
-  --gusto-menu-reservation-gap-xs: 64px;
-  --gusto-menu-reservation-width-xs: 360px;
+  /* Mobile navigation.
+   *  Pixso 393px open menu frame: 996:11873.
+   */
+  /* Header. */
+  --gusto-menu-header-height-xs: 84px; /* unused */
 
-  /* Pixso 1440px hero frame: 1711:21465. */
+  /* Panel. */
+  --gusto-menu-panel-height-xs: 736px; /* unused */
+
+  /* Links. */
+  --gusto-menu-links-top-xs: 100px; /* unused */
+  --gusto-menu-link-gap-xs: 28px; /* unused */
+  --gusto-menu-list-width-xs: 118px; /* unused */
+
+  /* Reservation. */
+  --gusto-menu-reservation-gap-xs: 64px; /* unused */
+  --gusto-menu-reservation-width-xs: 360px; /* unused */
+
+  /* Hero.
+   *  Pixso 1440px hero frame: 1711:21465.
+   *  Pixso 768px hero frame: 1148:38380.
+   *  Pixso 393px hero frame: 1725:25524.
+   */
+  /* Section. */
   --gusto-hero-1440-height: 952px;
+  --gusto-hero-768-height: 844px;
+  --gusto-hero-393-height: 675px;
+
+  /* Copy. */
   --gusto-hero-1440-copy-left: 202.271194px;
+  --gusto-hero-768-title-left: 86.237976px;
+  --gusto-hero-393-content-left: 16px;
   --gusto-hero-1440-copy-top: 204.869141px;
   --gusto-hero-1440-copy-width: 424px;
-  --gusto-hero-1440-menu-top: 532.714966px;
-  --gusto-hero-1440-dishes-left: 627.082397px;
-  --gusto-hero-1440-dishes-top: -59.054199px;
-  --gusto-hero-1440-dishes-width: 844.035925px;
-  --gusto-hero-1440-dishes-height: 908.671057px;
-  --gusto-hero-1440-veg-left: 394.24704px;
-  --gusto-hero-1440-veg-top: 549.103516px;
-  --gusto-hero-1440-veg-width: 415.595337px;
-  --gusto-hero-1440-marquee-top: 163.935059px;
-
-  /* Pixso 768px hero frame: 1148:38380. */
-  --gusto-hero-768-height: 844px;
-  --gusto-hero-768-title-left: 86.237976px;
   --gusto-hero-768-title-width: 424px;
+  --gusto-hero-393-content-width: 361px;
   --gusto-hero-768-title-height: 240px;
+  --gusto-hero-393-title-height: 180px;
+
+  /* Menu. */
+  --gusto-hero-1440-menu-top: 532.714966px;
+
+  /* Dishes. */
+  --gusto-hero-1440-dishes-left: 627.082397px;
   --gusto-hero-768-dishes-left: 141.321472px;
+  --gusto-hero-393-dishes-left: -17.040405px;
+  --gusto-hero-1440-dishes-top: -59.054199px;
   --gusto-hero-768-dishes-top: -1.597839px;
+  --gusto-hero-393-dishes-top: 123.562851px;
+  --gusto-hero-1440-dishes-width: 844.035925px;
   --gusto-hero-768-dishes-width: 739.296631px;
+  --gusto-hero-393-dishes-width: 464.832825px;
+  --gusto-hero-1440-dishes-height: 908.671057px;
   --gusto-hero-768-dishes-height: 797.771484px;
+  --gusto-hero-393-dishes-height: 501.597656px;
+
+  /* Vegetables. */
+  --gusto-hero-1440-veg-left: 394.24704px;
   --gusto-hero-768-veg-left: 86.73233px;
+  --gusto-hero-393-veg-left: 16px;
+  --gusto-hero-1440-veg-top: 549.103516px;
   --gusto-hero-768-veg-top: 597.101837px;
+  --gusto-hero-393-veg-top: 516.244629px;
+  --gusto-hero-1440-veg-width: 415.595337px;
   --gusto-hero-768-veg-width: 347.39679px;
+  --gusto-hero-393-veg-width: 201.76062px;
   --gusto-hero-768-veg-height: 237.561798px;
+  --gusto-hero-393-veg-height: 137.972656px;
+
+  /* Marquee. */
+  --gusto-hero-1440-marquee-top: 163.935059px;
   --gusto-hero-768-marquee-width: 60px;
   --gusto-hero-768-marquee-height: 527px;
   --gusto-hero-768-marquee-font-size: 68px;
   --gusto-hero-768-marquee-text-left: -233.499996px;
   --gusto-hero-768-marquee-text-top: 233.500009px;
 
-  /* Pixso 393px hero frame: 1725:25524. */
-  --gusto-hero-393-height: 675px;
-  --gusto-hero-393-content-left: 16px;
-  --gusto-hero-393-content-width: 361px;
-  --gusto-hero-393-title-height: 180px;
-  --gusto-hero-393-dishes-left: -17.040405px;
-  --gusto-hero-393-dishes-top: 123.562851px;
-  --gusto-hero-393-dishes-width: 464.832825px;
-  --gusto-hero-393-dishes-height: 501.597656px;
-  --gusto-hero-393-veg-left: 16px;
-  --gusto-hero-393-veg-top: 516.244629px;
-  --gusto-hero-393-veg-width: 201.76062px;
-  --gusto-hero-393-veg-height: 137.972656px;
-
-  /* Pixso 1440px About frame: 910:4508. */
+  /* About.
+   *  Pixso 1440px About frame: 910:4508.
+   *  Pixso 768px About frame: 910:7154.
+   *  Pixso 393px About frame: 1180:14924.
+   */
+  /* Section. */
   --gusto-about-1440-height: 832px;
+  --gusto-about-768-height: 1239.476807px;
+  --gusto-about-393-height: 961.976929px; /* unused */
   --gusto-about-1440-padding: 60px 96px 100px;
   --gusto-about-1440-column-width: 612px;
   --gusto-about-1440-column-gap: 24px;
+
+  /* Title. */
   --gusto-about-1440-title-width: 320px;
+  --gusto-about-393-title-width: 128px; /* unused */
   --gusto-about-1440-title-height: 84px;
+  --gusto-about-393-title-height: 36.000019px; /* unused */
+
+  /* Body. */
   --gusto-about-1440-body-height: 231px;
+  --gusto-about-393-body-height: 216px;
+
+  /* Image. */
   --gusto-about-1440-image-height: 672px;
+  --gusto-about-768-image-height: 670.850098px;
+  --gusto-about-393-image-height: 397px;
+  --gusto-about-768-image-width: 611.997742px;
+  --gusto-about-393-image-top: 488.000031px; /* unused */
+
+  /* Decoration. */
   --gusto-about-1440-deco-top: 507.815918px;
   --gusto-about-1440-deco-width: 276px;
 
-  /* Pixso 768px About frame: 910:7154. */
-  --gusto-about-768-height: 1239.476807px;
+  /* Brush. */
   --gusto-about-768-brush-height: 56.62664px;
-  --gusto-about-768-panel-height: 1182.850098px;
-  --gusto-about-768-content-width: 720px;
-  --gusto-about-768-copy-height: 352.000031px;
-  --gusto-about-768-image-width: 611.997742px;
-  --gusto-about-768-image-height: 670.850098px;
-
-  /* Pixso 393px About frame: 1180:14924. */
-  --gusto-about-393-height: 961.976929px;
   --gusto-about-393-brush-height: 28.976917px;
-  --gusto-about-393-panel-height: 933px;
-  --gusto-about-393-content-left: 16px;
-  --gusto-about-393-content-width: 361px;
-  --gusto-about-393-copy-top: 48px;
-  --gusto-about-393-copy-height: 408.000031px;
-  --gusto-about-393-title-width: 128px;
-  --gusto-about-393-title-height: 36.000019px;
-  --gusto-about-393-body-height: 216px;
-  --gusto-about-393-image-top: 488.000031px;
-  --gusto-about-393-image-height: 397px;
 
-  /* Pixso 1440px Wine frame: 910:4529. */
+  /* Panel. */
+  --gusto-about-768-panel-height: 1182.850098px;
+  --gusto-about-393-panel-height: 933px; /* unused */
+
+  /* Content. */
+  --gusto-about-768-content-width: 720px;
+  --gusto-about-393-content-width: 361px; /* unused */
+  --gusto-about-393-content-left: 16px;
+
+  /* Copy. */
+  --gusto-about-768-copy-height: 352.000031px;
+  --gusto-about-393-copy-height: 408.000031px;
+  --gusto-about-393-copy-top: 48px;
+
+  /* Wine.
+   *  Pixso 1440px Wine frame: 910:4529.
+   *  Pixso 768px Wine frame: 910:7175.
+   *  Pixso 393px Wine frame: 1180:14940.
+   */
+  /* Section. */
   --gusto-wine-1440-height: 1068.639893px;
+  --gusto-wine-768-height: 1097.074585px;
+  --gusto-wine-393-inline-padding: 16px;
+
+  /* Background. */
   --gusto-wine-1440-bg-height: 926.471985px;
+
+  /* Brush. */
   --gusto-wine-1440-top-brush-height: 135.472px;
+  --gusto-wine-768-top-brush-height: 72.251732px;
+  --gusto-wine-393-top-brush-height: 36.972569px;
   --gusto-wine-1440-bottom-brush-height: 142.167999px;
+  --gusto-wine-768-bottom-brush-height: 75.822929px;
+  --gusto-wine-393-bottom-brush-height: 38.800018px;
+
+  /* Inner. */
   --gusto-wine-1440-inner-height: 791px;
+  --gusto-wine-768-inner-height: 941px;
   --gusto-wine-1440-inner-padding: 60px 96px;
+  --gusto-wine-768-inner-top: 80.251732px;
+
+  /* Columns. */
   --gusto-wine-1440-left-width: 738px;
   --gusto-wine-1440-right-width: 500px;
   --gusto-wine-1440-column-gap: 32px;
+
+  /* Visual. */
   --gusto-wine-1440-visual-height: 671px;
+  --gusto-wine-768-visual-height: 382px;
+
+  /* Copy. */
   --gusto-wine-1440-copy-height: 635px;
+  --gusto-wine-768-copy-height: 399.000031px;
+
+  /* Text. */
   --gusto-wine-1440-text-height: 396px;
 
-  /* Pixso 768px Wine frame: 910:7175. */
-  --gusto-wine-768-height: 1097.074585px;
+  /* Panel. */
   --gusto-wine-768-panel-height: 1021.251709px;
-  --gusto-wine-768-top-brush-height: 72.251732px;
-  --gusto-wine-768-bottom-brush-height: 75.822929px;
-  --gusto-wine-768-inner-top: 80.251732px;
-  --gusto-wine-768-inner-height: 941px;
+
+  /* Content. */
   --gusto-wine-768-content-width: 720px;
-  --gusto-wine-768-copy-height: 399.000031px;
-  --gusto-wine-768-visual-height: 382px;
+  --gusto-wine-393-content-gap: 32px;
+
+  /* Art. */
   --gusto-wine-768-art-width: 394.5px;
   --gusto-wine-768-art-height: 358.636383px;
 
-  /* Pixso 393px Wine frame: 1180:14940. */
-  --gusto-wine-393-top-brush-height: 36.972569px;
-  --gusto-wine-393-bottom-brush-height: 38.800018px;
-  --gusto-wine-393-inline-padding: 16px;
-  --gusto-wine-393-content-gap: 32px;
-
-  /* Pixso 393px recommendation 1 frame: 1180:14961. */
+  /* Recommendation 1.
+   *  Pixso 393px recommendation 1 frame: 1180:14961.
+   *  Pixso 768px recommendation 1 frame: 910:7200.
+   *  Pixso 1440px recommendation 1 frame: 910:4554.
+   */
+  /* Section. */
   --gusto-feature-1-393-height: 843.472534px;
+  --gusto-feature-1-768-height: 994.930908px;
+  --gusto-feature-1-1440-height: 826px;
   --gusto-feature-1-393-inline-padding: 16px;
   --gusto-feature-1-393-block-padding: 24px;
+  --gusto-feature-1-1440-padding: 60px 0 60px 96px; /* unused */
+  --gusto-feature-1-1440-column-gap: 24px;
+
+  /* Copy. */
   --gusto-feature-1-393-copy-height: 412.000031px;
-  --gusto-feature-1-393-heading-width: 200px;
-  --gusto-feature-1-393-heading-height: 40.000027px;
-  --gusto-feature-1-393-content-height: 348px;
-  --gusto-feature-1-393-image-height: 359.472534px;
-
-  /* Pixso 393px recommendation 2 frame: 1180:14975. */
-  --gusto-feature-2-393-height: 880.692139px;
-  --gusto-feature-2-393-inline-padding: 16px;
-  --gusto-feature-2-393-block-padding: 24px;
-  --gusto-feature-2-393-heading-width: 200px;
-  --gusto-feature-2-393-heading-height: 40px;
-  --gusto-feature-2-393-image-height: 396.692108px;
-
-  /* Pixso 393px recommendation 3 frame: 1180:14990. */
-  --gusto-feature-3-393-height: 916.735596px;
-  --gusto-feature-3-393-inline-padding: 16px;
-  --gusto-feature-3-393-block-padding: 24px;
-  --gusto-feature-3-393-heading-width: 200px;
-  --gusto-feature-3-393-heading-height: 32px;
-  --gusto-feature-3-393-image-height: 464.735626px;
-
-  /* Pixso 393px picture and social frame: 1180:15006. */
-  --gusto-social-393-height: 573px;
-  --gusto-social-393-brush-height: 38.800018px;
-  --gusto-social-393-gallery-top: 70.800018px;
-  --gusto-social-393-gallery-left: -340.5px;
-  --gusto-social-393-gallery-width: 1074px;
-  --gusto-social-393-gallery-height: 100px;
-  --gusto-social-393-links-top: 234px;
-  --gusto-social-393-links-width: 361px;
-  --gusto-social-393-links-height: 286px;
-
-  /* Pixso 393px reservation frame: 1180:15034. */
-  --gusto-reservation-393-brush-height: 7.284471px;
-  --gusto-reservation-393-card-left: 16px;
-  --gusto-reservation-393-card-top: 100px;
-  --gusto-reservation-393-card-width: 361px;
-  --gusto-reservation-393-title-width: 198px;
-  --gusto-reservation-393-title-height: 54.000042px;
-  --gusto-reservation-393-notes-width: 329px;
-  --gusto-reservation-393-button-width: 329px;
-  --gusto-reservation-393-button-height: 46px;
-
-  /* Pixso 393px access frame: 1180:15040. */
-  --gusto-access-393-height: 954.010742px;
-  --gusto-access-393-padding: 32px 16px;
-  --gusto-access-393-title-width: 191px;
-  --gusto-access-393-title-height: 64.010719px;
-  --gusto-access-393-content-width: 361px;
-  --gusto-access-393-content-height: 810px;
-  --gusto-access-393-map-height: 414px;
-  --gusto-access-393-details-height: 372px;
-  --gusto-access-393-label-width: 79px;
-
-  /* Pixso 393px footer frame: 1180:15062. */
-  --gusto-footer-393-height: 462.284515px;
-  --gusto-footer-393-brush-height: 7.284471px;
-  --gusto-footer-393-content-height: 455px;
-  --gusto-footer-393-upper-height: 346px;
-  --gusto-footer-393-upper-inner-height: 282px;
-  --gusto-footer-393-logo-width: 207.637802px;
-  --gusto-footer-393-nav-width: 124px;
-  --gusto-footer-393-social-width: 200px;
-  --gusto-footer-393-lower-height: 109px;
-  --gusto-footer-393-lower-inner-height: 77px;
-  --gusto-footer-393-phone-width: 119px;
-  --gusto-footer-393-hours-width: 272px;
-  --gusto-footer-393-copyright-width: 218px;
-
-  /* Pixso 768px recommendation 1 frame: 910:7200. */
-  --gusto-feature-1-768-height: 994.930908px;
+  --gusto-feature-1-768-copy-height: 356.000031px;
+  --gusto-feature-1-1440-copy-height: 607px;
   --gusto-feature-1-768-copy-left: 86px;
   --gusto-feature-1-768-copy-top: 64px;
   --gusto-feature-1-768-copy-width: 596px;
-  --gusto-feature-1-768-copy-height: 356.000031px;
+  --gusto-feature-1-1440-copy-width: 611px;
+
+  /* Heading. */
+  --gusto-feature-1-393-heading-width: 200px;
   --gusto-feature-1-768-heading-width: 300px;
+  --gusto-feature-1-393-heading-height: 40.000027px;
   --gusto-feature-1-768-heading-height: 56.000034px;
-  --gusto-feature-1-768-content-top: 104.000031px;
+  --gusto-feature-1-1440-heading-height: 88px;
+
+  /* Content. */
+  --gusto-feature-1-393-content-height: 348px;
   --gusto-feature-1-768-content-height: 252px;
+  --gusto-feature-1-1440-content-height: 471px;
+  --gusto-feature-1-768-content-top: 104.000031px;
+
+  /* Image. */
+  --gusto-feature-1-393-image-height: 359.472534px;
+  --gusto-feature-1-768-image-height: 486.930878px;
+  --gusto-feature-1-1440-image-height: 706px;
   --gusto-feature-1-768-image-left: 139.5px;
   --gusto-feature-1-768-image-top: 444.000031px;
   --gusto-feature-1-768-image-width: 489px;
-  --gusto-feature-1-768-image-height: 486.930878px;
+  --gusto-feature-1-1440-image-width: 709px;
 
-  /* Pixso 768px recommendation 2 frame: 910:7219. */
+  /* Description. */
+  --gusto-feature-1-1440-description-height: 264px;
+
+  /* Recommendation 2.
+   *  Pixso 393px recommendation 2 frame: 1180:14975.
+   *  Pixso 768px recommendation 2 frame: 910:7219.
+   *  Pixso 1440px recommendation 2 frame: 910:4573.
+   */
+  /* Section. */
+  --gusto-feature-2-393-height: 880.692139px;
   --gusto-feature-2-768-height: 1091.632813px;
-  --gusto-feature-2-768-copy-left: 86px;
-  --gusto-feature-2-768-copy-top: 64px;
-  --gusto-feature-2-768-copy-width: 596px;
-  --gusto-feature-2-768-copy-height: 380px;
+  --gusto-feature-2-1440-height: 895.717163px;
+  --gusto-feature-2-393-inline-padding: 16px;
+  --gusto-feature-2-393-block-padding: 24px;
+  --gusto-feature-2-1440-padding: 60px 96px 60px 0; /* unused */
+  --gusto-feature-2-1440-column-gap: 24px;
+
+  /* Heading. */
+  --gusto-feature-2-393-heading-width: 200px;
   --gusto-feature-2-768-heading-width: 300px;
+  --gusto-feature-2-393-heading-height: 40px;
   --gusto-feature-2-768-heading-height: 56px;
-  --gusto-feature-2-768-content-top: 104px;
-  --gusto-feature-2-768-content-height: 276px;
+  --gusto-feature-2-1440-heading-height: 88px;
+
+  /* Image. */
+  --gusto-feature-2-393-image-height: 396.692108px;
+  --gusto-feature-2-768-image-height: 551.632751px;
+  --gusto-feature-2-1440-image-height: 775.717163px;
   --gusto-feature-2-768-image-left: 133px;
   --gusto-feature-2-768-image-top: 476px;
   --gusto-feature-2-768-image-width: 502px;
-  --gusto-feature-2-768-image-height: 551.632751px;
-
-  /* Pixso 768px recommendation 3 frame: 910:7239. */
-  --gusto-feature-3-768-height: 1068px;
-  --gusto-feature-3-768-copy-left: 86px;
-  --gusto-feature-3-768-copy-top: 64px;
-  --gusto-feature-3-768-copy-width: 596px;
-  --gusto-feature-3-768-copy-height: 356px;
-  --gusto-feature-3-768-heading-width: 300px;
-  --gusto-feature-3-768-heading-height: 56px;
-  --gusto-feature-3-768-content-top: 104px;
-  --gusto-feature-3-768-content-width: 596.02063px;
-  --gusto-feature-3-768-content-height: 252px;
-  --gusto-feature-3-768-image-left: 166.5px;
-  --gusto-feature-3-768-image-top: 444px;
-  --gusto-feature-3-768-image-width: 435px;
-  --gusto-feature-3-768-image-height: 560px;
-
-  /* Pixso 768px picture and social frame: 910:7260. */
-  --gusto-social-768-height: 714.626709px;
-  --gusto-social-768-brush-height: 56.62664px;
-  --gusto-social-768-gallery-top: 106.626709px;
-  --gusto-social-768-gallery-left: -690px;
-  --gusto-social-768-gallery-width: 2148px;
-  --gusto-social-768-gallery-height: 200px;
-  --gusto-social-768-links-top: 378.626709px;
-  --gusto-social-768-links-width: 722px;
-  --gusto-social-768-links-height: 286px;
-
-  /* Pixso 768px reservation frame: 910:7310. */
-  --gusto-reservation-768-height: 832px;
-  --gusto-reservation-768-brush-height: 14.235302px;
-  --gusto-reservation-768-card-left: 192px;
-  --gusto-reservation-768-card-top: 76.999969px;
-  --gusto-reservation-768-card-width: 384px;
-  --gusto-reservation-768-card-height: 678.000061px;
-  --gusto-reservation-768-title-width: 297px;
-  --gusto-reservation-768-title-height: 80.000038px;
-  --gusto-reservation-768-notes-width: 352px;
-  --gusto-reservation-768-notes-height: 462px;
-  --gusto-reservation-768-button-width: 352px;
-  --gusto-reservation-768-button-height: 56px;
-
-  /* Pixso 768px access frame: 910:7322. */
-  --gusto-access-768-height: 1137.248535px;
-  --gusto-access-768-padding: 64px 86px;
-  --gusto-access-768-title-width: 191px;
-  --gusto-access-768-title-height: 94.248497px;
-  --gusto-access-768-content-width: 596px;
-  --gusto-access-768-content-height: 858px;
-  --gusto-access-768-map-height: 414px;
-  --gusto-access-768-details-height: 420px;
-
-  /* Pixso 768px footer frame: 947:8990. */
-  --gusto-footer-768-height: 420.235382px;
-  --gusto-footer-768-brush-height: 14.235302px;
-  --gusto-footer-768-upper-height: 286px;
-  --gusto-footer-768-upper-inner-height: 222px;
-  --gusto-footer-768-logo-width: 207.637802px;
-  --gusto-footer-768-nav-width: 451px;
-  --gusto-footer-768-social-width: 248px;
-  --gusto-footer-768-lower-height: 120px;
-  --gusto-footer-768-lower-inner-height: 88px;
-  --gusto-footer-768-phone-width: 139px;
-  --gusto-footer-768-hours-width: 484px;
-  --gusto-footer-768-copyright-width: 218px;
-
-  /* Pixso 1440px recommendation 1 frame: 910:4554. */
-  --gusto-feature-1-1440-height: 826px;
-  --gusto-feature-1-1440-padding: 60px 0 60px 96px;
-  --gusto-feature-1-1440-copy-width: 611px;
-  --gusto-feature-1-1440-copy-height: 607px;
-  --gusto-feature-1-1440-image-width: 709px;
-  --gusto-feature-1-1440-image-height: 706px;
-  --gusto-feature-1-1440-column-gap: 24px;
-  --gusto-feature-1-1440-heading-height: 88px;
-  --gusto-feature-1-1440-content-height: 471px;
-  --gusto-feature-1-1440-description-height: 264px;
-
-  /* Pixso 1440px recommendation 2 frame: 910:4573. */
-  --gusto-feature-2-1440-height: 895.717163px;
-  --gusto-feature-2-1440-padding: 60px 96px 60px 0;
   --gusto-feature-2-1440-image-width: 705.922607px;
-  --gusto-feature-2-1440-image-height: 775.717163px;
+
+  /* Copy. */
+  --gusto-feature-2-768-copy-left: 86px;
+  --gusto-feature-2-768-copy-top: 64px;
+  --gusto-feature-2-768-copy-width: 596px;
   --gusto-feature-2-1440-copy-width: 614.077393px;
+  --gusto-feature-2-768-copy-height: 380px;
   --gusto-feature-2-1440-copy-height: 574px;
-  --gusto-feature-2-1440-column-gap: 24px;
-  --gusto-feature-2-1440-heading-height: 88px;
+
+  /* Content. */
+  --gusto-feature-2-768-content-top: 104px;
+  --gusto-feature-2-768-content-height: 276px;
   --gusto-feature-2-1440-content-height: 438px;
+
+  /* Description. */
   --gusto-feature-2-1440-description-height: 231px;
+
+  /* Decoration. */
   --gusto-feature-2-1440-deco-left: 1172.750366px;
   --gusto-feature-2-1440-deco-width: 267.249664px;
 
-  /* Pixso 1440px recommendation 3 frame: 910:4593. */
+  /* Recommendation 3.
+   *  Pixso 393px recommendation 3 frame: 1180:14990.
+   *  Pixso 768px recommendation 3 frame: 910:7239.
+   *  Pixso 1440px recommendation 3 frame: 910:4593.
+   */
+  /* Section. */
+  --gusto-feature-3-393-height: 916.735596px;
+  --gusto-feature-3-768-height: 1068px;
   --gusto-feature-3-1440-height: 905.751831px;
-  --gusto-feature-3-1440-padding: 60px 0 60px 96px;
-  --gusto-feature-3-1440-copy-width: 504px;
-  --gusto-feature-3-1440-copy-height: 574px;
-  --gusto-feature-3-1440-visual-width: 816px;
-  --gusto-feature-3-1440-image-width: 610.360779px;
-  --gusto-feature-3-1440-image-height: 785.751831px;
+  --gusto-feature-3-393-inline-padding: 16px;
+  --gusto-feature-3-393-block-padding: 24px;
+  --gusto-feature-3-1440-padding: 60px 0 60px 96px; /* unused */
   --gusto-feature-3-1440-column-gap: 24px;
+
+  /* Heading. */
+  --gusto-feature-3-393-heading-width: 200px;
+  --gusto-feature-3-768-heading-width: 300px;
   --gusto-feature-3-1440-heading-width: 500px;
+  --gusto-feature-3-393-heading-height: 32px;
+  --gusto-feature-3-768-heading-height: 56px;
   --gusto-feature-3-1440-heading-height: 88px;
+
+  /* Image. */
+  --gusto-feature-3-393-image-height: 464.735626px;
+  --gusto-feature-3-768-image-height: 560px;
+  --gusto-feature-3-1440-image-height: 785.751831px;
+  --gusto-feature-3-768-image-left: 166.5px;
+  --gusto-feature-3-768-image-top: 444px;
+  --gusto-feature-3-768-image-width: 435px;
+  --gusto-feature-3-1440-image-width: 610.360779px;
+
+  /* Copy. */
+  --gusto-feature-3-768-copy-left: 86px;
+  --gusto-feature-3-768-copy-top: 64px;
+  --gusto-feature-3-768-copy-width: 596px;
+  --gusto-feature-3-1440-copy-width: 504px;
+  --gusto-feature-3-768-copy-height: 356px;
+  --gusto-feature-3-1440-copy-height: 574px;
+
+  /* Content. */
+  --gusto-feature-3-768-content-top: 104px;
+  --gusto-feature-3-768-content-width: 596.02063px;
+  --gusto-feature-3-768-content-height: 252px;
   --gusto-feature-3-1440-content-height: 438px;
+
+  /* Visual. */
+  --gusto-feature-3-1440-visual-width: 816px; /* unused */
+
+  /* Description. */
   --gusto-feature-3-1440-description-height: 231px;
+
+  /* Decoration. */
   --gusto-feature-3-1440-deco-left: 1101.374634px;
   --gusto-feature-3-1440-deco-top: -126.476285px;
   --gusto-feature-3-1440-deco-width: 426.709015px;
   --gusto-feature-3-1440-deco-height: 442.898px;
 
-  /* Pixso 1440px picture and social frame: 1741:31389. */
+  /* Picture and social.
+   *  Pixso 393px picture and social frame: 1180:15006.
+   *  Pixso 768px picture and social frame: 910:7260.
+   *  Pixso 1440px picture and social frame: 1741:31389.
+   */
+  /* Section. */
+  --gusto-social-393-height: 573px;
+  --gusto-social-768-height: 714.626709px;
   --gusto-social-1440-height: 814.17511px;
+
+  /* Brush. */
+  --gusto-social-393-brush-height: 38.800018px;
+  --gusto-social-768-brush-height: 56.62664px;
   --gusto-social-1440-brush-height: 106.174957px;
+
+  /* Gallery. */
+  --gusto-social-393-gallery-top: 70.800018px;
+  --gusto-social-768-gallery-top: 106.626709px;
   --gusto-social-1440-gallery-top: 156.175087px;
+  --gusto-social-393-gallery-left: -340.5px;
+  --gusto-social-768-gallery-left: -690px;
   --gusto-social-1440-gallery-left: -354px;
+  --gusto-social-393-gallery-width: 1074px;
+  --gusto-social-768-gallery-width: 2148px;
   --gusto-social-1440-gallery-width: 2148px;
+  --gusto-social-393-gallery-height: 100px;
+  --gusto-social-768-gallery-height: 200px;
   --gusto-social-1440-gallery-height: 200px;
+
+  /* Links. */
+  --gusto-social-393-links-top: 234px;
+  --gusto-social-768-links-top: 378.626709px;
+  --gusto-social-393-links-width: 361px;
+  --gusto-social-768-links-width: 722px;
   --gusto-social-1440-links-width: 1182px;
+  --gusto-social-393-links-height: 286px;
+  --gusto-social-768-links-height: 286px;
   --gusto-social-1440-links-height: 286px;
 
-  /* Pixso 1440px reservation frame: 910:4664. */
-  --gusto-reservation-1440-height: 914px;
+  /* Reservation.
+   *  Pixso 393px reservation frame: 1180:15034.
+   *  Pixso 768px reservation frame: 910:7310.
+   *  Pixso 1440px reservation frame: 910:4664.
+   */
+  /* Brush. */
+  --gusto-reservation-393-brush-height: 7.284471px;
+  --gusto-reservation-768-brush-height: 14.235302px;
   --gusto-reservation-1440-brush-height: 26.691189px;
+
+  /* Card. */
+  --gusto-reservation-393-card-left: 16px;
+  --gusto-reservation-768-card-left: 192px;
   --gusto-reservation-1440-card-left: 414px;
+  --gusto-reservation-393-card-top: 100px;
+  --gusto-reservation-768-card-top: 76.999969px;
   --gusto-reservation-1440-card-top: 200px;
+  --gusto-reservation-393-card-width: 361px;
+  --gusto-reservation-768-card-width: 384px;
   --gusto-reservation-1440-card-width: 710px;
+  --gusto-reservation-768-card-height: 678.000061px;
   --gusto-reservation-1440-card-height: 514px;
+
+  /* Title. */
+  --gusto-reservation-393-title-width: 198px;
+  --gusto-reservation-768-title-width: 297px;
   --gusto-reservation-1440-title-width: 322px;
+  --gusto-reservation-393-title-height: 54.000042px;
+  --gusto-reservation-768-title-height: 80.000038px;
   --gusto-reservation-1440-title-height: 84px;
+
+  /* Notes. */
+  --gusto-reservation-393-notes-width: 329px;
+  --gusto-reservation-768-notes-width: 352px;
   --gusto-reservation-1440-notes-width: 517px;
+  --gusto-reservation-768-notes-height: 462px;
   --gusto-reservation-1440-notes-height: 294px;
 
-  /* Pixso 1440px access frame: 910:4676. */
-  --gusto-access-1440-height: 671.248474px;
-  --gusto-access-1440-padding: 50px 96px;
-  --gusto-access-1440-title-width: 1248px;
-  --gusto-access-1440-title-height: 94.248497px;
-  --gusto-access-1440-content-width: 1248px;
-  --gusto-access-1440-content-height: 420px;
-  --gusto-access-1440-map-width: 481.522461px;
-  --gusto-access-1440-map-height: 414px;
-  --gusto-access-1440-details-width: 479px;
-  --gusto-access-1440-details-height: 420px;
+  /* Button. */
+  --gusto-reservation-393-button-width: 329px;
+  --gusto-reservation-768-button-width: 352px;
+  --gusto-reservation-393-button-height: 46px;
+  --gusto-reservation-768-button-height: 56px;
 
-  /* Pixso 1440px footer frame: 947:8896. */
+  /* Section. */
+  --gusto-reservation-768-height: 832px;
+  --gusto-reservation-1440-height: 914px;
+
+  /* Access.
+   *  Pixso 393px access frame: 1180:15040.
+   *  Pixso 768px access frame: 910:7322.
+   *  Pixso 1440px access frame: 910:4676.
+   */
+  /* Section. */
+  --gusto-access-393-height: 954.010742px;
+  --gusto-access-768-height: 1137.248535px;
+  --gusto-access-1440-height: 671.248474px;
+  --gusto-access-393-padding: 32px 16px;
+  --gusto-access-768-padding: 64px 86px;
+  --gusto-access-1440-padding: 50px 96px;
+
+  /* Title. */
+  --gusto-access-393-title-width: 191px;
+  --gusto-access-768-title-width: 191px;
+  --gusto-access-1440-title-width: 1248px;
+  --gusto-access-393-title-height: 64.010719px;
+  --gusto-access-768-title-height: 94.248497px;
+  --gusto-access-1440-title-height: 94.248497px;
+
+  /* Content. */
+  --gusto-access-393-content-width: 361px;
+  --gusto-access-768-content-width: 596px;
+  --gusto-access-1440-content-width: 1248px;
+  --gusto-access-393-content-height: 810px;
+  --gusto-access-768-content-height: 858px;
+  --gusto-access-1440-content-height: 420px;
+
+  /* Map. */
+  --gusto-access-393-map-height: 414px;
+  --gusto-access-768-map-height: 414px;
+  --gusto-access-1440-map-height: 414px;
+  --gusto-access-1440-map-width: 481.522461px;
+
+  /* Details. */
+  --gusto-access-393-details-height: 372px;
+  --gusto-access-768-details-height: 420px;
+  --gusto-access-1440-details-height: 420px;
+  --gusto-access-1440-details-width: 479px;
+
+  /* Label. */
+  --gusto-access-393-label-width: 79px;
+
+  /* Footer.
+   *  Pixso 393px footer frame: 1180:15062.
+   *  Pixso 768px footer frame: 947:8990.
+   *  Pixso 1440px footer frame: 947:8896.
+   */
+  /* Section. */
+  --gusto-footer-393-height: 462.284515px;
+  --gusto-footer-768-height: 420.235382px;
   --gusto-footer-1440-height: 287.691315px;
-  --gusto-footer-1440-brush-height: 26.691189px;
-  --gusto-footer-1440-upper-height: 197px;
-  --gusto-footer-1440-lower-height: 64px;
   --gusto-footer-1440-inline-padding: 96px;
+
+  /* Brush. */
+  --gusto-footer-393-brush-height: 7.284471px;
+  --gusto-footer-768-brush-height: 14.235302px;
+  --gusto-footer-1440-brush-height: 26.691189px;
+
+  /* Content. */
+  --gusto-footer-393-content-height: 455px;
+
+  /* Upper. */
+  --gusto-footer-393-upper-height: 346px;
+  --gusto-footer-768-upper-height: 286px;
+  --gusto-footer-1440-upper-height: 197px;
+  --gusto-footer-393-upper-inner-height: 282px;
+  --gusto-footer-768-upper-inner-height: 222px;
+
+  /* Logo. */
+  --gusto-footer-393-logo-width: 207.637802px;
+  --gusto-footer-768-logo-width: 207.637802px;
   --gusto-footer-1440-logo-width: 230.708664px;
+
+  /* Nav. */
+  --gusto-footer-393-nav-width: 124px;
+  --gusto-footer-768-nav-width: 451px;
   --gusto-footer-1440-nav-width: 479px;
+
+  /* Social. */
+  --gusto-footer-393-social-width: 200px;
+  --gusto-footer-768-social-width: 248px;
   --gusto-footer-1440-social-width: 248px;
+
+  /* Lower. */
+  --gusto-footer-393-lower-height: 109px;
+  --gusto-footer-768-lower-height: 120px;
+  --gusto-footer-1440-lower-height: 64px;
+  --gusto-footer-393-lower-inner-height: 77px;
+  --gusto-footer-768-lower-inner-height: 88px;
+
+  /* Phone. */
+  --gusto-footer-393-phone-width: 119px;
+  --gusto-footer-768-phone-width: 139px;
   --gusto-footer-1440-phone-width: 196px;
+
+  /* Hours. */
+  --gusto-footer-393-hours-width: 272px;
+  --gusto-footer-768-hours-width: 484px;
   --gusto-footer-1440-hours-width: 667px;
+
+  /* Copyright. */
+  --gusto-footer-393-copyright-width: 218px;
+  --gusto-footer-768-copyright-width: 218px;
   --gusto-footer-1440-copyright-width: 218px;
 
-  --color-text-default: var(--primitive-gray-5);
+  --color-text-default: var(--primitive-gray-5); /* unused */
   --color-text-subtle: var(--primitive-gray-40);
-  --color-text-inverse: var(--primitive-gray-90);
+  --color-text-inverse: var(--primitive-gray-90); /* unused */
   --color-surface-default: var(--primitive-gray-100);
   --color-surface-subtle: var(--primitive-gray-90);
   --color-border-default: var(--primitive-gray-40);
-  --color-action-primary: var(--primitive-gray-5);
+  --color-action-primary: var(--primitive-gray-5); /* unused */
   --color-action-primary-hover: var(--primitive-gray-20);
-  --color-danger: var(--primitive-red-40);
-  --color-success: var(--primitive-green-40);
+  --color-danger: var(--primitive-red-40); /* unused */
+  --color-success: var(--primitive-green-40); /* unused */
   --color-focus: #9c4b2e;
 
   --color-brand-paper: #fbf1db;
@@ -522,14 +676,429 @@
   --color-page-text: #241b17;
   --color-content-inverse: #e0e6f6;
   --color-map-surface: #f5f4f2;
-  --color-map-text: #aaaaaa;
-  --color-social-divider: #617062;
-  --color-overlay-reservation: rgb(20 32 21 / 78%);
-  --color-overlay-ink: rgb(27 40 27 / 91%);
+  --color-map-text: #aaaaaa; /* unused */
+  --color-social-divider: #617062; /* unused */
+  --color-overlay-reservation: rgb(20 32 21 / 78%); /* unused */
+  --color-overlay-ink: rgb(27 40 27 / 91%); /* unused */
   --shadow-hero-title: 0 2px 6px rgb(0 0 0 / 25%);
 
   --background: var(--color-page-surface);
   --foreground: var(--color-page-text);
+}
+
+/* Menu page: supplied 1920 / 1440 / 768 / 393 Pixso frames. */
+.gusto-menu {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  color: var(--color-brand-ink);
+}
+
+.gusto-menu__container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 46px;
+  padding: 0 240px 200px;
+}
+
+.gusto-menu__title {
+  margin: 0;
+  color: var(--color-brand-coral);
+  font-family: var(--font-family-display);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.375;
+  letter-spacing: -0.04em;
+}
+
+.gusto-menu__category-nav {
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  align-items: flex-start;
+  border-bottom: 2px dashed var(--color-brand-coral);
+}
+
+.gusto-menu__category-nav a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-brand-coral);
+  font-family: var(--font-family-display);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.gusto-menu__category-nav a + a {
+  border-left: 2px dotted var(--color-brand-coral);
+  padding-left: 12px;
+  margin-left: 12px;
+}
+
+.gusto-menu__category-nav a.is-current {
+  color: #c3a8a2;
+}
+
+.gusto-menu__groups {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 136px;
+}
+
+.gusto-menu__group {
+  display: flex;
+  width: 100%;
+  scroll-margin-top: 24px;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.gusto-menu__category-title {
+  width: fit-content;
+  margin: 0;
+  border-bottom: 2px dashed var(--color-brand-coral);
+  color: var(--color-brand-coral);
+  font-family: var(--font-family-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.gusto-menu__grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.gusto-menu-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fbece6;
+}
+
+.gusto-menu-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.gusto-menu-card__image img {
+  object-fit: contain;
+}
+
+.gusto-menu-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gusto-menu-card__copy h3 {
+  margin: 0;
+  color: var(--color-brand-coral);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.gusto-menu-card__copy p {
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.gusto-menu-card__price {
+  display: flex;
+  margin: auto 0 0;
+  align-items: baseline;
+  color: #000;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.gusto-menu-card__price-excluding {
+  font-size: 24px;
+}
+
+.gusto-menu-card__price-including {
+  margin-left: 3px;
+  font-size: 28px;
+}
+
+.gusto-menu-card__price small {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.gusto-menu__grid--drinks .gusto-menu-card {
+  min-height: auto;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.gusto-menu__grid--drinks .gusto-menu-card__copy h3 {
+  color: var(--color-brand-ink);
+  font-size: 16px;
+}
+
+.gusto-menu__grid--drinks .gusto-menu-card__price {
+  flex: none;
+}
+
+.gusto-menu__marquee {
+  position: absolute;
+  top: 188px;
+  left: 0;
+  display: flex;
+  width: 90px;
+  height: 667px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--color-brand-orange);
+  font-family: var(--font-family-display);
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+}
+
+.gusto-menu__line-art {
+  position: absolute;
+  top: 1560px;
+  right: -72px;
+  width: 287px;
+  height: 297px;
+  pointer-events: none;
+}
+
+.gusto-menu__line-art i {
+  position: absolute;
+  display: block;
+  width: 170px;
+  height: 250px;
+  border: 1px solid var(--color-brand-ink);
+  transform: rotate(28deg);
+}
+
+.gusto-menu__line-art i:last-child {
+  right: 0;
+  bottom: 0;
+  width: 220px;
+  height: 150px;
+  transform: rotate(-30deg);
+}
+
+.gusto-menu__status {
+  margin: 0;
+  color: var(--color-text-subtle);
+}
+
+@media (max-width: 1599.98px) {
+  .gusto-menu__container {
+    padding-inline: 96px;
+  }
+
+  .gusto-menu__title {
+    line-height: 1.375;
+  }
+
+  .gusto-menu__category-nav {
+    min-height: 52px;
+  }
+
+  .gusto-menu__category-nav a {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .gusto-menu__container {
+    padding-inline: 24px;
+  }
+
+  .gusto-menu__title {
+    font-size: 48px;
+    line-height: 1.25;
+  }
+
+  .gusto-menu__category-nav {
+    min-height: 32px;
+  }
+
+  .gusto-menu__category-nav a {
+    font-size: 14px;
+  }
+
+  .gusto-menu__category-nav a + a {
+    margin-left: 7px;
+    padding-left: 7px;
+  }
+
+  .gusto-menu__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gusto-menu__marquee {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gusto-menu__container {
+    gap: 24px;
+    padding: 0 16px 50px;
+  }
+
+  .gusto-menu__title {
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .gusto-menu__category-nav {
+    min-height: 72px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    border-bottom: 0;
+    row-gap: 8px;
+  }
+
+  .gusto-menu__category-nav a {
+    height: 32px;
+  }
+
+  .gusto-menu__groups {
+    gap: 136px;
+  }
+
+  .gusto-menu__category-title {
+    font-size: 24px;
+  }
+
+  .gusto-menu__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gusto-menu-card__copy h3 {
+    font-size: 18px;
+  }
+
+  .gusto-menu-card__price-excluding {
+    font-size: 22px;
+  }
+
+  .gusto-menu-card__price-including {
+    font-size: 26px;
+  }
+
+  .gusto-menu__line-art {
+    top: 1631px;
+    right: -66px;
+  }
+}
+
+/* Menu header — Pixso instances 1746:32445, 1746:32413, 1746:32460,
+   and 1725:27321. The header remains in the page's auto-layout flow. */
+.site-header--menu {
+  position: relative;
+  inset: auto;
+  z-index: 40;
+  height: 132px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.site-header--menu .site-header-inner {
+  width: 100%;
+  max-width: none;
+  height: 132px;
+  padding: 16px 48px;
+  background: transparent;
+}
+
+.site-header--menu .site-header-logo {
+  display: block;
+  width: 230.708664px;
+  height: 100px;
+}
+
+.site-header--menu .site-header-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.site-header--menu .site-header-desktop-nav,
+.site-header--menu .site-header-menu-button {
+  display: none !important;
+}
+
+@media (max-width: 768.02px) {
+  .site-header--menu {
+    height: 120px;
+    padding: 8px 0;
+  }
+
+  .site-header--menu .site-header-inner {
+    height: 104px;
+    padding: 8px 16px;
+  }
+
+  .site-header--menu .site-header-logo {
+    position: relative;
+    top: -1px;
+    width: 207.637802px;
+    height: 90px;
+  }
+
+  .site-header--menu .site-header-menu-button {
+    display: flex !important;
+    color: var(--color-brand-ink);
+  }
+}
+
+@media (max-width: 480.02px) {
+  .site-header--menu {
+    height: 84px;
+    padding: 4px 0;
+  }
+
+  .site-header--menu .site-header-inner {
+    height: 76px;
+    padding: 8px 16px;
+  }
+
+  .site-header--menu .site-header-logo {
+    top: 0;
+    width: 138.425201px;
+    height: 60px;
+  }
+
+  .site-header--menu .site-header-menu-button {
+    margin-right: -8px;
+  }
 }
 
 @media (min-width: 1920px) {
@@ -561,11 +1130,22 @@
 }
 
 @theme inline {
+  /* Responsive utility aliases for the supplied Pixso frames. */
+  --breakpoint-gusto-xs: 393px; /* unused */
+  --breakpoint-gusto-tablet: 768px; /* unused */
+  --breakpoint-gusto-desktop: 992px; /* unused */
+  --breakpoint-gusto-wide: 1440px; /* unused */
+  --breakpoint-gusto-ultrawide: 1920px; /* unused */
+
+  /* Semantic colors and typefaces used directly in component class names. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-page: var(--color-page-surface);
+  --color-page: var(--color-page-surface); /* unused */
+  --color-paper: var(--color-brand-paper);
   --color-ink: var(--color-brand-ink);
   --color-coral: var(--color-brand-coral);
+  --color-warm-light: var(--color-brand-warm-light); /* unused */
+  --color-orange: var(--color-brand-orange); /* unused */
   --color-surface: var(--color-surface-default);
   --color-surface-muted: var(--color-surface-subtle);
   --color-content: var(--color-content-inverse);
@@ -574,77 +1154,29 @@
   --font-sans: var(--font-family-body);
   --font-display: var(--font-family-display);
   --font-label: var(--font-family-label);
-  --font-accent: var(--font-family-accent);
-  --text-body-xl: var(--font-size-body-xl);
-  --text-body-lg: var(--font-size-body-lg);
-  --text-body-md: var(--font-size-body-md);
+  --font-accent: var(--font-family-accent); /* unused */
+  --text-body-xl: var(--font-size-body-xl); /* unused */
+  --text-body-lg: var(--font-size-body-lg); /* unused */
+  --text-body-md: var(--font-size-body-md); /* unused */
   --text-body-sm: var(--font-size-body-sm);
-  --text-body-xs: var(--font-size-body-xs);
+  --text-body-xs: var(--font-size-body-xs); /* unused */
   --radius-card: var(--radius-xl);
   --shadow-card: 0 8px 24px rgb(27 40 27 / 10%);
 }
 
-@utility content-shell {
-  width: min(100%, var(--layout-container));
-  margin-inline: auto;
-  padding-inline: var(--layout-page-padding);
-}
-
-@utility page-eyebrow {
-  color: var(--color-brand-coral);
-  font-family: var(--font-family-label);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.25em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-@utility page-heading {
-  color: var(--color-page-text);
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-title-xl);
-  font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-title);
-  line-height: 1;
-}
-
-@utility action-primary {
-  align-items: center;
-  background: var(--color-brand-ink);
-  border-radius: var(--radius-full);
-  color: var(--primitive-gray-100);
-  display: inline-flex;
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-semibold);
-  justify-content: center;
-  min-height: 2.75rem;
-  padding: 0.625rem 1.25rem;
-  text-decoration: none;
-  transition:
-    background-color 160ms ease,
-    transform 160ms ease;
-  &:hover {
-    background: var(--color-action-primary-hover);
-    transform: translateY(-1px);
-  }
+@utility gusto-more-link {
+  @apply flex w-max items-center underline underline-offset-4;
 }
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
   html {
-    scroll-behavior: smooth;
+    @apply scroll-smooth;
   }
   body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-family-body);
-    overflow-x: hidden;
+    @apply overflow-x-hidden bg-background font-sans text-foreground;
   }
-  body:has(.gusto-home) {
+  body:has(.gusto-home),
+  body:has(.gusto-menu) {
     background: var(--color-brand-paper) url('/images/cotton01.jpg')
       center/cover fixed;
   }
@@ -656,255 +1188,20 @@
 
 @layer components {
   /* Japanese home page — based on the supplied 1920, 1440, 768 and 393px frames. */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    border: 0;
-    background: none;
-    background-color: transparent;
-    background-image: none;
-    backdrop-filter: none;
-    box-shadow: none;
-  }
-  .site-header-inner {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-inline: auto;
-    max-width: var(--layout-container);
-    padding: 16px var(--layout-page-padding);
-    width: 100%;
-    background: none;
-    background-color: transparent;
-    background-image: none;
-  }
-  .gusto-home {
-    --cream: var(--color-brand-paper);
-    --ink: var(--color-brand-ink);
-    --coral: var(--color-brand-coral);
-    background: var(--cream) url('/images/cotton01.jpg') center/cover fixed;
-    color: var(--ink);
-    font-family: var(--font-family-body);
-    overflow: hidden;
-  }
-  body:has(.gusto-home) .site-header {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 40;
-    height: var(--gusto-header-height-desktop);
-    border: 0;
-    background: none;
-    background-color: transparent;
-    background-image: none;
-    backdrop-filter: none;
-    box-shadow: none;
-  }
-  body:has(.gusto-home) .site-header-inner {
-    height: var(--gusto-header-height-desktop);
-    max-width: none;
-    padding: var(--gusto-header-padding-desktop);
-  }
-  body:has(.gusto-home) header .site-header-logo {
-    display: block;
-    width: var(--gusto-header-logo-width-desktop);
-    height: var(--gusto-header-logo-height-desktop);
-  }
-  body:has(.gusto-home) header .site-header-logo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  body:has(.gusto-home) .site-header-menu-button {
-    color: var(--color-brand-ink);
-  }
-  @media (min-width: 769px) {
-    body:has(.gusto-home) .site-header-inner > nav,
-    body:has(.gusto-home) .site-header-menu-button {
-      display: none;
-    }
-  }
-  .site-header-desktop-nav {
-    display: flex;
-  }
-  .site-header-menu-button {
-    align-items: center;
-    background: none;
-    border: 0;
-    color: inherit;
-    display: none;
-    flex: 0 0 32px;
-    height: 32px;
-    justify-content: center;
-    margin-left: auto;
-    padding: 0;
-    position: relative;
-    z-index: 1;
-    width: 32px;
-  }
-  .site-header-menu-icon {
-    display: block;
-    height: var(--gusto-header-menu-size-sm);
-    position: relative;
-    width: var(--gusto-header-menu-size-sm);
-  }
-  .site-header-menu-icon i {
-    background: var(--color-brand-ink);
-    display: block;
-    height: 3px;
-    left: 5px;
-    opacity: 1;
-    position: absolute;
-    width: var(--gusto-header-menu-line-width-sm);
-  }
-  .site-header-menu-icon i:nth-child(1) {
-    top: 8px;
-  }
-  .site-header-menu-icon i:nth-child(2) {
-    top: 16px;
-  }
-  .site-header-menu-icon i:nth-child(3) {
-    top: 24px;
-  }
-  .site-header-mobile-nav {
-    display: none;
-  }
-  @media (max-width: 767px) {
-    .site-header-desktop-nav {
-      display: none;
-    }
-  }
-  @media (max-width: 767px) {
-    .site-header-menu-button {
-      display: flex;
-    }
-    .site-header-mobile-nav {
-      background: var(--color-brand-ink);
-      color: var(--color-brand-warm-light);
-      display: flex;
-      flex-direction: column;
-      inset: 0;
-      min-height: 100dvh;
-      overflow-y: auto;
-      position: fixed;
-      will-change: opacity, transform;
-      z-index: 50;
-    }
-    .site-header-mobile-header {
-      align-items: center;
-      display: flex;
-      flex: 0 0 120px;
-      justify-content: center;
-      padding: 8px 24px;
-      position: relative;
-      width: 100%;
-    }
-    .site-header-mobile-logo {
-      display: block;
-      height: 91.023888px;
-      left: 50%;
-      position: absolute;
-      top: 20.976112px;
-      transform: translateX(-50%);
-      width: 210px;
-    }
-    .site-header-mobile-logo img {
-      display: block;
-      height: 100%;
-      width: 100%;
-    }
-    .site-header-mobile-close {
-      align-items: center;
-      background: transparent;
-      border: 0;
-      color: var(--color-brand-warm-light);
-      display: flex;
-      height: 32px;
-      justify-content: center;
-      padding: 0;
-      position: absolute;
-      right: 16px;
-      top: 44px;
-      width: 32px;
-    }
-    .site-header-mobile-close-icon {
-      display: block;
-      height: 32px;
-      position: relative;
-      width: 32px;
-    }
-    .site-header-mobile-close-icon i {
-      background: currentColor;
-      display: block;
-      height: 3px;
-      left: 7px;
-      position: absolute;
-      top: 14.5px;
-      width: 18px;
-    }
-    .site-header-mobile-close-icon i:nth-child(2) {
-      display: none;
-    }
-    .site-header-mobile-close-icon i:first-child {
-      transform: rotate(45deg);
-    }
-    .site-header-mobile-close-icon i:last-child {
-      transform: rotate(-45deg);
-    }
-    .site-header-mobile-links {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: 84px;
-      padding: 100px 24px;
-      width: 100%;
-    }
-    .site-header-mobile-link-list {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-    }
-    .site-header-mobile-link-list a {
-      color: inherit;
-      font-family: var(--font-kalam), var(--font-noto-sans-jp), sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 45px;
-      text-decoration: none;
-    }
-    .site-header-mobile-reservation {
-      align-items: center;
-      background: var(--color-brand-coral);
-      color: var(--color-brand-warm-light);
-      display: flex;
-      font-family: var(--font-kalam), var(--font-noto-sans-jp), sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      height: 54px;
-      justify-content: center;
-      line-height: 38px;
-      max-width: 360px;
-      padding: 8px 16px;
-      text-decoration: none;
-      width: 100%;
-    }
-  }
   .gusto-home h1,
   .gusto-home h2,
   .gusto-home h3,
+  /* unused */
   .gusto-kicker {
-    font-family: var(--font-kirigirisu), var(--font-noto-sans-jp), sans-serif;
+    @apply font-display;
   }
   .gusto-home p {
-    line-height: 1.8;
+    @apply leading-[1.8];
   }
   .gusto-hero {
     height: min(66.458vw, 1276px);
     min-height: 900px;
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
+    @apply relative isolate overflow-hidden;
     padding: 205px max(8vw, calc((100vw - 1440px) / 2));
   }
   .gusto-dark::before,
@@ -938,33 +1235,28 @@
     z-index: 3;
   }
   .gusto-hero-brush {
-    position: absolute;
-    z-index: 3;
+    @apply absolute z-[3] block pointer-events-none;
     inset: auto 0 -1px !important;
-    display: block;
     width: 100% !important;
     height: auto !important;
     max-width: none !important;
-    pointer-events: none;
   }
   .gusto-hero-copy {
-    position: relative;
-    z-index: 2;
+    @apply relative z-[2];
     max-width: 596px;
   }
   .gusto-hero h1 {
-    white-space: pre-line;
+    @apply whitespace-pre-line font-normal;
     color: var(--coral);
     font-size: clamp(4.5rem, 5.21vw, 100px);
     line-height: 108px;
     letter-spacing: -0.3em;
-    font-weight: 400;
   }
   .gusto-hero-title-line {
-    display: block;
+    @apply block;
   }
   .gusto-hero-nav {
-    display: grid;
+    @apply grid;
     gap: 18px;
     margin-top: 68px;
     font-family: var(--font-kalam), var(--font-noto-sans-jp), sans-serif;
@@ -973,20 +1265,18 @@
     font-weight: 700;
   }
   .gusto-hero-nav a {
-    width: max-content;
+    @apply w-max no-underline;
     color: var(--ink);
-    text-decoration: none;
   }
   .gusto-hero-dishes {
-    z-index: 1;
+    @apply z-[1];
     left: 32.8125% !important;
     width: 68% !important;
     height: 92% !important;
     top: 0 !important;
   }
   .gusto-hero-veg {
-    position: absolute;
-    z-index: 2;
+    @apply absolute z-[2];
     width: 360px;
     height: auto;
     left: 24.0625%;
@@ -994,11 +1284,10 @@
     opacity: 0.7;
   }
   .gusto-home .gusto-vertical {
-    position: absolute;
+    @apply absolute whitespace-nowrap font-display;
     left: 90px;
     top: 304.5px;
     color: var(--color-brand-orange);
-    font-family: var(--font-kirigirisu), var(--font-noto-sans-jp), sans-serif;
     font-weight: 400;
     font-size: 86px;
     line-height: 90px;
@@ -1006,23 +1295,16 @@
     text-shadow: var(--shadow-hero-title);
     transform: rotate(90deg);
     transform-origin: top left;
-    white-space: nowrap;
   }
   .gusto-hero-caret {
-    align-items: center;
+    @apply absolute z-[4] flex items-center justify-center rounded-full no-underline;
     border: 5px solid var(--coral);
-    border-radius: 50%;
     color: var(--coral);
-    display: flex;
     font: 400 46px/1 var(--font-kirigirisu);
     height: 74px;
-    justify-content: center;
-    position: absolute;
     right: 72px;
-    text-decoration: none;
     top: 1026px;
     width: 74px;
-    z-index: 4;
   }
   @media (min-width: 1200px) and (max-width: 1599px) {
     .gusto-hero {
@@ -1073,7 +1355,7 @@
     }
   }
   .gusto-dark {
-    position: relative;
+    @apply relative;
     background: var(--ink);
     color: var(--cream);
   }
@@ -1081,30 +1363,25 @@
     height: min(61.77vw, 1186px);
     min-height: 0;
     padding: min(6.25vw, 120px) 0 0;
-    display: flex;
-    justify-content: center;
+    @apply flex items-start justify-center;
     gap: min(1.25vw, 24px);
-    align-items: start;
   }
   .gusto-about-brush {
-    display: none;
+    @apply hidden;
   }
   .gusto-about-left {
-    position: relative;
+    @apply relative;
     width: min(30.47vw, 585px);
     height: min(39.48vw, 758px);
   }
   .gusto-about-copy {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+    @apply relative z-[2] flex flex-col;
     gap: min(2.5vw, 48px);
     width: 100%;
   }
   .gusto-about-title {
     --gusto-about-title-width: 100%;
-    position: relative;
+    @apply relative;
     width: var(--gusto-about-title-width);
     height: min(4.375vw, 84px);
   }
@@ -1122,9 +1399,9 @@
     content: '';
   }
   .gusto-about-title h2 {
+    @apply font-normal;
     color: var(--coral);
     font-size: clamp(2.5rem, 4.167vw, 5rem);
-    font-weight: 400;
     letter-spacing: -0.25em;
     line-height: 1;
   }
@@ -1141,19 +1418,15 @@
     margin-top: 0;
   }
   .gusto-about-more {
-    display: flex;
-    align-items: center;
+    @apply gusto-more-link;
     gap: min(1.667vw, 32px);
-    width: max-content;
     color: var(--color-brand-warm-light);
     font-family: var(--font-yamafont), var(--font-noto-sans-jp), sans-serif;
     font-size: clamp(0.75rem, 1.25vw, 1.5rem);
     line-height: 1.375;
-    text-decoration: underline;
-    text-underline-offset: 4px;
   }
   .gusto-about-more svg {
-    flex: none;
+    @apply shrink-0;
     width: clamp(3.5rem, 5.8vw, 6.96rem);
     height: auto;
     overflow: visible;
@@ -1161,22 +1434,23 @@
     stroke: currentColor;
     stroke-width: 1;
   }
+  /* unused */
   .gusto-copy {
+    @apply relative z-[2];
     max-width: 440px;
-    position: relative;
-    z-index: 2;
   }
+  /* unused */
   .gusto-kicker {
+    @apply mb-2 font-extrabold;
     color: var(--coral);
     font-size: clamp(1.3rem, 2.2vw, 2.25rem);
-    font-weight: 800;
-    margin-bottom: 0.5rem;
   }
+  /* unused */
   .gusto-copy h2 {
+    @apply mb-[1.6rem] font-extrabold;
     font-size: clamp(1.3rem, 2vw, 2rem);
-    font-weight: 800;
-    margin-bottom: 1.6rem;
   }
+  /* unused */
   .gusto-copy p,
   .gusto-feature-copy p {
     font-size: clamp(0.72rem, 1.05vw, 1rem);
@@ -2306,7 +2580,7 @@
   }
   .gusto-footer {
     --footer-ink: var(--color-brand-ink);
-    --footer-coral: var(--color-brand-coral);
+    --footer-coral: var(--color-brand-coral); /* unused */
     --footer-brush-height: min(1.8535vw, 35.588px);
     position: relative;
     overflow: hidden;
@@ -2653,24 +2927,6 @@
   }
 
   @media (max-width: 768px) {
-    body:has(.gusto-home) .site-header {
-      height: var(--gusto-header-height-sm);
-      padding: var(--gusto-header-padding-sm);
-    }
-    body:has(.gusto-home) .site-header-inner {
-      height: var(--gusto-header-inner-height-sm);
-      padding: var(--gusto-header-inner-padding-sm);
-    }
-    body:has(.gusto-home) header .site-header-logo {
-      height: var(--gusto-header-logo-height-sm);
-      position: relative;
-      top: -1px;
-      width: var(--gusto-header-logo-width-sm);
-    }
-    body:has(.gusto-home) header .site-header-logo img {
-      height: var(--gusto-header-logo-height-sm);
-      width: var(--gusto-header-logo-width-sm);
-    }
     .gusto-hero {
       height: auto;
       min-height: 470px;
@@ -2971,9 +3227,6 @@
     }
   }
   @media (min-width: 481px) and (max-width: 768px) {
-    body:has(.gusto-home) .site-header {
-      position: relative;
-    }
     .gusto-hero {
       height: var(--gusto-hero-768-height);
       min-height: var(--gusto-hero-768-height);
@@ -3747,76 +4000,6 @@
     }
   }
   @media (max-width: 480px) {
-    body:has(.gusto-home) .site-header {
-      height: var(--gusto-header-height-xs);
-      padding: var(--gusto-header-padding-xs);
-      position: relative;
-    }
-    body:has(.gusto-home) .site-header-inner {
-      height: var(--gusto-header-inner-height-xs);
-      padding: var(--gusto-header-inner-padding-xs);
-    }
-    body:has(.gusto-home) header .site-header-logo {
-      height: var(--gusto-header-logo-height-xs);
-      top: 0;
-      width: var(--gusto-header-logo-width-xs);
-    }
-    body:has(.gusto-home) header .site-header-logo img {
-      height: var(--gusto-header-logo-height-xs);
-      width: var(--gusto-header-logo-width-xs);
-    }
-    body:has(.gusto-home) .site-header-menu-button {
-      margin-right: var(--gusto-header-menu-inline-offset-xs);
-    }
-    .site-header-mobile-nav {
-      inset: 0;
-    }
-    .site-header-mobile-header {
-      flex-basis: var(--gusto-menu-header-height-xs);
-      height: var(--gusto-menu-header-height-xs);
-      justify-content: flex-start;
-      padding: 4px 0;
-    }
-    .site-header-mobile-logo {
-      height: var(--gusto-header-logo-height-xs);
-      left: 16px;
-      top: 12px;
-      transform: none;
-      width: var(--gusto-header-logo-width-xs);
-    }
-    .site-header-mobile-close {
-      right: 8px;
-      top: 26px;
-    }
-    .site-header-mobile-close-icon i {
-      left: 5px;
-      transform: none !important;
-      width: var(--gusto-header-menu-line-width-sm);
-    }
-    .site-header-mobile-close-icon i:nth-child(1) {
-      top: 8px;
-    }
-    .site-header-mobile-close-icon i:nth-child(2) {
-      display: block;
-      top: 16px;
-    }
-    .site-header-mobile-close-icon i:nth-child(3) {
-      top: 24px;
-    }
-    .site-header-mobile-links {
-      flex: 0 0 var(--gusto-menu-panel-height-xs);
-      gap: var(--gusto-menu-reservation-gap-xs);
-      height: var(--gusto-menu-panel-height-xs);
-      padding: var(--gusto-menu-links-top-xs) 16px 100px;
-    }
-    .site-header-mobile-link-list {
-      gap: var(--gusto-menu-link-gap-xs);
-      width: var(--gusto-menu-list-width-xs);
-    }
-    .site-header-mobile-reservation {
-      flex: 0 0 54px;
-      width: var(--gusto-menu-reservation-width-xs);
-    }
     .gusto-hero {
       height: var(--gusto-hero-393-height);
       min-height: var(--gusto-hero-393-height);
@@ -3870,14 +4053,17 @@
       padding: 3.8rem 9% 5rem;
       min-height: 0;
     }
+    /* unused */
     .gusto-copy p,
     .gusto-feature-copy p {
       font-size: 0.62rem;
       line-height: 1.75;
     }
+    /* unused */
     .gusto-kicker {
       font-size: 1.05rem;
     }
+    /* unused */
     .gusto-copy h2 {
       font-size: 0.95rem;
       margin-bottom: 0.75rem;

@@ -11,7 +11,11 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
             <span className='gusto-hero-title-line' key={lineIndex}>
               {line.map((segment, segmentIndex) => (
                 <span
-                  className={'emphasis' in segment && segment.emphasis ? 'gusto-hero-title-emphasis' : undefined}
+                  className={
+                    'emphasis' in segment && segment.emphasis
+                      ? 'gusto-hero-title-emphasis'
+                      : undefined
+                  }
                   key={`${lineIndex}-${segmentIndex}`}
                 >
                   {segment.text}
@@ -28,12 +32,36 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
           <a href='#reservation'>{copy.home.heroNav.reservation}</a>
         </nav>
       </div>
-      <Image src='/images/dishes.png' alt={copy.home.heroDishesAlt} fill priority sizes='(max-width: 768px) 90vw, 65vw' className='gusto-hero-dishes object-contain object-right-top' />
-      <Image src='/images/four-veggies.png' alt='' width={360} height={246} className='gusto-hero-veg' />
-      <a className='gusto-hero-caret' href='#about' aria-label={copy.home.heroScrollLabel}>
+      <Image
+        src='/images/dishes.png'
+        alt={copy.home.heroDishesAlt}
+        fill
+        priority
+        sizes='(max-width: 768px) 90vw, 65vw'
+        className='gusto-hero-dishes object-contain object-right-top'
+      />
+      <Image
+        src='/images/four-veggies.png'
+        alt=''
+        width={360}
+        height={246}
+        className='gusto-hero-veg'
+      />
+      <a
+        className='gusto-hero-caret'
+        href='#about'
+        aria-label={copy.home.heroScrollLabel}
+      >
         <span aria-hidden='true'>↑</span>
       </a>
-      <Image src='/images/b-1.png' alt='' width={3841} height={284} sizes='100vw' className='gusto-hero-brush' />
+      <Image
+        src='/images/b-1.png'
+        alt=''
+        width={3841}
+        height={284}
+        sizes='100vw'
+        className='gusto-hero-brush'
+      />
     </section>
   );
 }
