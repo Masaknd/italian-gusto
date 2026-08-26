@@ -704,38 +704,63 @@
 }
 
 .gusto-menu__title {
+  display: inline-flex;
+  width: 385px;
+  height: 88px;
   margin: 0;
+  align-items: flex-end;
+  box-sizing: border-box;
+  border-bottom: 3px dashed var(--color-brand-coral);
   color: var(--color-brand-coral);
   font-family: var(--font-family-display);
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 1.375;
-  letter-spacing: -0.04em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.gusto-menu__title-prefix {
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: -0.3em;
+}
+
+.gusto-menu__title-main {
+  font-size: 80px;
+  line-height: 96px;
+  letter-spacing: -0.25em;
 }
 
 .gusto-menu__category-nav {
   display: flex;
   width: 100%;
-  min-height: 60px;
-  align-items: flex-start;
-  border-bottom: 2px dashed var(--color-brand-coral);
+  height: 60px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.gusto-menu__category-item {
+  display: contents;
 }
 
 .gusto-menu__category-nav a {
   display: inline-flex;
+  height: 60px;
   align-items: center;
   color: var(--color-brand-coral);
   font-family: var(--font-family-display);
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.25;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 72px;
+  letter-spacing: -0.25em;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.gusto-menu__category-nav a + a {
-  border-left: 2px dotted var(--color-brand-coral);
-  padding-left: 12px;
-  margin-left: 12px;
+.gusto-menu__category-divider {
+  width: 0;
+  height: 50px;
+  flex: none;
+  align-self: center;
+  border-left: 2px dashed var(--color-brand-coral);
 }
 
 .gusto-menu__category-nav a.is-current {
@@ -758,15 +783,18 @@
 }
 
 .gusto-menu__category-title {
+  display: flex;
   width: fit-content;
+  height: 64px;
   margin: 0;
+  align-items: center;
   border-bottom: 2px dashed var(--color-brand-coral);
   color: var(--color-brand-coral);
   font-family: var(--font-family-display);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 64px;
+  letter-spacing: -0.25em;
 }
 
 .gusto-menu__grid {
@@ -778,6 +806,7 @@
 
 .gusto-menu-card {
   display: flex;
+  height: 642.25px;
   min-width: 0;
   flex-direction: column;
   align-items: flex-start;
@@ -790,7 +819,9 @@
 .gusto-menu-card__image {
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  flex: none;
+  aspect-ratio: 414 / 412.25;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 25%);
 }
 
 .gusto-menu-card__image img {
@@ -799,6 +830,9 @@
 
 .gusto-menu-card__copy {
   display: flex;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
   gap: 8px;
 }
@@ -806,44 +840,52 @@
 .gusto-menu-card__copy h3 {
   margin: 0;
   color: var(--color-brand-coral);
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.25;
+  font-family: var(--font-family-display);
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: -0.25em;
 }
 
 .gusto-menu-card__copy p {
   margin: 0;
   color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.45;
+  font-family: var(--font-family-accent);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.36;
   white-space: pre-line;
 }
 
 .gusto-menu-card__price {
   display: flex;
+  width: 100%;
+  min-height: 60px;
   margin: auto 0 0;
   align-items: baseline;
+  justify-content: flex-end;
   color: #000;
-  font-weight: 800;
+  font-family: var(--font-family-accent);
+  font-weight: 400;
   line-height: 1;
 }
 
 .gusto-menu-card__price-excluding {
-  font-size: 24px;
+  font-size: 42px;
 }
 
 .gusto-menu-card__price-including {
   margin-left: 3px;
-  font-size: 28px;
+  font-size: 42px;
 }
 
 .gusto-menu-card__price small {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .gusto-menu__grid--drinks .gusto-menu-card {
+  height: auto;
   min-height: auto;
   flex-direction: row;
   align-items: baseline;
@@ -865,7 +907,7 @@
 
 .gusto-menu__marquee {
   position: absolute;
-  top: 188px;
+  top: 46px;
   left: 0;
   display: flex;
   width: 90px;
@@ -875,18 +917,19 @@
   overflow: hidden;
   color: var(--color-brand-orange);
   font-family: var(--font-family-display);
-  font-size: 54px;
-  font-weight: 700;
-  line-height: 1;
+  font-size: 86px;
+  font-weight: 400;
+  line-height: 90px;
+  letter-spacing: -0.25em;
   text-orientation: upright;
   writing-mode: vertical-rl;
 }
 
 .gusto-menu__line-art {
   position: absolute;
-  top: 1560px;
-  right: -72px;
-  width: 287px;
+  top: 46px;
+  right: 1.999px;
+  width: 287.08px;
   height: 297px;
   pointer-events: none;
 }
@@ -918,16 +961,33 @@
     padding-inline: 96px;
   }
 
-  .gusto-menu__title {
-    line-height: 1.375;
-  }
-
   .gusto-menu__category-nav {
-    min-height: 52px;
+    height: 52px;
   }
 
   .gusto-menu__category-nav a {
-    font-size: 20px;
+    height: 52px;
+    font-size: 48px;
+    line-height: 58px;
+  }
+
+  .gusto-menu__category-divider {
+    height: 42px;
+  }
+
+  .gusto-menu-card {
+    height: 604.51px;
+  }
+
+  .gusto-menu-card__copy h3 {
+    font-size: 36px;
+    line-height: 43px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .gusto-menu__grid {
+    width: calc(100% - 6px);
   }
 }
 
@@ -937,28 +997,89 @@
   }
 
   .gusto-menu__title {
-    font-size: 48px;
-    line-height: 1.25;
+    width: 261px;
+    height: 60px;
+  }
+
+  .gusto-menu__title-prefix {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .gusto-menu__title-main {
+    font-size: 52px;
+    line-height: 62px;
   }
 
   .gusto-menu__category-nav {
-    min-height: 32px;
+    display: grid;
+    height: auto;
+    min-height: 80px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .gusto-menu__category-item {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gusto-menu__category-item:not(:nth-child(3n + 1)) {
+    border-left: 2px dashed var(--color-brand-coral);
   }
 
   .gusto-menu__category-nav a {
-    font-size: 14px;
+    height: 36px;
+    justify-content: center;
+    font-size: 32px;
+    line-height: 38px;
   }
 
-  .gusto-menu__category-nav a + a {
-    margin-left: 7px;
-    padding-left: 7px;
+  .gusto-menu__category-divider {
+    display: none;
   }
 
   .gusto-menu__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .gusto-menu__marquee {
+  .gusto-menu__category-title {
+    height: 52px;
+    font-size: 40px;
+    line-height: 52px;
+  }
+
+  .gusto-menu-card {
+    height: 486.73px;
+  }
+
+  .gusto-menu-card__copy h3 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .gusto-menu-card__copy p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .gusto-menu-card__price {
+    min-height: 32px;
+  }
+
+  .gusto-menu-card__price-excluding {
+    font-size: 24px;
+  }
+
+  .gusto-menu-card__price-including {
+    font-size: 28px;
+  }
+
+  .gusto-menu__marquee,
+  .gusto-menu__line-art {
     display: none;
   }
 }
@@ -970,20 +1091,34 @@
   }
 
   .gusto-menu__title {
-    font-size: 32px;
-    line-height: 1.25;
+    width: 203px;
+    height: 40px;
+  }
+
+  .gusto-menu__title-prefix {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .gusto-menu__title-main {
+    font-size: 40px;
+    line-height: 48px;
   }
 
   .gusto-menu__category-nav {
     min-height: 72px;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    border-bottom: 0;
+    align-content: center;
     row-gap: 8px;
   }
 
   .gusto-menu__category-nav a {
     height: 32px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .gusto-menu__category-nav a.is-wide {
+    transform: scaleX(0.82);
   }
 
   .gusto-menu__groups {
@@ -991,7 +1126,9 @@
   }
 
   .gusto-menu__category-title {
-    font-size: 24px;
+    height: 24.12px;
+    font-size: 20.1px;
+    line-height: 24.12px;
   }
 
   .gusto-menu__grid {
@@ -999,20 +1136,12 @@
   }
 
   .gusto-menu-card__copy h3 {
-    font-size: 18px;
+    font-size: 28px;
+    line-height: 34px;
   }
 
-  .gusto-menu-card__price-excluding {
-    font-size: 22px;
-  }
-
-  .gusto-menu-card__price-including {
-    font-size: 26px;
-  }
-
-  .gusto-menu__line-art {
-    top: 1631px;
-    right: -66px;
+  .gusto-menu-card {
+    height: 504.91px;
   }
 }
 

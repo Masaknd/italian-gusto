@@ -17,13 +17,20 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
     <>
       <nav className="gusto-menu__category-nav" aria-label={copy.menu.categoryNavigation}>
         {groups.map(([category], index) => (
-          <a
-            key={category}
-            href={`#menu-category-${index + 1}`}
-            className={index === 0 ? 'is-current' : undefined}
-          >
-            {category}
-          </a>
+          <span className="gusto-menu__category-item" key={category}>
+            {index > 0 && (
+              <span className="gusto-menu__category-divider" aria-hidden="true" />
+            )}
+            <a
+              href={`#menu-category-${index + 1}`}
+              className={[
+                index === 0 ? 'is-current' : '',
+                category.length > 7 ? 'is-wide' : '',
+              ].filter(Boolean).join(' ') || undefined}
+            >
+              {category}
+            </a>
+          </span>
         ))}
       </nav>
 
