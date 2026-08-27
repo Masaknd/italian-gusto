@@ -12,6 +12,8 @@
   --breakpoint-sm: 30.0625rem; /* 481px */
   --breakpoint-md: 48.00125rem; /* 768.02px */
   --breakpoint-lg: 56.25rem; /* 900px */
+  --breakpoint-desktop: 63.99875rem; /* 1023.98px */
+  --breakpoint-wide: 68.75rem; /* 1100px */
   --breakpoint-xl: 75rem; /* 1200px */
   --breakpoint-2xl: 100rem; /* 1600px */
   --breakpoint-3xl: 120rem; /* 1920px */
@@ -160,8 +162,8 @@
   --text-body-sm--line-height: var(--type-body-sm-line-height);
   --text-body-sm--letter-spacing: var(--type-body-tracking);
 
-  /* Spacing — Mode 3. The token namespace avoids collisions with Tailwind
-   * keywords such as max-w-none: p-token-xs, gap-token-sm, mt-token-md. */
+  /* Spacing — Mode 3. Keep these in a token namespace so values such as
+   * `none` cannot override Tailwind keyword utilities like max-w-none. */
   --spacing-token-none: 0px;
   --spacing-token-4xs: 2px;
   --spacing-token-3xs: 4px;
@@ -297,7 +299,6 @@
   --opacity-30: 0.3;
   --opacity-50: 0.5;
   --opacity-100: 1;
-  --border-width-none: 0px;
   --border-width-sm: 0.5px;
   --border-width-md: 1px;
   --border-width-lg: 2px;
@@ -309,7 +310,7 @@
   --layout-padding-title: 16px;
   --layout-padding-body: 16px;
   --layout-padding-body-wide: 16px;
-  --layout-page-padding: var(--layout-padding-body); /* delete later*/
+  --layout-page-padding: var(--layout-padding-body);
 }
 
 /* Semantic colors — dark */
@@ -412,10 +413,6 @@
   background-attachment: fixed;
   color: var(--color-brand-ink);
   font-family: var(--font-family-body);
-}
-
-@utility footer-brush {
-  --footer-brush-height: min(1.8535vw, 35.588px);
 }
 
 @utility text-default {
@@ -657,18 +654,6 @@
 @utility layout-container {
   width: min(100%, var(--layout-container));
   margin-inline: auto;
-}
-@utility layout-title {
-  padding-inline: var(--layout-padding-title);
-}
-@utility layout-body {
-  padding-inline: var(--layout-padding-body);
-}
-@utility layout-body-wide {
-  padding-inline: var(--layout-padding-body-wide);
-}
-@utility border-width-none {
-  border-width: var(--border-width-none);
 }
 @utility border-hairline {
   border-width: var(--border-width-sm);

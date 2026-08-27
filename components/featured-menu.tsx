@@ -1,46 +1,143 @@
-"use client";
-import Image from "next/image";
-import { animate, motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
-import type { FeaturedMenu } from "@/lib/microcms/types";
-import type { getDictionary } from "@/locales";
+'use client';
+import Image from 'next/image';
+import { animate, motion, useReducedMotion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import type { FeaturedMenu } from '@/lib/microcms/types';
+import type { getDictionary } from '@/locales';
 type Copy = ReturnType<typeof getDictionary>;
-export function FeaturedMenuCarousel({ items, copy }: {
-    items: FeaturedMenu[];
-    copy: Copy;
+export function FeaturedMenuCarousel({
+  items,
+  copy,
+}: {
+  items: FeaturedMenu[];
+  copy: Copy;
 }) {
-    const scroller = useRef<HTMLDivElement>(null);
-    const [active, setActive] = useState(0);
-    const reduced = useReducedMotion();
-    const move = (index: number) => { const next = Math.max(0, Math.min(index, items.length - 1)); const element = scroller.current?.children[next] as HTMLElement | undefined; element?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest", inline: "start" }); setActive(next); };
-    useEffect(() => {
-        const node = scroller.current;
-        if (!node)
-            return;
-        const onScroll = () => { const width = node.clientWidth; setActive(Math.round(node.scrollLeft / width)); };
-        node.addEventListener("scroll", onScroll, { passive: true });
-        return () => node.removeEventListener("scroll", onScroll);
-    }, []);
-    if (!items.length)
-        return null;
-    return <section aria-labelledby="featured-heading" className="overflow-hidden py-16 md:py-24"><div className="mx-auto mb-6 flex w-[min(100%,var(--layout-container))] items-end justify-between px-[var(--layout-page-padding)]"><div><p className="font-label text-body-sm leading-[1.2] font-bold tracking-[0.25em] text-coral uppercase">Featured</p><h2 id="featured-heading" className="mt-2 font-display text-3xl tracking-[var(--tracking-title)]">{copy.featured.title} {active + 1}</h2></div><p aria-live="polite" className="text-body-sm text-muted">{copy.featured.position.replace("{current}", String(active + 1)).replace("{total}", String(items.length))}</p></div><div ref={scroller} onWheel={(event) => {
-            const node = scroller.current;
-            if (!node || Math.abs(event.deltaY) <= Math.abs(event.deltaX))
-                return;
-            const atStart = node.scrollLeft <= 0;
-            const atEnd = node.scrollLeft + node.clientWidth >= node.scrollWidth - 1;
-            if ((event.deltaY < 0 && !atStart) || (event.deltaY > 0 && !atEnd)) {
-                event.preventDefault();
-                animate(node.scrollLeft, node.scrollLeft + event.deltaY, { duration: reduced ? 0 : .25, onUpdate: (value) => { node.scrollLeft = value; } });
-            }
-        }} onKeyDown={(event) => {
-            if (event.key === "ArrowRight") {
-                event.preventDefault();
-                move(active + 1);
-            }
-            if (event.key === "ArrowLeft") {
-                event.preventDefault();
-                move(active - 1);
-            }
-        }} tabIndex={0} aria-label={copy.featured.title} className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-[var(--layout-page-padding)] pb-4 [scrollbar-width:thin]">{items.map((item, index) => <motion.article key={item.id} initial={reduced ? false : { opacity: 0 }} animate={{ opacity: index === active ? 1 : .72 }} transition={{ duration: .35 }} className="w-[calc(100vw-(var(--layout-page-padding)*2))] shrink-0 snap-start overflow-hidden rounded-card bg-ink text-content shadow-card sm:w-[min(82vw,57.5rem)]"><div className="relative aspect-[16/9]"><Image src={item.image.url} alt={item.image.alt ?? item.name} fill sizes="(max-width: 640px) 100vw, 920px" className="object-cover" priority={index === 0}/></div><div className="p-6"><h3 className="font-display text-3xl tracking-[var(--tracking-title)]">{item.name}</h3>{item.description && <p className="mt-3 max-w-2xl leading-7 text-content/85">{item.description}</p>}</div></motion.article>)}</div><div className="mx-auto mt-3 flex w-[min(100%,var(--layout-container))] justify-end gap-3 px-[var(--layout-page-padding)]"><button onClick={() => move(active - 1)} disabled={active === 0} className="inline-flex size-11 items-center justify-center rounded-full border border-line transition-colors hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-40">← <span className="sr-only">{copy.featured.previous}</span></button><button onClick={() => move(active + 1)} disabled={active === items.length - 1} className="inline-flex size-11 items-center justify-center rounded-full border border-line transition-colors hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-40">→ <span className="sr-only">{copy.featured.next}</span></button></div></section>;
+  const scroller = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const reduced = useReducedMotion();
+  const move = (index: number) => {
+    const next = Math.max(0, Math.min(index, items.length - 1));
+    const element = scroller.current?.children[next] as HTMLElement | undefined;
+    element?.scrollIntoView({
+      behavior: reduced ? 'auto' : 'smooth',
+      block: 'nearest',
+      inline: 'start',
+    });
+    setActive(next);
+  };
+  useEffect(() => {
+    const node = scroller.current;
+    if (!node) return;
+    const onScroll = () => {
+      const width = node.clientWidth;
+      setActive(Math.round(node.scrollLeft / width));
+    };
+    node.addEventListener('scroll', onScroll, { passive: true });
+    return () => node.removeEventListener('scroll', onScroll);
+  }, []);
+  if (!items.length) return null;
+  return (
+    <section
+      aria-labelledby='featured-heading'
+      className='overflow-hidden py-16 md:py-24'
+    >
+      <div className='mx-auto mb-6 flex w-[min(100%,var(--layout-container))] items-end justify-between px-8'>
+        <div>
+          <p className='font-label text-body-sm leading-[1.2] font-bold tracking-[0.25em] text-coral uppercase'>
+            Featured
+          </p>
+          <h2
+            id='featured-heading'
+            className='mt-2 font-display text-3xl tracking-[var(--tracking-title)]'
+          >
+            {copy.featured.title} {active + 1}
+          </h2>
+        </div>
+        <p aria-live='polite' className='text-body-sm text-muted'>
+          {copy.featured.position
+            .replace('{current}', String(active + 1))
+            .replace('{total}', String(items.length))}
+        </p>
+      </div>
+      <div
+        ref={scroller}
+        onWheel={(event) => {
+          const node = scroller.current;
+          if (!node || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+          const atStart = node.scrollLeft <= 0;
+          const atEnd =
+            node.scrollLeft + node.clientWidth >= node.scrollWidth - 1;
+          if ((event.deltaY < 0 && !atStart) || (event.deltaY > 0 && !atEnd)) {
+            event.preventDefault();
+            animate(node.scrollLeft, node.scrollLeft + event.deltaY, {
+              duration: reduced ? 0 : 0.25,
+              onUpdate: (value) => {
+                node.scrollLeft = value;
+              },
+            });
+          }
+        }}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            move(active + 1);
+          }
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            move(active - 1);
+          }
+        }}
+        tabIndex={0}
+        aria-label={copy.featured.title}
+        className='flex snap-x snap-mandatory gap-5 overflow-x-auto px-8 pb-4 [scrollbar-width:thin]'
+      >
+        {items.map((item, index) => (
+          <motion.article
+            key={item.id}
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: index === active ? 1 : 0.72 }}
+            transition={{ duration: 0.35 }}
+            className='w-full shrink-0 snap-start overflow-hidden rounded-card bg-ink text-content shadow-card sm:w-[min(82vw,57.5rem)]'
+          >
+            <div className='relative aspect-[16/9]'>
+              <Image
+                src={item.image.url}
+                alt={item.image.alt ?? item.name}
+                fill
+                sizes='(max-width: 640px) 100vw, 920px'
+                className='object-cover'
+                priority={index === 0}
+              />
+            </div>
+            <div className='p-6'>
+              <h3 className='font-display text-3xl tracking-[var(--tracking-title)]'>
+                {item.name}
+              </h3>
+              {item.description && (
+                <p className='mt-3 max-w-2xl leading-7 text-content/85'>
+                  {item.description}
+                </p>
+              )}
+            </div>
+          </motion.article>
+        ))}
+      </div>
+      <div className='mx-auto mt-3 flex w-[min(100%,var(--layout-container))] justify-end gap-3 px-8'>
+        <button
+          onClick={() => move(active - 1)}
+          disabled={active === 0}
+          className='inline-flex size-11 items-center justify-center rounded-full border border-line transition-colors hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-40'
+        >
+          ← <span className='sr-only'>{copy.featured.previous}</span>
+        </button>
+        <button
+          onClick={() => move(active + 1)}
+          disabled={active === items.length - 1}
+          className='inline-flex size-11 items-center justify-center rounded-full border border-line transition-colors hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-40'
+        >
+          → <span className='sr-only'>{copy.featured.next}</span>
+        </button>
+      </div>
+    </section>
+  );
 }

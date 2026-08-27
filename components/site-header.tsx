@@ -113,7 +113,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           className={[
             'block',
             usesGustoHeader
-              ? 'h-[100px] w-[230.708664px] max-md:relative max-md:top-[-1px] max-md:h-[90px] max-md:w-[207.637802px] xs:top-0 xs:h-[60px] xs:w-[138.425201px]'
+              ? 'h-25 w-[230.708664px] max-md:relative max-md:-top-px max-md:h-[90px] max-md:w-[207.637802px] xs:top-0 xs:h-15 xs:w-[138.425201px]'
               : 'h-auto w-40',
           ].join(' ')}
           onClick={() => setOpen(false)}
@@ -233,11 +233,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             >
               <div className='site-header-mobile-link-list flex flex-col items-center gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-[45px] [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline xs:w-[118px] xs:gap-7'>
                 {mobileNav.map(([label, href]) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={() => setOpen(false)}
-                  >
+                  <Link key={href} href={href} onClick={() => setOpen(false)}>
                     {label}
                   </Link>
                 ))}
