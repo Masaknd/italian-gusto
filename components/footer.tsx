@@ -32,14 +32,14 @@ export function HomeFooter({
         width={3849}
         height={72}
         sizes='100vw'
-        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none rotate-180 xl:h-7 sm:h-4 xs:h-2 -translate-y-px'
+        className='gusto-footer-brush block w-full max-w-none rotate-180 xl:h-7 sm:h-4 xs:h-2 -translate-y-px'
       />
       <div className='gusto-footer-content relative bg-ink'>
-        <div className='gusto-footer-upper flex  items-center justify-center p-[calc(32px_+_var(--footer-brush-height))_var(--layout-page-padding)_32px]  xl:p-[calc(var(--footer-brush-height)_+_32px)_96px_32px] lg:p-[calc(32px_+_var(--footer-brush-height))_24px_32px]  sm:p-[calc(var(--footer-brush-height)_+_32px)_0_32px]  xs:p-[32px_0]'>
-          <div className='gusto-footer-upper-inner flex h-[133px] w-full items-center justify-between xl:h-[133px] xl:w-[1248px] max-lg:h-[222px] max-lg:flex-col max-lg:justify-start max-lg:gap-8 sm:h-[222px] sm:w-[768px] sm:px-6 xs:h-[282px] xs:w-full xs:gap-6 3xl:px-[240px] xs:px-4'>
+        <div className='gusto-footer-upper flex  items-center justify-center'>
+          <div className='gusto-footer-upper-inner flex w-full items-center justify-between  max-lg:flex-col max-lg:justify-start max-lg:gap-8 xs:gap-6 2xl:px-60 xl:px-24 sm:px-6 xs:px-4 py-8'>
             <Link
               href={`/${locale}`}
-              className='gusto-footer-logo block h-[100px] flex-none xl:h-[100px]  max-lg:h-[90px]'
+              className='gusto-footer-logo block h-25 max-lg:h-[90px]'
             >
               <Image
                 src='/images/logo-w@2x.png'
@@ -52,7 +52,7 @@ export function HomeFooter({
             </Link>
             <nav
               aria-label={copy.footer.navigation}
-              className='gusto-footer-nav flex items-center xl:h-[22px] sm:h-5 xs:h-[112px] xs:flex-col xs:gap-4'
+              className='gusto-footer-nav flex items-center xs:flex-col xs:gap-4'
             >
               {footerNav.map(([label, href]) => (
                 <Link

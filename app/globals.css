@@ -163,16 +163,16 @@
   /* Spacing — Mode 3. The token namespace avoids collisions with Tailwind
    * keywords such as max-w-none: p-token-xs, gap-token-sm, mt-token-md. */
   --spacing-token-none: 0px;
-  --spacing-token-xxxxs: 2px;
-  --spacing-token-xxxs: 4px;
-  --spacing-token-xxs: 8px;
+  --spacing-token-4xs: 2px;
+  --spacing-token-3xs: 4px;
+  --spacing-token-2xs: 8px;
   --spacing-token-xs: 16px;
   --spacing-token-sm: 24px;
   --spacing-token-md: 48px;
   --spacing-token-lg: 52px;
   --spacing-token-xl: 68px;
-  --spacing-token-xxl: 113px;
-  --spacing-token-xxxl: 124px;
+  --spacing-token-2xl: 113px;
+  --spacing-token-3xl: 124px;
 
   /* Shape — Mode 3. These generate rounded-xs through rounded-infinity. */
   --radius-none: 0px;
@@ -309,7 +309,7 @@
   --layout-padding-title: 16px;
   --layout-padding-body: 16px;
   --layout-padding-body-wide: 16px;
-  --layout-page-padding: var(--layout-padding-body);
+  --layout-page-padding: var(--layout-padding-body); /* delete later*/
 }
 
 /* Semantic colors — dark */
