@@ -3,11 +3,27 @@ import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
 import type { HomePageCopy } from './types';
 
-function WineMoreLink({ children, locale }: { children: React.ReactNode; locale: Locale }) {
+function WineMoreLink({
+  children,
+  locale,
+}: {
+  children: React.ReactNode;
+  locale: Locale;
+}) {
   return (
-    <Link href={`/${locale}/menu`} className='gusto-wine-more'>
-      <span>{children}</span>
-      <svg aria-hidden='true' viewBox='0 0 111.4 60' focusable='false'>
+    <Link
+      href={`/${locale}/menu`}
+      className='gusto-wine-more mt-[min(2.5vw,48px)] flex h-auto w-max items-center gap-[min(1.6667vw,32px)] font-accent text-[min(1.25vw,24px)] leading-[1.36] text-warm-light underline underline-offset-4 min-[1200px]:max-[1599px]:mt-12 min-[1200px]:max-[1599px]:h-[60px] min-[1200px]:max-[1599px]:gap-8 min-[1200px]:max-[1599px]:text-2xl min-[481px]:max-[768.02px]:mt-12 min-[481px]:max-[768.02px]:h-[60px] min-[481px]:max-[768.02px]:gap-8 min-[481px]:max-[768.02px]:text-[22px] min-[481px]:max-[768.02px]:leading-6 max-[480px]:mt-12 max-[480px]:h-[60px] max-[480px]:w-full max-[480px]:justify-start max-[480px]:gap-8 max-[480px]:text-lg max-[480px]:leading-6 max-[480px]:no-underline'
+    >
+      <span className='max-[480px]:min-w-0 max-[480px]:flex-1'>
+        {children}
+      </span>
+      <svg
+        className='h-auto w-[min(5.8021vw,111.4px)] shrink-0 overflow-visible fill-none stroke-ink stroke-1 min-[1200px]:max-[1599px]:w-[111.396759px] min-[481px]:max-[768.02px]:h-[60px] min-[481px]:max-[768.02px]:w-[111.396759px] max-[480px]:h-[60px] max-[480px]:w-[111.396759px]'
+        aria-hidden='true'
+        viewBox='0 0 111.4 60'
+        focusable='false'
+      >
         <circle cx='46' cy='30' r='29.5' />
         <path d='M37 30h73m-22-22 22 22-22 22' />
       </svg>
@@ -15,23 +31,58 @@ function WineMoreLink({ children, locale }: { children: React.ReactNode; locale:
   );
 }
 
-export function HomeWineSection({ copy, locale }: { copy: HomePageCopy; locale: Locale }) {
+export function HomeWineSection({
+  copy,
+  locale,
+}: {
+  copy: HomePageCopy;
+  locale: Locale;
+}) {
   return (
-    <section id='wine' className='gusto-wine'>
-      <Image src='/images/b-2.png' alt='' width={3840} height={362} sizes='100vw' className='gusto-wine-brush gusto-wine-brush-top' />
-      <div className='gusto-wine-inner'>
-        <div className='gusto-wine-visual'>
-          <Image src='/images/bottle-grapes.png' alt={copy.home.wineArtworkAlt} fill sizes='(max-width: 768px) 82vw, 43.23vw' className='object-contain' />
+    <section
+      id='wine'
+      className="relative h-[min(71.5201vw,1373.187px)] min-h-0 overflow-hidden bg-transparent text-ink before:absolute before:inset-x-0 before:top-0 before:h-[min(61.6474vw,1183.629px)] before:bg-coral before:content-[''] min-[1200px]:max-[1599px]:h-[1068.639893px] min-[1200px]:max-[1599px]:before:h-[926.471985px] min-[481px]:max-[768.02px]:h-[1097.074585px] min-[481px]:max-[768.02px]:min-h-[1097.074585px] min-[481px]:max-[768.02px]:before:h-[1021.251709px] max-[480px]:h-auto max-[480px]:before:top-0 max-[480px]:before:bottom-[38.800018px] max-[480px]:before:h-auto"
+    >
+      <Image
+        src='/images/b-2.png'
+        alt=''
+        width={3840}
+        height={362}
+        sizes='100vw'
+        className='gusto-wine-brush-top pointer-events-none absolute top-0 left-0 z-[1] block h-auto w-full min-[1200px]:max-[1599px]:h-[135.472px] min-[481px]:max-[768.02px]:h-[72.251732px] max-[480px]:h-[36.972569px]'
+      />
+      <div className='gusto-wine-inner absolute top-[min(9.8244vw,188.629px)] left-0 flex h-[min(51.8229vw,995px)] w-full items-start justify-center gap-[min(1.6667vw,32px)] p-[min(6.25vw,120px)_min(12.5vw,240px)] min-[1200px]:max-[1599px]:top-[135.472px] min-[1200px]:max-[1599px]:h-[791px] min-[1200px]:max-[1599px]:gap-8 min-[1200px]:max-[1599px]:p-[60px_96px] min-[481px]:max-[768.02px]:top-[80.251732px] min-[481px]:max-[768.02px]:h-[941px] min-[481px]:max-[768.02px]:flex-col min-[481px]:max-[768.02px]:items-center min-[481px]:max-[768.02px]:gap-8 min-[481px]:max-[768.02px]:p-[64px_24px] max-[480px]:relative max-[480px]:top-auto max-[480px]:h-auto max-[480px]:flex-row max-[480px]:flex-wrap max-[480px]:items-start max-[480px]:gap-x-0 max-[480px]:gap-y-8 max-[480px]:p-[calc(36.972569px_+_8px)_16px_calc(38.800018px_+_32px)]'>
+        <div className='gusto-wine-visual relative h-[min(39.3229vw,755px)] w-[min(43.2292vw,830px)] flex-none min-[1200px]:max-[1599px]:h-[671px] min-[1200px]:max-[1599px]:w-[738px] min-[481px]:max-[768.02px]:h-[382px] min-[481px]:max-[768.02px]:w-[720px] max-[480px]:h-auto max-[480px]:min-w-0 max-[480px]:basis-full max-[480px]:w-auto max-[480px]:aspect-[308/280]'>
+          <Image
+            src='/images/bottle-grapes.png'
+            alt={copy.home.wineArtworkAlt}
+            fill
+            sizes='(max-width: 768px) 82vw, 43.23vw'
+            className='object-contain min-[481px]:max-[768.02px]:[inset:0_auto_auto_50%]! min-[481px]:max-[768.02px]:[height:358.636383px]! min-[481px]:max-[768.02px]:[width:394.5px]! min-[481px]:max-[768.02px]:-translate-x-1/2 max-[480px]:[inset:0_auto_auto_0]! max-[480px]:[height:100%]! max-[480px]:[width:100%]! max-[480px]:translate-x-0'
+          />
         </div>
-        <div className='gusto-wine-copy'>
-          <div className='gusto-wine-title'><h2>{copy.home.wineTitle}</h2></div>
-          <div className='gusto-wine-text'>
-            {copy.home.wineBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <div className='gusto-wine-copy h-[min(33.0729vw,635px)] w-[min(30.1042vw,578px)] flex-none min-[1200px]:max-[1599px]:h-[635px] min-[1200px]:max-[1599px]:w-[500px] min-[481px]:max-[768.02px]:order-[-1] min-[481px]:max-[768.02px]:flex min-[481px]:max-[768.02px]:h-[399.000031px] min-[481px]:max-[768.02px]:w-[720px] min-[481px]:max-[768.02px]:flex-col min-[481px]:max-[768.02px]:items-center max-[480px]:relative max-[480px]:order-[-1] max-[480px]:flex max-[480px]:h-auto max-[480px]:min-w-0 max-[480px]:basis-full max-[480px]:w-auto max-[480px]:flex-col max-[480px]:items-start'>
+          <div className="gusto-wine-title relative h-[min(4.4792vw,86px)] w-[min(19.7917vw,380px)] after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-[min(18.8542vw,362px)] after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] min-[1200px]:max-[1599px]:h-[83px] min-[1200px]:max-[1599px]:w-[380px] min-[1200px]:max-[1599px]:after:h-0.5 min-[1200px]:max-[1599px]:after:w-[362px] min-[481px]:max-[768.02px]:h-[51.000027px] min-[481px]:max-[768.02px]:w-[228px] min-[481px]:max-[768.02px]:after:h-0.5 min-[481px]:max-[768.02px]:after:w-[228px] max-[480px]:h-[35px] max-[480px]:w-max max-[480px]:self-center max-[480px]:after:h-0.5 max-[480px]:after:w-full">
+            <h2 className='whitespace-nowrap font-display text-[min(4.1667vw,80px)] leading-none font-normal tracking-[-0.25em] text-ink min-[1200px]:max-[1599px]:text-[80px] min-[481px]:max-[768.02px]:h-12 min-[481px]:max-[768.02px]:text-[60px] min-[481px]:max-[768.02px]:leading-12 max-[480px]:h-8 max-[480px]:text-5xl max-[480px]:leading-8'>
+              {copy.home.wineTitle}
+            </h2>
+          </div>
+          <div className='gusto-wine-text mt-[min(2.3438vw,45px)] h-[min(20.625vw,396px)] w-full font-accent text-[min(1.25vw,24px)] leading-[1.36] text-warm-light min-[1200px]:max-[1599px]:mt-12 min-[1200px]:max-[1599px]:h-[396px] min-[1200px]:max-[1599px]:w-[500px] min-[1200px]:max-[1599px]:text-2xl min-[481px]:max-[768.02px]:mt-12 min-[481px]:max-[768.02px]:h-[192px] min-[481px]:max-[768.02px]:w-[598px] min-[481px]:max-[768.02px]:overflow-hidden min-[481px]:max-[768.02px]:text-[22px] min-[481px]:max-[768.02px]:leading-6 max-[480px]:mt-12 max-[480px]:h-auto max-[480px]:w-full max-[480px]:overflow-visible max-[480px]:text-lg max-[480px]:leading-6 [&_p]:leading-[inherit] [&_p+p]:mt-[min(1.7188vw,33px)] min-[1200px]:max-[1599px]:[&_p+p]:mt-0 min-[481px]:max-[768.02px]:[&_p+p]:mt-0 max-[480px]:[&_p+p]:mt-0'>
+            {copy.home.wineBody.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
           <WineMoreLink locale={locale}>{copy.home.wineMenu}</WineMoreLink>
         </div>
       </div>
-      <Image src='/images/b-3.png' alt='' width={3840} height={380} sizes='100vw' className='gusto-wine-brush gusto-wine-brush-bottom' />
+      <Image
+        src='/images/b-3.png'
+        alt=''
+        width={3840}
+        height={380}
+        sizes='100vw'
+        className='gusto-wine-brush-bottom pointer-events-none absolute bottom-0 left-0 z-[1] block h-auto w-full min-[1200px]:max-[1599px]:h-[142.167999px] min-[481px]:max-[768.02px]:h-[75.822929px] max-[480px]:h-[38.800018px]'
+      />
     </section>
   );
 }

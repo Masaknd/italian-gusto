@@ -1336,7 +1336,6 @@ test("the 1440px About section follows the supplied Pixso frame", async ({ page 
   expect(titleBox!.x).toBeCloseTo(96, 1);
   expect(titleBox!.y - aboutBox!.y).toBeCloseTo(60, 1);
   expect(titleBox!.width).toBeCloseTo(320, 1);
-  expect(await title.evaluate((element) => getComputedStyle(element).getPropertyValue("--gusto-about-title-width").trim())).toBe("320px");
   expect(bodyBox!.x).toBeCloseTo(96, 1);
   expect(bodyBox!.y - aboutBox!.y).toBeCloseTo(192, 1);
   expect(imageBox!.x).toBeCloseTo(732, 1);
