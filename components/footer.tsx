@@ -25,21 +25,21 @@ export function HomeFooter({
   ];
 
   return (
-    <footer className='relative overflow-hidden bg-ink text-content [--footer-brush-height:min(1.8535vw,35.588px)] max-[480px]:pt-[7.284471px]'>
+    <footer className='relative overflow-hidden bg-ink text-content [--footer-brush-height:min(1.8535vw,35.588px)] xs:pt-[7.284471px]'>
       <Image
         src='/images/b-4.png'
         alt=''
         width={3849}
         height={72}
         sizes='100vw'
-        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none rotate-180 min-[1200px]:max-[1599px]:h-[26.691189px] min-[481px]:max-[768.02px]:h-[14.235302px] max-[480px]:h-[7.284471px]'
+        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none rotate-180 xl:max-2xl:h-[26.691189px] sm:max-md:h-[14.235302px] xs:h-[7.284471px]'
       />
-      <div className='gusto-footer-content relative bg-ink min-[1200px]:max-[1599px]:h-[287.691315px] min-[481px]:max-[768.02px]:h-[420.235382px] max-[480px]:h-[455px]'>
-        <div className='gusto-footer-upper flex h-[calc(197px_+_var(--footer-brush-height))] items-center justify-center p-[calc(32px_+_var(--footer-brush-height))_var(--layout-page-padding)_32px] min-[1200px]:max-[1599px]:h-[calc(26.691189px_+_197px)] min-[1200px]:max-[1599px]:p-[calc(var(--footer-brush-height)_+_32px)_96px_32px] max-[900px]:h-[calc(286px_+_var(--footer-brush-height))] max-[900px]:p-[calc(32px_+_var(--footer-brush-height))_24px_32px] min-[481px]:max-[768.02px]:h-[calc(14.235302px_+_286px)] min-[481px]:max-[768.02px]:p-[calc(var(--footer-brush-height)_+_32px)_0_32px] max-[480px]:h-[346px] max-[480px]:p-[32px_0]'>
-          <div className='gusto-footer-upper-inner flex h-[133px] w-full items-center justify-between min-[1200px]:max-[1599px]:h-[133px] min-[1200px]:max-[1599px]:w-[1248px] max-[900px]:h-[222px] max-[900px]:flex-col max-[900px]:justify-start max-[900px]:gap-8 min-[481px]:max-[768.02px]:h-[222px] min-[481px]:max-[768.02px]:w-[768px] min-[481px]:max-[768.02px]:px-6 max-[480px]:h-[282px] max-[480px]:w-full max-[480px]:gap-6 max-[480px]:px-4'>
+      <div className='gusto-footer-content relative bg-ink xl:max-2xl:h-[287.691315px] sm:max-md:h-[420.235382px] xs:h-[455px]'>
+        <div className='gusto-footer-upper flex h-[calc(197px_+_var(--footer-brush-height))] items-center justify-center p-[calc(32px_+_var(--footer-brush-height))_var(--layout-page-padding)_32px] xl:max-2xl:h-[calc(26.691189px_+_197px)] xl:max-2xl:p-[calc(var(--footer-brush-height)_+_32px)_96px_32px] max-lg:h-[calc(286px_+_var(--footer-brush-height))] max-lg:p-[calc(32px_+_var(--footer-brush-height))_24px_32px] sm:max-md:h-[calc(14.235302px_+_286px)] sm:max-md:p-[calc(var(--footer-brush-height)_+_32px)_0_32px] xs:h-[346px] xs:p-[32px_0]'>
+          <div className='gusto-footer-upper-inner flex h-[133px] w-full items-center justify-between xl:max-2xl:h-[133px] xl:max-2xl:w-[1248px] max-lg:h-[222px] max-lg:flex-col max-lg:justify-start max-lg:gap-8 sm:max-md:h-[222px] sm:max-md:w-[768px] sm:max-md:px-6 xs:h-[282px] xs:w-full xs:gap-6 xs:px-4'>
             <Link
               href={`/${locale}`}
-              className='gusto-footer-logo block h-[100px] w-[230.709px] flex-none min-[1200px]:max-[1599px]:h-[100px] min-[1200px]:max-[1599px]:w-[230.708664px] max-[900px]:h-[90px] max-[900px]:w-[207.638px] min-[481px]:max-[768.02px]:w-[207.637802px] max-[480px]:w-[207.637802px]'
+              className='gusto-footer-logo block h-[100px] w-[230.709px] flex-none xl:max-2xl:h-[100px] xl:max-2xl:w-[230.708664px] max-lg:h-[90px] max-lg:w-[207.638px] sm:max-md:w-[207.637802px] xs:w-[207.637802px]'
             >
               <Image
                 src='/images/logo-w@2x.png'
@@ -52,19 +52,19 @@ export function HomeFooter({
             </Link>
             <nav
               aria-label={copy.footer.navigation}
-              className='gusto-footer-nav flex items-center min-[1200px]:max-[1599px]:h-[22px] min-[1200px]:max-[1599px]:w-[479px] min-[481px]:max-[768.02px]:h-5 min-[481px]:max-[768.02px]:w-[451px] max-[480px]:h-[112px] max-[480px]:w-[124px] max-[480px]:flex-col max-[480px]:gap-4'
+              className='gusto-footer-nav flex items-center xl:max-2xl:h-[22px] xl:max-2xl:w-[479px] sm:max-md:h-5 sm:max-md:w-[451px] xs:h-[112px] xs:w-[124px] xs:flex-col xs:gap-4'
             >
               {footerNav.map(([label, href]) => (
                 <Link
                   href={href}
-                  className='h-auto border-l border-content px-4 font-label text-2xl leading-[22px] font-bold text-inherit no-underline last:border-r min-[1200px]:max-[1599px]:h-[22px] min-[1200px]:max-[1599px]:text-2xl min-[1200px]:max-[1599px]:leading-[22px] max-[900px]:text-[22px] max-[900px]:leading-5 min-[481px]:max-[768.02px]:h-5 min-[481px]:max-[768.02px]:text-2xl min-[481px]:max-[768.02px]:leading-5 max-[480px]:border-0 max-[480px]:px-4 max-[480px]:text-xl max-[480px]:leading-4 max-[480px]:last:border-0'
+                  className='h-auto border-l border-content px-4 font-label text-2xl leading-[22px] font-bold text-inherit no-underline last:border-r xl:max-2xl:h-[22px] xl:max-2xl:text-2xl xl:max-2xl:leading-[22px] max-lg:text-[22px] max-lg:leading-5 sm:max-md:h-5 sm:max-md:text-2xl sm:max-md:leading-5 xs:border-0 xs:px-4 xs:text-xl xs:leading-4 xs:last:border-0'
                   key={href}
                 >
                   {label}
                 </Link>
               ))}
             </nav>
-            <div className='gusto-footer-social flex items-center gap-[52px] min-[1200px]:max-[1599px]:h-12 min-[1200px]:max-[1599px]:w-[248px] min-[481px]:max-[768.02px]:h-12 min-[481px]:max-[768.02px]:w-[248px] max-[480px]:h-8 max-[480px]:w-[200px]'>
+            <div className='gusto-footer-social flex items-center gap-[52px] xl:max-2xl:h-12 xl:max-2xl:w-[248px] sm:max-md:h-12 sm:max-md:w-[248px] xs:h-8 xs:w-[200px]'>
               {socialCards.map((card) => (
                 <a
                   href={siteConfig.socialUrl}
@@ -74,42 +74,45 @@ export function HomeFooter({
                     '{name}',
                     card.name,
                   )}
-                  className='block h-12 w-12 text-inherit min-[1200px]:max-[1599px]:h-12 min-[1200px]:max-[1599px]:w-12 min-[481px]:max-[768.02px]:h-12 min-[481px]:max-[768.02px]:w-12 max-[480px]:h-8 max-[480px]:w-8'
+                  className='block h-12 w-12 text-inherit xl:max-2xl:h-12 xl:max-2xl:w-12 sm:max-md:h-12 sm:max-md:w-12 xs:h-8 xs:w-8'
                   key={card.name}
                 >
-                  <HomeSocialIcon type={card.icon} className='block h-full w-full' />
+                  <HomeSocialIcon
+                    type={card.icon}
+                    className='block h-full w-full'
+                  />
                 </a>
               ))}
             </div>
           </div>
         </div>
-        <div className='gusto-footer-lower h-16 bg-orange p-[16px_var(--layout-page-padding)] text-ink min-[1200px]:max-[1599px]:h-16 min-[1200px]:max-[1599px]:p-[16px_96px] max-[900px]:h-[120px] max-[900px]:p-[16px_24px] min-[481px]:max-[768.02px]:h-[120px] min-[481px]:max-[768.02px]:p-[16px_0] max-[480px]:h-[109px] max-[480px]:p-[16px_0]'>
-          <div className='gusto-footer-lower-inner flex h-8 w-full items-center justify-between min-[1200px]:max-[1599px]:h-8 min-[1200px]:max-[1599px]:w-[1248px] max-[900px]:h-[88px] max-[900px]:flex-col max-[900px]:justify-start max-[900px]:gap-2 min-[481px]:max-[768.02px]:h-[88px] min-[481px]:max-[768.02px]:w-[768px] min-[481px]:max-[768.02px]:px-6 max-[480px]:h-[77px] max-[480px]:w-full max-[480px]:gap-2 max-[480px]:px-4'>
+        <div className='gusto-footer-lower h-16 bg-orange p-[16px_var(--layout-page-padding)] text-ink xl:max-2xl:h-16 xl:max-2xl:p-[16px_96px] max-lg:h-[120px] max-lg:p-[16px_24px] sm:max-md:h-[120px] sm:max-md:p-[16px_0] xs:h-[109px] xs:p-[16px_0]'>
+          <div className='gusto-footer-lower-inner flex h-8 w-full items-center justify-between xl:max-2xl:h-8 xl:max-2xl:w-[1248px] max-lg:h-[88px] max-lg:flex-col max-lg:justify-start max-lg:gap-2 sm:max-md:h-[88px] sm:max-md:w-[768px] sm:max-md:px-6 xs:h-[77px] xs:w-full xs:gap-2 xs:px-4'>
             <a
-              className='gusto-footer-phone flex items-center gap-4 font-label text-2xl leading-[22px] font-bold text-inherit no-underline min-[1200px]:max-[1599px]:h-8 min-[1200px]:max-[1599px]:w-[196px] min-[1200px]:max-[1599px]:text-2xl min-[1200px]:max-[1599px]:leading-[22px] max-[900px]:gap-1 max-[900px]:text-lg max-[900px]:leading-6 min-[481px]:max-[768.02px]:h-6 min-[481px]:max-[768.02px]:w-[139px] min-[481px]:max-[768.02px]:text-2xl min-[481px]:max-[768.02px]:leading-4 max-[480px]:h-4 max-[480px]:w-[119px] max-[480px]:text-base max-[480px]:leading-4'
+              className='gusto-footer-phone flex items-center gap-4 font-label text-2xl leading-[22px] font-bold text-inherit no-underline xl:max-2xl:h-8 xl:max-2xl:w-[196px] xl:max-2xl:text-2xl xl:max-2xl:leading-[22px] max-lg:gap-1 max-lg:text-lg max-lg:leading-6 sm:max-md:h-6 sm:max-md:w-[139px] sm:max-md:text-2xl sm:max-md:leading-4 xs:h-4 xs:w-[119px] xs:text-base xs:leading-4'
               href={siteConfig.phoneHref}
             >
               <PhoneIcon
                 aria-hidden='true'
                 weight='regular'
-                className='size-8 flex-none max-[900px]:size-6 min-[481px]:max-[768.02px]:size-6 max-[480px]:size-4'
+                className='size-8 flex-none max-lg:size-6 sm:max-md:size-6 xs:size-4'
               />
               <span>{siteConfig.phone}</span>
             </a>
-            <div className='gusto-footer-hours flex items-center font-label text-2xl leading-[22px] font-bold text-inherit min-[1200px]:max-[1599px]:h-8 min-[1200px]:max-[1599px]:w-[667px] min-[1200px]:max-[1599px]:text-2xl min-[1200px]:max-[1599px]:leading-[22px] max-[900px]:text-lg max-[900px]:leading-6 min-[481px]:max-[768.02px]:h-6 min-[481px]:max-[768.02px]:w-[484px] min-[481px]:max-[768.02px]:text-2xl min-[481px]:max-[768.02px]:leading-4 max-[480px]:grid max-[480px]:h-[31px] max-[480px]:w-[272px] max-[480px]:grid-cols-[16px_auto] max-[480px]:gap-x-1 max-[480px]:gap-y-px max-[480px]:text-base max-[480px]:leading-4'>
+            <div className='gusto-footer-hours flex items-center font-label text-2xl leading-[22px] font-bold text-inherit xl:max-2xl:h-8 xl:max-2xl:w-[667px] xl:max-2xl:text-2xl xl:max-2xl:leading-[22px] max-lg:text-lg max-lg:leading-6 sm:max-md:h-6 sm:max-md:w-[484px] sm:max-md:text-2xl sm:max-md:leading-4 xs:grid xs:h-[31px] xs:w-[272px] xs:grid-cols-[16px_auto] xs:gap-x-1 xs:gap-y-px xs:text-base xs:leading-4'>
               <ClockIcon
                 aria-hidden='true'
                 weight='regular'
-                className='size-8 flex-none max-[900px]:size-6 min-[481px]:max-[768.02px]:size-6 max-[480px]:col-start-1 max-[480px]:row-start-1 max-[480px]:size-4'
+                className='size-8 flex-none max-lg:size-6 sm:max-md:size-6 xs:col-start-1 xs:row-start-1 xs:size-4'
               />
-              <p className='border-l border-ink px-4 whitespace-nowrap max-[900px]:px-2 min-[481px]:max-[768.02px]:h-6 min-[481px]:max-[768.02px]:leading-4 max-[480px]:col-start-2 max-[480px]:m-0 max-[480px]:border-0 max-[480px]:p-0'>
+              <p className='border-l border-ink px-4 whitespace-nowrap max-lg:px-2 sm:max-md:h-6 sm:max-md:leading-4 xs:col-start-2 xs:m-0 xs:border-0 xs:p-0'>
                 {copy.footer.lunch}: {siteConfig.lunchHours}
               </p>
-              <p className='border-l border-ink px-4 whitespace-nowrap max-[900px]:px-2 min-[481px]:max-[768.02px]:h-6 min-[481px]:max-[768.02px]:leading-4 max-[480px]:col-start-2 max-[480px]:m-0 max-[480px]:border-0 max-[480px]:p-0'>
+              <p className='border-l border-ink px-4 whitespace-nowrap max-lg:px-2 sm:max-md:h-6 sm:max-md:leading-4 xs:col-start-2 xs:m-0 xs:border-0 xs:p-0'>
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
-            <p className='gusto-footer-copyright whitespace-nowrap font-accent text-sm leading-none min-[1200px]:max-[1599px]:h-[14px] min-[1200px]:max-[1599px]:w-[218px] min-[1200px]:max-[1599px]:text-right min-[1200px]:max-[1599px]:text-sm min-[1200px]:max-[1599px]:leading-[14px] max-[900px]:font-sans max-[900px]:text-xs min-[481px]:max-[768.02px]:h-[14px] min-[481px]:max-[768.02px]:w-[218px] min-[481px]:max-[768.02px]:text-center min-[481px]:max-[768.02px]:text-xs min-[481px]:max-[768.02px]:leading-[14px] max-[480px]:h-[14px] max-[480px]:w-[218px] max-[480px]:text-center max-[480px]:text-xs max-[480px]:leading-[14px]'>
+            <p className='gusto-footer-copyright whitespace-nowrap font-accent text-sm leading-none xl:max-2xl:h-[14px] xl:max-2xl:w-[218px] xl:max-2xl:text-right xl:max-2xl:text-sm xl:max-2xl:leading-[14px] max-lg:font-sans max-lg:text-xs sm:max-md:h-[14px] sm:max-md:w-[218px] sm:max-md:text-center sm:max-md:text-xs sm:max-md:leading-[14px] xs:h-[14px] xs:w-[218px] xs:text-center xs:text-xs xs:leading-[14px]'>
               {copy.footer.copyright}
             </p>
           </div>

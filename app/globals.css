@@ -1,26 +1,104 @@
+/* ============================================================================
+   Gusto Italian Bar — Global Styles & Design System
+   ----------------------------------------------------------------------------
+   Table of contents
+     1. Imports & responsive variants
+     2. Theme bridge
+          2.1  Breakpoints
+          2.2  Color utilities
+          2.3  Typography
+          2.4  Shape & effects
+     3. Design tokens
+          3.1  Brand primitives
+          3.2  Semantic colors
+          3.3  Compatibility aliases
+          3.4  Typography
+          3.5  Layout & effects
+     4. Locale & responsive values
+     5. Base layer
+   ========================================================================== */
+
+/* 1. Imports & responsive variants ------------------------------------- */
 @import 'tailwindcss';
 
-/*
- * Global CSS is intentionally limited to shared tokens and document defaults.
- * Section geometry, responsive behavior, and component states belong in the
- * Tailwind class lists beside their JSX.
- */
+/* The supplied mobile frames end at 480px. Unlike Tailwind breakpoints,
+ * this project-specific variant is intentionally max-width. */
+@custom-variant xs (@media (width <= 30rem));
+
+/* 2. Theme bridge ------------------------------------------------------- */
+@theme inline {
+  /* 2.1 Breakpoints — mobile-first min-width values
+   * `desktop` and `wide` name intermediate layout transitions that do not map
+   * cleanly to Tailwind's standard scale. `xs` remains the max-width variant
+   * declared above. */
+  --breakpoint-sm: 30.0625rem; /* 481px */
+  --breakpoint-md: 48.00125rem; /* 768.02px */
+  --breakpoint-lg: 56.25rem; /* 900px */
+  --breakpoint-desktop: 63.99875rem; /* 1023.98px */
+  --breakpoint-wide: 68.75rem; /* 1100px */
+  --breakpoint-xl: 75rem; /* 1200px */
+  --breakpoint-2xl: 100rem; /* 1600px */
+  --breakpoint-3xl: 120rem; /* 1920px */
+
+  /* 2.2 Color utilities */
+  --color-background: var(--color-surface-page);
+  --color-foreground: var(--color-text-default);
+  --color-paper: var(--color-brand-paper);
+  --color-ink: var(--color-brand-ink);
+  --color-coral: var(--color-brand-coral);
+  --color-orange: var(--color-brand-orange);
+  --color-warm-light: var(--color-brand-warm-light);
+  --color-content: var(--color-text-inverse);
+  --color-muted: var(--color-text-subtle);
+  --color-surface-muted: var(--color-surface-subtle);
+  --color-map: var(--color-surface-map);
+  --color-line: var(--color-border-default);
+  --color-focus: var(--color-border-focus);
+  --color-action-hover: var(--color-action-primary-hover);
+
+  /* 2.3 Typography */
+  --font-sans: var(--font-family-body);
+  --font-display: var(--font-family-display);
+  --font-accent: var(--font-family-accent);
+  --font-label: var(--font-family-label);
+  --text-body-sm: var(--font-size-body-sm);
+
+  /* 2.4 Shape & effects */
+  --radius-card: 1rem;
+  --shadow-card: 0 8px 24px rgb(27 40 27 / 10%);
+}
+
+/* 3. Design tokens ------------------------------------------------------ */
 :root {
+  /* 3.1 Brand primitives */
   --color-brand-paper: #fbf1db;
   --color-brand-ink: #1b281b;
   --color-brand-coral: #f26c4f;
   --color-brand-orange: #ff8c00;
   --color-brand-warm-light: #f6e6e0;
-  --color-content-inverse: #e0e6f6;
-  --color-page-surface: #f7f4ee;
-  --color-page-text: #241b17;
-  --color-map-surface: #f5f4f2;
-  --color-text-subtle: #5c5c5c;
-  --color-surface-subtle: #f4f4f4;
-  --color-border-default: #e0e0e0;
-  --color-action-primary-hover: #5c5c5c;
-  --color-focus: #9c4b2e;
 
+  /* 3.2 Semantic colors */
+  --color-surface-page: #f7f4ee;
+  --color-surface-map: #f5f4f2;
+  --color-surface-subtle: #f4f4f4;
+  --color-text-default: #241b17;
+  --color-text-subtle: #5c5c5c;
+  --color-text-inverse: #e0e6f6;
+  --color-border-default: #e0e0e0;
+  --color-border-focus: #9c4b2e;
+  --color-action-primary-hover: #5c5c5c;
+
+  /* 3.3 Compatibility aliases
+   * Keep direct var() consumers stable while new work uses semantic names. */
+  --color-content-inverse: var(--color-text-inverse);
+  --color-page-surface: var(--color-surface-page);
+  --color-page-text: var(--color-text-default);
+  --color-map-surface: var(--color-surface-map);
+  --color-focus: var(--color-border-focus);
+  --background: var(--color-surface-page);
+  --foreground: var(--color-text-default);
+
+  /* 3.4 Typography */
   --font-family-display:
     var(--font-kirigirisu), var(--font-noto-sans-jp), sans-serif;
   --font-family-body: var(--font-noto-sans-jp), sans-serif;
@@ -32,13 +110,13 @@
   --font-size-title-xl: 2.625rem;
   --tracking-title: -0.15em;
 
+  /* 3.5 Layout & effects */
   --layout-container: 1336px;
   --layout-page-padding: 96px;
   --shadow-hero-title: 0 2px 6px rgb(0 0 0 / 25%);
-  --background: var(--color-page-surface);
-  --foreground: var(--color-page-text);
 }
 
+/* 4. Locale & responsive values ---------------------------------------- */
 [lang='ja'] {
   --font-size-body-sm: 0.75rem;
 }
@@ -70,28 +148,7 @@
   }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-paper: var(--color-brand-paper);
-  --color-ink: var(--color-brand-ink);
-  --color-coral: var(--color-brand-coral);
-  --color-orange: var(--color-brand-orange);
-  --color-warm-light: var(--color-brand-warm-light);
-  --color-content: var(--color-content-inverse);
-  --color-muted: var(--color-text-subtle);
-  --color-surface-muted: var(--color-surface-subtle);
-  --color-line: var(--color-border-default);
-
-  --font-sans: var(--font-family-body);
-  --font-display: var(--font-family-display);
-  --font-accent: var(--font-family-accent);
-  --font-label: var(--font-family-label);
-  --text-body-sm: var(--font-size-body-sm);
-  --radius-card: 1rem;
-  --shadow-card: 0 8px 24px rgb(27 40 27 / 10%);
-}
-
+/* 5. Base layer --------------------------------------------------------- */
 @layer base {
   html {
     @apply scroll-smooth;
@@ -107,7 +164,13 @@
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-focus);
+    outline: 3px solid var(--color-border-focus);
     outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
