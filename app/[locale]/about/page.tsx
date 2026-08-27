@@ -44,7 +44,7 @@ export default async function AboutPage({
 
   return (
     <>
-      <main className="gusto-home overflow-hidden bg-paper bg-[url(/images/cotton01.jpg)] bg-cover bg-fixed bg-center font-sans text-ink [--coral:var(--color-brand-coral)] [--cream:var(--color-brand-paper)] [--ink:var(--color-brand-ink)]">
+      <main className="gusto-home gusto-page">
         <AboutPageHero copy={copy} />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
         <HomeReservationSection copy={copy} />
