@@ -19,11 +19,11 @@ function MenuPrice({
   priceExcludingTax: number;
 }) {
   return (
-    <p className='gusto-menu-card__price mt-auto mb-0 flex min-h-[60px] w-full items-baseline justify-end font-accent leading-none font-normal text-black max-lg:min-h-8'>
-      <span className='text-[42px] max-lg:text-2xl'>
+    <p className='gusto-menu-card__price mt-auto mb-0 flex min-h-8 w-full items-baseline justify-end font-accent leading-none font-normal text-black xl:min-h-[60px]'>
+      <span className='text-2xl xl:text-[42px]'>
         {yen(priceExcludingTax)}
       </span>
-      <span className='ml-[3px] text-[42px] max-lg:text-[28px]'>
+      <span className='ml-[3px] text-[28px] xl:text-[42px]'>
         <small className='text-sm font-normal'>
           （{copy.menu.includingTax}
         </small>{' '}
@@ -44,26 +44,26 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
   return (
     <>
       <nav
-        className='gusto-menu__category-nav flex h-[60px] w-full items-end justify-between max-2xl:h-[52px] max-lg:grid max-lg:h-auto max-lg:min-h-20 max-lg:grid-cols-3 max-lg:items-center max-lg:gap-y-2 xs:min-h-[72px] xs:content-center'
+        className='gusto-menu__category-nav grid min-h-[72px] w-full grid-cols-3 content-center items-center gap-y-2 sm:min-h-20 sm:content-normal xl:flex xl:h-[52px] xl:min-h-0 xl:items-end xl:justify-between 3xl:h-[60px]'
         aria-label={copy.menu.categoryNavigation}
       >
         {groups.map(([category], index) => (
           <span
-            className='contents max-lg:flex max-lg:min-w-0 max-lg:items-center max-lg:justify-center max-lg:[&:not(:nth-child(3n+1))]:border-l-2 max-lg:[&:not(:nth-child(3n+1))]:border-dashed max-lg:[&:not(:nth-child(3n+1))]:border-coral'
+            className='flex min-w-0 items-center justify-center [&:not(:nth-child(3n+1))]:border-l-2 [&:not(:nth-child(3n+1))]:border-dashed [&:not(:nth-child(3n+1))]:border-coral xl:contents xl:[&:not(:nth-child(3n+1))]:border-l-0'
             key={category}
           >
             {index > 0 && (
               <span
-                className='h-[50px] w-0 flex-none self-center border-l-2 border-dashed border-coral max-2xl:h-[42px] max-lg:hidden'
+                className='hidden h-[42px] w-0 flex-none self-center border-l-2 border-dashed border-coral xl:block 3xl:h-[50px]'
                 aria-hidden='true'
               />
             )}
             <a
               href={`#menu-category-${index + 1}`}
               className={[
-                'inline-flex h-[60px] items-center whitespace-nowrap font-display text-[60px] leading-[72px] font-normal tracking-[-0.25em] text-coral no-underline max-2xl:h-[52px] max-2xl:text-5xl max-2xl:leading-[58px] max-lg:h-9 max-lg:justify-center max-lg:text-[32px] max-lg:leading-[38px] xs:h-8 xs:text-2xl xs:leading-[29px]',
+                'inline-flex h-8 items-center justify-center whitespace-nowrap font-display text-2xl leading-[29px] font-normal tracking-[-0.25em] text-coral no-underline sm:h-9 sm:text-[32px] sm:leading-[38px] xl:h-[52px] xl:text-5xl xl:leading-[58px] 3xl:h-[60px]! 3xl:text-[60px]! 3xl:leading-[72px]!',
                 index === 0 ? 'text-[#c3a8a2]!' : '',
-                category.length > 7 ? 'xs:scale-x-[0.82]' : '',
+                category.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
               ]
                 .filter(Boolean)
                 .join(' ')}
@@ -85,13 +85,13 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
             >
               <h2
                 id={`menu-category-heading-${index + 1}`}
-                className='gusto-menu__category-title m-0 flex h-16 w-fit items-center border-b-2 border-dashed border-coral font-display text-5xl leading-16 font-normal tracking-[-0.25em] text-coral max-lg:h-[52px] max-lg:text-[40px] max-lg:leading-[52px] xs:h-[24.12px] xs:text-[20.1px] xs:leading-[24.12px]'
+                className='gusto-menu__category-title m-0 flex h-[24.12px] w-fit items-center border-b-2 border-dashed border-coral font-display text-[20.1px] leading-[24.12px] font-normal tracking-[-0.25em] text-coral sm:h-[52px] sm:text-[40px] sm:leading-[52px] xl:h-16 xl:text-5xl xl:leading-16'
               >
                 {category}
               </h2>
               <div
                 className={[
-                  'gusto-menu__grid grid w-full grid-cols-3 gap-6 2xl:w-[calc(100%_-_6px)] max-lg:grid-cols-2 xs:grid-cols-1',
+                  'gusto-menu__grid grid w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 3xl:w-[calc(100%_-_6px)]',
                 ]
                   .filter(Boolean)
                   .join(' ')}
@@ -105,7 +105,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
                       className={
                         drink
                           ? 'gusto-menu-card flex h-auto min-h-0 min-w-0 flex-row items-baseline justify-between gap-6 bg-transparent p-0'
-                          : 'gusto-menu-card flex h-[642.25px] min-w-0 flex-col items-start gap-4 rounded-2xl bg-[#fbece6] p-6 max-2xl:h-[604.51px] max-lg:h-[486.73px] xs:h-[504.91px]'
+                          : 'gusto-menu-card flex h-[504.91px] min-w-0 flex-col items-start gap-4 rounded-2xl bg-[#fbece6] p-6 sm:h-[486.73px] xl:h-[604.51px] 3xl:h-[642.25px]'
                       }
                     >
                       {!drink && item.image && (
@@ -124,13 +124,13 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
                           className={
                             drink
                               ? 'm-0 font-display text-base leading-[50px] font-normal tracking-[-0.25em] text-ink'
-                              : 'm-0 font-display text-[42px] leading-[50px] font-normal tracking-[-0.25em] text-coral max-2xl:text-4xl max-2xl:leading-[43px] max-lg:text-[28px] max-lg:leading-[34px]'
+                              : 'm-0 font-display text-[28px] leading-[34px] font-normal tracking-[-0.25em] text-coral xl:text-4xl xl:leading-[43px] 3xl:text-[42px]! 3xl:leading-[50px]!'
                           }
                         >
                           {item.name}
                         </h3>
                         {!drink && item.description && (
-                          <p className='m-0 whitespace-pre-line font-accent text-lg leading-[1.36] font-normal text-black max-lg:text-sm max-lg:leading-[1.5]'>
+                          <p className='m-0 whitespace-pre-line font-accent text-sm leading-[1.5] font-normal text-black xl:text-lg xl:leading-[1.36]'>
                             {item.description}
                           </p>
                         )}
@@ -157,7 +157,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
       </div>
 
       <Marquee
-        className='gusto-menu__marquee top-[46px] left-[90px] max-lg:hidden'
+        className='gusto-menu__marquee top-[46px] left-[90px] hidden xl:block'
         text={copy.home.verticalTitle}
       />
     </>

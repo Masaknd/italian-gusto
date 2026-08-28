@@ -3,24 +3,24 @@ import type { HomePageCopy } from './types';
 
 const detailValueClass = 'm-0 list-none p-0 not-italic';
 const detailRowClass =
-  'gusto-access-row grid grid-cols-[min(5.2083vw,100px)_1fr] xl:max-2xl:grid-cols-[100px_1fr] sm:max-md:grid-cols-[100px_1fr] xs:grid-cols-[79px_1fr]';
+  'gusto-access-row grid grid-cols-[79px_1fr] sm:grid-cols-[100px_1fr] 3xl:grid-cols-[min(5.2083vw,100px)_1fr]';
 
 export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
   return (
     <section
       id='access'
-      className='gusto-access relative flex min-h-[min(38.0729vw,731px)] flex-col items-center gap-[min(2.9688vw,57px)] bg-coral p-[min(4.375vw,84px)_min(12.5vw,240px)] text-center text-content xl:max-2xl:h-[671.248474px] xl:max-2xl:min-h-[671.248474px] xl:max-2xl:gap-[57px] xl:max-2xl:p-[50px_96px] max-lg:h-auto max-lg:min-h-0 max-lg:gap-12 max-lg:p-[72px_max(24px,9vw)] sm:max-md:h-[1137.248535px] sm:max-md:min-h-[1137.248535px] sm:max-md:gap-[57px] sm:max-md:p-[64px_86px] xs:h-[954.010742px] xs:min-h-[954.010742px] xs:gap-4 xs:p-[32px_16px]'
+      className='gusto-access relative flex h-[954.010742px] min-h-[954.010742px] flex-col items-center gap-4 bg-coral p-[32px_16px] text-center text-content sm:h-[1137.248535px] sm:min-h-[1137.248535px] sm:gap-[57px] sm:p-[64px_86px] lg:h-auto lg:min-h-0 lg:gap-12 lg:p-[72px_max(24px,9vw)] xl:h-[671.248474px] xl:min-h-[671.248474px] xl:gap-[57px] xl:p-[50px_96px] 3xl:h-auto 3xl:min-h-[min(38.0729vw,731px)] 3xl:gap-[min(2.9688vw,57px)] 3xl:p-[min(4.375vw,84px)_min(12.5vw,240px)]'
     >
-      <div className='gusto-access-title flex h-[min(4.7917vw,92px)] w-[min(75vw,1440px)] flex-col items-center gap-[min(0.4167vw,8px)] xl:max-2xl:h-[94.248497px] xl:max-2xl:w-[1248px] xl:max-2xl:gap-2 max-lg:h-auto max-lg:w-full max-lg:gap-2 sm:max-md:h-[94.248497px] sm:max-md:w-[191px] xs:h-[64.010719px] xs:w-[191px]'>
-        <h2 className='w-full font-display text-[min(2.7083vw,52px)] leading-none font-normal tracking-[-0.288em] text-ink xl:max-2xl:h-[52px] xl:max-2xl:text-[52px] max-lg:text-[46px] sm:max-md:h-[52px] sm:max-md:text-[52px] sm:max-md:leading-[52px] sm:max-md:tracking-[-15px] xs:h-8 xs:text-[32px] xs:leading-8 xs:tracking-[-0.25em]'>
+      <div className='gusto-access-title flex h-[64.010719px] w-[191px] flex-col items-center gap-[min(0.4167vw,8px)] sm:h-[94.248497px] sm:gap-2 lg:h-auto lg:w-full xl:h-[94.248497px] xl:w-[1248px] 3xl:h-[min(4.7917vw,92px)] 3xl:w-[min(75vw,1440px)]'>
+        <h2 className='h-8 w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:h-[52px] sm:-translate-x-2.5 sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] lg:h-auto lg:translate-x-0 lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:h-[52px] xl:text-[52px] 3xl:h-auto 3xl:text-[min(2.7083vw,52px)]'>
           {copy.home.accessTitle}
         </h2>
-        <p className="relative pb-[min(0.4167vw,8px)] font-accent text-[min(0.9375vw,18px)] leading-[1.36] text-ink after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[3px] after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] xl:max-2xl:h-[34.248497px] xl:max-2xl:w-[172px] xl:max-2xl:px-[14px] xl:max-2xl:pt-0 xl:max-2xl:pb-[10.248497px] xl:max-2xl:text-lg xl:max-2xl:whitespace-nowrap xl:max-2xl:after:right-[14px] xl:max-2xl:after:left-[14px] xl:max-2xl:after:h-0.5 max-lg:pb-2 max-lg:text-[17px] sm:max-md:h-[34.248497px] sm:max-md:w-[144px] sm:max-md:p-[0_0_10.248497px] sm:max-md:text-lg sm:max-md:leading-6 sm:max-md:whitespace-nowrap sm:max-md:after:h-0.5 xs:h-[24.010719px] xs:w-[191px] xs:p-[0_0_10.010719px] xs:text-sm xs:leading-[14px] xs:whitespace-nowrap xs:after:right-[31.1px] xs:after:left-[31.1px] xs:after:h-0.5 xs:after:rotate-[0.895deg]">
+        <p className="relative h-[24.010719px] w-[191px] p-[0_0_10px] whitespace-nowrap font-accent text-sm leading-[14px] text-ink after:absolute after:right-[31.1px] after:bottom-0 after:left-[31.1px] after:h-0.5 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:h-[34.248497px] sm:w-[144px] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 sm:after:right-0 sm:after:left-0 lg:h-auto lg:w-auto lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:h-[34.248497px] xl:w-[172px] xl:pb-[10.248497px] xl:text-lg xl:after:right-[14px] xl:after:left-[14px] 3xl:h-auto 3xl:w-auto 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)] 3xl:after:right-0 3xl:after:left-0 3xl:after:h-[3px]">
           {copy.home.accessLabel}
         </p>
       </div>
-      <div className='gusto-access-grid grid min-h-[min(21.5625vw,414px)] w-[min(75vw,1440px)] grid-cols-[min(25.3023vw,485.804px)_min(24.9479vw,479px)] justify-center gap-[min(1.25vw,24px)] text-left xl:max-2xl:h-[420px] xl:max-2xl:min-h-[420px] xl:max-2xl:w-[1248px] xl:max-2xl:grid-cols-[481.522461px_479px] xl:max-2xl:gap-6 max-lg:h-auto max-lg:min-h-0 max-lg:w-[min(100%,560px)] max-lg:grid-cols-1 max-lg:gap-9 sm:max-md:h-[858px] sm:max-md:min-h-[858px] sm:max-md:w-[596px] sm:max-md:grid-rows-[414px_420px] sm:max-md:gap-6 xs:h-[810px] xs:min-h-[810px] xs:w-[361px] xs:grid-rows-[414px_372px] xs:gap-6'>
-        <div className='gusto-map h-[min(21.5625vw,414px)] w-[min(25.3023vw,485.804px)] overflow-hidden bg-[var(--color-map-surface)] xl:max-2xl:h-[414px] xl:max-2xl:w-[481.522461px] max-lg:h-auto max-lg:min-h-0 max-lg:w-full max-lg:aspect-[486/414] sm:max-md:h-[414px] sm:max-md:w-[596px] sm:max-md:[aspect-ratio:auto] xs:h-[414px] xs:[aspect-ratio:auto]'>
+      <div className='gusto-access-grid grid h-[810px] min-h-[810px] w-[361px] grid-cols-1 grid-rows-[414px_372px] justify-center gap-6 text-left sm:h-[858px] sm:min-h-[858px] sm:w-[596px] sm:grid-rows-[414px_420px] lg:h-auto lg:min-h-0 lg:w-[min(100%,560px)] lg:grid-rows-none lg:gap-9 xl:h-[420px] xl:min-h-[420px] xl:w-[1248px] xl:grid-cols-[481.522461px_479px] xl:gap-6 3xl:min-h-[min(21.5625vw,414px)] 3xl:w-[min(75vw,1440px)] 3xl:grid-cols-[min(25.3023vw,485.804px)_min(24.9479vw,479px)] 3xl:gap-[min(1.25vw,24px)]'>
+        <div className='gusto-map h-[414px] w-full overflow-hidden bg-[var(--color-map-surface)] [aspect-ratio:auto] sm:w-[596px] lg:h-auto lg:min-h-0 lg:aspect-[486/414] xl:h-[414px] xl:w-[481.522461px] xl:[aspect-ratio:auto] 3xl:h-[min(21.5625vw,414px)] 3xl:w-[min(25.3023vw,485.804px)]'>
           <iframe
             src={siteConfig.mapEmbedUrl}
             title={copy.home.accessMapTitle}
@@ -29,7 +29,7 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
             className='block h-full w-full border-0'
           />
         </div>
-        <dl className='gusto-access-details grid min-h-[min(21.5625vw,414px)] w-[min(24.9479vw,479px)] content-start text-[min(0.8333vw,16px)] leading-[min(2.1875vw,42px)] xl:max-2xl:h-[420px] xl:max-2xl:min-h-[420px] xl:max-2xl:w-[479px] xl:max-2xl:text-base xl:max-2xl:leading-[42px] max-lg:h-auto max-lg:min-h-0 max-lg:w-full max-lg:text-[15px] max-lg:leading-[2.2] sm:max-md:h-[420px] sm:max-md:min-h-[420px] sm:max-md:w-[596px] sm:max-md:text-base sm:max-md:leading-[42px] xs:h-[372px] xs:min-h-[372px] xs:grid-rows-[81px_125px_25px_50px_27px] xs:gap-y-4 xs:text-base xs:leading-[27px]'>
+        <dl className='gusto-access-details grid h-[372px] min-h-[372px] w-[361px] grid-rows-[81px_125px_25px_50px_27px] content-start gap-y-4 text-base leading-[27px] sm:h-[420px] sm:min-h-[420px] sm:w-[596px] sm:grid-rows-none sm:gap-y-0 sm:leading-[42px] lg:h-auto lg:min-h-0 lg:w-full lg:text-[15px] lg:leading-[2.2] xl:h-[420px] xl:min-h-[420px] xl:w-[479px] xl:text-base xl:leading-[42px] 3xl:h-auto 3xl:min-h-[min(21.5625vw,414px)] 3xl:w-[min(24.9479vw,479px)] 3xl:text-[min(0.8333vw,16px)] 3xl:leading-[min(2.1875vw,42px)]'>
           <div className={detailRowClass}>
             <dt className='font-normal'>{copy.info.address}</dt>
             <dd className={detailValueClass}>
@@ -48,7 +48,7 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
             </dd>
           </div>
           <div
-            className={`${detailRowClass} mb-[min(2.1875vw,42px)] xl:max-2xl:mb-[42px] max-lg:mb-6 sm:max-md:mb-[42px] xs:mb-0`}
+            className={`${detailRowClass} mb-0 sm:mb-[42px] lg:mb-6 xl:mb-[42px] 3xl:mb-[min(2.1875vw,42px)]`}
           >
             <dt className='font-normal'>{copy.home.accessDetails}</dt>
             <dd className={detailValueClass}>

@@ -35,7 +35,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   ];
 
   useEffect(() => {
-    const mobileMenu = window.matchMedia('(max-width: 768px)');
+    const mobileMenu = window.matchMedia('(max-width: 991px)');
     const closeOutsideMobile = (event: MediaQueryListEvent) => {
       if (!event.matches) setOpen(false);
     };
@@ -87,9 +87,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       className={[
         'bg-transparent shadow-none backdrop-filter-none',
         usesGustoHeader
-          ? 'z-40 h-[132px] border-0 max-md:relative max-md:h-[120px] max-md:p-[8px_0] xs:h-[84px] xs:p-[4px_0]'
+          ? 'z-40 h-[84px] border-0 p-[4px_0] sm:h-[120px] sm:p-[8px_0] lg:h-[132px] lg:p-0'
           : 'sticky top-0 z-30 border-b border-ink/10',
-        isHomePage ? 'absolute inset-[0_0_auto]' : '',
+        isHomePage ? 'relative inset-[0_0_auto] lg:absolute' : '',
         isInnerPage ? 'relative inset-auto' : '',
       ]
         .filter(Boolean)
@@ -99,11 +99,8 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         className={[
           'site-header-inner mx-auto flex w-full items-center justify-between bg-transparent',
           usesGustoHeader
-            ? 'h-[132px] max-w-none p-[16px_48px]'
-            : 'max-w-[var(--layout-container)] p-4 min-[768px]:px-6 min-[992px]:px-24 3xl:px-60',
-          usesGustoHeader
-            ? 'max-md:h-[104px] max-md:p-[8px_16px] xs:h-[76px] xs:p-[8px_16px]'
-            : '',
+            ? 'h-[76px] max-w-none p-[8px_16px] sm:h-[104px] lg:h-[132px] lg:p-[16px_48px]'
+            : 'max-w-[var(--layout-container)] p-4 md:px-6 lg:px-24 3xl:px-60',
         ]
           .filter(Boolean)
           .join(' ')}
@@ -113,7 +110,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           className={[
             'block',
             usesGustoHeader
-              ? 'h-25 w-[230.708664px] max-md:relative max-md:-top-px max-md:h-[90px] max-md:w-[207.637802px] xs:top-0 xs:h-15 xs:w-[138.425201px]'
+              ? 'h-15 w-[138.425201px] sm:relative sm:-top-px sm:h-[90px] sm:w-[207.637802px] lg:static lg:h-25 lg:w-[230.708664px]'
               : 'h-auto w-40',
           ].join(' ')}
           onClick={() => setOpen(false)}
@@ -130,7 +127,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
         <nav
           aria-label='Primary navigation'
-          className={`items-center gap-6 max-md:hidden ${usesGustoHeader ? 'hidden' : 'flex'}`}
+          className={`items-center gap-6 ${usesGustoHeader ? 'hidden' : 'hidden lg:flex'}`}
         >
           {desktopNav.map(([label, href]) => (
             <Link
@@ -163,7 +160,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           aria-haspopup='dialog'
           aria-controls='mobile-nav'
           onClick={() => setOpen((current) => !current)}
-          className='relative z-[1] ml-auto hidden size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink max-md:flex xs:mr-[-8px]'
+          className='relative z-[1] mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
         >
           <span className='sr-only'>{d.nav.menu}</span>
           <span
@@ -185,7 +182,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             role='dialog'
             aria-modal='true'
             aria-label={d.nav.menu}
-            className='fixed inset-0 z-50 hidden min-h-[100dvh] flex-col overflow-y-auto bg-ink text-warm-light will-change-[opacity,transform] max-md:flex'
+            className='fixed inset-0 z-50 flex min-h-[100dvh] flex-col overflow-y-auto bg-ink text-warm-light will-change-[opacity,transform] lg:hidden'
             initial={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
@@ -194,19 +191,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <div className='site-header-mobile-header relative flex w-full flex-[0_0_120px] items-center justify-center p-[8px_24px] xs:h-[84px] xs:basis-[84px] xs:justify-start xs:p-[4px_0]'>
+            <div className='site-header-mobile-header relative flex h-[84px] w-full flex-[0_0_84px] items-center justify-start p-[4px_0] sm:h-auto sm:flex-[0_0_120px] sm:justify-center sm:p-[8px_24px]'>
               <button
                 type='button'
                 onClick={() => {
                   setOpen(false);
                   menuButtonRef.current?.focus();
                 }}
-                className='absolute top-[44px] right-4 flex size-8 items-center justify-center border-0 bg-transparent p-0 text-warm-light xs:top-[26px] xs:right-2'
+                className='absolute top-[26px] right-2 flex size-8 items-center justify-center border-0 bg-transparent p-0 text-warm-light sm:top-[44px] sm:right-4'
               >
                 <span className='sr-only'>{d.nav.closeMenu}</span>
                 <span
                   aria-hidden='true'
-                  className='relative block size-8 [&_i]:absolute [&_i]:top-[14.5px] [&_i]:left-[7px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[18px] [&_i]:bg-current [&_i:nth-child(2)]:hidden [&_i:first-child]:rotate-45 [&_i:last-child]:-rotate-45 xs:[&_i]:left-[5px] xs:[&_i]:w-[22px] xs:[&_i]:rotate-0! xs:[&_i:nth-child(1)]:top-2 xs:[&_i:nth-child(2)]:top-4 xs:[&_i:nth-child(2)]:block xs:[&_i:nth-child(3)]:top-6'
+                  className='relative block size-8 [&_i]:absolute [&_i]:left-[5px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[22px] [&_i]:rotate-0! [&_i]:bg-current [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6 sm:[&_i]:top-[14.5px] sm:[&_i]:left-[7px] sm:[&_i]:w-[18px] sm:[&_i:nth-child(2)]:hidden sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45!'
                 >
                   <i />
                   <i />
@@ -215,7 +212,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               </button>
               <Link
                 href={`/${locale}`}
-                className='absolute top-[20.976112px] left-1/2 block h-[91.023888px] w-[210px] -translate-x-1/2 xs:top-3 xs:left-4 xs:h-[60px] xs:w-[138.425201px] xs:translate-x-0'
+                className='absolute top-3 left-4 block h-[60px] w-[138.425201px] translate-x-0 sm:top-[20.976112px] sm:left-1/2 sm:h-[91.023888px] sm:w-[210px] sm:-translate-x-1/2'
                 onClick={() => setOpen(false)}
               >
                 <Image
@@ -229,9 +226,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </div>
             <nav
               aria-label={d.nav.menu}
-              className='flex w-full flex-col items-center gap-[84px] p-[100px_24px] xs:h-[736px] xs:flex-[0_0_736px] xs:gap-16 xs:p-[100px_16px]'
+              className='flex h-[736px] w-full flex-[0_0_736px] flex-col items-center gap-16 p-[100px_16px] sm:h-auto sm:flex-auto sm:gap-[84px] sm:p-[100px_24px]'
             >
-              <div className='site-header-mobile-link-list flex flex-col items-center gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-[45px] [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline xs:w-[118px] xs:gap-7'>
+              <div className='site-header-mobile-link-list flex w-[118px] flex-col items-center gap-7 sm:w-auto sm:gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-[45px] [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
                 {mobileNav.map(([label, href]) => (
                   <Link key={href} href={href} onClick={() => setOpen(false)}>
                     {label}
@@ -240,7 +237,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               </div>
               <ReservationLink
                 href={siteConfig.reservationUrl}
-                className='flex h-[54px] w-full max-w-[360px] items-center justify-center bg-coral p-[8px_16px] font-label text-2xl leading-[38px] font-bold text-warm-light no-underline xs:w-[360px] xs:flex-[0_0_54px]'
+                className='flex h-[54px] w-[360px] max-w-[360px] flex-[0_0_54px] items-center justify-center bg-coral p-[8px_16px] font-label text-2xl leading-[38px] font-bold text-warm-light no-underline sm:w-full'
               >
                 {d.nav.mobileReserve}
               </ReservationLink>

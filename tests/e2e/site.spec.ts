@@ -411,7 +411,7 @@ test("the 393px hamburger menu matches the supplied Pixso frame", async ({ page 
   await expect(close).toBeFocused();
 });
 
-test("the mobile menu is available below the 768px breakpoint", async ({ page }, testInfo) => {
+test("the mobile menu is available below the 992px breakpoint", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only breakpoint check");
   await page.setViewportSize({ width: 767, height: 900 });
   await page.goto("/ja");
@@ -482,7 +482,10 @@ test("the mobile menu is available below the 768px breakpoint", async ({ page },
   await page.setViewportSize({ width: 768, height: 900 });
   await expect(page.getByRole("dialog", { name: "メニュー" })).toBeVisible();
   await expect(trigger).toBeVisible();
-  await page.setViewportSize({ width: 769, height: 900 });
+  await page.setViewportSize({ width: 991, height: 900 });
+  await expect(page.getByRole("dialog", { name: "メニュー" })).toBeVisible();
+  await expect(trigger).toBeVisible();
+  await page.setViewportSize({ width: 992, height: 900 });
   await expect(page.getByRole("dialog", { name: "メニュー" })).toBeHidden();
   await expect(trigger).toBeHidden();
 });

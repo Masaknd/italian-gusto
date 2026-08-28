@@ -7,26 +7,26 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
   return (
     <section
       id='about-story'
-      className='gusto-about-page-hero relative h-[1166px] w-full overflow-hidden xl:max-2xl:h-[926px] max-xl:h-[1254px] xs:h-[907px]'
+      className='gusto-about-page-hero relative h-[907px] w-full overflow-hidden sm:h-[1254px] xl:h-[926px] 3xl:h-[1166px]'
       aria-labelledby='gusto-about-page-title'
     >
       <Marquee
-        className='gusto-about-page-marquee top-[262.01px] left-[90px] z-[3] xl:max-2xl:top-[84px] max-xl:hidden'
+        className='gusto-about-page-marquee top-[262.01px] left-[90px] z-[3] hidden xl:top-[84px] xl:block 3xl:top-[262.01px]'
         text={copy.home.verticalTitle}
       />
 
-      <div className='gusto-about-page-story absolute top-6 left-[264px] z-[2] flex h-[609px] w-[585px] flex-col items-start gap-12 xl:max-2xl:left-[120px] xl:max-2xl:w-[612px] max-xl:left-1/2 max-xl:h-[404px] max-xl:w-[min(720px,calc(100%_-_48px))] max-xl:-translate-x-1/2 xs:left-4 xs:h-[436px] xs:w-[361px] xs:max-w-[calc(100%_-_32px)] xs:translate-x-0 xs:gap-6'>
-        <div className='flex h-[84px] w-80 flex-col items-start gap-1 border-b-2 border-dashed border-coral max-xl:h-[52px] max-xl:w-48 xs:h-9 xs:w-32'>
+      <div className='gusto-about-page-story absolute top-6 left-4 z-[2] flex h-[436px] w-[361px] max-w-[calc(100%_-_32px)] translate-x-0 flex-col items-start gap-6 sm:left-1/2 sm:h-[404px] sm:w-[min(720px,calc(100%_-_48px))] sm:max-w-none sm:-translate-x-1/2 sm:gap-12 xl:left-[120px] xl:h-[609px] xl:w-[612px] xl:translate-x-0 3xl:left-[264px] 3xl:w-[585px]'>
+        <div className='flex h-9 w-32 flex-col items-start gap-1 border-b-2 border-dashed border-coral sm:h-[52px] sm:w-48 xl:h-[84px] xl:w-80'>
           <h1
             id='gusto-about-page-title'
-            className='m-0 flex h-20 w-80 items-center whitespace-nowrap font-display text-[80px] leading-[96px] font-normal tracking-[-0.25em] text-coral max-xl:h-12 max-xl:w-48 max-xl:text-5xl max-xl:leading-[58px] xs:h-8 xs:w-32 xs:text-[32px] xs:leading-[38px]'
+            className='m-0 flex h-8 w-32 items-center whitespace-nowrap font-display text-[32px] leading-[38px] font-normal tracking-[-0.25em] text-coral sm:h-12 sm:w-48 sm:text-5xl sm:leading-[58px] xl:h-20 xl:w-80 xl:text-[80px] xl:leading-[96px]'
           >
             {copy.home.aboutTitle}
           </h1>
         </div>
 
-        <div className='relative flex h-[477px] w-full flex-col items-start gap-12 max-xl:h-[304px] max-xl:gap-4 xs:h-[376px] xs:w-[360px] xs:max-w-full'>
-          <div className='gusto-about-page-copy relative z-[2] h-[231px] w-full font-accent text-2xl leading-[1.36] font-normal text-ink max-xl:h-36 max-xl:text-lg xs:h-[216px]'>
+        <div className='relative flex h-[376px] w-[360px] max-w-full flex-col items-start gap-4 sm:h-[304px] sm:w-full xl:h-[477px] xl:gap-12'>
+          <div className='gusto-about-page-copy relative z-[2] h-[216px] w-full font-accent text-lg leading-[1.36] font-normal text-ink sm:h-36 xl:h-[231px] xl:text-2xl'>
             {copy.home.aboutBody.map((paragraph) => (
               <p className='m-0 leading-[inherit]' key={paragraph}>
                 {paragraph}
@@ -34,15 +34,15 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
             ))}
           </div>
 
-          <dl className='relative z-[2] m-0 flex h-[198px] w-full flex-col justify-between font-accent text-2xl leading-[1.36] font-normal text-ink max-xl:h-36 max-xl:text-lg'>
-            <div className='grid grid-cols-[112px_minmax(0,1fr)] max-xl:grid-cols-[96px_minmax(0,1fr)]'>
+          <dl className='relative z-[2] m-0 flex h-36 w-full flex-col justify-between font-accent text-lg leading-[1.36] font-normal text-ink xl:h-[198px] xl:text-2xl'>
+            <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
               <dt className='m-0 font-[inherit]'>{copy.info.hours}</dt>
               <dd className='m-0 font-[inherit]'>
                 <span className='block'>{siteConfig.lunchHours}</span>
                 <span className='block'>{siteConfig.dinnerHours}</span>
               </dd>
             </div>
-            <div className='grid grid-cols-[112px_minmax(0,1fr)] max-xl:grid-cols-[96px_minmax(0,1fr)]'>
+            <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
               <dt className='m-0 font-[inherit]'>{copy.info.phone}</dt>
               <dd className='m-0 font-[inherit]'>
                 <a
@@ -53,7 +53,7 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
                 </a>
               </dd>
             </div>
-            <div className='grid grid-cols-[112px_minmax(0,1fr)] max-xl:grid-cols-[96px_minmax(0,1fr)]'>
+            <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
               <dt className='m-0 font-[inherit]'>{copy.home.paymentLabel}</dt>
               <dd className='m-0 font-[inherit]'>{copy.home.paymentMethods}</dd>
             </div>
@@ -65,12 +65,12 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
             width={399}
             height={256}
             sizes='(max-width: 768px) 310px, (max-width: 1599px) 399px, 553px'
-            className='gusto-about-page-barrel absolute top-[555px] left-0 z-[1] block h-[354.46px] w-[552.71px] object-contain xl:max-2xl:top-[477.66px] xl:max-2xl:left-[220px] xl:max-2xl:h-[255.62px] xl:max-2xl:w-[398.6px] max-xl:top-[105px] max-xl:right-0 max-xl:left-auto max-xl:h-[199px] max-xl:w-[310.31px] xs:hidden'
+            className='gusto-about-page-barrel absolute top-[105px] right-0 left-auto z-[1] hidden h-[199px] w-[310.31px] object-contain sm:block xl:top-[477.66px] xl:right-auto xl:left-[220px] xl:h-[255.62px] xl:w-[398.6px] 3xl:top-[555px] 3xl:left-0 3xl:h-[354.46px] 3xl:w-[552.71px]'
           />
         </div>
       </div>
 
-      <div className='gusto-about-page-interior absolute top-0 left-[849px] h-[1066px] w-[973px] xl:max-2xl:top-6 xl:max-2xl:left-[732px] xl:max-2xl:h-[776px] xl:max-2xl:w-[709px] max-xl:top-[452px] max-xl:left-1/2 max-xl:h-[776px] max-xl:w-[709px] max-xl:-translate-x-1/2 xs:top-[484px] xs:left-4 xs:h-[397px] xs:w-[361px] xs:max-w-[calc(100%_-_32px)] xs:translate-x-0'>
+      <div className='gusto-about-page-interior absolute top-[484px] left-4 h-[397px] w-[361px] max-w-[calc(100%_-_32px)] translate-x-0 sm:top-[452px] sm:left-1/2 sm:h-[776px] sm:w-[709px] sm:max-w-none sm:-translate-x-1/2 xl:top-6 xl:left-[732px] xl:translate-x-0 3xl:top-0 3xl:left-[849px] 3xl:h-[1066px] 3xl:w-[973px]'>
         <Image
           src='/images/inside.png'
           alt={copy.home.aboutImageAlt}
@@ -82,7 +82,7 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
       </div>
 
       <a
-        className='absolute right-[72px] bottom-[100px] z-[4] flex size-[74px] items-center justify-center rounded-full border-[5px] border-coral font-display text-[46px] leading-none font-normal text-coral no-underline xl:max-2xl:right-8 xl:max-2xl:size-12 xl:max-2xl:border-[3px] xl:max-2xl:text-3xl max-xl:hidden'
+        className='absolute right-8 bottom-[100px] z-[4] hidden size-12 items-center justify-center rounded-full border-[3px] border-coral font-display text-3xl leading-none font-normal text-coral no-underline xl:flex 3xl:right-[72px] 3xl:size-[74px] 3xl:border-[5px] 3xl:text-[46px]'
         href='#about-story'
         aria-label={copy.aboutPage.backToTop}
       >

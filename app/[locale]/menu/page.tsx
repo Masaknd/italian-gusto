@@ -57,19 +57,19 @@ export default async function MenuPage({
           className='relative w-full overflow-hidden text-ink'
           aria-labelledby='gusto-menu-title'
         >
-          <div className='flex w-full flex-col items-start gap-[46px] px-60 pb-50 max-2xl:px-24 max-lg:px-6 xs:gap-6 xs:px-4 xs:pb-[50px]'>
+          <div className='flex w-full flex-col items-start gap-6 px-4 pb-[50px] sm:gap-[46px] sm:px-6 sm:pb-50 xl:px-24 3xl:px-60'>
             <h1
               id='gusto-menu-title'
-              className='gusto-menu__title m-0 box-border inline-flex h-[88px] w-[385px] items-end whitespace-nowrap border-b-[3px] border-dashed border-coral font-display font-normal text-coral max-lg:h-[60px] max-lg:w-[261px] xs:h-10 xs:w-[203px]'
+              className='gusto-menu__title m-0 box-border inline-flex h-10 w-[203px] items-end whitespace-nowrap border-b-[3px] border-dashed border-coral font-display font-normal text-coral sm:h-[60px] sm:w-[261px] xl:h-[88px] xl:w-[385px]'
             >
               <span
-                className='gusto-menu__title-prefix text-5xl leading-15 tracking-[-0.3em] max-lg:text-[32px] max-lg:leading-10 xs:text-2xl xs:leading-[30px]'
+                className='gusto-menu__title-prefix text-2xl leading-[30px] tracking-[-0.3em] sm:text-[32px] sm:leading-10 xl:text-5xl xl:leading-15'
                 aria-hidden='true'
               >
                 {d.menu.titlePrefix}
               </span>
               <span
-                className='gusto-menu__title-main text-[80px] leading-24 tracking-[-0.25em] max-lg:text-[52px] max-lg:leading-[62px] xs:text-[40px] xs:leading-12'
+                className='gusto-menu__title-main text-[40px] leading-12 tracking-[-0.25em] sm:text-[52px] sm:leading-[62px] xl:text-[80px] xl:leading-24'
                 aria-hidden='true'
               >
                 {d.menu.titleMain}
@@ -85,7 +85,7 @@ export default async function MenuPage({
             )}
           </div>
           <div
-            className='gusto-menu__line-art pointer-events-none absolute top-[46px] right-[1.999px] h-[297px] w-[287.08px] max-lg:hidden'
+            className='gusto-menu__line-art pointer-events-none absolute top-[46px] right-[1.999px] hidden h-[297px] w-[287.08px] xl:block'
             aria-hidden='true'
           >
             <Image

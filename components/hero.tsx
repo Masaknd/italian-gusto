@@ -4,20 +4,20 @@ import { Marquee } from './marquee';
 
 export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
   return (
-    <section className='gusto-hero relative isolate h-[min(66.458vw,1276px)] min-h-[900px] overflow-hidden px-[max(8vw,calc((100vw_-_1440px)/2))] py-[205px] xl:max-2xl:h-[952px] xl:max-2xl:min-h-[952px] xl:max-2xl:p-0 max-md:h-auto max-md:min-h-[470px] max-md:px-[15%] max-md:pt-[5.2rem] max-md:pb-20 sm:max-md:h-[844px] sm:max-md:min-h-[844px] sm:max-md:p-0 xs:h-[675px] xs:min-h-[675px] xs:px-[16px] xs:py-0'>
+    <section className='gusto-hero relative isolate h-[675px] min-h-[675px] overflow-hidden px-4 py-0 sm:h-[844px] sm:min-h-[844px] sm:p-0 xl:h-[952px] xl:min-h-[952px] xl:p-0 3xl:h-[min(66.458vw,1276px)] 3xl:min-h-[900px] 3xl:px-[max(8vw,calc((100vw_-_1440px)/2))] 3xl:py-[205px]'>
       <Marquee
-        className='gusto-vertical top-[304.5px] left-[90px] xl:max-2xl:top-[163.935059px] max-md:top-[27%] max-md:left-[5%] max-md:text-[clamp(1.1rem,4vw,2rem)] max-md:leading-[1.1] max-md:tracking-[0.2em] max-md:[text-shadow:none] sm:max-md:top-[233.500009px] sm:max-md:left-[-233.499996px] sm:max-md:flex sm:max-md:h-[60px] sm:max-md:w-[527px] sm:max-md:origin-center sm:max-md:items-center sm:max-md:justify-start sm:max-md:text-[length:68px] sm:max-md:leading-[90px] sm:max-md:tracking-[-0.25em] sm:max-md:[text-shadow:var(--shadow-hero-title)] xs:hidden'
+        className='gusto-vertical hidden sm:top-[233.500009px] sm:left-[-233.499996px] sm:flex sm:h-[60px] sm:w-[527px] sm:origin-center sm:items-center sm:justify-start sm:text-[length:68px] sm:leading-[90px] sm:tracking-[-0.25em] sm:[text-shadow:var(--shadow-hero-title)] xl:top-[163.935059px] xl:left-[90px] xl:block xl:h-auto xl:w-auto xl:origin-top-left xl:text-[86px] xl:leading-[90px] xl:tracking-[-0.25em] 3xl:top-[304.5px]'
         text={copy.home.verticalTitle}
       />
-      <div className='relative z-[2] max-w-[596px] xl:max-2xl:absolute xl:max-2xl:top-[204.869141px] xl:max-2xl:left-[202.271194px] xl:max-2xl:w-[424px] xl:max-2xl:max-w-none sm:max-md:absolute sm:max-md:top-0 sm:max-md:left-[86.237976px] sm:max-md:w-[424px] sm:max-md:max-w-none xs:absolute xs:top-0 xs:left-[16px] xs:w-[361px] xs:max-w-none'>
-        <h1 className='whitespace-pre-line font-display text-[clamp(4.5rem,5.21vw,100px)] leading-[108px] font-normal tracking-[-0.3em] text-coral xl:max-2xl:w-[424px] xl:max-2xl:text-[68px] xl:max-2xl:leading-[80px] xl:max-2xl:tracking-[-0.2em] max-md:text-[clamp(1.55rem,5vw,2.5rem)] max-md:leading-[1.35] max-md:tracking-normal sm:max-md:h-[240px] sm:max-md:w-[424px] sm:max-md:text-[68px] sm:max-md:leading-[80px] sm:max-md:tracking-[-0.2em] xs:h-[180px] xs:w-[361px] xs:text-center xs:text-5xl xs:leading-[60px] xs:tracking-[-0.2em]'>
+      <div className='absolute top-0 left-4 z-[2] w-[361px] max-w-none sm:left-[86.237976px] sm:w-[424px] xl:top-[204.869141px] xl:left-[202.271194px] 3xl:relative 3xl:top-auto 3xl:left-auto 3xl:w-auto 3xl:max-w-[596px]'>
+        <h1 className='h-[180px] w-[361px] whitespace-pre-line text-center font-display text-5xl leading-[60px] font-normal tracking-[-0.2em] text-coral sm:h-[240px] sm:w-[424px] sm:text-[68px] sm:leading-[80px] xl:text-left 3xl:h-auto 3xl:w-auto 3xl:text-[clamp(4.5rem,5.21vw,100px)] 3xl:leading-[108px] 3xl:tracking-[-0.3em]'>
           {copy.hero.titleSegments.map((line, lineIndex) => (
             <span className='block' key={lineIndex}>
               {line.map((segment, segmentIndex) => (
                 <span
                   className={
                     'emphasis' in segment && segment.emphasis
-                      ? 'gusto-hero-title-emphasis sm:max-md:text-[86px] xs:text-[68px]'
+                      ? 'gusto-hero-title-emphasis text-[68px] sm:text-[86px] 3xl:text-[inherit]'
                       : undefined
                   }
                   key={`${lineIndex}-${segmentIndex}`}
@@ -30,7 +30,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         </h1>
         <nav
           aria-label={copy.home.heroNavLabel}
-          className='gusto-hero-nav mt-[68px] grid gap-[18px] font-label text-[28px] leading-6 font-bold xl:max-2xl:absolute xl:max-2xl:top-[calc(532.714966px_-_204.869141px)] xl:max-2xl:left-[2.556107px] xl:max-2xl:mt-0 sm:max-md:hidden xs:hidden [&_a]:w-max [&_a]:text-ink [&_a]:no-underline'
+          className='gusto-hero-nav hidden gap-[18px] font-label text-[28px] leading-6 font-bold xl:absolute xl:top-[calc(532.714966px_-_204.869141px)] xl:left-[2.556107px] xl:grid 3xl:static 3xl:mt-[68px] [&_a]:w-max [&_a]:text-ink [&_a]:no-underline'
         >
           <a href=''>{copy.home.heroNav.home}</a>
           <a href='#about'>{copy.home.heroNav.about}</a>
@@ -45,17 +45,17 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         fill
         priority
         sizes='(max-width: 768px) 90vw, 65vw'
-        className='gusto-hero-dishes z-[1] object-contain object-right-top [height:92%]! [left:32.8125%]! [top:0]! [width:68%]! xl:max-2xl:object-fill xl:max-2xl:object-center xl:max-2xl:[height:908.671057px]! xl:max-2xl:[left:627.082397px]! xl:max-2xl:[top:-59.054199px]! xl:max-2xl:[width:844.035925px]! max-md:[height:58%]! max-md:[left:23%]! max-md:[width:89%]! sm:max-md:object-fill sm:max-md:object-center sm:max-md:[height:797.771484px]! sm:max-md:[left:141.321472px]! sm:max-md:[top:-1.597839px]! sm:max-md:[width:739.296631px]! xs:max-w-none! xs:object-fill xs:object-center xs:[height:501.597656px]! xs:[left:-17.040405px]! xs:[top:123.562851px]! xs:[width:464.832825px]!'
+        className='gusto-hero-dishes z-[1] max-w-none! object-fill object-center [height:501.597656px]! [left:-17.040405px]! [top:123.562851px]! [width:464.832825px]! sm:[height:797.771484px]! sm:[left:141.321472px]! sm:[top:-1.597839px]! sm:[width:739.296631px]! xl:[height:908.671057px]! xl:[left:627.082397px]! xl:[top:-59.054199px]! xl:[width:844.035925px]! 3xl:object-contain 3xl:object-right-top 3xl:[height:92%]! 3xl:[left:32.8125%]! 3xl:[top:0]! 3xl:[width:68%]!'
       />
       <Image
         src='/images/four-veggies.png'
         alt=''
         width={360}
         height={246}
-        className='gusto-hero-veg absolute top-[675px] left-[24.0625%] z-[2] h-auto w-[360px] opacity-70 xl:max-2xl:top-[549.103516px] xl:max-2xl:left-[394.24704px] xl:max-2xl:w-[415.595337px] xl:max-2xl:opacity-100 sm:max-md:top-[597.101837px] sm:max-md:bottom-auto sm:max-md:left-[86.73233px] sm:max-md:h-[237.561798px] sm:max-md:w-[347.39679px] sm:max-md:opacity-100 xs:top-[516.244629px] xs:bottom-auto xs:left-[16px] xs:h-[137.972656px] xs:w-[201.76062px] xs:opacity-100'
+        className='gusto-hero-veg absolute top-[516.244629px] bottom-auto left-4 z-[2] h-[137.972656px] w-[201.76062px] opacity-100 sm:top-[597.101837px] sm:left-[86.73233px] sm:h-[237.561798px] sm:w-[347.39679px] xl:top-[549.103516px] xl:left-[394.24704px] xl:h-auto xl:w-[415.595337px] 3xl:top-[675px] 3xl:left-[24.0625%] 3xl:w-[360px] 3xl:opacity-70'
       />
       <a
-        className='gusto-hero-caret absolute top-[1026px] right-[72px] z-[4] flex size-[74px] items-center justify-center rounded-full border-[5px] border-coral font-display text-[46px] leading-none font-normal text-coral no-underline max-md:hidden'
+        className='gusto-hero-caret absolute top-[1026px] right-[72px] z-[4] hidden size-[74px] items-center justify-center rounded-full border-[5px] border-coral font-display text-[46px] leading-none font-normal text-coral no-underline lg:flex'
         href='#about'
         aria-label={copy.home.heroScrollLabel}
       >
@@ -67,7 +67,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         width={3841}
         height={284}
         sizes='100vw'
-        className='gusto-hero-brush pointer-events-none absolute inset-x-0 bottom-[-1px]! z-[3] block h-auto! w-full! max-w-none! sm:max-md:hidden xs:hidden'
+        className='gusto-hero-brush pointer-events-none absolute inset-x-0 bottom-[-1px]! z-[3] hidden h-auto! w-full! max-w-none! xl:block'
       />
     </section>
   );

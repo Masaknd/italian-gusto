@@ -5,15 +5,14 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
-@custom-variant xs (@media (width <= 30rem));
 
 @theme {
-  /* Breakpoints preserve the established responsive ranges. */
-  --breakpoint-sm: 30.0625rem; /* 481px */
-  --breakpoint-md: 48.00125rem; /* 768.02px */
-  --breakpoint-lg: 56.25rem; /* 900px */
+  /* Mobile-first breakpoints: each variant applies at this width and above. */
+  --breakpoint-sm: 30rem; /* 480px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 62rem; /* 992px */
   --breakpoint-xl: 75rem; /* 1200px */
-  --breakpoint-2xl: 100rem; /* 1600px */
+  --breakpoint-2xl: 90rem; /* 1440px */
   --breakpoint-3xl: 120rem; /* 1920px */
 
   /* Primitive colors — Mode 1 */
