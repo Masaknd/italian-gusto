@@ -32,10 +32,10 @@ export function HomeFooter({
         width={3849}
         height={72}
         sizes='100vw'
-        className='gusto-footer-brush block h-[7.284471px] w-full max-w-none rotate-180 sm:h-[14.235302px] xl:h-[26.691189px] 3xl:h-auto'
+        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none rotate-180 -translate-y-px'
       />
-      <div className='gusto-footer-content relative bg-ink sm:-mt-[14.235302px] xl:-mt-[26.691189px] 3xl:-mt-[35.588px]'>
-        <div className='gusto-footer-upper flex items-center justify-center p-[32px_0] sm:p-[46.235302px_0_32px] lg:p-[calc(32px_+_min(1.8535vw,35.588px))_24px_32px] xl:p-[58.691189px_96px_65px] 3xl:p-[calc(32px_+_min(1.8535vw,35.588px))_240px_32px]'>
+      <div className='gusto-footer-content relative bg-ink'>
+        <div className='gusto-footer-upper flex items-center justify-center p-[32px_0] sm:p-[46.235302px_0_32px] lg:p-[calc(32px_+_min(1.8535vw,35.588px))_24px_32px] xl:p-[calc(32px_+_min(1.8535vw,22px))_96px_32px] 3xl:p-[calc(32px_+_min(1.8535vw,35.588px))_240px_32px]'>
           <div className='gusto-footer-upper-inner flex w-full flex-col items-center justify-start gap-6 px-4 sm:gap-8 sm:px-6 xl:flex-row xl:justify-between xl:gap-0 xl:px-0'>
             <Link
               href={`/${locale}`}
@@ -52,7 +52,7 @@ export function HomeFooter({
             </Link>
             <nav
               aria-label={copy.footer.navigation}
-              className='gusto-footer-nav flex w-[124px] flex-col items-center gap-4 sm:w-[451px] sm:flex-row sm:gap-0 xl:w-[479px]'
+              className='gusto-footer-nav flex  flex-col items-center gap-4  sm:flex-row sm:gap-0'
             >
               {footerNav.map(([label, href]) => (
                 <Link
