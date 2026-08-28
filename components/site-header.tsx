@@ -100,7 +100,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           'site-header-inner mx-auto flex w-full items-center justify-between bg-transparent',
           usesGustoHeader
             ? 'h-[132px] max-w-none p-[16px_48px]'
-            : 'max-w-[var(--layout-container)] p-[16px_var(--layout-page-padding)]',
+            : 'max-w-[var(--layout-container)] p-4 min-[768px]:px-6 min-[992px]:px-24 3xl:px-60',
           usesGustoHeader
             ? 'max-md:h-[104px] max-md:p-[8px_16px] xs:h-[76px] xs:p-[8px_16px]'
             : '',

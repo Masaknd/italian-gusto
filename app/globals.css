@@ -12,8 +12,6 @@
   --breakpoint-sm: 30.0625rem; /* 481px */
   --breakpoint-md: 48.00125rem; /* 768.02px */
   --breakpoint-lg: 56.25rem; /* 900px */
-  --breakpoint-desktop: 63.99875rem; /* 1023.98px */
-  --breakpoint-wide: 68.75rem; /* 1100px */
   --breakpoint-xl: 75rem; /* 1200px */
   --breakpoint-2xl: 100rem; /* 1600px */
   --breakpoint-3xl: 120rem; /* 1920px */
@@ -307,10 +305,6 @@
   /* Layout defaults — xs */
   --layout-screen-size: 393px;
   --layout-container: min(361px, calc(100vw - 32px));
-  --layout-padding-title: 16px;
-  --layout-padding-body: 16px;
-  --layout-padding-body-wide: 16px;
-  --layout-page-padding: var(--layout-padding-body);
 }
 
 /* Semantic colors — dark */
@@ -367,9 +361,6 @@
   :root {
     --layout-screen-size: 768px;
     --layout-container: 720px;
-    --layout-padding-title: 24px;
-    --layout-padding-body: 24px;
-    --layout-padding-body-wide: 86px;
   }
 }
 
@@ -377,9 +368,6 @@
   :root {
     --layout-screen-size: 992px;
     --layout-container: 960px;
-    --layout-padding-title: 96px;
-    --layout-padding-body: 96px;
-    --layout-padding-body-wide: 96px;
   }
 }
 
@@ -387,9 +375,6 @@
   :root {
     --layout-screen-size: 1440px;
     --layout-container: 1336px;
-    --layout-padding-title: 96px;
-    --layout-padding-body: 96px;
-    --layout-padding-body-wide: 96px;
   }
 }
 
@@ -397,9 +382,6 @@
   :root {
     --layout-screen-size: 1920px;
     --layout-container: 1900px;
-    --layout-padding-title: 240px;
-    --layout-padding-body: 240px;
-    --layout-padding-body-wide: 240px;
   }
 }
 
