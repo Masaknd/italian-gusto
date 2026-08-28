@@ -20,9 +20,7 @@ function MenuPrice({
 }) {
   return (
     <p className='gusto-menu-card__price mt-auto mb-0 flex min-h-8 w-full items-baseline justify-end font-accent leading-none font-normal text-black xl:min-h-[60px]'>
-      <span className='text-2xl xl:text-[42px]'>
-        {yen(priceExcludingTax)}
-      </span>
+      <span className='text-2xl xl:text-[42px]'>{yen(priceExcludingTax)}</span>
       <span className='ml-[3px] text-[28px] xl:text-[42px]'>
         <small className='text-sm font-normal'>
           （{copy.menu.includingTax}
@@ -49,7 +47,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
       >
         {groups.map(([category], index) => (
           <span
-            className='flex min-w-0 items-center justify-center [&:not(:nth-child(3n+1))]:border-l-2 [&:not(:nth-child(3n+1))]:border-dashed [&:not(:nth-child(3n+1))]:border-coral xl:contents xl:[&:not(:nth-child(3n+1))]:border-l-0'
+            className='flex min-w-0 items-center justify-center xl:contents [&:not(:nth-child(3n+1))]:border-l-2 [&:not(:nth-child(3n+1))]:border-dashed [&:not(:nth-child(3n+1))]:border-coral xl:[&:not(:nth-child(3n+1))]:border-l-0'
             key={category}
           >
             {index > 0 && (
@@ -61,7 +59,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
             <a
               href={`#menu-category-${index + 1}`}
               className={[
-                'inline-flex h-8 items-center justify-center whitespace-nowrap font-display text-2xl leading-[29px] font-normal tracking-[-0.25em] text-coral no-underline sm:h-9 sm:text-[32px] sm:leading-[38px] xl:h-[52px] xl:text-5xl xl:leading-[58px] 3xl:h-[60px]! 3xl:text-[60px]! 3xl:leading-[72px]!',
+                'inline-flex h-8 items-center justify-center font-display text-2xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:h-9 sm:text-[32px] sm:leading-[38px] xl:h-[52px] xl:text-5xl xl:leading-[58px] 3xl:h-[60px]! 3xl:text-[60px]! 3xl:leading-[72px]!',
                 index === 0 ? 'text-[#c3a8a2]!' : '',
                 category.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
               ]
@@ -130,7 +128,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
                           {item.name}
                         </h3>
                         {!drink && item.description && (
-                          <p className='m-0 whitespace-pre-line font-accent text-sm leading-[1.5] font-normal text-black xl:text-lg xl:leading-[1.36]'>
+                          <p className='m-0 font-accent text-sm leading-[1.5] font-normal whitespace-pre-line text-black xl:text-lg xl:leading-[1.36]'>
                             {item.description}
                           </p>
                         )}

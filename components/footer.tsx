@@ -32,7 +32,7 @@ export function HomeFooter({
         width={3849}
         height={72}
         sizes='100vw'
-        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none rotate-180 -translate-y-px'
+        className='gusto-footer-brush absolute top-0 left-0 z-10 block w-full max-w-none -translate-y-px rotate-180'
       />
       <div className='gusto-footer-content relative bg-ink'>
         <div className='gusto-footer-upper flex items-center justify-center p-[32px_0] sm:p-[46.235302px_0_32px] lg:p-[calc(32px_+_min(1.8535vw,35.588px))_24px_32px] xl:p-[calc(32px_+_min(1.8535vw,22px))_96px_32px] 3xl:p-[calc(32px_+_min(1.8535vw,35.588px))_240px_32px]'>
@@ -52,7 +52,7 @@ export function HomeFooter({
             </Link>
             <nav
               aria-label={copy.footer.navigation}
-              className='gusto-footer-nav flex  flex-col items-center gap-4  sm:flex-row sm:gap-0'
+              className='gusto-footer-nav flex flex-col items-center gap-4 sm:flex-row sm:gap-0'
             >
               {footerNav.map(([label, href]) => (
                 <Link
@@ -112,7 +112,7 @@ export function HomeFooter({
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
-            <p className='gusto-footer-copyright w-[218px] text-center whitespace-nowrap font-sans text-xs leading-3.5 sm:text-center lg:font-sans xl:text-right xl:font-accent xl:text-sm'>
+            <p className='gusto-footer-copyright w-[218px] text-center font-sans text-xs leading-3.5 whitespace-nowrap sm:text-center lg:font-sans xl:text-right xl:font-accent xl:text-sm'>
               {copy.footer.copyright}
             </p>
           </div>

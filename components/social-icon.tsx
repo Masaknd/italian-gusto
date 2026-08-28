@@ -1,4 +1,8 @@
-import { InstagramLogoIcon, WineIcon, XLogoIcon } from '@phosphor-icons/react/ssr';
+import {
+  InstagramLogoIcon,
+  WineIcon,
+  XLogoIcon,
+} from '@phosphor-icons/react/ssr';
 import type { SocialIconType } from './types';
 
 export function HomeSocialIcon({

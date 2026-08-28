@@ -60,7 +60,7 @@ export function HomeSocialSection({
             className='flex h-[286px] w-full min-w-0 flex-col items-center gap-12 border-r border-warm-light p-[32px_8px] text-inherit no-underline last:border-0 sm:w-[calc(722px/3)] sm:p-8 xl:w-[394px] 3xl:h-[min(14.8958vw,286px)] 3xl:w-[min(20.5208vw,394px)] 3xl:gap-[min(2.5vw,48px)] 3xl:p-[min(1.6667vw,32px)]'
             key={card.name}
           >
-            <div className='gusto-social-copy h-[110px] min-w-0 w-full sm:w-[calc(722px/3_-_64px)] xl:h-[126px] xl:w-[330px] 3xl:h-[min(6.5625vw,126px)] 3xl:w-[min(17.1875vw,330px)]'>
+            <div className='gusto-social-copy h-[110px] w-full min-w-0 sm:w-[calc(722px/3_-_64px)] xl:h-[126px] xl:w-[330px] 3xl:h-[min(6.5625vw,126px)] 3xl:w-[min(17.1875vw,330px)]'>
               <div className='gusto-social-heading flex h-[72px] flex-col items-center gap-4 xl:h-[76px] 3xl:h-[min(3.9583vw,76px)] 3xl:gap-[min(0.8333vw,16px)]'>
                 <Image
                   src='/images/deco-1.png'
@@ -69,7 +69,7 @@ export function HomeSocialSection({
                   height={120}
                   className='h-6 w-[43.2px] sm:h-8 sm:w-[57.6px] 3xl:h-[min(1.6667vw,32px)] 3xl:w-[min(3vw,57.6px)]'
                 />
-                <span className='h-6 whitespace-nowrap font-display text-xl leading-6 font-normal tracking-[-0.2em] sm:text-2xl sm:tracking-[-0.25em] xl:h-7 xl:text-[28px] 3xl:h-[min(1.4583vw,28px)] 3xl:text-[min(1.4583vw,28px)] 3xl:leading-none 3xl:tracking-[-8px]'>
+                <span className='h-6 font-display text-xl leading-6 font-normal tracking-[-0.2em] whitespace-nowrap sm:text-2xl sm:tracking-[-0.25em] xl:h-7 xl:text-[28px] 3xl:h-[min(1.4583vw,28px)] 3xl:text-[min(1.4583vw,28px)] 3xl:leading-none 3xl:tracking-[-8px]'>
                   {card.name}
                 </span>
               </div>

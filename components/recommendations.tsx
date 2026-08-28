@@ -66,7 +66,7 @@ function RecommendationMoreLink({
   return (
     <Link
       href={`/${locale}/menu`}
-      className={`mt-8 flex h-[60px] w-full items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap xl:w-max xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(3.125vw,60px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] ${moreLayout[index]}`}
+      className={`mt-8 flex h-[60px] w-full items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:w-max xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(3.125vw,60px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap ${moreLayout[index]}`}
     >
       <span>{children}</span>
       <svg
@@ -104,7 +104,7 @@ function Recommendation({
         <div
           className={`gusto-feature-heading relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] 3xl:h-[min(4.7396vw,91px)] 3xl:after:h-[3px] ${headingLayout[index]}`}
         >
-          <p className='m-0 h-8 whitespace-nowrap font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-coral sm:h-12 sm:w-[300px] sm:text-[60px] sm:leading-12 xl:h-auto xl:w-auto xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)]'>
+          <p className='m-0 h-8 font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral sm:h-12 sm:w-[300px] sm:text-[60px] sm:leading-12 xl:h-auto xl:w-auto xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)]'>
             {copy.featured.title}
             {copy.featured.numberLabels[index - 1]}
           </p>
@@ -119,7 +119,7 @@ function Recommendation({
           </h3>
           {item.description && (
             <p
-              className={`gusto-feature-description w-full whitespace-pre-line font-accent text-ink 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(13.75vw,264px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] ${descriptionLayout[index]}`}
+              className={`gusto-feature-description w-full font-accent whitespace-pre-line text-ink 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(13.75vw,264px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] ${descriptionLayout[index]}`}
             >
               {item.description}
             </p>

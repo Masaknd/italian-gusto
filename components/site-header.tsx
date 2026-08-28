@@ -203,7 +203,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 <span className='sr-only'>{d.nav.closeMenu}</span>
                 <span
                   aria-hidden='true'
-                  className='relative block size-8 [&_i]:absolute [&_i]:left-[5px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[22px] [&_i]:rotate-0! [&_i]:bg-current [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6 sm:[&_i]:top-[14.5px] sm:[&_i]:left-[7px] sm:[&_i]:w-[18px] sm:[&_i:nth-child(2)]:hidden sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45!'
+                  className='relative block size-8 [&_i]:absolute [&_i]:left-[5px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[22px] [&_i]:rotate-0! [&_i]:bg-current sm:[&_i]:top-[14.5px] sm:[&_i]:left-[7px] sm:[&_i]:w-[18px] sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45! [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 sm:[&_i:nth-child(2)]:hidden [&_i:nth-child(3)]:top-6'
                 >
                   <i />
                   <i />

@@ -89,7 +89,7 @@ export function FeaturedMenuCarousel({
         }}
         tabIndex={0}
         aria-label={copy.featured.title}
-        className='flex snap-x snap-mandatory gap-5 overflow-x-auto px-8 pb-4 [scrollbar-width:thin]'
+        className='flex snap-x snap-mandatory [scrollbar-width:thin] gap-5 overflow-x-auto px-8 pb-4'
       >
         {items.map((item, index) => (
           <motion.article

@@ -19,7 +19,7 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
         <div className='flex h-9 w-32 flex-col items-start gap-1 border-b-2 border-dashed border-coral sm:h-[52px] sm:w-48 xl:h-[84px] xl:w-80'>
           <h1
             id='gusto-about-page-title'
-            className='m-0 flex h-8 w-32 items-center whitespace-nowrap font-display text-[32px] leading-[38px] font-normal tracking-[-0.25em] text-coral sm:h-12 sm:w-48 sm:text-5xl sm:leading-[58px] xl:h-20 xl:w-80 xl:text-[80px] xl:leading-[96px]'
+            className='m-0 flex h-8 w-32 items-center font-display text-[32px] leading-[38px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral sm:h-12 sm:w-48 sm:text-5xl sm:leading-[58px] xl:h-20 xl:w-80 xl:text-[80px] xl:leading-[96px]'
           >
             {copy.home.aboutTitle}
           </h1>

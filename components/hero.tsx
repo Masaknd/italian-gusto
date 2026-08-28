@@ -10,7 +10,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         text={copy.home.verticalTitle}
       />
       <div className='absolute top-0 left-4 z-[2] w-[361px] max-w-none sm:left-[86.237976px] sm:w-[424px] xl:top-[204.869141px] xl:left-[202.271194px] 3xl:relative 3xl:top-auto 3xl:left-auto 3xl:w-auto 3xl:max-w-[596px]'>
-        <h1 className='h-[180px] w-[361px] whitespace-pre-line text-center font-display text-5xl leading-[60px] font-normal tracking-[-0.2em] text-coral sm:h-[240px] sm:w-[424px] sm:text-[68px] sm:leading-[80px] xl:text-left 3xl:h-auto 3xl:w-auto 3xl:text-[clamp(4.5rem,5.21vw,100px)] 3xl:leading-[108px] 3xl:tracking-[-0.3em]'>
+        <h1 className='h-[180px] w-[361px] text-center font-display text-5xl leading-[60px] font-normal tracking-[-0.2em] whitespace-pre-line text-coral sm:h-[240px] sm:w-[424px] sm:text-[68px] sm:leading-[80px] xl:text-left 3xl:h-auto 3xl:w-auto 3xl:text-[clamp(4.5rem,5.21vw,100px)] 3xl:leading-[108px] 3xl:tracking-[-0.3em]'>
           {copy.hero.titleSegments.map((line, lineIndex) => (
             <span className='block' key={lineIndex}>
               {line.map((segment, segmentIndex) => (
@@ -45,7 +45,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         fill
         priority
         sizes='(max-width: 768px) 90vw, 65vw'
-        className='gusto-hero-dishes z-[1] max-w-none! object-fill object-center [height:501.597656px]! [left:-17.040405px]! [top:123.562851px]! [width:464.832825px]! sm:[height:797.771484px]! sm:[left:141.321472px]! sm:[top:-1.597839px]! sm:[width:739.296631px]! xl:[height:908.671057px]! xl:[left:627.082397px]! xl:[top:-59.054199px]! xl:[width:844.035925px]! 3xl:object-contain 3xl:object-right-top 3xl:[height:92%]! 3xl:[left:32.8125%]! 3xl:[top:0]! 3xl:[width:68%]!'
+        className='gusto-hero-dishes [top:123.562851px]! [left:-17.040405px]! z-[1] [height:501.597656px]! [width:464.832825px]! max-w-none! object-fill object-center sm:[top:-1.597839px]! sm:[left:141.321472px]! sm:[height:797.771484px]! sm:[width:739.296631px]! xl:[top:-59.054199px]! xl:[left:627.082397px]! xl:[height:908.671057px]! xl:[width:844.035925px]! 3xl:[top:0]! 3xl:[left:32.8125%]! 3xl:[height:92%]! 3xl:[width:68%]! 3xl:object-contain 3xl:object-right-top'
       />
       <Image
         src='/images/four-veggies.png'

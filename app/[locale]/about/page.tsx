@@ -44,7 +44,7 @@ export default async function AboutPage({
 
   return (
     <>
-      <main className="gusto-home gusto-page">
+      <main className='gusto-home gusto-page'>
         <AboutPageHero copy={copy} />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
         <HomeReservationSection copy={copy} />
