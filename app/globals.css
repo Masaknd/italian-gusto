@@ -663,8 +663,26 @@
   }
 }
 
+@keyframes gusto-gallery-marquee {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.gusto-gallery-track {
+  animation: gusto-gallery-marquee 60s linear infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .gusto-gallery-track {
+    animation: none;
   }
 }
