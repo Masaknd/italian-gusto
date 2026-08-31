@@ -61,7 +61,7 @@ export function HomeSocialSection({
             ))}
           </div>
         </div>
-        <div className='gusto-social-links xl:16 m-0 grid w-full grid-cols-3 place-items-center px-4 pt-[140px] text-center sm:px-8 sm:pt-[280px] xl:px-[clamp(10vw,20vw,30vw)] xl:pt-[320px]'>
+        <div className='gusto-social-links xl:16 m-0 grid w-full grid-cols-3 place-items-center px-4 pt-[140px] text-center sm:px-8 sm:pt-[280px] xl:px-[clamp(10vw,20vw,30vw)] xl:pt-[280px] 3xl:pt-[320px]'>
           {socialCards.map((card) => (
             <a
               href={siteConfig.socialUrl}
