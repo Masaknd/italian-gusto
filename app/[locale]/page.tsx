@@ -39,7 +39,7 @@ export default async function HomePage({
 
   return (
     <>
-      <main className='gusto-home gusto-page'>
+      <main className='gusto-home gusto-page !overflow-clip'>
         <HomeHeroSection copy={copy} />
         <HomeAboutSection copy={copy} />
         <HomeWineSection copy={copy} locale={locale} />

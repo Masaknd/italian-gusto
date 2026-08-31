@@ -1,5 +1,44 @@
 import { expect, test } from "@playwright/test";
 
+test("one mouse-wheel step advances a full-width recommendation", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Mouse-wheel interaction check");
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/ja");
+
+  const section = page.locator("#recommendations");
+  const track = page.getByTestId("recommendations-track");
+  await section.evaluate((element) => element.scrollIntoView());
+  await expect
+    .poll(async () => (await page.locator("#recommendation-1").boundingBox())?.x)
+    .toBeCloseTo(0, 0);
+  await page.waitForTimeout(500);
+
+  await page.mouse.move(720, 450);
+  await page.mouse.wheel(0, 100);
+  await page.mouse.wheel(0, 40);
+
+  await expect
+    .poll(() =>
+      track.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).m41),
+    )
+    .toBeCloseTo(-1440, 0);
+  await expect
+    .poll(async () => (await page.locator("#recommendation-2").boundingBox())?.x)
+    .toBeCloseTo(0, 0);
+
+  await page.waitForTimeout(250);
+  await page.mouse.wheel(0, 100);
+
+  await expect
+    .poll(() =>
+      track.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).m41),
+    )
+    .toBeCloseTo(-2880, 0);
+  await expect
+    .poll(async () => (await page.locator("#recommendation-3").boundingBox())?.x)
+    .toBeCloseTo(0, 0);
+});
+
 test("the 1440px home header matches the desktop design frame", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 1100 });

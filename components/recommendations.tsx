@@ -1,72 +1,38 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import type { WheelEvent } from 'react';
 import type { Locale } from '@/lib/i18n';
 import type { FeaturedMenu } from '@/lib/microcms/types';
 import type { HomePageCopy } from './types';
 
 type RecommendationIndex = 1 | 2 | 3;
 
-const articleLayout: Record<RecommendationIndex, string> = {
-  1: 'h-[843.472534px] gap-6 p-[24px_16px] sm:block sm:h-[994.930908px] sm:p-0 xl:flex xl:h-[826px] xl:p-[60px_0] 3xl:h-[min(49.2945vw,946.454px)] 3xl:gap-[min(1.25vw,24px)] 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]',
-  2: 'h-[880.692139px] gap-6 p-[24px_16px] sm:block sm:h-[1091.632813px] sm:p-0 xl:flex xl:h-[895.717163px] xl:p-[60px_0] 3xl:h-[min(53.7383vw,1031.774px)] 3xl:gap-[min(1.25vw,24px)] 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]',
-  3: 'h-[916.735596px] gap-6 p-[24px_16px] sm:block sm:h-[1068px] sm:p-0 xl:flex xl:h-[905.751831px] xl:p-[60px_0] 3xl:h-[min(53.7189vw,1031.403px)] 3xl:gap-[min(1.25vw,24px)] 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]',
-};
-
-const copyLayout: Record<RecommendationIndex, string> = {
-  1: 'h-[412.000031px] w-full sm:absolute sm:top-16 sm:left-[86px] sm:h-[356.000031px] sm:w-[596px] xl:relative xl:top-auto xl:left-auto xl:h-[607px] xl:w-[611px] 3xl:h-[min(31.6146vw,607px)] 3xl:w-[min(30.5208vw,586px)]',
-  2: 'order-none h-auto w-full sm:absolute sm:top-16 sm:left-[86px] sm:h-[380px] sm:w-[596px] xl:relative xl:top-auto xl:left-auto xl:order-2 xl:h-[574px] xl:w-[614.077393px] 3xl:h-[min(28.1771vw,541px)] 3xl:w-[min(30.5208vw,586px)]',
-  3: 'relative z-[1] h-auto w-full sm:absolute sm:top-16 sm:left-[86px] sm:h-[356px] sm:w-[596px] xl:relative xl:top-auto xl:left-auto xl:h-[574px] xl:w-[504px] 3xl:h-[min(28.1771vw,541px)] 3xl:w-[min(30.5208vw,586px)]',
-};
-
-const headingLayout: Record<RecommendationIndex, string> = {
-  1: 'h-[40.000027px] w-[200px] after:w-[200px] sm:h-[56.000034px] sm:w-[300px] sm:after:top-[56.000013px] sm:after:bottom-auto sm:after:w-[300px] xl:h-[88px] xl:w-full xl:after:top-auto xl:after:bottom-0 xl:after:w-[450px] 3xl:w-full 3xl:after:w-[min(23.4375vw,450px)]',
-  2: 'h-10 w-[200px] after:w-[200px] sm:h-[56px] sm:w-[300px] sm:after:top-[56px] sm:after:bottom-auto sm:after:w-[300px] xl:h-[88px] xl:w-full xl:after:top-auto xl:after:bottom-0 xl:after:w-[461px] 3xl:w-full 3xl:after:w-[min(24.0104vw,461px)]',
-  3: 'h-8 w-[200px] after:top-8 after:bottom-auto after:w-[200px] sm:h-[56px] sm:w-[300px] sm:after:top-[56px] sm:after:w-[300px] xl:h-[88px] xl:w-[500px] xl:after:top-auto xl:after:bottom-0 xl:after:w-[461px] 3xl:w-full 3xl:after:w-[min(24.0104vw,461px)]',
-};
-
-const contentLayout: Record<RecommendationIndex, string> = {
-  1: 'mt-6 h-[348px] sm:absolute sm:top-[104.000031px] sm:left-0 sm:mt-0 sm:h-[252px] sm:w-[596px] xl:relative xl:top-auto xl:mt-12 xl:h-[471px] xl:w-[611px]',
-  2: 'mt-6 h-auto sm:absolute sm:top-[104px] sm:left-0 sm:mt-0 sm:h-[276px] sm:w-[596px] xl:relative xl:top-auto xl:mt-12 xl:h-[438px] xl:w-[614.077393px]',
-  3: 'mt-6 h-auto sm:absolute sm:top-[104px] sm:left-0 sm:mt-0 sm:h-[252px] sm:w-[596.02063px] xl:relative xl:top-auto xl:mt-12 xl:h-[438px] xl:w-[504px]',
-};
-
-const titleLayout: Record<RecommendationIndex, string> = {
-  1: 'h-8 text-[32px] leading-8 sm:w-[596px] sm:overflow-hidden sm:text-[42px] xl:h-[83px] xl:w-auto xl:overflow-visible xl:text-[52px] xl:leading-[1.596]',
-  2: 'h-8 text-[32px] leading-8 sm:w-max sm:max-w-full sm:text-[42px] xl:h-[83px] xl:max-w-none xl:text-[52px] xl:leading-[1.596]',
-  3: 'h-8 text-[32px] leading-8 sm:w-[596.02063px] sm:overflow-hidden sm:text-[42px] xl:h-[83px] xl:w-auto xl:overflow-visible xl:text-[52px] xl:leading-[1.596]',
-};
-
-const descriptionLayout: Record<RecommendationIndex, string> = {
-  1: 'mt-8 h-[192px] text-lg leading-6 sm:h-24 sm:w-[596px] sm:overflow-hidden sm:text-[22px] xl:h-[264px] xl:w-[611px] xl:text-2xl',
-  2: 'mt-8 h-auto text-lg leading-6 sm:h-[120px] sm:w-[596px] sm:overflow-hidden sm:text-[22px] xl:h-[231px] xl:w-[614.077393px] xl:text-2xl 3xl:h-[min(10.3125vw,198px)]',
-  3: 'mt-8 h-auto text-lg leading-6 sm:h-24 sm:w-[596.02063px] sm:overflow-hidden sm:text-[22px] xl:h-[231px] xl:w-[504px] xl:text-2xl 3xl:h-[min(10.3125vw,198px)]',
-};
-
-const moreLayout: Record<RecommendationIndex, string> = {
-  1: 'sm:w-[323.396759px] sm:[&_span]:w-[180px] xl:w-max xl:[&_span]:w-auto',
-  2: 'sm:w-[305.396759px] sm:[&_span]:w-[162px] xl:w-[614.077393px] xl:[&_span]:w-auto',
-  3: 'sm:w-[287.396759px] sm:max-w-[596.02063px] sm:[&_span]:w-[144px] xl:w-[504px] xl:[&_span]:w-auto',
-};
-
 const imageLayout: Record<RecommendationIndex, string> = {
-  1: 'h-[359.472534px] w-full sm:absolute sm:top-[444.000031px] sm:left-[139.5px] sm:h-[486.930878px] sm:w-[489px] xl:relative xl:top-auto xl:left-auto xl:h-[706px] xl:w-[709px] 3xl:h-[min(43.0445vw,826.454px)] 3xl:w-[min(43.2292vw,830px)]',
-  2: 'order-2 h-[396.692108px] w-full sm:absolute sm:top-[476px] sm:left-[133px] sm:order-none sm:h-[551.632751px] sm:w-[502px] xl:relative xl:top-auto xl:left-auto xl:order-1 xl:h-[775.717163px] xl:w-[705.922607px] 3xl:h-[min(47.4883vw,911.774px)] 3xl:w-[min(43.2292vw,830px)]',
-  3: 'z-[1] h-[464.735626px] w-full sm:absolute sm:top-[444px] sm:left-[166.5px] sm:h-[560px] sm:w-[435px] xl:relative xl:top-auto xl:left-auto xl:h-[785.751831px] xl:w-[610.360779px] 3xl:h-[min(47.4689vw,911.403px)] 3xl:w-[min(36.8732vw,707.965px)]',
+  1: 'h-[360px] w-full sm:h-[490px] sm:w-[489px] xl:h-[706px] xl:w-[709px]',
+  2: 'h-[396px] w-full sm:h-[550px] sm:w-[502px] xl:h-[775px] xl:w-[706px] 3xl:h-[min(47.4883vw,911.774px)] 3xl:w-[min(43.2292vw,830px)]',
+  3: 'h-[465px] w-full sm:h-[560px] sm:w-[435px] xl:h-[785px] xl:w-[610px] 3xl:h-[min(47.4689vw,911.403px)] 3xl:w-[min(36.8732vw,707.965px)]',
 };
 
 function RecommendationMoreLink({
   children,
-  index,
   locale,
 }: {
   children: React.ReactNode;
-  index: RecommendationIndex;
   locale: Locale;
 }) {
   return (
     <Link
       href={`/${locale}/menu`}
-      className={`mt-8 flex h-[60px] w-full items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:w-max xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(3.125vw,60px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap ${moreLayout[index]}`}
+      className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
       <span>{children}</span>
       <svg
@@ -96,35 +62,33 @@ function Recommendation({
   return (
     <article
       id={`recommendation-${index}`}
-      className={`relative flex min-h-0 w-full flex-col items-stretch justify-center xl:flex-row xl:items-center ${articleLayout[index]}`}
+      className={`flex h-screen min-h-0 w-full flex-col items-stretch justify-center gap-6 p-[24px_16px] sm:block sm:p-0 xl:flex xl:flex-row xl:items-center xl:p-[60px_0] 3xl:gap-16 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
-      <div
-        className={`gusto-feature-copy max-w-none flex-none ${copyLayout[index]}`}
-      >
-        <div
-          className={`gusto-feature-heading relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] 3xl:h-[min(4.7396vw,91px)] 3xl:after:h-[3px] ${headingLayout[index]}`}
-        >
-          <p className='m-0 h-8 font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral sm:h-12 sm:w-[300px] sm:text-[60px] sm:leading-12 xl:h-auto xl:w-auto xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)]'>
+      <div className={`gusto-feature-copy max-w-none flex-none`}>
+        <div className={`gusto-feature-heading`}>
+          <p
+            className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-12 xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)] 3xl:after:h-[3px]`}
+          >
             {copy.featured.title}
             {copy.featured.numberLabels[index - 1]}
           </p>
         </div>
         <div
-          className={`gusto-feature-content w-full 3xl:mt-[min(2.3438vw,45px)] ${contentLayout[index]}`}
+          className={`gusto-feature-content mt-6 sm:mt-0 xl:mt-12 3xl:mt-[min(2.3438vw,45px)]`}
         >
           <h3
-            className={`m-0 font-display font-normal tracking-[-0.25em] text-ink 3xl:h-[min(4.3229vw,83px)] 3xl:text-[min(2.7083vw,52px)] 3xl:leading-[1.596] ${titleLayout[index]}`}
+            className={`m-0 font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[42px] xl:text-[52px] xl:leading-[1.596] 3xl:text-[min(2.7083vw,52px)] 3xl:leading-[1.596]`}
           >
             {item.name}
           </h3>
           {item.description && (
             <p
-              className={`gusto-feature-description w-full font-accent whitespace-pre-line text-ink 3xl:mt-[min(1.6667vw,32px)] 3xl:h-[min(13.75vw,264px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] ${descriptionLayout[index]}`}
+              className={`gusto-feature-description mt-8 font-accent text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
             >
               {item.description}
             </p>
           )}
-          <RecommendationMoreLink index={index} locale={locale}>
+          <RecommendationMoreLink locale={locale}>
             {copy.featured.menuLinks[index - 1]}
           </RecommendationMoreLink>
         </div>
@@ -171,17 +135,112 @@ export function HomeRecommendationsSection({
   featured: FeaturedMenu[];
   locale: Locale;
 }) {
+  const section = useRef<HTMLElement>(null);
+  const wheelGestureActive = useRef(false);
+  const wheelGestureEnd = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const recommendations = featured.slice(0, 3);
+  const { scrollYProgress } = useScroll({
+    target: section,
+    offset: ['start start', 'end end'],
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (progress) => {
+    if (wheelGestureActive.current) return;
+
+    setActiveIndex(
+      Math.round(progress * Math.max(recommendations.length - 1, 0)),
+    );
+  });
+
+  useEffect(
+    () => () => {
+      clearTimeout(wheelGestureEnd.current);
+    },
+    [],
+  );
+
+  const handleWheel = (event: WheelEvent<HTMLElement>) => {
+    if (reduceMotion) return;
+
+    const delta =
+      Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+        ? event.deltaY
+        : event.deltaX;
+    if (!delta) return;
+
+    if (wheelGestureActive.current) {
+      event.preventDefault();
+      clearTimeout(wheelGestureEnd.current);
+      wheelGestureEnd.current = setTimeout(() => {
+        wheelGestureActive.current = false;
+      }, 180);
+      return;
+    }
+
+    const direction = delta > 0 ? 1 : -1;
+    const nextIndex = activeIndex + direction;
+    const canAdvance = nextIndex >= 0 && nextIndex < recommendations.length;
+
+    if (!canAdvance) return;
+
+    event.preventDefault();
+    clearTimeout(wheelGestureEnd.current);
+    wheelGestureEnd.current = setTimeout(() => {
+      wheelGestureActive.current = false;
+    }, 180);
+
+    wheelGestureActive.current = true;
+    setActiveIndex(nextIndex);
+
+    const sectionTop =
+      window.scrollY + (section.current?.getBoundingClientRect().top ?? 0);
+    window.scrollTo({
+      top: sectionTop + nextIndex * window.innerHeight,
+      behavior: 'auto',
+    });
+  };
+
+  if (!recommendations.length) return null;
+
   return (
-    <section id='recommendations' className='p-0'>
-      {featured.slice(0, 3).map((item, index) => (
-        <Recommendation
-          item={item}
-          index={(index + 1) as RecommendationIndex}
-          copy={copy}
-          locale={locale}
-          key={item.id}
-        />
-      ))}
+    <section
+      ref={section}
+      id='recommendations'
+      className='relative isolate p-0 motion-reduce:!h-auto'
+      style={{ height: `${recommendations.length * 100}vh` }}
+      onWheel={handleWheel}
+    >
+      <div className='sticky top-0 h-screen overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible'>
+        <motion.div
+          className='flex h-full motion-reduce:!transform-none motion-reduce:flex-col'
+          animate={{ x: `-${activeIndex * 100}vw` }}
+          transition={{ duration: reduceMotion ? 0 : 0.65, ease: 'easeOut' }}
+          data-testid='recommendations-track'
+        >
+          {recommendations.map((item, index) => (
+            <motion.div
+              className='h-screen w-screen shrink-0'
+              initial={reduceMotion ? false : { opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ amount: 0.2 }}
+              transition={{
+                duration: reduceMotion ? 0 : 1.5,
+                ease: 'easeOut',
+              }}
+              key={item.id}
+            >
+              <Recommendation
+                item={item}
+                index={(index + 1) as RecommendationIndex}
+                copy={copy}
+                locale={locale}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
