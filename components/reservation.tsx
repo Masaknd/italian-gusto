@@ -29,7 +29,7 @@ export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
           <h2 className='font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-coral sm:text-5xl sm:leading-8 lg:text-[42px] lg:leading-10 lg:tracking-[-0.288em] xl:text-[52px]'>
             {copy.home.reservationTitle}
           </h2>
-          <p className="relative pb-1 font-accent text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg">
+          <p className="relative pb-1 font-accent text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[3px] after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg">
             {copy.home.reservationLabel}
           </p>
         </div>

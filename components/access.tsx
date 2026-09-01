@@ -15,7 +15,7 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
         <h2 className='w-full -translate-x-1 font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:-translate-x-2 sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] md:-translate-x-2.5 lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:text-[52px] 3xl:text-[min(2.7083vw,52px)]'>
           {copy.home.accessTitle}
         </h2>
-        <p className="relative p-[0_0_10px] font-accent text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)] 3xl:after:h-[3px]">
+        <p className="relative p-[0_0_10px] font-accent text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]">
           {copy.home.accessLabel}
         </p>
       </div>
