@@ -47,7 +47,7 @@ export function HomeWineSection({
         width={3840}
         height={362}
         sizes='100vw'
-        className='gusto-wine-brush-top pointer-events-none absolute top-0 left-0 z-[1] block h-[36.972569px] w-full sm:h-[72.251732px] xl:h-[135.472px] 3xl:h-auto'
+        className='gusto-wine-brush-top pointer-events-none absolute top-0 left-0 z-1 block h-auto w-full'
       />
       <div className='gusto-wine-inner relative top-auto left-0 flex h-auto w-full flex-row flex-wrap items-start justify-center gap-x-0 gap-y-8 p-[calc(36.972569px_+_8px)_16px_calc(38.800018px_+_32px)] sm:absolute sm:top-[80.251732px] sm:h-[941px] sm:flex-col sm:flex-nowrap sm:items-center sm:gap-8 sm:p-[64px_24px] xl:top-[135.472px] xl:h-[791px] xl:flex-row xl:items-start xl:p-[60px_96px] 3xl:top-[min(9.8244vw,188.629px)] 3xl:h-[min(51.8229vw,995px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:p-[min(6.25vw,120px)_min(12.5vw,240px)]'>
         <div className='gusto-wine-visual relative aspect-[308/280] h-auto min-w-0 basis-full sm:h-[382px] sm:w-[720px] sm:basis-auto xl:h-[671px] xl:w-[738px] xl:flex-none 3xl:h-[min(39.3229vw,755px)] 3xl:w-[min(43.2292vw,830px)]'>

@@ -17,12 +17,6 @@ import type { HomePageCopy } from './types';
 
 type RecommendationIndex = 1 | 2 | 3;
 
-const imageLayout: Record<RecommendationIndex, string> = {
-  1: 'h-[360px] w-full sm:h-[670px] sm:w-[669px] xl:h-[706px] xl:w-[709px]',
-  2: 'h-[396px] w-full sm:h-[727px] sm:w-[669px] xl:h-[775px] xl:w-[706px] 3xl:h-[min(47.4883vw,911.774px)] 3xl:w-[min(43.2292vw,830px)]',
-  3: 'h-[465px] w-full sm:h-[794px] sm:w-[669px] xl:h-[785px] xl:w-[610px] 3xl:h-[min(47.4689vw,911.403px)] 3xl:w-[min(36.8732vw,707.965px)]',
-};
-
 function RecommendationMoreLink({
   children,
   locale,
@@ -63,9 +57,9 @@ function Recommendation({
   return (
     <article
       id={`recommendation-${index}`}
-      className={`relative grid h-screen w-full grid-cols-1 place-items-center gap-6 p-[24px_16px] sm:p-[24px_88px] xl:p-[60px_120px] 2xl:grid-cols-4 3xl:grid-cols-5 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
+      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_88px] xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
-      <div className={`gusto-feature-copy xl:col-span-2`}>
+      <div className={`gusto-feature-copy h-max`}>
         <div className={`gusto-feature-heading w-max`}>
           <h3
             className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-14 xl:text-[80px] xl:leading-none 3xl:text-[80px]`}
@@ -94,15 +88,13 @@ function Recommendation({
           </RecommendationMoreLink>
         </div>
       </div>
-      <div
-        className={`gusto-feature-image relative 2xl:col-span-2 3xl:col-span-3 ${imageLayout[index]}`}
-      >
+      <div className={`gusto-feature-image relative size-full`}>
         <Image
           src={item.image.url}
           alt={item.name}
           fill
           sizes='(max-width: 768px) 80vw, 36vw'
-          className={`object-contain ${index === 3 ? 'xl:object-fill 3xl:object-contain' : ''}`}
+          className={`pointer-events-none object-contain`}
         />
       </div>
       {index === 1 && (
@@ -111,7 +103,7 @@ function Recommendation({
           alt=''
           width={535}
           height={445}
-          className='gusto-feature-2-deco pointer-events-none absolute top-0 left-[1250px] hidden h-auto w-[267.249664px] xl:block 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
+          className='gusto-feature-2-deco pointer-events-none top-[30px] left-[1250px] hidden h-auto w-[267.249664px] xl:absolute xl:block 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
         />
       )}
       {index === 2 && (
@@ -120,7 +112,7 @@ function Recommendation({
           alt=''
           width={535}
           height={445}
-          className='gusto-feature-3-deco pointer-events-none absolute top-0 left-[1250px] hidden h-auto w-[267.249664px] xl:block 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
+          className='gusto-feature-3-deco pointer-events-none top-[30px] left-[1250px] hidden h-auto w-[267.249664px] xl:block 2xl:absolute 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
         />
       )}
 
@@ -130,7 +122,7 @@ function Recommendation({
           alt=''
           width={996}
           height={872}
-          className='gusto-feature-3-deco pointer-events-none absolute top-20 left-[1230px] z-0 hidden h-85 w-auto xl:block 3xl:top-15 3xl:left-[1700px] 3xl:h-110'
+          className='gusto-feature-3-deco pointer-events-none top-[50px] left-[1230px] hidden h-85 w-auto xl:block 2xl:absolute 3xl:top-15 3xl:left-[1700px] 3xl:h-110'
         />
       )}
     </article>
@@ -224,7 +216,7 @@ export function HomeRecommendationsSection({
     <section
       ref={section}
       id='recommendations'
-      className='relative isolate p-0 motion-reduce:!h-auto'
+      className='motion-reduce:!h-auto'
       style={{ height: `${recommendations.length * 100}vh` }}
       onWheel={handleWheel}
     >
