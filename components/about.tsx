@@ -38,8 +38,8 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
       />
       <div className='gusto-about-left relative z-[2] order-[-1] h-auto min-w-0 basis-full sm:absolute sm:top-[calc(56.62664px_+_64px)] sm:left-6 sm:h-[352.000031px] sm:w-[720px] xl:relative xl:top-auto xl:left-auto xl:order-none xl:h-[672px] xl:w-[612px] xl:basis-auto 3xl:h-[min(39.48vw,758px)] 3xl:w-[min(30.47vw,585px)]'>
         <div className='relative z-[2] flex h-[408.000031px] w-full flex-col items-center gap-12 sm:h-[352.000031px] sm:w-[720px] xl:h-auto xl:w-[612px] xl:items-start 3xl:w-full 3xl:gap-[min(2.5vw,48px)]'>
-          <div className="gusto-about-title relative h-[35px] w-max self-center after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:h-[52.000023px] sm:w-[192px] xl:h-[84px] xl:w-[320px] xl:self-auto 3xl:h-[min(4.375vw,84px)] 3xl:w-full 3xl:after:h-[3px]">
-            <h2 className='h-8 font-display text-5xl leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral sm:h-12 sm:text-[60px] sm:leading-12 xl:h-auto xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)]'>
+          <div className='gusto-about-title relative self-center xl:self-auto'>
+            <h2 className="w-max font-display text-5xl leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-12 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]">
               {copy.home.aboutTitle}
             </h2>
           </div>

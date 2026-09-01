@@ -17,6 +17,32 @@ test("one mouse-wheel step advances a full-width recommendation", async ({ page 
   await page.mouse.wheel(0, 100);
   await page.mouse.wheel(0, 40);
 
+  await page.waitForTimeout(120);
+  const inFlightPosition = await page.evaluate(() => {
+    const sectionElement = document.querySelector("#recommendations");
+    const trackElement = document.querySelector(
+      '[data-testid="recommendations-track"]',
+    );
+
+    if (!sectionElement || !trackElement) return null;
+
+    const sectionTop =
+      window.scrollY + sectionElement.getBoundingClientRect().top;
+
+    return {
+      horizontal: new DOMMatrix(getComputedStyle(trackElement).transform).m41,
+      vertical: window.scrollY - sectionTop,
+    };
+  });
+
+  expect(inFlightPosition).not.toBeNull();
+  expect(inFlightPosition!.vertical).toBeGreaterThan(0);
+  expect(inFlightPosition!.vertical).toBeLessThan(900);
+  expect(inFlightPosition!.horizontal).toBeCloseTo(
+    (-inFlightPosition!.vertical / 900) * 1440,
+    -1,
+  );
+
   await expect
     .poll(() =>
       track.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).m41),
@@ -25,6 +51,14 @@ test("one mouse-wheel step advances a full-width recommendation", async ({ page 
   await expect
     .poll(async () => (await page.locator("#recommendation-2").boundingBox())?.x)
     .toBeCloseTo(0, 0);
+  const vegetablesBox = await page
+    .locator("#recommendation-2 .gusto-feature-2-deco")
+    .boundingBox();
+  expect(vegetablesBox).not.toBeNull();
+  expect(vegetablesBox!.x).toBeGreaterThanOrEqual(0);
+  expect(vegetablesBox!.x).toBeLessThan(1440);
+  expect(vegetablesBox!.y + vegetablesBox!.height).toBeGreaterThan(0);
+  expect(vegetablesBox!.y).toBeLessThan(900);
 
   await page.waitForTimeout(250);
   await page.mouse.wheel(0, 100);
@@ -37,6 +71,14 @@ test("one mouse-wheel step advances a full-width recommendation", async ({ page 
   await expect
     .poll(async () => (await page.locator("#recommendation-3").boundingBox())?.x)
     .toBeCloseTo(0, 0);
+  const olivesBox = await page
+    .locator("#recommendation-3 .gusto-feature-3-deco")
+    .boundingBox();
+  expect(olivesBox).not.toBeNull();
+  expect(olivesBox!.x + olivesBox!.width).toBeGreaterThan(0);
+  expect(olivesBox!.x).toBeLessThan(1440);
+  expect(olivesBox!.y + olivesBox!.height).toBeGreaterThan(0);
+  expect(olivesBox!.y).toBeLessThan(900);
 });
 
 test("the 1440px home header matches the desktop design frame", async ({ page }, testInfo) => {
