@@ -13,7 +13,7 @@ function WineMoreLink({
   return (
     <Link
       href={`/${locale}/menu`}
-      className='gusto-wine-more mt-8 flex h-[60px] w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:mt-12 xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(2.5vw,48px)] 3xl:h-auto 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
+      className='gusto-wine-more mt-8 flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:mt-12 xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(2.5vw,48px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
@@ -49,7 +49,7 @@ export function HomeWineSection({
         sizes='100vw'
         className='gusto-wine-brush-top pointer-events-none absolute top-0 left-0 z-1 block h-auto w-full'
       />
-      <div className='gusto-wine-inner relative flex h-full w-full flex-col items-center justify-center gap-x-0 gap-y-8 bg-coral p-[calc(36.972569px_+_8px)_16px_calc(38.800018px_+_32px)] sm:flex-col sm:flex-nowrap sm:items-center sm:gap-8 sm:p-[120px_32px_64px_32px] xl:flex-row xl:items-start xl:p-[200px_96px_60px_96px] 3xl:gap-[min(1.6667vw,32px)] 3xl:p-[300px_240px_120px_240px]'>
+      <div className='gusto-wine-inner relative flex h-full w-full flex-col items-center justify-center gap-x-0 gap-y-8 bg-coral p-[64px_16px_32px_16px] sm:flex-col sm:flex-nowrap sm:items-center sm:gap-8 sm:p-[120px_32px_64px_32px] xl:flex-row xl:items-start xl:p-[200px_96px_60px_96px] 3xl:gap-[min(1.6667vw,32px)] 3xl:p-[300px_240px_120px_240px]'>
         <div className='gusto-wine-visual order-2 xl:order-1'>
           <Image
             src='/images/bottle-grapes.png'

@@ -12,20 +12,9 @@ export const ja = {
     eyebrow: 'OSAKA ITALIAN BAR',
     title: 'だれでも気軽に\nワインと料理を\n楽しめるバル',
     titleSegments: [
-      [
-        { text: 'だれでも' },
-        { text: '気軽', emphasis: true },
-        { text: 'に' },
-      ],
-      [
-        { text: 'ワインと' },
-        { text: '料理', emphasis: true },
-        { text: 'を' },
-      ],
-      [
-        { text: '楽', emphasis: true },
-        { text: 'しめるバル' },
-      ],
+      [{ text: 'だれでも' }, { text: '気軽', emphasis: true }, { text: 'に' }],
+      [{ text: 'ワインと' }, { text: '料理', emphasis: true }, { text: 'を' }],
+      [{ text: '楽', emphasis: true }, { text: 'しめるバル' }],
     ],
     body: '気軽な一杯から、ゆっくり楽しむ食事まで。大阪の夜に寄り添うイタリアンバーです。',
   },
@@ -46,8 +35,7 @@ export const ja = {
     aboutBody: [
       '昼間はカフェ、夜は気軽に楽しめるイタリアンバル。',
       'ワインエキスパートを取得したマスターが日々勉強を重ね、どのような方でもワインや料理を楽しめるバルを目指しております。',
-      'ワイン好きな方、これからワインを楽しみたい方、',
-      'お気軽にお越しください！',
+      'ワイン好きな方、これからワインを楽しみたい方、お気軽にお越しください！',
       'お手頃価格なものからご用意しております！',
     ],
     aboutMore: 'ワインのうんちくを読む',

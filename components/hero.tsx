@@ -67,7 +67,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
         width={3841}
         height={284}
         sizes='100vw'
-        className='gusto-hero-brush pointer-events-none absolute inset-x-0 bottom-[-1px]! z-[3] hidden h-auto! w-full! max-w-none! xl:block'
+        className='gusto-hero-brush pointer-events-none absolute inset-x-0 bottom-[-1px]! z-[3] h-auto! w-full! max-w-none! xl:block'
       />
     </section>
   );
