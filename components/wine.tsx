@@ -13,7 +13,7 @@ function WineMoreLink({
   return (
     <Link
       href={`/${locale}/menu`}
-      className='gusto-wine-more mt-8 flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:mt-12 xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(2.5vw,48px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
+      className='gusto-wine-more flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg

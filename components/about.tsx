@@ -6,7 +6,7 @@ function AboutMoreLink({ children }: { children: React.ReactNode }) {
   return (
     <Link
       href='#wine'
-      className='gusto-about-more mt-8 flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:mt-12 xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]'
+      className='gusto-about-more flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]'
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
