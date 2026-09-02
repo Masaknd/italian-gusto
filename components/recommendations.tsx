@@ -31,13 +31,16 @@ function RecommendationMoreLink({
     >
       <span>{children}</span>
       <svg
-        className='h-[60px] w-[111.396759px] shrink-0 overflow-visible fill-none stroke-ink stroke-1 3xl:h-auto 3xl:w-[min(5.8021vw,111.4px)]'
+        className='group h-[60px] w-[111.396759px] shrink-0 overflow-visible fill-none stroke-ink stroke-1 3xl:h-auto 3xl:w-[min(5.8021vw,111.4px)]'
         aria-hidden='true'
         viewBox='0 0 111.4 60'
         focusable='false'
       >
         <circle cx='46' cy='30' r='29.5' />
-        <path d='M37 30h73m-22-22 22 22-22 22' />
+        <path
+          d='M37 30h73m-22-22 22 22-22 22'
+          className='transform duration-200 group-hover:translate-x-6'
+        />
       </svg>
     </Link>
   );
@@ -57,7 +60,7 @@ function Recommendation({
   return (
     <article
       id={`recommendation-${index}`}
-      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_88px] xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
+      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
       <div className={`gusto-feature-copy h-max`}>
         <div className={`gusto-feature-heading w-max`}>
