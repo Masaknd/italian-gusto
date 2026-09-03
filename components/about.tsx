@@ -34,7 +34,7 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
       <div className='gusto-about-left'>
         <div className='relative flex w-full flex-col items-start gap-12 xl:items-start'>
           <div className='gusto-about-title'>
-            <h2 className="relative w-max font-display text-5xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]">
+            <h2 className="relative w-max font-display text-3xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]">
               {copy.home.aboutTitle}
             </h2>
           </div>
