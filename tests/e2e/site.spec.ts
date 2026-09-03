@@ -242,7 +242,16 @@ test("the 768px home header uses small-screen navigation at the breakpoint", asy
   await expect(header).toHaveCSS("background-image", "none");
   await expect(header.locator(".site-header-inner")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
   await expect(header.locator(".site-header-inner")).toHaveCSS("background-image", "none");
-  await expect(page.locator("body")).toHaveCSS("background-image", /cotton01\.jpg/);
+  await expect(page.locator("body")).toHaveCSS(
+    "background-image",
+    /cotton01\.jpg/,
+  );
+  await expect(page.locator("body")).toHaveCSS("background-repeat", "repeat");
+  await expect(page.locator("body")).toHaveCSS(
+    "background-size",
+    /853\.333\d*px 533\.333\d*px/,
+  );
+  await expect(page.locator("body")).toHaveCSS("background-attachment", "fixed");
   await expect(logo).toBeVisible();
   await expect(menu).toBeVisible();
 
@@ -253,6 +262,23 @@ test("the 768px home header uses small-screen navigation at the breakpoint", asy
   expect(logoBox!.y).toBeCloseTo(14, 1);
   expect(logoBox!.width).toBeCloseTo(207.637802, 1);
   expect(logoBox!.height).toBeCloseTo(90, 1);
+});
+
+test("the smartphone home page uses one mobile-safe paper texture layer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only background check");
+  await page.goto("/ja");
+
+  const body = page.locator("body");
+  const main = page.locator("main.gusto-page");
+
+  await expect(body).toHaveCSS("background-image", /cotton01\.jpg/);
+  await expect(body).toHaveCSS("background-repeat", "repeat");
+  await expect(body).toHaveCSS(
+    "background-size",
+    /853\.333\d*px 533\.333\d*px/,
+  );
+  await expect(body).toHaveCSS("background-attachment", "scroll");
+  await expect(main).toHaveCSS("background-image", "none");
 });
 
 test("the 768px menu header matches the small-screen design frame", async ({ page }, testInfo) => {

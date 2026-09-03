@@ -387,11 +387,6 @@
 /* Semantic utilities keep token wiring out of JSX. */
 @utility gusto-page {
   overflow: hidden;
-  background-color: var(--color-brand-paper);
-  background-image: url('/images/cotton01.jpg');
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
   color: var(--color-brand-ink);
   font-family: var(--font-family-body);
 }
@@ -654,12 +649,23 @@
     @apply overflow-x-hidden bg-background font-sans text-foreground;
   }
   body:has(.gusto-home) {
-    background: var(--color-brand-paper) url('/images/cotton01.jpg') center /
-      cover fixed;
+    background-color: var(--color-brand-paper);
+    background-image: url('/images/cotton01.jpg');
+    background-position: top left;
+    background-repeat: repeat;
+    /* Render the 2560 x 1600 source at three image pixels per CSS pixel. */
+    background-size: 853.333333px 533.333333px;
+    background-attachment: scroll;
   }
   :focus-visible {
     outline: 3px solid var(--color-brand-focus);
     outline-offset: 3px;
+  }
+}
+
+@media (min-width: 768px) {
+  body:has(.gusto-home) {
+    background-attachment: fixed;
   }
 }
 
