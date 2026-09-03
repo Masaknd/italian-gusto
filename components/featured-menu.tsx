@@ -100,14 +100,16 @@ export function FeaturedMenuCarousel({
             className='w-full shrink-0 snap-start overflow-hidden rounded-card bg-ink text-content shadow-card sm:w-[min(82vw,57.5rem)]'
           >
             <div className='relative aspect-[16/9]'>
-              <Image
-                src={item.image.url}
-                alt={item.image.alt ?? item.name}
-                fill
-                sizes='(max-width: 640px) 100vw, 920px'
-                className='object-cover'
-                priority={index === 0}
-              />
+              {item.image.url.trim() && (
+                <Image
+                  src={item.image.url.trim()}
+                  alt={item.image.alt ?? item.name}
+                  fill
+                  sizes='(max-width: 640px) 100vw, 920px'
+                  className='object-cover'
+                  priority={index === 0}
+                />
+              )}
             </div>
             <div className='p-6'>
               <h3 className='font-display text-3xl tracking-[var(--tracking-title)]'>

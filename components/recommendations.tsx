@@ -57,6 +57,8 @@ function Recommendation({
   copy: HomePageCopy;
   locale: Locale;
 }) {
+  const imageSrc = item.image.url.trim();
+
   return (
     <article
       id={`recommendation-${index}`}
@@ -92,13 +94,15 @@ function Recommendation({
         </div>
       </div>
       <div className={`gusto-feature-image relative size-full`}>
-        <Image
-          src={item.image.url}
-          alt={item.name}
-          fill
-          sizes='(max-width: 768px) 80vw, 36vw'
-          className={`pointer-events-none object-contain`}
-        />
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            alt={item.image.alt ?? item.name}
+            fill
+            sizes='(max-width: 768px) 80vw, 36vw'
+            className={`pointer-events-none object-contain`}
+          />
+        )}
       </div>
       {index === 1 && (
         <Image
@@ -109,16 +113,6 @@ function Recommendation({
           className='gusto-feature-2-deco pointer-events-none top-[30px] left-[1250px] hidden h-auto w-[267.249664px] xl:absolute xl:block 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
         />
       )}
-      {index === 2 && (
-        <Image
-          src=''
-          alt=''
-          width={535}
-          height={445}
-          className='gusto-feature-3-deco pointer-events-none top-[30px] left-[1250px] hidden h-auto w-[267.249664px] xl:block 2xl:absolute 3xl:top-[min(4.0906vw,78.539px)] 3xl:left-[min(78.7972vw,1850px)] 3xl:w-[min(13.9193vw,267.25px)]'
-        />
-      )}
-
       {index === 3 && (
         <Image
           src='/images/olives.png'

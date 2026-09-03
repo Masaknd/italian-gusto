@@ -54,10 +54,10 @@ export function HomeWineSection({
           <Image
             src='/images/bottle-grapes.png'
             alt={copy.home.wineArtworkAlt}
-            width={768}
-            height={480}
+            width={1660}
+            height={1511}
             sizes='(max-width: 768px) 82vw, 43.23vw'
-            className='object-contain'
+            className='h-auto object-contain'
           />
         </div>
         <div className='gusto-wine-copy order-1 flex flex-col items-start gap-8 sm:items-center sm:gap-12 xl:order-2 xl:flex-none xl:items-start'>

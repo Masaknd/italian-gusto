@@ -106,10 +106,10 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
                           : 'gusto-menu-card flex h-[504.91px] min-w-0 flex-col items-start gap-4 rounded-2xl bg-[#fbece6] p-6 sm:h-[486.73px] xl:h-[604.51px] 3xl:h-[642.25px]'
                       }
                     >
-                      {!drink && item.image && (
+                      {!drink && item.image?.url.trim() && (
                         <div className='gusto-menu-card__image relative aspect-[414/412.25] w-full flex-none [box-shadow:0_4px_8px_rgb(0_0_0/25%)]'>
                           <Image
-                            src={item.image.url}
+                            src={item.image.url.trim()}
                             alt={item.image.alt ?? item.name}
                             fill
                             sizes='(max-width: 767px) calc(100vw - 80px), (max-width: 1023px) 300px, (max-width: 1599px) 352px, 416px'

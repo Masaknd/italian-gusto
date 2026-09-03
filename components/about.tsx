@@ -58,10 +58,10 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
           <Image
             src='/images/inside.png'
             alt={copy.home.aboutImageAlt}
-            width={768}
-            height={480}
+            width={1944}
+            height={2131}
             sizes='(max-width: 768px) 92vw, 51vw'
-            className='object-contain'
+            className='h-auto object-contain'
           />
         </div>
       </div>
