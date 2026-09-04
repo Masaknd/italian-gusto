@@ -1,6 +1,6 @@
 # Gusto Italian Bar
 
-An App Router, TypeScript, Tailwind and microCMS foundation for the official Osaka Italian bar website. The visual layer uses local placeholder imagery until the corresponding Pixso designs and final assets are supplied.
+An App Router, TypeScript, Tailwind and microCMS foundation for the official Osaka Italian bar website. The visual layer uses local imagery and the current project styles as its source of truth.
 
 ## Local setup
 
@@ -58,4 +58,4 @@ Keep the initial project within the selected microCMS and SelectType free plans:
 
 ## Remaining design inputs
 
-The site has intentionally neutral typography, spacing, and supplied local image placeholders. Replace these only against the supplied Pixso component/screen source of truth. Venue address, telephone number, hours, social URL, tax policy, and reservation destination are centralized in [`lib/site-config.ts`](./lib/site-config.ts).
+The current project styles and implementation are the visual source of truth. Venue address, telephone number, hours, social URL, tax policy, and reservation destination are centralized in [`lib/site-config.ts`](./lib/site-config.ts).

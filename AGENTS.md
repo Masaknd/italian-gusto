@@ -14,5 +14,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Keep Japanese as the CMS source language. Static copy belongs in `locales/`; do not put user-facing literals in feature components.
 - Keep CMS and DeepL credentials server-only. New public environment variables require an `.env.local.example` update and README documentation.
 - Preserve the explicit `/ja` and `/en` URL structure, locale metadata, and accessible keyboard interactions.
-- Supplied Pixso screens are the visual source of truth. Until then, use the neutral placeholder foundation rather than creating a new visual direction.
+- Treat the current project styles and implementation as the visual source of truth. Do not rely on superseded external design files.
 - Run `pnpm lint`, `pnpm exec tsc --noEmit`, `pnpm build`, and applicable Playwright tests after material changes.

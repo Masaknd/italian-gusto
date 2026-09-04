@@ -182,7 +182,7 @@ test("the 1920px menu hero uses the supplied title, nav, marquee, and botanical 
   expect(botanicalBox?.height).toBeCloseTo(297, 1);
 });
 
-test("the appetizer cards follow the supplied responsive Pixso geometry", async ({ page }, testInfo) => {
+test("the appetizer cards follow the current responsive geometry", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only design detail check");
 
   const frames = [
@@ -449,7 +449,7 @@ test("the menu page reuses the home social, reservation, access, and footer sect
   await expect(page.getByRole("contentinfo").getByRole("link", { name: "Our Story" })).toHaveAttribute("href", "/ja/about");
 });
 
-test("the 393px hamburger menu matches the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 393px hamburger menu matches the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 820 });
   await page.goto("/ja");
@@ -597,7 +597,7 @@ test("the mobile menu is available below the 992px breakpoint", async ({ page },
   await expect(trigger).toBeHidden();
 });
 
-test("the 768px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px hero follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -648,7 +648,7 @@ test("the 768px hero follows the supplied Pixso frame", async ({ page }, testInf
   await expect(marquee).toHaveCSS("transform-origin", "263.5px 30px");
 });
 
-test("the 393px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 393px hero follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -772,7 +772,7 @@ test("the 393px About flex row wraps its content top-to-bottom", async ({ page }
   await expect(artwork).toHaveCSS("object-fit", "fill");
 });
 
-test("the 768px About section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px About section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -884,7 +884,7 @@ test("the 393px Wine flex row wraps its content top-to-bottom", async ({ page },
   await expect(text).toHaveCSS("line-height", "24px");
 });
 
-test("the 768px Wine section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px Wine section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -952,7 +952,7 @@ test("the 768px Wine section follows the supplied Pixso frame", async ({ page },
   await expect(text).toHaveCSS("font-size", "22px");
 });
 
-test("the first 393px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the first 393px recommendation follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -1023,7 +1023,7 @@ test("the first 393px recommendation follows the supplied Pixso frame", async ({
   await expect(more).toHaveCSS("text-decoration-line", "none");
 });
 
-test("the second 393px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the second 393px recommendation follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -1099,7 +1099,7 @@ test("the second 393px recommendation follows the supplied Pixso frame", async (
   await expect(more).toHaveCSS("text-decoration-line", "none");
 });
 
-test("the third 393px recommendation follows the supplied Pixso frame with natural content heights", async ({ page }, testInfo) => {
+test("the third 393px recommendation follows the current project layout with natural content heights", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -1176,7 +1176,7 @@ test("the third 393px recommendation follows the supplied Pixso frame with natur
   await expect(more).toHaveCSS("text-decoration-line", "none");
 });
 
-test("the first 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the first 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -1245,7 +1245,7 @@ test("the first 768px recommendation follows the supplied Pixso frame", async ({
   await expect(more).toHaveCSS("font-size", "22px");
 });
 
-test("the second 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the second 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -1318,7 +1318,7 @@ test("the second 768px recommendation follows the supplied Pixso frame", async (
   await expect(more).toHaveCSS("font-size", "22px");
 });
 
-test("the third 768px recommendation follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the third 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -1391,7 +1391,7 @@ test("the third 768px recommendation follows the supplied Pixso frame", async ({
   await expect(more).toHaveCSS("font-size", "22px");
 });
 
-test("the 1440px hero follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 1440px hero follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto("/ja");
@@ -1420,7 +1420,7 @@ test("the 1440px hero follows the supplied Pixso frame", async ({ page }, testIn
   expect(vegetablesBox!.width).toBeCloseTo(415.595337, 1);
 });
 
-test("the 1440px About section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 1440px About section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto("/ja");
@@ -1608,7 +1608,7 @@ test("the third 1440px recommendation keeps its flex content centered", async ({
   expect(decorationBox!.height).toBeCloseTo(442.898, 1);
 });
 
-test("the 393px social section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 393px social section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -1675,7 +1675,7 @@ test("the 393px social section follows the supplied Pixso frame", async ({ page 
   expect(await firstTitle.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
 });
 
-test("the 768px social section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px social section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -1792,7 +1792,7 @@ test("the 1440px social links remain centered", async ({ page }, testInfo) => {
   expect(firstIconBox!.height).toBeCloseTo(48, 1);
 });
 
-test("the 393px reservation section keeps its Pixso frame with natural content heights", async ({ page }, testInfo) => {
+test("the 393px reservation section keeps its current layout with natural content heights", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -1876,7 +1876,7 @@ test("the 393px reservation section keeps its Pixso frame with natural content h
   expect(await notes.evaluate((element) => element.scrollHeight <= element.clientHeight)).toBe(true);
 });
 
-test("the 768px reservation section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px reservation section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -1948,7 +1948,7 @@ test("the 768px reservation section follows the supplied Pixso frame", async ({ 
   await expect(button).toHaveCSS("font-size", "18px");
 });
 
-test("the 1440px reservation section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 1440px reservation section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/ja");
@@ -1999,7 +1999,7 @@ test("the 1440px reservation section follows the supplied Pixso frame", async ({
   expect(buttonBox!.height).toBeCloseTo(56, 1);
 });
 
-test("the 393px access section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 393px access section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -2068,7 +2068,7 @@ test("the 393px access section follows the supplied Pixso frame", async ({ page 
   await expect(details).toHaveCSS("line-height", "27px");
 });
 
-test("the 768px access section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px access section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -2125,7 +2125,7 @@ test("the 768px access section follows the supplied Pixso frame", async ({ page 
   await expect(details).toHaveCSS("line-height", "42px");
 });
 
-test("the 1440px access section follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 1440px access section follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/ja");
@@ -2169,7 +2169,7 @@ test("the 1440px access section follows the supplied Pixso frame", async ({ page
   expect(detailsBox!.height).toBeCloseTo(420, 1);
 });
 
-test("the 393px footer follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 393px footer follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/ja");
@@ -2270,7 +2270,7 @@ test("the 393px footer follows the supplied Pixso frame", async ({ page }, testI
   await expect(copyright).toHaveCSS("font-size", "12px");
 });
 
-test("the 768px footer follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 768px footer follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("/ja");
@@ -2355,7 +2355,7 @@ test("the 768px footer follows the supplied Pixso frame", async ({ page }, testI
   expect(copyrightBox!.height).toBeCloseTo(14, 1);
 });
 
-test("the 1440px footer follows the supplied Pixso frame", async ({ page }, testInfo) => {
+test("the 1440px footer follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 1440, height: 700 });
   await page.goto("/ja");
