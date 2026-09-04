@@ -12,7 +12,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
       {/* container */}
       <div className='relative w-full'>
         {/* left content */}
-        <div className='absolute z-10 flex w-max flex-col items-start gap-12 sm:top-0 sm:left-0 xl:top-20 xl:left-20 2xl:top-30 2xl:left-30 3xl:top-30 3xl:left-10'>
+        <div className='absolute z-10 flex w-max flex-col items-start gap-12 sm:top-0 sm:left-0 xl:top-[calc(50dvh-132px)] xl:left-20 xl:-translate-y-1/2 2xl:left-30 3xl:left-10'>
           <h1 className='h-[180px] w-[361px] text-center font-display text-5xl leading-[50px] font-normal tracking-[-0.2em] whitespace-pre-line text-coral sm:h-[240px] sm:w-[424px] sm:text-left sm:text-[68px] sm:leading-[70px] 3xl:h-auto 3xl:w-auto 3xl:text-[clamp(4.5rem,5.21vw,100px)] 3xl:leading-[108px] 3xl:tracking-[-0.3em]'>
             {copy.hero.titleSegments.map((line, lineIndex) => (
               <span className='block' key={lineIndex}>
@@ -50,14 +50,14 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
           />
         </div>
         {/* right content */}
-        <div className='absolute top-30 -right-15 w-max sm:top-0 sm:-right-50 xl:-top-45 xl:-right-60 2xl:-top-40 2xl:-right-30 3xl:-top-50 3xl:right-0'>
+        <div className='absolute top-30 -right-15 w-max sm:top-0 sm:-right-50 xl:top-[calc(50dvh-132px)] xl:-right-60 xl:-translate-y-1/2 2xl:-right-30 3xl:right-0'>
           <Image
             src='/images/dishes.png'
             alt={copy.home.heroDishesAlt}
             width={768}
             height={480}
             priority
-            className='pointer-none: gusto-hero-dishes h-auto w-[min(120vw,150vw)] object-contain sm:w-[min(100vw,150vw)] xl:w-[min(65vw,120vw)] 2xl:w-[min(60vw,120vw)] 3xl:w-[min(50vw,120vw)]'
+            className='pointer-none: gusto-hero-dishes h-auto w-[min(120vw,150vw)] object-contain sm:w-[min(100vw,150vw)] xl:w-[clamp(90vh,100dvh,120vh)]'
           />
         </div>
       </div>
