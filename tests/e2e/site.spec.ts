@@ -2419,98 +2419,82 @@ test("the 1440px footer follows the current project layout", async ({ page }, te
   expect(hoursBox!.width).toBeCloseTo(667, 1);
 });
 
-test("the about page follows the four supplied responsive hero frames", async ({ page }, testInfo) => {
+test("the About page hero inherits the home About layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop browser geometry check");
 
-  const frames = [
-    {
-      width: 1920,
-      headerHeight: 132,
-      heroHeight: 1166,
-      story: { x: 264, y: 156, width: 585, height: 609 },
-      interior: { x: 849, y: 132, width: 973, height: 1066 },
-      barrelWidth: 552.71,
-      titleSize: "80px",
-      socialY: 1298,
-    },
-    {
-      width: 1440,
-      headerHeight: 132,
-      heroHeight: 926,
-      story: { x: 120, y: 156, width: 612, height: 609 },
-      interior: { x: 732, y: 156, width: 709, height: 776 },
-      barrelWidth: 398.6,
-      titleSize: "80px",
-      socialY: 1058,
-    },
-    {
-      width: 768,
-      headerHeight: 120,
-      heroHeight: 1254,
-      story: { x: 24, y: 144, width: 720, height: 404 },
-      interior: { x: 29.5, y: 572, width: 709, height: 776 },
-      barrelWidth: 310.31,
-      titleSize: "48px",
-      socialY: 1374,
-    },
-    {
-      width: 393,
-      headerHeight: 84,
-      heroHeight: 907,
-      story: { x: 16, y: 108, width: 361, height: 436 },
-      interior: { x: 16, y: 568, width: 361, height: 397 },
-      barrelWidth: null,
-      titleSize: "32px",
-      socialY: 991,
-    },
-  ] as const;
+  const frames = [393, 768, 1440, 1920] as const;
 
-  for (const frame of frames) {
-    await page.setViewportSize({ width: frame.width, height: 1000 });
+  for (const width of frames) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/ja");
+
+    const homeLayout = await page.locator("#about").evaluate((section) => {
+      const title = section.querySelector<HTMLElement>(".gusto-about-title h2")!;
+      const body = section.querySelector<HTMLElement>(".gusto-about-body")!;
+      const decoration = section.querySelector<HTMLElement>(".gusto-about-left img")!;
+      const interiorImage = section.querySelector<HTMLElement>(".gusto-about-right img")!;
+      const sectionStyles = getComputedStyle(section);
+      const titleStyles = getComputedStyle(title);
+      const bodyStyles = getComputedStyle(body);
+      const bodyBox = body.getBoundingClientRect();
+      const decorationBox = decoration.getBoundingClientRect();
+      const interiorImageBox = interiorImage.getBoundingClientRect();
+
+      return {
+        section: [sectionStyles.display, sectionStyles.flexDirection, sectionStyles.gap, sectionStyles.padding],
+        title: [titleStyles.fontFamily, titleStyles.fontSize, titleStyles.lineHeight, titleStyles.letterSpacing],
+        body: [bodyStyles.fontFamily, bodyStyles.fontSize, bodyStyles.lineHeight, bodyStyles.gap, bodyStyles.overflow, bodyBox.width, bodyBox.height],
+        decorationWidth: decorationBox.width,
+        interiorImage: [interiorImageBox.width, interiorImageBox.height],
+      };
+    });
+
     await page.goto("/ja/about");
 
-    const header = page.getByRole("banner");
     const hero = page.locator(".gusto-about-page-hero");
     const story = page.locator(".gusto-about-page-story");
-    const title = page.getByRole("heading", { level: 1, name: "グストとは" });
     const interior = page.locator(".gusto-about-page-interior");
     const barrel = page.locator(".gusto-about-page-barrel");
-    const social = page.locator(".gusto-social");
-    const marquee = page.locator(".gusto-about-page-marquee");
+    const pageLayout = await hero.evaluate((section) => {
+      const title = section.querySelector<HTMLElement>(".gusto-about-title h1")!;
+      const body = section.querySelector<HTMLElement>(".gusto-about-body")!;
+      const decoration = section.querySelector<HTMLElement>(".gusto-about-page-barrel")!;
+      const interiorImage = section.querySelector<HTMLElement>(".gusto-about-right img")!;
+      const sectionStyles = getComputedStyle(section);
+      const titleStyles = getComputedStyle(title);
+      const bodyStyles = getComputedStyle(body);
+      const bodyBox = body.getBoundingClientRect();
+      const decorationBox = decoration.getBoundingClientRect();
+      const interiorImageBox = interiorImage.getBoundingClientRect();
 
-    await expect(title).toHaveCSS("font-size", frame.titleSize);
-    await expect(title).toHaveCSS("font-family", /kirigirisu/);
-    await expect(page.locator(".gusto-about-page-copy")).toHaveCSS("font-family", /yamafont/);
+      return {
+        section: [sectionStyles.display, sectionStyles.flexDirection, sectionStyles.gap, sectionStyles.padding],
+        title: [titleStyles.fontFamily, titleStyles.fontSize, titleStyles.lineHeight, titleStyles.letterSpacing],
+        body: [bodyStyles.fontFamily, bodyStyles.fontSize, bodyStyles.lineHeight, bodyStyles.gap, bodyStyles.overflow, bodyBox.width, bodyBox.height],
+        decorationWidth: decorationBox.width,
+        interiorImage: [interiorImageBox.width, interiorImageBox.height],
+      };
+    });
 
-    if (frame.width >= 1200) {
-      await expect(marquee).toBeVisible();
-      await expect(marquee).toHaveCSS("transform", "matrix(0, 1, -1, 0, 0, 0)");
-      await expect(marquee).toHaveCSS("transform-origin", "0px 0px");
-      await expect(marquee).toHaveCSS("white-space", "nowrap");
-    } else {
-      await expect(marquee).toBeHidden();
-    }
+    expect(pageLayout).toEqual(homeLayout);
 
-    const [headerBox, heroBox, storyBox, interiorBox, socialBox] = await Promise.all([
-      header.boundingBox(),
-      hero.boundingBox(),
+    const [storyBox, interiorBox] = await Promise.all([
       story.boundingBox(),
       interior.boundingBox(),
-      social.boundingBox(),
     ]);
 
-    expect(headerBox?.height).toBeCloseTo(frame.headerHeight, 1);
-    expect(heroBox?.height).toBeCloseTo(frame.heroHeight, 1);
-    expect(storyBox).toMatchObject(frame.story);
-    expect(interiorBox).toMatchObject(frame.interior);
-    expect(socialBox?.y).toBeCloseTo(frame.socialY, 1);
-
-    if (frame.barrelWidth === null) {
-      await expect(barrel).toBeHidden();
+    if (width >= 1200) {
+      expect(interiorBox!.x - (storyBox!.x + storyBox!.width)).toBeCloseTo(32, 1);
     } else {
-      await expect(barrel).toBeVisible();
-      expect((await barrel.boundingBox())?.width).toBeCloseTo(frame.barrelWidth, 1);
+      expect(interiorBox!.x).toBeCloseTo(storyBox!.x, 1);
+      expect(interiorBox!.y - (storyBox!.y + storyBox!.height)).toBeCloseTo(32, 1);
     }
+
+    await expect(barrel).toBeVisible();
+    await expect(story.getByText("営業時間")).toBeVisible();
+    await expect(story.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059");
+    await expect(hero.locator(".gusto-about-more")).toHaveCount(0);
+    await expect(hero).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
   }
 });
 
