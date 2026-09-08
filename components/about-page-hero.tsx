@@ -6,7 +6,7 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
   return (
     <section
       id='about-story'
-      className='gusto-about-page-hero relative flex w-full flex-col items-center justify-center gap-8 px-4 py-[0px_48px] text-ink sm:p-[0px_32px_64px_32px] lg:flex-row xl:p-[0px_96px_64px_96px] 3xl:p-[0px_240px_120px_240px]'
+      className='gusto-about-page-hero relative flex w-full flex-col items-center justify-center gap-8 px-4 py-[24px_48px] text-ink sm:p-[32px_32px_64px_32px] lg:flex-row xl:p-[32px_96px_64px_96px] 3xl:p-[0px_240px_120px_240px]'
       aria-labelledby='gusto-about-page-title'
     >
       <div className='gusto-about-page-story gusto-about-left'>
