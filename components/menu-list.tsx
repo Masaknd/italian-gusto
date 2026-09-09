@@ -33,7 +33,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
               />
             )}
             <a
-              href={`#menu-category-${index + 1}`}
+              href={`#category-${index + 1}`}
               className={[
                 'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
                 index === 0 ? 'text-[#c3a8a2]!' : '',
@@ -53,7 +53,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
           return (
             <section
               key={category}
-              id={`menu-category-${index + 1}`}
+              id={`category-${index + 1}`}
               className='gusto-menu__group flex w-full scroll-mt-6 flex-col gap-8'
               aria-labelledby={`menu-category-heading-${index + 1}`}
             >

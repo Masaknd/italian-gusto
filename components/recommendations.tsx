@@ -17,16 +17,24 @@ import type { HomePageCopy } from './types';
 
 type RecommendationIndex = 1 | 2 | 3;
 
+const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
+  1: 1,
+  2: 5,
+  3: 3,
+};
+
 function RecommendationMoreLink({
   children,
+  index,
   locale,
 }: {
   children: React.ReactNode;
+  index: RecommendationIndex;
   locale: Locale;
 }) {
   return (
     <Link
-      href={`/${locale}/menu`}
+      href={`/${locale}/menu#category-${menuCategoryByRecommendation[index]}`}
       className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
       <span>{children}</span>
@@ -88,7 +96,7 @@ function Recommendation({
               {item.description}
             </p>
           )}
-          <RecommendationMoreLink locale={locale}>
+          <RecommendationMoreLink index={index} locale={locale}>
             {copy.featured.menuLinks[index - 1]}
           </RecommendationMoreLink>
         </div>
