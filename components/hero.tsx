@@ -65,8 +65,6 @@ const heroClassNames = {
     'sm:w-[min(100vw,150vw)]',
     'lg:w-[clamp(90vh,100dvh,120vh)]',
   ].join(' '),
-  scrollLink:
-    'gusto-hero-caret absolute top-[1026px] right-[72px] z-[4] hidden size-[74px] items-center justify-center rounded-full border-[5px] border-coral font-display text-[46px] leading-none font-normal text-coral no-underline lg:flex',
   brush:
     'gusto-hero-brush pointer-events-none absolute bottom-0 left-0 z-[3] h-auto w-full translate-y-px',
 };
@@ -127,13 +125,6 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
           />
         </div>
       </div>
-      <a
-        className={heroClassNames.scrollLink}
-        href='#'
-        aria-label={copy.home.heroScrollLabel}
-      >
-        <span aria-hidden='true'>↑</span>
-      </a>
       <Image
         src='/images/b-1.png'
         alt=''

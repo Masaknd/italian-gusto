@@ -4,6 +4,7 @@ export const en = {
     home: 'Home',
     menu: 'Menu',
     closeMenu: 'Close menu',
+    backToTop: 'Back to the top',
     mobileReserve: 'Reserve',
     access: 'Information',
     reserve: 'Reserve',
@@ -25,7 +26,6 @@ export const en = {
       reservation: 'Reservation',
     },
     heroDishesAlt: 'Pasta, antipasto, and carpaccio',
-    heroScrollLabel: 'Continue to the restaurant introduction',
     aboutLabel: 'About',
     aboutTitle: 'About Gusto',
     aboutBody: [
@@ -79,7 +79,6 @@ export const en = {
     paymentLabel: 'Payment',
     paymentMethods: 'Cash, VISA, Mastercard',
   },
-  aboutPage: { backToTop: 'Back to the top' },
   concept: {
     title: 'An Italian table where you can unwind.',
     body: 'Seasonal ingredients and wine, enjoyed without formality. A little extra room for a memorable evening.',

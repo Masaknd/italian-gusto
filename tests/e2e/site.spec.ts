@@ -2525,3 +2525,50 @@ test("access section includes the map and complete localized travel details", as
 test("footer exposes navigation, social links, contact hours, and copyright", async ({ page }) => { await page.goto("/ja"); const footer = page.getByRole("contentinfo"); await expect(footer.getByRole("link", { name: "Gusto Italian Bar" })).toHaveAttribute("href", "/ja"); await expect(footer.getByRole("navigation", { name: "フッターナビゲーション" }).getByRole("link")).toHaveCount(4); await expect(footer.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); await expect(footer.getByRole("link", { name: "Twitterを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(footer.getByText("Lunch: 12:00～15:00")).toBeVisible(); await expect(footer.getByText("© 2023 Masa Kondo. All Rights Reserved.")).toBeVisible(); });
 test("reservation page provides a graceful phone fallback without configuration", async ({ page }) => { await page.goto("/ja/reserve"); await expect(page.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); });
 test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "Menu" })).toHaveAttribute("href", "/ja/menu"); });
+
+test("the localized scroll-to-top button is shared by every page", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop interaction check");
+
+  for (const path of ["/ja", "/ja/menu", "/ja/about", "/ja/reserve"]) {
+    await page.goto(path);
+
+    const scrollToTop = page.locator(".gusto-scroll-to-top");
+    await expect(scrollToTop).toHaveCount(1);
+    await expect(scrollToTop).toHaveAttribute("type", "button");
+    await expect(scrollToTop).toHaveAttribute(
+      "aria-label",
+      "ページ上部へ戻る",
+    );
+    await expect(scrollToTop).toBeHidden();
+  }
+
+  await page.goto("/ja/menu");
+  await page.evaluate(() => window.scrollTo(0, 500));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(300);
+  const scrollToTop = page.getByRole("button", { name: "ページ上部へ戻る" });
+  await expect(scrollToTop).toBeVisible();
+  await scrollToTop.focus();
+  await page.keyboard.press("Enter");
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(scrollToTop).toBeHidden();
+
+  await page.goto("/en/menu");
+  await expect(page.locator(".gusto-scroll-to-top")).toHaveAttribute(
+    "aria-label",
+    "Back to the top",
+  );
+});
+
+test("the scroll-to-top control is outside the mobile navigation dialog", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only structure check");
+  await page.goto("/ja");
+  await page.getByRole("button", { name: "メニュー" }).click();
+
+  const mobileNav = page.locator("#mobile-nav");
+  await expect(mobileNav).toBeVisible();
+  await expect(mobileNav.locator(".gusto-scroll-to-top")).toHaveCount(0);
+});

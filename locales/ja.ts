@@ -4,6 +4,7 @@ export const ja = {
     home: 'ホーム',
     menu: 'メニュー',
     closeMenu: 'メニューを閉じる',
+    backToTop: 'ページ上部へ戻る',
     mobileReserve: 'Reserve',
     access: '店舗情報',
     reserve: '予約する',
@@ -29,7 +30,6 @@ export const ja = {
       reservation: 'Reservation',
     },
     heroDishesAlt: 'パスタ、前菜、カルパッチョ',
-    heroScrollLabel: '店舗紹介へ進む',
     aboutLabel: 'About',
     aboutTitle: 'グストとは',
     aboutBody: [
@@ -79,9 +79,6 @@ export const ja = {
     ],
     paymentLabel: '支払方法',
     paymentMethods: '現金、VISA、Mastercard',
-  },
-  aboutPage: {
-    backToTop: 'ページ上部へ戻る',
   },
   concept: {
     title: '心ほどける、イタリアの食卓。',

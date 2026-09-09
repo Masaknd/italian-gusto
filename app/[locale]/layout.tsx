@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Analytics } from '@/components/analytics';
 import { PreviewBanner } from '@/components/preview-banner';
+import { ScrollToTop } from '@/components/scroll-to-top';
 import { SiteHeader } from '@/components/site-header';
 import { isLocale, locales, type Locale } from '@/lib/i18n';
 import { getDictionary } from '@/locales';
@@ -34,11 +35,13 @@ export default async function LocaleLayout({
 }: LayoutProps<'/[locale]'>) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  const d = getDictionary(locale);
   return (
     <div lang={locale}>
       <Analytics />
       <SiteHeader locale={locale} />
       {children}
+      <ScrollToTop label={d.nav.backToTop} />
       <PreviewBanner locale={locale} />
     </div>
   );
