@@ -18,7 +18,7 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
   return (
     <>
       <nav
-        className='gusto-menu__category-nav flex w-full flex-wrap content-center items-center gap-4 gap-y-2 sm:content-normal lg:flex lg:items-end lg:justify-start lg:gap-6 3xl:gap-8'
+        className='gusto-menu__category-nav flex w-full flex-wrap content-center items-center gap-2 gap-y-2 sm:content-normal sm:gap-4 lg:flex lg:items-end lg:justify-start lg:gap-6 3xl:gap-8'
         aria-label={copy.menu.categoryNavigation}
       >
         {groups.map(([category], index) => (
@@ -28,14 +28,14 @@ export function MenuList({ menus, copy }: { menus: Menu[]; copy: Copy }) {
           >
             {index > 0 && (
               <span
-                className='mr-2 block h-[24px] w-0 self-center border-l-[3px] border-dashed border-coral sm:h-[32px] xl:mr-4 3xl:mr-6 3xl:h-[50px]'
+                className='mr-2 block h-5 w-0 self-center border-l-2 border-dashed border-coral sm:h-[24px] xl:mr-4 xl:h-8'
                 aria-hidden='true'
               />
             )}
             <a
               href={`#menu-category-${index + 1}`}
               className={[
-                'inline-flex items-center justify-center font-display text-2xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:text-[32px] sm:leading-[40px] xl:text-5xl xl:leading-[58px] 3xl:text-[60px]! 3xl:leading-[72px]!',
+                'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
                 index === 0 ? 'text-[#c3a8a2]!' : '',
                 category.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
               ]
