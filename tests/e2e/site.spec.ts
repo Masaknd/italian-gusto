@@ -228,6 +228,17 @@ test("the appetizer cards follow the current responsive geometry", async ({ page
   }
 });
 
+test("menu card yen symbols have an independent sizing hook", async ({ page }) => {
+  await page.goto("/ja/menu");
+
+  const price = page.locator(".gusto-menu-card__price").first();
+  const yenSymbols = price.locator(".gusto-menu-card__yen");
+
+  await expect(yenSymbols).toHaveCount(2);
+  await expect(yenSymbols.nth(0)).toHaveText("¥");
+  await expect(yenSymbols.nth(1)).toHaveText("¥");
+});
+
 test("the 768px home header uses small-screen navigation at the breakpoint", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });

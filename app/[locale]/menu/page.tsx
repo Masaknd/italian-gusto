@@ -57,10 +57,10 @@ export default async function MenuPage({
           className='relative w-full overflow-hidden text-ink'
           aria-labelledby='gusto-menu-title'
         >
-          <div className='flex w-full flex-col items-start gap-6 px-4 pb-[50px] sm:gap-[46px] sm:px-6 sm:pb-50 xl:px-24 3xl:px-60'>
+          <div className='flex w-full flex-col items-start gap-6 px-4 pb-[50px] sm:gap-[46px] sm:px-8 sm:pb-50 xl:px-24 3xl:px-60'>
             <h1
               id='gusto-menu-title'
-              className='gusto-menu__title m-0 box-border inline-flex h-10 w-[203px] items-end border-b-[3px] border-dashed border-coral font-display font-normal whitespace-nowrap text-coral sm:h-[60px] sm:w-[261px] xl:h-[88px] xl:w-[385px]'
+              className='gusto-menu__title m-0 box-border inline-flex items-end border-b-[3px] border-dashed border-coral font-display font-normal whitespace-nowrap text-coral'
             >
               <span
                 className='gusto-menu__title-prefix text-2xl leading-[30px] tracking-[-0.3em] sm:text-[32px] sm:leading-10 xl:text-5xl xl:leading-15'
@@ -69,7 +69,7 @@ export default async function MenuPage({
                 {d.menu.titlePrefix}
               </span>
               <span
-                className='gusto-menu__title-main text-[40px] leading-12 tracking-[-0.25em] sm:text-[52px] sm:leading-[62px] xl:text-[80px] xl:leading-24'
+                className='gusto-menu__title-main text-[40px] leading-10 tracking-[-0.25em] sm:text-[52px] sm:leading-[52px] xl:text-[80px] xl:leading-20'
                 aria-hidden='true'
               >
                 {d.menu.titleMain}
@@ -83,17 +83,6 @@ export default async function MenuPage({
             ) : (
               <MenuList menus={menus} copy={d} />
             )}
-          </div>
-          <div
-            className='gusto-menu__line-art pointer-events-none absolute top-[46px] right-[1.999px] hidden h-[297px] w-[287.08px] xl:block'
-            aria-hidden='true'
-          >
-            <Image
-              src='/images/menu-botanicals.svg'
-              alt=''
-              fill
-              sizes='287px'
-            />
           </div>
         </section>
         <HomeSocialSection copy={d} socialCards={socialCards} />
