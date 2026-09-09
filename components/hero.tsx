@@ -19,7 +19,7 @@ const heroClassNames = {
   ].join(' '),
   content: 'relative w-full',
   intro: [
-    'absolute z-10 flex w-max flex-col items-start gap-12',
+    'absolute flex w-max flex-col items-start gap-12 z-5',
     'sm:top-0 sm:left-0',
     'lg:top-[calc(50dvh-180px)] lg:left-20 lg:gap-8',
     'xl:top-[calc(50dvh-132px)] xl:-translate-y-1/2 xl:gap-12',
@@ -46,15 +46,15 @@ const heroClassNames = {
     'xl:gap-4.5 xl:text-[28px]',
   ].join(' '),
   vegetables: [
-    'gusto-hero-veg absolute right-40 -bottom-125 z-2 h-auto w-[202px]',
-    'sm:right-0 sm:-bottom-160 sm:w-[347px]',
+    'gusto-hero-veg absolute right-28 -bottom-125 h-auto w-[202px] -z-1',
+    'sm:right-20 sm:-bottom-160 sm:w-[347px]',
     'lg:-right-25 lg:-bottom-20 lg:w-[260px]',
     'xl:-right-30 xl:-bottom-30 xl:w-[315px]',
     '2xl:-right-25 2xl:-bottom-40 2xl:w-[347px]',
     '3xl:right-0 3xl:-bottom-30 3xl:w-[360px]',
   ].join(' '),
   dishesWrapper: [
-    'absolute top-30 -right-15 w-max',
+    'absolute top-30 -right-15 w-max h-auto z-2',
     'sm:top-[clamp(60px,calc(100vh-700px),120px)] sm:-right-50',
     'md:top-[clamp(0px,calc(100vh-700px),30px)]',
     'lg:top-[calc(50dvh-340px)] lg:right-[clamp(-100px,calc(50vw-840px),0px)]',
@@ -129,7 +129,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
       </div>
       <a
         className={heroClassNames.scrollLink}
-        href='#about'
+        href='#'
         aria-label={copy.home.heroScrollLabel}
       >
         <span aria-hidden='true'>↑</span>
