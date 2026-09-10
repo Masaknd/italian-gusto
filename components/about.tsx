@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 
 function AboutMoreLink({ children }: { children: React.ReactNode }) {
@@ -34,9 +35,9 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
       <div className='gusto-about-left'>
         <div className='relative flex w-full flex-col items-start gap-12 xl:items-start'>
           <div className='gusto-about-title'>
-            <h2 className="relative w-max font-display text-3xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]">
+            <InViewHeading className="relative w-max font-display text-3xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]">
               {copy.home.aboutTitle}
-            </h2>
+            </InViewHeading>
           </div>
           <div className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
             {copy.home.aboutBody.map((paragraph) => (

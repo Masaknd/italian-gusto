@@ -115,14 +115,24 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           ].join(' ')}
           onClick={() => setOpen(false)}
         >
-          <Image
-            src='/images/logo-w2@2x.png'
-            alt={siteConfig.name}
-            width={692}
-            height={300}
-            priority
+          <motion.div
             className='block h-full w-full'
-          />
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <Image
+              src='/images/logo-w2@2x.png'
+              alt={siteConfig.name}
+              width={692}
+              height={300}
+              priority
+              className='block h-full w-full'
+            />
+          </motion.div>
         </Link>
 
         <nav

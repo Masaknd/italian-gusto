@@ -1,6 +1,14 @@
+'use client';
+
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'motion/react';
 import type { HomePageCopy } from './types';
 import { Marquee } from './marquee';
+
+const entranceTransition = {
+  duration: 1.5,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
 
 const heroClassNames = {
   root: [
@@ -70,17 +78,52 @@ const heroClassNames = {
 };
 
 export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className={heroClassNames.root}>
-      <Marquee
-        className={heroClassNames.verticalTitle}
-        text={copy.home.verticalTitle}
-      />
+      <motion.div
+        className='pointer-events-none absolute inset-0'
+        initial={{ opacity: 0, x: reduceMotion ? 0 : -48 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={entranceTransition}
+      >
+        <Marquee
+          className={heroClassNames.verticalTitle}
+          text={copy.home.verticalTitle}
+        />
+      </motion.div>
       <div className={heroClassNames.content}>
         <div className={heroClassNames.intro}>
-          <h1 className={heroClassNames.title}>
+          <motion.h1
+            className={heroClassNames.title}
+            initial='hidden'
+            animate='visible'
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: reduceMotion ? 0 : 0.3,
+                },
+              },
+            }}
+          >
             {copy.hero.titleSegments.map((line, lineIndex) => (
-              <span className='block' key={lineIndex}>
+              <motion.span
+                className='block'
+                key={lineIndex}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: reduceMotion ? 0 : 32,
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: entranceTransition,
+                  },
+                }}
+              >
                 {line.map((segment, segmentIndex) => (
                   <span
                     className={
@@ -93,28 +136,71 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
                     {segment.text}
                   </span>
                 ))}
-              </span>
+              </motion.span>
             ))}
-          </h1>
-          <nav
+          </motion.h1>
+          <motion.nav
             aria-label={copy.home.heroNavLabel}
             className={heroClassNames.navigation}
+            initial='hidden'
+            animate='visible'
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  delayChildren: 0.15,
+                  staggerChildren: reduceMotion ? 0 : 0.1,
+                },
+              },
+            }}
           >
-            <a href=''>{copy.home.heroNav.home}</a>
-            <a href='#about'>{copy.home.heroNav.about}</a>
-            <a href='#recommendations'>{copy.home.heroNav.menu}</a>
-            <a href='#access'>{copy.home.heroNav.access}</a>
-            <a href='#reservation'>{copy.home.heroNav.reservation}</a>
-          </nav>
-          <Image
-            src='/images/four-veggies.png'
-            alt=''
-            width={360}
-            height={246}
+            {[
+              [copy.home.heroNav.home, ''],
+              [copy.home.heroNav.about, '#about'],
+              [copy.home.heroNav.menu, '#recommendations'],
+              [copy.home.heroNav.access, '#access'],
+              [copy.home.heroNav.reservation, '#reservation'],
+            ].map(([label, href]) => (
+              <motion.a
+                key={href}
+                href={href}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    x: reduceMotion ? 0 : 32,
+                  },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: entranceTransition,
+                  },
+                }}
+              >
+                {label}
+              </motion.a>
+            ))}
+          </motion.nav>
+          <motion.div
             className={heroClassNames.vegetables}
-          />
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ...entranceTransition, delay: 0.2 }}
+          >
+            <Image
+              src='/images/four-veggies.png'
+              alt=''
+              width={360}
+              height={246}
+              className='h-auto w-full'
+            />
+          </motion.div>
         </div>
-        <div className={heroClassNames.dishesWrapper}>
+        <motion.div
+          className={heroClassNames.dishesWrapper}
+          initial={{ opacity: 0, x: reduceMotion ? 0 : 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ ...entranceTransition, delay: 0.1 }}
+        >
           <Image
             src='/images/dishes.png'
             alt={copy.home.heroDishesAlt}
@@ -123,7 +209,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
             priority
             className={heroClassNames.dishes}
           />
-        </div>
+        </motion.div>
       </div>
       <Image
         src='/images/b-1.png'
