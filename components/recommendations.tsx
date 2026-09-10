@@ -13,9 +13,19 @@ import { useEffect, useRef, useState } from 'react';
 import type { WheelEvent } from 'react';
 import type { Locale } from '@/lib/i18n';
 import type { FeaturedMenu } from '@/lib/microcms/types';
+import { InViewText } from './in-view-text';
 import type { HomePageCopy } from './types';
 
 type RecommendationIndex = 1 | 2 | 3;
+
+const letterRevealDuration = 0.25;
+const letterRevealStagger = 0.035;
+const linkRevealGap = 0.2;
+const entranceTransition = {
+  duration: 1.5,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
+const MotionLink = motion.create(Link);
 
 const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
   1: 1,
@@ -23,17 +33,39 @@ const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
   3: 3,
 };
 
+function getTextRevealEnd(text: string) {
+  const letterCount = Array.from(text).filter(
+    (character) => !/^\s$/u.test(character),
+  ).length;
+
+  return (
+    Math.max(0, letterCount - 1) * letterRevealStagger + letterRevealDuration
+  );
+}
+
 function RecommendationMoreLink({
   children,
   index,
   locale,
+  revealDelay,
 }: {
   children: React.ReactNode;
   index: RecommendationIndex;
   locale: Locale;
+  revealDelay: number;
 }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <Link
+    <MotionLink
+      initial={reduceMotion ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ amount: 0.3, once: true }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { ...entranceTransition, delay: revealDelay }
+      }
       href={`/${locale}/menu#category-${menuCategoryByRecommendation[index]}`}
       className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
@@ -50,7 +82,7 @@ function RecommendationMoreLink({
           className='transform duration-200 group-hover:translate-x-6'
         />
       </svg>
-    </Link>
+    </MotionLink>
   );
 }
 
@@ -66,11 +98,14 @@ function Recommendation({
   locale: Locale;
 }) {
   const imageSrc = item.image.url.trim();
+  const linkRevealDelay = item.description
+    ? getTextRevealEnd(item.description) + linkRevealGap
+    : 0;
 
   return (
     <article
       id={`recommendation-${index}`}
-      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
+      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] lg:flex-row lg:items-center lg:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
       <div className={`gusto-feature-copy h-max`}>
         <div className={`gusto-feature-heading w-max`}>
@@ -90,13 +125,19 @@ function Recommendation({
             {item.name}
           </h3>
           {item.description && (
-            <p
+            <InViewText
               className={`gusto-feature-description mt-4 font-accent text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
+              duration={letterRevealDuration}
+              stagger={letterRevealStagger}
             >
               {item.description}
-            </p>
+            </InViewText>
           )}
-          <RecommendationMoreLink index={index} locale={locale}>
+          <RecommendationMoreLink
+            index={index}
+            locale={locale}
+            revealDelay={linkRevealDelay}
+          >
             {copy.featured.menuLinks[index - 1]}
           </RecommendationMoreLink>
         </div>
@@ -127,7 +168,7 @@ function Recommendation({
           alt=''
           width={996}
           height={872}
-          className='gusto-feature-3-deco pointer-events-none top-[50px] left-[1230px] hidden h-85 w-auto xl:block 2xl:absolute 3xl:top-15 3xl:left-[1700px] 3xl:h-110'
+          className='gusto-feature-3-deco pointer-events-none top-[50px] left-[1230px] hidden h-85 w-auto xl:absolute xl:block 3xl:top-15 3xl:left-[1700px] 3xl:h-110'
         />
       )}
     </article>

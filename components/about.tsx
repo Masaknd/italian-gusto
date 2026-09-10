@@ -1,11 +1,42 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'motion/react';
+
 import { InViewHeading } from './in-view-heading';
+import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
 
-function AboutMoreLink({ children }: { children: React.ReactNode }) {
+const letterRevealDuration = 0.25;
+const letterRevealStagger = 0.035;
+const paragraphRevealPause = 0.12;
+const linkRevealGap = 0.2;
+const entranceTransition = {
+  duration: 1.5,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
+const MotionLink = motion.create(Link);
+
+function AboutMoreLink({
+  children,
+  revealDelay,
+}: {
+  children: React.ReactNode;
+  revealDelay: number;
+}) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <Link
+    <MotionLink
+      initial={reduceMotion ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ amount: 0.3, once: true }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { ...entranceTransition, delay: revealDelay }
+      }
       href='#wine'
       className='gusto-about-more flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]'
     >
@@ -22,11 +53,18 @@ function AboutMoreLink({ children }: { children: React.ReactNode }) {
           className='transform duration-200 group-hover:translate-x-6'
         />
       </svg>
-    </Link>
+    </MotionLink>
   );
 }
 
 export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
+  const linkRevealDelay =
+    getInViewTextSequenceDuration(copy.home.aboutBody, {
+      duration: letterRevealDuration,
+      stagger: letterRevealStagger,
+      paragraphPause: paragraphRevealPause,
+    }) + linkRevealGap;
+
   return (
     <section
       id='about'
@@ -39,12 +77,17 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
               {copy.home.aboutTitle}
             </InViewHeading>
           </div>
-          <div className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
-            {copy.home.aboutBody.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <AboutMoreLink>{copy.home.aboutMore}</AboutMoreLink>
+          <InViewTextGroup
+            className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'
+            duration={letterRevealDuration}
+            stagger={letterRevealStagger}
+            paragraphPause={paragraphRevealPause}
+          >
+            {copy.home.aboutBody}
+          </InViewTextGroup>
+          <AboutMoreLink revealDelay={linkRevealDelay}>
+            {copy.home.aboutMore}
+          </AboutMoreLink>
           <Image
             src='/images/glasscheese.png'
             alt='glass wine and cheese'
