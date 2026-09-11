@@ -113,7 +113,7 @@ export function HomeFooter({
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
-            <p className='gusto-footer-copyright w-[218px] text-center font-sans text-xs leading-3.5 whitespace-nowrap sm:text-center lg:font-sans xl:text-right xl:font-accent xl:text-sm'>
+            <p className='gusto-footer-copyright text-center font-secondary text-xs leading-3.5 whitespace-nowrap sm:text-center xl:text-right xl:text-sm'>
               {copy.footer.copyright}
             </p>
           </div>
