@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
+import { AnimatedEmphasisText } from './animations/animated-emphasis-text';
 import { entranceTransition } from './animations/config';
-import { AnimatedHeroTitle } from './animations/hero-title';
 import type { HomePageCopy } from './types';
 import { Marquee } from './marquee';
 
@@ -92,10 +92,11 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
       </motion.div>
       <div className={heroClassNames.content}>
         <div className={heroClassNames.intro}>
-          <AnimatedHeroTitle
+          <AnimatedEmphasisText
+            as='h1'
             className={heroClassNames.title}
             emphasizedSegmentClassName={heroClassNames.emphasizedTitleSegment}
-            titleSegments={copy.hero.titleSegments}
+            lines={copy.hero.titleSegments}
           />
           <motion.nav
             aria-label={copy.home.heroNavLabel}

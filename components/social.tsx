@@ -92,8 +92,9 @@ export function HomeSocialSection({
                 </p>
               </div>
               <HomeSocialIcon
+                animated
                 type={card.icon}
-                className='h-8 w-8 flex-[0_0_32px] text-current sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'
+                className='h-8 w-8 flex-[0_0_32px] origin-bottom text-current sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'
               />
             </a>
           ))}

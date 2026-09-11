@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { motion, useAnimationControls, useReducedMotion } from 'motion/react';
 import type { Variants } from 'motion/react';
-import type { HomePageCopy } from '../types';
 import { entranceTransition } from './config';
 
 const emphasisPauseRange = {
@@ -37,14 +36,93 @@ const emphasisCharacterVariants: Variants = {
   },
 };
 
-type HeroTitleSegments = HomePageCopy['hero']['titleSegments'];
-type HeroTitleSegment = HeroTitleSegments[number][number];
+export function useRepeatingEmphasisAnimation(enabled = true) {
+  const controls = useAnimationControls();
+  const reduceMotion = useReducedMotion();
+  const [isActive, setIsActive] = useState(false);
 
-function isEmphasizedSegment(segment: HeroTitleSegment) {
-  return 'emphasis' in segment && segment.emphasis;
+  useEffect(() => {
+    if (!enabled || reduceMotion || isActive) return;
+
+    const pause =
+      emphasisPauseRange.min +
+      Math.random() * (emphasisPauseRange.max - emphasisPauseRange.min);
+    const timeoutId = setTimeout(() => setIsActive(true), pause);
+
+    return () => clearTimeout(timeoutId);
+  }, [enabled, isActive, reduceMotion]);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    if (reduceMotion) {
+      controls.set('idle');
+      return;
+    }
+
+    if (!isActive) return;
+
+    let cancelled = false;
+    let completionTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const runAnimation = async () => {
+      await controls.start('bounce');
+
+      if (!cancelled) {
+        completionTimeoutId = setTimeout(
+          () => setIsActive(false),
+          emphasisUnitPauseMs,
+        );
+      }
+    };
+
+    void runAnimation();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(completionTimeoutId);
+      controls.stop();
+    };
+  }, [controls, enabled, isActive, reduceMotion]);
+
+  return {
+    animate: controls,
+    initial: 'idle' as const,
+    variants: emphasisCharacterVariants,
+  };
 }
 
-function EmphasizedTitleSegment({
+export type EmphasisTextSegment = {
+  text: string;
+  emphasis?: boolean;
+};
+
+export type EmphasisTextLines = readonly (readonly EmphasisTextSegment[])[];
+
+export type EmphasisTextElement = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
+
+export type AnimatedEmphasisTextProps = {
+  as?: EmphasisTextElement;
+  className?: string;
+  emphasizedSegmentClassName?: string;
+  lineClassName?: string;
+  lines: EmphasisTextLines;
+};
+
+const motionTextElements = {
+  div: motion.div,
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+  p: motion.p,
+  span: motion.span,
+};
+
+function isEmphasizedSegment(segment: EmphasisTextSegment) {
+  return segment.emphasis === true;
+}
+
+function AnimatedEmphasisSegment({
   animationIndex,
   className,
   isActive,
@@ -52,7 +130,7 @@ function EmphasizedTitleSegment({
   text,
 }: {
   animationIndex: number;
-  className: string;
+  className?: string;
   isActive: boolean;
   onAnimationComplete: (animationIndex: number) => void;
   text: string;
@@ -119,17 +197,15 @@ function EmphasizedTitleSegment({
   );
 }
 
-export function AnimatedHeroTitle({
+export function AnimatedEmphasisText({
+  as = 'span',
   className,
   emphasizedSegmentClassName,
-  titleSegments,
-}: {
-  className: string;
-  emphasizedSegmentClassName: string;
-  titleSegments: HeroTitleSegments;
-}) {
+  lineClassName = 'block',
+  lines,
+}: AnimatedEmphasisTextProps) {
   const reduceMotion = useReducedMotion();
-  const emphasisCount = titleSegments.reduce(
+  const emphasisCount = lines.reduce(
     (count, line) => count + line.filter(isEmphasizedSegment).length,
     0,
   );
@@ -160,9 +236,10 @@ export function AnimatedHeroTitle({
   );
 
   let emphasisIndex = 0;
+  const MotionTextElement = motionTextElements[as];
 
   return (
-    <motion.h1
+    <MotionTextElement
       className={className}
       initial='hidden'
       animate='visible'
@@ -175,9 +252,9 @@ export function AnimatedHeroTitle({
         },
       }}
     >
-      {titleSegments.map((line, lineIndex) => (
+      {lines.map((line, lineIndex) => (
         <motion.span
-          className='block'
+          className={lineClassName}
           key={lineIndex}
           variants={{
             hidden: {
@@ -201,7 +278,7 @@ export function AnimatedHeroTitle({
             const animationIndex = emphasisIndex++;
 
             return (
-              <EmphasizedTitleSegment
+              <AnimatedEmphasisSegment
                 animationIndex={animationIndex}
                 className={emphasizedSegmentClassName}
                 isActive={activeEmphasisIndex === animationIndex}
@@ -213,6 +290,6 @@ export function AnimatedHeroTitle({
           })}
         </motion.span>
       ))}
-    </motion.h1>
+    </MotionTextElement>
   );
 }
