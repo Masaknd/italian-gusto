@@ -85,7 +85,7 @@ export function HomeHeroSection({
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className={heroClassNames.root}>
+    <section id='top' className={heroClassNames.root}>
       <AnimatedMarquee
         className={heroClassNames.verticalTitle}
         text={copy.home.verticalTitle}
