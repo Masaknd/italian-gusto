@@ -79,6 +79,7 @@ export function HomeFooter({
                   key={card.name}
                 >
                   <HomeSocialIcon
+                    animated
                     type={card.icon}
                     className='block h-full w-full'
                   />
