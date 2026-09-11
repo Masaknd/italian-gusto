@@ -13,18 +13,12 @@ import { useEffect, useRef, useState } from 'react';
 import type { WheelEvent } from 'react';
 import type { Locale } from '@/lib/i18n';
 import type { FeaturedMenu } from '@/lib/microcms/types';
-import { InViewText } from './in-view-text';
+import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
+import { getInViewTextDuration, InViewText } from './in-view-text';
 import type { HomePageCopy } from './types';
 
 type RecommendationIndex = 1 | 2 | 3;
 
-const letterRevealDuration = 0.25;
-const letterRevealStagger = 0.035;
-const linkRevealGap = 0.2;
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 const MotionLink = motion.create(Link);
 
 const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
@@ -32,16 +26,6 @@ const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
   2: 5,
   3: 3,
 };
-
-function getTextRevealEnd(text: string) {
-  const letterCount = Array.from(text).filter(
-    (character) => !/^\s$/u.test(character),
-  ).length;
-
-  return (
-    Math.max(0, letterCount - 1) * letterRevealStagger + letterRevealDuration
-  );
-}
 
 function RecommendationMoreLink({
   children,
@@ -58,14 +42,7 @@ function RecommendationMoreLink({
 
   return (
     <MotionLink
-      initial={reduceMotion ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ amount: 0.3, once: true }}
-      transition={
-        reduceMotion
-          ? { duration: 0 }
-          : { ...entranceTransition, delay: revealDelay }
-      }
+      {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu#category-${menuCategoryByRecommendation[index]}`}
       className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
@@ -99,7 +76,7 @@ function Recommendation({
 }) {
   const imageSrc = item.image.url.trim();
   const linkRevealDelay = item.description
-    ? getTextRevealEnd(item.description) + linkRevealGap
+    ? getInViewTextDuration(item.description) + inViewTextDefaults.linkGap
     : 0;
 
   return (
@@ -127,8 +104,6 @@ function Recommendation({
           {item.description && (
             <InViewText
               className={`gusto-feature-description mt-4 font-accent text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
-              duration={letterRevealDuration}
-              stagger={letterRevealStagger}
             >
               {item.description}
             </InViewText>

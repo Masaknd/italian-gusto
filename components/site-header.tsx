@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { siteConfig } from '@/lib/site-config';
 import { getDictionary } from '@/locales';
+import { entranceEasing } from './animations/config';
 import { ReservationLink } from './reservation-link';
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -121,7 +122,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
+              ease: entranceEasing,
             }}
           >
             <Image
@@ -198,7 +199,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             exit={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
             transition={{
               duration: reduceMotion ? 0.15 : 0.32,
-              ease: [0.22, 1, 0.36, 1],
+              ease: entranceEasing,
             }}
           >
             <div className='site-header-mobile-header relative flex h-[84px] w-full flex-[0_0_84px] items-center justify-start p-[4px_0] sm:h-auto sm:flex-[0_0_120px] sm:justify-center sm:p-[8px_24px]'>

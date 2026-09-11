@@ -2,13 +2,10 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
+import { entranceTransition } from './animations/config';
+import { AnimatedHeroTitle } from './animations/hero-title';
 import type { HomePageCopy } from './types';
 import { Marquee } from './marquee';
-
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 
 const heroClassNames = {
   root: [
@@ -42,7 +39,7 @@ const heroClassNames = {
     '3xl:text-[clamp(4.5rem,5.21vw,100px)] 3xl:leading-[108px] 3xl:tracking-[-0.3em]',
   ].join(' '),
   emphasizedTitleSegment: [
-    'gusto-hero-title-emphasis text-[68px]',
+    'gusto-hero-title-emphasis inline-block origin-bottom text-[68px]',
     'sm:text-[86px]',
     'lg:text-[70px]',
     'xl:text-[86px]',
@@ -95,50 +92,11 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
       </motion.div>
       <div className={heroClassNames.content}>
         <div className={heroClassNames.intro}>
-          <motion.h1
+          <AnimatedHeroTitle
             className={heroClassNames.title}
-            initial='hidden'
-            animate='visible'
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: reduceMotion ? 0 : 0.3,
-                },
-              },
-            }}
-          >
-            {copy.hero.titleSegments.map((line, lineIndex) => (
-              <motion.span
-                className='block'
-                key={lineIndex}
-                variants={{
-                  hidden: {
-                    opacity: 0,
-                    y: reduceMotion ? 0 : 32,
-                  },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: entranceTransition,
-                  },
-                }}
-              >
-                {line.map((segment, segmentIndex) => (
-                  <span
-                    className={
-                      'emphasis' in segment && segment.emphasis
-                        ? heroClassNames.emphasizedTitleSegment
-                        : undefined
-                    }
-                    key={`${lineIndex}-${segmentIndex}`}
-                  >
-                    {segment.text}
-                  </span>
-                ))}
-              </motion.span>
-            ))}
-          </motion.h1>
+            emphasizedSegmentClassName={heroClassNames.emphasizedTitleSegment}
+            titleSegments={copy.hero.titleSegments}
+          />
           <motion.nav
             aria-label={copy.home.heroNavLabel}
             className={heroClassNames.navigation}

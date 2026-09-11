@@ -4,18 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 
+import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
-
-const letterRevealDuration = 0.25;
-const letterRevealStagger = 0.035;
-const paragraphRevealPause = 0.12;
-const linkRevealGap = 0.2;
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 const MotionLink = motion.create(Link);
 
 function AboutMoreLink({
@@ -29,14 +21,7 @@ function AboutMoreLink({
 
   return (
     <MotionLink
-      initial={reduceMotion ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ amount: 0.3, once: true }}
-      transition={
-        reduceMotion
-          ? { duration: 0 }
-          : { ...entranceTransition, delay: revealDelay }
-      }
+      {...getInViewFadeProps(reduceMotion, revealDelay)}
       href='#wine'
       className='gusto-about-more flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]'
     >
@@ -59,11 +44,8 @@ function AboutMoreLink({
 
 export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
   const linkRevealDelay =
-    getInViewTextSequenceDuration(copy.home.aboutBody, {
-      duration: letterRevealDuration,
-      stagger: letterRevealStagger,
-      paragraphPause: paragraphRevealPause,
-    }) + linkRevealGap;
+    getInViewTextSequenceDuration(copy.home.aboutBody) +
+    inViewTextDefaults.linkGap;
 
   return (
     <section
@@ -77,12 +59,7 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
               {copy.home.aboutTitle}
             </InViewHeading>
           </div>
-          <InViewTextGroup
-            className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'
-            duration={letterRevealDuration}
-            stagger={letterRevealStagger}
-            paragraphPause={paragraphRevealPause}
-          >
+          <InViewTextGroup className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
             {copy.home.aboutBody}
           </InViewTextGroup>
           <AboutMoreLink revealDelay={linkRevealDelay}>

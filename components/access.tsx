@@ -2,12 +2,9 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import { siteConfig } from '@/lib/site-config';
+import { getInViewFadeUpProps } from './animations/config';
+import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
-
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 
 const detailValueClass = 'm-0 list-none p-0 not-italic';
 const detailRowClass =
@@ -22,26 +19,12 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
       className='gusto-access relative flex flex-col items-center gap-4 bg-coral p-[32px_16px] text-center text-content sm:gap-8 sm:p-[64px_86px] lg:gap-12 lg:p-[72px_max(24px,9vw)] xl:gap-[57px] xl:p-[50px_96px] 3xl:gap-[min(2.9688vw,57px)] 3xl:p-[min(4.375vw,84px)_min(12.5vw,240px)]'
     >
       <div className='gusto-access-title flex w-full -translate-x-1 flex-col items-center gap-[min(0.4167vw,8px)] sm:-translate-x-2 sm:gap-2 md:-translate-x-2.5'>
-        <motion.h2
-          className='w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:text-[52px] 3xl:text-[min(2.7083vw,52px)]'
-          initial={reduceMotion ? false : { opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.3, once: true }}
-          transition={reduceMotion ? { duration: 0 } : entranceTransition}
-          data-in-view-heading
-        >
+        <InViewHeading className='w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:text-[52px] 3xl:text-[min(2.7083vw,52px)]'>
           {copy.home.accessTitle}
-        </motion.h2>
+        </InViewHeading>
         <motion.p
           className="relative p-[0_0_10px] font-accent text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]"
-          initial={reduceMotion ? false : { opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.3, once: true }}
-          transition={
-            reduceMotion
-              ? { duration: 0 }
-              : { ...entranceTransition, delay: 0.2 }
-          }
+          {...getInViewFadeUpProps(reduceMotion, 0.2)}
           data-access-title-label
         >
           {copy.home.accessLabel}

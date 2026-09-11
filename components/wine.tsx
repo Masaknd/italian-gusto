@@ -5,18 +5,10 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 
 import type { Locale } from '@/lib/i18n';
+import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
-
-const letterRevealDuration = 0.25;
-const letterRevealStagger = 0.035;
-const paragraphRevealPause = 0.12;
-const linkRevealGap = 0.2;
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 const MotionLink = motion.create(Link);
 
 function WineMoreLink({
@@ -32,14 +24,7 @@ function WineMoreLink({
 
   return (
     <MotionLink
-      initial={reduceMotion ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ amount: 0.3, once: true }}
-      transition={
-        reduceMotion
-          ? { duration: 0 }
-          : { ...entranceTransition, delay: revealDelay }
-      }
+      {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu`}
       className='gusto-wine-more flex w-full items-center justify-start gap-8 font-accent text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
     >
@@ -68,11 +53,8 @@ export function HomeWineSection({
   locale: Locale;
 }) {
   const linkRevealDelay =
-    getInViewTextSequenceDuration(copy.home.wineBody, {
-      duration: letterRevealDuration,
-      stagger: letterRevealStagger,
-      paragraphPause: paragraphRevealPause,
-    }) + linkRevealGap;
+    getInViewTextSequenceDuration(copy.home.wineBody) +
+    inViewTextDefaults.linkGap;
 
   return (
     <section id='wine' className='relative w-full overflow-hidden text-ink'>
@@ -101,12 +83,7 @@ export function HomeWineSection({
               {copy.home.wineTitle}
             </InViewHeading>
           </div>
-          <InViewTextGroup
-            className='gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'
-            duration={letterRevealDuration}
-            stagger={letterRevealStagger}
-            paragraphPause={paragraphRevealPause}
-          >
+          <InViewTextGroup className='gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
             {copy.home.wineBody}
           </InViewTextGroup>
           <WineMoreLink locale={locale} revealDelay={linkRevealDelay}>

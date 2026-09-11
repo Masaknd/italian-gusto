@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import type { Variants } from 'motion/react';
+import { inViewTextDefaults } from './animations/config';
 
 type InViewTextElement = 'div' | 'p' | 'span';
 type InViewTextUnit = 'letter' | 'word';
@@ -54,11 +55,19 @@ function countAnimationUnits(text: string, by: InViewTextUnit) {
   }, 0);
 }
 
-function getTextRevealDuration(
+export function getInViewTextDuration(
   text: string,
-  by: InViewTextUnit,
-  duration: number,
-  stagger: number,
+  {
+    by = 'letter',
+    duration = inViewTextDefaults.duration,
+    stagger = by === 'word'
+      ? inViewTextDefaults.wordStagger
+      : inViewTextDefaults.letterStagger,
+  }: {
+    by?: InViewTextUnit;
+    duration?: number;
+    stagger?: number;
+  } = {},
 ) {
   const unitCount = countAnimationUnits(text, by);
 
@@ -70,9 +79,11 @@ export function getInViewTextSequenceDuration(
   {
     by = 'letter',
     delay = 0,
-    duration = 0.25,
-    stagger = by === 'word' ? 0.1 : 0.035,
-    paragraphPause = 0.12,
+    duration = inViewTextDefaults.duration,
+    stagger = by === 'word'
+      ? inViewTextDefaults.wordStagger
+      : inViewTextDefaults.letterStagger,
+    paragraphPause = inViewTextDefaults.paragraphPause,
   }: {
     by?: InViewTextUnit;
     delay?: number;
@@ -84,7 +95,7 @@ export function getInViewTextSequenceDuration(
   return paragraphs.reduce(
     (total, paragraph, index) =>
       total +
-      getTextRevealDuration(paragraph, by, duration, stagger) +
+      getInViewTextDuration(paragraph, { by, duration, stagger }) +
       (index < paragraphs.length - 1 ? paragraphPause : 0),
     delay,
   );
@@ -96,8 +107,10 @@ export function InViewText({
   by = 'letter',
   className,
   delay = 0,
-  duration = 0.25,
-  stagger = by === 'word' ? 0.1 : 0.035,
+  duration = inViewTextDefaults.duration,
+  stagger = by === 'word'
+    ? inViewTextDefaults.wordStagger
+    : inViewTextDefaults.letterStagger,
   amount = 0.3,
   once = true,
   trigger = 'self',
@@ -190,9 +203,9 @@ export function InViewTextGroup({
   children,
   className,
   delay = 0,
-  duration = 0.25,
-  stagger = 0.035,
-  paragraphPause = 0.12,
+  duration = inViewTextDefaults.duration,
+  stagger = inViewTextDefaults.letterStagger,
+  paragraphPause = inViewTextDefaults.paragraphPause,
   amount = 0.3,
   once = true,
 }: InViewTextGroupProps) {
@@ -204,12 +217,7 @@ export function InViewTextGroup({
       .reduce(
         (total, previousParagraph) =>
           total +
-          getTextRevealDuration(
-            previousParagraph,
-            'letter',
-            duration,
-            stagger,
-          ) +
+          getInViewTextDuration(previousParagraph, { duration, stagger }) +
           paragraphPause,
         delay,
       );

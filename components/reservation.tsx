@@ -3,13 +3,10 @@
 import { motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
 import { siteConfig } from '@/lib/site-config';
+import { getInViewFadeUpProps } from './animations/config';
+import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 import { ReservationLink } from './reservation-link';
-
-const entranceTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
 
 export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
   const reduceMotion = useReducedMotion();
@@ -36,26 +33,12 @@ export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
       />
       <div className='gusto-booking z-[1] flex flex-col items-center justify-start gap-6 p-4 text-center [background:rgb(27_40_27_/_70%)] sm:p-8 lg:p-14'>
         <div className='gusto-booking-title flex w-full flex-col items-center gap-1'>
-          <motion.h2
-            className='font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-coral sm:text-5xl sm:leading-8 lg:text-[42px] lg:leading-10 lg:tracking-[-0.288em] xl:text-[52px]'
-            initial={reduceMotion ? false : { opacity: 0, y: 48 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.3, once: true }}
-            transition={reduceMotion ? { duration: 0 } : entranceTransition}
-            data-in-view-heading
-          >
+          <InViewHeading className='font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-coral sm:text-5xl sm:leading-8 lg:text-[42px] lg:leading-10 lg:tracking-[-0.288em] xl:text-[52px]'>
             {copy.home.reservationTitle}
-          </motion.h2>
+          </InViewHeading>
           <motion.p
             className="relative pb-1 font-accent text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[3px] after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg"
-            initial={reduceMotion ? false : { opacity: 0, y: 48 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.3, once: true }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { ...entranceTransition, delay: 0.2 }
-            }
+            {...getInViewFadeUpProps(reduceMotion, 0.2)}
             data-reservation-title-label
           >
             {copy.home.reservationLabel}
