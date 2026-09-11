@@ -18,8 +18,9 @@ export function HomeFooter({
   storyHref?: string;
 }) {
   const footerNav = [
+    [copy.home.heroNav.home, ''],
     [copy.footer.nav.menu, `/${locale}/menu`],
-    [copy.footer.nav.story, storyHref ?? `/${locale}/about`],
+    [copy.footer.nav.about, storyHref ?? `/${locale}/about`],
     [copy.footer.nav.access, '#access'],
     [copy.footer.nav.reservation, '#reservation'],
   ];

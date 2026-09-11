@@ -24,7 +24,7 @@ export const ja = {
     heroNavLabel: 'ホームページ内ナビゲーション',
     heroNav: {
       home: 'Home',
-      about: 'About',
+      about: 'Our Story',
       menu: 'Menu',
       access: 'Access',
       reservation: 'Reservation',
@@ -116,8 +116,9 @@ export const ja = {
   footer: {
     navigation: 'フッターナビゲーション',
     nav: {
+      home: 'Home',
       menu: 'Menu',
-      story: 'Our Story',
+      about: 'Our Story',
       access: 'Access',
       reservation: 'Reservation',
     },

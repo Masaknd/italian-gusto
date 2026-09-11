@@ -111,8 +111,9 @@ export const en = {
   footer: {
     navigation: 'Footer navigation',
     nav: {
+      home: 'Home',
       menu: 'Menu',
-      story: 'Our Story',
+      about: 'Our Story',
       access: 'Access',
       reservation: 'Reservation',
     },

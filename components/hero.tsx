@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
+import type { Locale } from '@/lib/i18n';
 import { AnimatedEmphasisText } from './animations/animated-emphasis-text';
 import { entranceTransition } from './animations/config';
 import { AnimatedMarquee } from './animated-marquee';
@@ -74,7 +75,13 @@ const heroClassNames = {
     'gusto-hero-brush pointer-events-none absolute bottom-0 left-0 z-[3] h-auto w-full translate-y-px',
 };
 
-export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
+export function HomeHeroSection({
+  copy,
+  locale,
+}: {
+  copy: HomePageCopy;
+  locale: Locale;
+}) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -108,7 +115,7 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
           >
             {[
               [copy.home.heroNav.home, ''],
-              [copy.home.heroNav.about, '#about'],
+              [copy.home.heroNav.about, `/${locale}/about`],
               [copy.home.heroNav.menu, '#recommendations'],
               [copy.home.heroNav.access, '#access'],
               [copy.home.heroNav.reservation, '#reservation'],
