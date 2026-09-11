@@ -32,7 +32,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     [d.home.heroNav.home, `/${locale}`],
     [d.home.heroNav.menu, `/${locale}/menu`],
     [d.home.heroNav.access, `/${locale}#access`],
-    [d.footer.nav.story, `/${locale}/about`],
+    [d.footer.nav.about, `/${locale}/about`],
   ];
 
   useEffect(() => {
