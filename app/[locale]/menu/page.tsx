@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { HomeAccessSection } from '@/components/access';
 import { HomeFooter } from '@/components/footer';
+import { InViewHeading } from '@/components/in-view-heading';
 import { MenuList } from '@/components/menu-list';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
@@ -58,7 +59,8 @@ export default async function MenuPage({
           aria-labelledby='gusto-menu-title'
         >
           <div className='flex w-full flex-col items-start gap-6 px-4 pb-[50px] sm:gap-[46px] sm:px-8 sm:pb-50 xl:px-24 3xl:px-60'>
-            <h1
+            <InViewHeading
+              as='h1'
               id='gusto-menu-title'
               className='gusto-menu__title m-0 box-border inline-flex items-end border-b-[3px] border-dashed border-coral font-display font-normal whitespace-nowrap text-coral'
             >
@@ -75,7 +77,7 @@ export default async function MenuPage({
                 {d.menu.titleMain}
               </span>
               <span className='sr-only'>{d.menu.title}</span>
-            </h1>
+            </InViewHeading>
             {content.error ? (
               <p className='m-0 text-muted' role='status'>
                 {d.errors.dynamic}

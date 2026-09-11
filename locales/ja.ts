@@ -55,7 +55,7 @@ export const ja = {
     social: {
       twitter: { name: 'Twitter', description: 'グストのお知らせを発信！' },
       instagram: { name: 'Instagram', description: '新メニューなどを掲載中！' },
-      blog: { name: 'Blog', description: '店主の日記' },
+      blog: { name: 'Blog', description: '店主の日記       ' },
     },
     reservationLabel: 'ご予約・お問い合わせについて',
     reservationNotes: [

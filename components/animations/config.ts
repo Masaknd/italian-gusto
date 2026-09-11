@@ -12,6 +12,8 @@ export const inViewViewport = {
   once: true,
 } as const;
 
+export const inViewStagger = 0.1;
+
 export const inViewTextDefaults = {
   duration: 0.25,
   letterStagger: 0.035,

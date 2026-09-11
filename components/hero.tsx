@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
 import { AnimatedEmphasisText } from './animations/animated-emphasis-text';
 import { entranceTransition } from './animations/config';
+import { AnimatedMarquee } from './animated-marquee';
 import type { HomePageCopy } from './types';
-import { Marquee } from './marquee';
 
 const heroClassNames = {
   root: [
@@ -79,17 +79,10 @@ export function HomeHeroSection({ copy }: { copy: HomePageCopy }) {
 
   return (
     <section className={heroClassNames.root}>
-      <motion.div
-        className='pointer-events-none absolute inset-0'
-        initial={{ opacity: 0, x: reduceMotion ? 0 : -48 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={entranceTransition}
-      >
-        <Marquee
-          className={heroClassNames.verticalTitle}
-          text={copy.home.verticalTitle}
-        />
-      </motion.div>
+      <AnimatedMarquee
+        className={heroClassNames.verticalTitle}
+        text={copy.home.verticalTitle}
+      />
       <div className={heroClassNames.content}>
         <div className={heroClassNames.intro}>
           <AnimatedEmphasisText

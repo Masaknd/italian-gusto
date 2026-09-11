@@ -1,8 +1,26 @@
+'use client';
+
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'motion/react';
 import { siteConfig } from '@/lib/site-config';
+import {
+  getInViewFadeUpProps,
+  inViewStagger,
+  inViewTextDefaults,
+} from './animations/config';
+import { InViewHeading } from './in-view-heading';
+import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
 
+const MotionImage = motion.create(Image);
+
 export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
+  const reduceMotion = useReducedMotion();
+  const detailsRevealDelay =
+    getInViewTextSequenceDuration(copy.home.aboutBody) +
+    inViewTextDefaults.linkGap;
+  const barrelRevealDelay = detailsRevealDelay + inViewStagger;
+
   return (
     <section
       id='about-story'
@@ -12,20 +30,23 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
       <div className='gusto-about-page-story gusto-about-left'>
         <div className='relative flex w-full flex-col items-start gap-12 xl:items-start'>
           <div className='gusto-about-title'>
-            <h1
+            <InViewHeading
+              as='h1'
               id='gusto-about-page-title'
               className="relative w-max font-display text-3xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[clamp(2.5rem,4.167vw,5rem)] 3xl:after:h-[3px]"
             >
               {copy.home.aboutTitle}
-            </h1>
+            </InViewHeading>
           </div>
 
-          <div className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
-            {copy.home.aboutBody.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <dl className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-6 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'>
+          <InViewTextGroup className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
+            {copy.home.aboutBody}
+          </InViewTextGroup>
+          <motion.dl
+            className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-6 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
+            {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}
+            data-about-details-animation
+          >
             <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
               <dt className='m-0 font-[inherit]'>{copy.info.hours}</dt>
               <dd className='m-0 font-[inherit]'>
@@ -48,15 +69,17 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
               <dt className='m-0 font-[inherit]'>{copy.home.paymentLabel}</dt>
               <dd className='m-0 font-[inherit]'>{copy.home.paymentMethods}</dd>
             </div>
-          </dl>
+          </motion.dl>
 
-          <Image
+          <MotionImage
             src='/images/about-barrel.png'
             alt=''
             width={399}
             height={256}
             sizes='276px'
             className='gusto-about-page-barrel h-auto w-[300px] object-contain xl:w-[360px]'
+            {...getInViewFadeUpProps(reduceMotion, barrelRevealDelay)}
+            data-about-barrel-animation
           />
         </div>
       </div>
