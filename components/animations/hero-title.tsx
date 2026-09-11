@@ -11,7 +11,8 @@ const emphasisPauseRange = {
   max: 10000,
 };
 
-const emphasisCharacterStagger = 1;
+const emphasisCharacterStagger = 0.3;
+const emphasisUnitPauseMs = 1200;
 
 const emphasisParentVariants: Variants = {
   idle: {},
@@ -68,12 +69,16 @@ function EmphasizedTitleSegment({
     if (!isActive) return;
 
     let cancelled = false;
+    let completionTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const runAnimation = async () => {
       await controls.start('bounce');
 
       if (!cancelled) {
-        onAnimationComplete(animationIndex);
+        completionTimeoutId = setTimeout(
+          () => onAnimationComplete(animationIndex),
+          emphasisUnitPauseMs,
+        );
       }
     };
 
@@ -81,6 +86,7 @@ function EmphasizedTitleSegment({
 
     return () => {
       cancelled = true;
+      clearTimeout(completionTimeoutId);
       controls.stop();
     };
   }, [animationIndex, controls, isActive, onAnimationComplete, reduceMotion]);
