@@ -58,7 +58,7 @@ export function HomeFooter({
               {footerNav.map(([label, href]) => (
                 <Link
                   href={href}
-                  className='h-auto border-0 px-4 font-label text-xl leading-4 font-bold text-inherit no-underline sm:h-5 sm:border-l sm:border-content sm:text-[22px] sm:leading-5 sm:last:border-r xl:h-[22px] xl:text-2xl xl:leading-[22px]'
+                  className='h-auto border-0 px-4 font-label text-xl leading-4 font-bold text-warm-light no-underline sm:h-5 sm:border-l sm:border-content sm:text-[22px] sm:leading-5 sm:last:border-r xl:h-[22px] xl:text-2xl xl:leading-[22px]'
                   key={href}
                 >
                   {label}
@@ -81,7 +81,7 @@ export function HomeFooter({
                   <HomeSocialIcon
                     animated
                     type={card.icon}
-                    className='block h-full w-full'
+                    className='block h-full w-full text-warm-light'
                   />
                 </a>
               ))}
@@ -91,7 +91,7 @@ export function HomeFooter({
         <div className='gusto-footer-lower bg-orange p-[16px_0] lg:px-6 xl:px-24 3xl:px-60'>
           <div className='gusto-footer-lower-inner flex h-[77px] w-full flex-col items-center justify-start gap-2 sm:h-[88px] xl:h-8 xl:flex-row xl:justify-between xl:gap-0'>
             <a
-              className='gusto-footer-phone flex w-[119px] items-center gap-1 font-label text-base leading-4 font-bold text-inherit no-underline sm:w-[139px] sm:text-lg sm:leading-6 xl:w-[196px] xl:gap-4 xl:text-2xl xl:leading-5.5'
+              className='gusto-footer-phone flex w-[119px] items-center gap-1 font-label text-base leading-4 font-bold text-inherit text-warm-light no-underline sm:w-[139px] sm:text-lg sm:leading-6 xl:w-[196px] xl:gap-4 xl:text-2xl xl:leading-5.5'
               href={siteConfig.phoneHref}
             >
               <PhoneIcon
@@ -101,7 +101,7 @@ export function HomeFooter({
               />
               <span>{siteConfig.phone}</span>
             </a>
-            <div className='gusto-footer-hours grid h-[31px] w-[272px] grid-cols-[16px_auto] items-center gap-x-1 gap-y-px font-label text-base leading-4 font-bold text-inherit sm:flex sm:h-6 sm:w-[484px] sm:gap-0 sm:text-lg sm:leading-6 xl:h-8 xl:w-[667px] xl:text-2xl xl:leading-5.5'>
+            <div className='gusto-footer-hours grid h-[31px] w-[272px] grid-cols-[16px_auto] items-center gap-x-1 gap-y-px font-label text-base leading-4 font-bold text-warm-light sm:flex sm:h-6 sm:w-[484px] sm:gap-0 sm:text-lg sm:leading-6 xl:h-8 xl:w-[667px] xl:text-2xl xl:leading-5.5'>
               <ClockIcon
                 aria-hidden='true'
                 weight='regular'
@@ -114,7 +114,7 @@ export function HomeFooter({
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
-            <p className='gusto-footer-copyright text-center font-secondary text-xs leading-3.5 whitespace-nowrap sm:text-center xl:text-right xl:text-sm'>
+            <p className='gusto-footer-copyright text-center font-secondary text-xs leading-3.5 whitespace-nowrap text-warm-light sm:text-center xl:text-right xl:text-sm'>
               {copy.footer.copyright}
             </p>
           </div>

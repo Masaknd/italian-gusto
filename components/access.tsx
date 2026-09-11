@@ -40,7 +40,7 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
             className='block h-full w-full border-0'
           />
         </div>
-        <dl className='gusto-access-details text-base leading-[32px] sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'>
+        <dl className='gusto-access-details text-base leading-[32px] text-warm-light sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'>
           <div className={detailRowClass}>
             <dt className='font-normal'>{copy.info.address}</dt>
             <dd className={detailValueClass}>

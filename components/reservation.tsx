@@ -44,14 +44,14 @@ export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
             {copy.home.reservationLabel}
           </motion.p>
         </div>
-        <ul className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-[27px] text-content sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-[42px]'>
+        <ul className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-[27px] text-warm-light sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-[42px]'>
           {copy.home.reservationNotes.map((note) => (
             <li key={note}>{note}</li>
           ))}
         </ul>
         <ReservationLink
           href={siteConfig.reservationUrl}
-          className='gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 font-accent text-sm leading-3.5 text-content no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg'
+          className='gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 font-accent text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg'
           ariaLabel={copy.reserve.external}
         >
           {copy.home.reservationCta}
