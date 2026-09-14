@@ -248,7 +248,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               </div>
               <ReservationLink
                 href={siteConfig.reservationUrl}
-                className='flex h-[54px] w-[360px] max-w-[360px] flex-[0_0_54px] items-center justify-center bg-coral p-[8px_16px] font-label text-2xl leading-[38px] font-bold text-warm-light no-underline sm:w-full'
+                className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-[38px] font-bold text-warm-light no-underline'
               >
                 {d.nav.mobileReserve}
               </ReservationLink>

@@ -50,7 +50,7 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
   return (
     <section
       id='about'
-      className='relative flex w-full flex-col items-center justify-center gap-8 bg-ink px-4 py-12 text-paper sm:p-[64px_32px] xl:flex-row xl:p-[64px_96px] 3xl:p-[120px_240px]'
+      className='relative flex w-full flex-col items-center justify-center gap-8 bg-ink px-4 py-12 text-paper sm:p-[64px_32px] lg:flex-row xl:p-[64px_96px] 3xl:p-[120px_240px]'
     >
       <div className='gusto-about-left'>
         <div className='relative flex w-full flex-col items-start gap-12 xl:items-start'>
