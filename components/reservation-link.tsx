@@ -13,7 +13,6 @@ export function ReservationLink({
   className?: string;
   ariaLabel?: string;
 }) {
-  if (!href) return <span className={className}>{children}</span>;
   return (
     <a
       href={href}
