@@ -11,6 +11,7 @@ import { HomeWineSection } from '@/components/wine';
 import { translateManagedFields } from '@/lib/deepl';
 import { homePreviewFeatured } from '@/lib/home-preview-content';
 import { isLocale } from '@/lib/i18n';
+import { siteConfig } from '@/lib/site-config';
 import { getMenuContentForSite } from '@/lib/microcms/content';
 import { getDictionary } from '@/locales';
 
@@ -49,7 +50,10 @@ export default async function HomePage({
           locale={locale}
         />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
-        <HomeReservationSection copy={copy} />
+        <HomeReservationSection
+          copy={copy}
+          reservationUrl={siteConfig.reservationUrl}
+        />
         <HomeAccessSection copy={copy} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />

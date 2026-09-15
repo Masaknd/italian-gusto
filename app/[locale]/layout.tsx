@@ -5,6 +5,7 @@ import { PreviewBanner } from '@/components/preview-banner';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import { SiteHeader } from '@/components/site-header';
 import { isLocale, locales, type Locale } from '@/lib/i18n';
+import { siteConfig } from '@/lib/site-config';
 import { getDictionary } from '@/locales';
 
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function LocaleLayout({
   return (
     <div lang={locale}>
       <Analytics />
-      <SiteHeader locale={locale} />
+      <SiteHeader locale={locale} reservationUrl={siteConfig.reservationUrl} />
       {children}
       <ScrollToTop label={d.nav.backToTop} />
       <PreviewBanner locale={locale} />

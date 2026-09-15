@@ -10,6 +10,7 @@ import { HomeSocialSection } from '@/components/social';
 import type { SocialCard } from '@/components/types';
 import { translateManagedFields } from '@/lib/deepl';
 import { isLocale } from '@/lib/i18n';
+import { siteConfig } from '@/lib/site-config';
 import { getMenuContentForSite } from '@/lib/microcms/content';
 import { getDictionary } from '@/locales';
 export async function generateMetadata({
@@ -88,7 +89,10 @@ export default async function MenuPage({
           </div>
         </section>
         <HomeSocialSection copy={d} socialCards={socialCards} />
-        <HomeReservationSection copy={d} />
+        <HomeReservationSection
+          copy={d}
+          reservationUrl={siteConfig.reservationUrl}
+        />
         <HomeAccessSection copy={d} />
       </main>
       <HomeFooter copy={d} locale={locale} socialCards={socialCards} />

@@ -2,13 +2,18 @@
 
 import { motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
-import { siteConfig } from '@/lib/site-config';
 import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 import { ReservationLink } from './reservation-link';
 
-export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
+export function HomeReservationSection({
+  copy,
+  reservationUrl,
+}: {
+  copy: HomePageCopy;
+  reservationUrl?: string;
+}) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -50,7 +55,7 @@ export function HomeReservationSection({ copy }: { copy: HomePageCopy }) {
           ))}
         </ul>
         <ReservationLink
-          href={siteConfig.reservationUrl}
+          href={reservationUrl}
           className='gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 font-accent text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg'
           ariaLabel={copy.reserve.external}
         >

@@ -1,4 +1,5 @@
 'use client';
+
 import { trackReservationClick } from './analytics';
 
 export function ReservationLink({

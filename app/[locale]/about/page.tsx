@@ -7,6 +7,7 @@ import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
 import type { SocialCard } from '@/components/types';
 import { isLocale } from '@/lib/i18n';
+import { siteConfig } from '@/lib/site-config';
 import { getDictionary } from '@/locales';
 
 export async function generateMetadata({
@@ -47,7 +48,10 @@ export default async function AboutPage({
       <main className='gusto-home gusto-page'>
         <AboutPageHero copy={copy} />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
-        <HomeReservationSection copy={copy} />
+        <HomeReservationSection
+          copy={copy}
+          reservationUrl={siteConfig.reservationUrl}
+        />
         <HomeAccessSection copy={copy} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />
