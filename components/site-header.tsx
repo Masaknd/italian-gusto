@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { siteConfig } from '@/lib/site-config';
@@ -94,7 +95,7 @@ export function SiteHeader({
       className={[
         'bg-transparent shadow-none backdrop-filter-none',
         usesGustoHeader
-          ? 'z-40 h-[84px] border-0 p-[4px_0] sm:h-[120px] sm:p-[8px_0] lg:h-[132px] lg:p-0'
+          ? 'z-40 h-21 border-0 p-[4px_0] sm:h-30 sm:p-[8px_0] lg:h-33 lg:p-0'
           : 'sticky top-0 z-30 border-b border-ink/10',
         isHomePage ? 'relative inset-[0_0_auto] lg:absolute' : '',
         isInnerPage ? 'relative inset-auto' : '',
@@ -106,8 +107,8 @@ export function SiteHeader({
         className={[
           'site-header-inner mx-auto flex w-full items-center justify-between bg-transparent',
           usesGustoHeader
-            ? 'h-[76px] max-w-none p-[8px_16px] sm:h-[104px] lg:h-[132px] lg:p-[16px_48px]'
-            : 'max-w-[var(--layout-container)] p-4 md:px-6 lg:px-24 3xl:px-60',
+            ? 'h-19 max-w-none p-[8px_16px] sm:h-26 lg:h-33 lg:p-[16px_48px]'
+            : 'max-w-(--layout-container) p-4 md:px-6 lg:px-24 3xl:px-60',
         ]
           .filter(Boolean)
           .join(' ')}
@@ -117,7 +118,7 @@ export function SiteHeader({
           className={[
             'block',
             usesGustoHeader
-              ? 'h-15 w-[138.425201px] sm:relative sm:-top-px sm:h-[90px] sm:w-[207.637802px] lg:static lg:h-25 lg:w-[230.708664px]'
+              ? 'h-15 w-[138.425201px] sm:relative sm:-top-px sm:h-22.5 sm:w-[207.637802px] lg:static lg:h-25 lg:w-[230.708664px]'
               : 'h-auto w-40',
           ].join(' ')}
           onClick={() => setOpen(false)}
@@ -164,7 +165,7 @@ export function SiteHeader({
           </Link>
           <ReservationLink
             href={reservationUrl}
-            className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-[var(--color-action-primary-hover)]'
+            className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-action-hover'
           >
             {d.nav.reserve}
           </ReservationLink>
@@ -177,12 +178,12 @@ export function SiteHeader({
           aria-haspopup='dialog'
           aria-controls='mobile-nav'
           onClick={() => setOpen((current) => !current)}
-          className='relative z-[1] mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
+          className='relative z-1 mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
         >
           <span className='sr-only'>{d.nav.menu}</span>
           <span
             aria-hidden='true'
-            className='relative block size-8 [&_i]:absolute [&_i]:left-[5px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[22px] [&_i]:bg-ink [&_i]:opacity-100 [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6'
+            className='relative block size-8 [&_i]:absolute [&_i]:left-1.25 [&_i]:block [&_i]:h-0.75 [&_i]:w-5.5 [&_i]:bg-ink [&_i]:opacity-100 [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6'
           >
             <i />
             <i />
@@ -199,7 +200,7 @@ export function SiteHeader({
             role='dialog'
             aria-modal='true'
             aria-label={d.nav.menu}
-            className='fixed inset-0 z-50 flex min-h-[100dvh] flex-col overflow-y-auto bg-ink text-warm-light will-change-[opacity,transform] lg:hidden'
+            className='fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto bg-ink text-warm-light will-change-[opacity,transform] lg:hidden'
             initial={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
@@ -208,19 +209,19 @@ export function SiteHeader({
               ease: entranceEasing,
             }}
           >
-            <div className='site-header-mobile-header relative flex h-[84px] w-full flex-[0_0_84px] items-center justify-start p-[4px_0] sm:h-auto sm:flex-[0_0_120px] sm:justify-center sm:p-[8px_24px]'>
+            <div className='site-header-mobile-header relative flex h-21 w-full flex-[0_0_84px] items-center justify-start p-[4px_0] sm:h-auto sm:flex-[0_0_120px] sm:justify-center sm:p-[8px_24px]'>
               <button
                 type='button'
                 onClick={() => {
                   setOpen(false);
                   menuButtonRef.current?.focus();
                 }}
-                className='absolute top-[26px] right-2 flex size-8 items-center justify-center border-0 bg-transparent p-0 text-warm-light sm:top-[44px] sm:right-4'
+                className='absolute top-6.5 right-2 flex size-8 items-center justify-center border-0 bg-transparent p-0 text-warm-light sm:top-11 sm:right-4'
               >
                 <span className='sr-only'>{d.nav.closeMenu}</span>
                 <span
                   aria-hidden='true'
-                  className='relative block size-8 [&_i]:absolute [&_i]:left-[5px] [&_i]:block [&_i]:h-[3px] [&_i]:w-[22px] [&_i]:rotate-0! [&_i]:bg-current sm:[&_i]:top-[14.5px] sm:[&_i]:left-[7px] sm:[&_i]:w-[18px] sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45! [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 sm:[&_i:nth-child(2)]:hidden [&_i:nth-child(3)]:top-6'
+                  className='relative block size-8 [&_i]:absolute [&_i]:left-1.25 [&_i]:block [&_i]:h-0.75 [&_i]:w-5.5 [&_i]:rotate-0! [&_i]:bg-current sm:[&_i]:top-[14.5px] sm:[&_i]:left-1.75 sm:[&_i]:w-4.5 sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45! [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 sm:[&_i:nth-child(2)]:hidden [&_i:nth-child(3)]:top-6'
                 >
                   <i />
                   <i />
@@ -229,7 +230,7 @@ export function SiteHeader({
               </button>
               <Link
                 href={`/${locale}`}
-                className='absolute top-3 left-4 block h-[60px] w-[138.425201px] translate-x-0 sm:top-[20.976112px] sm:left-1/2 sm:h-[91.023888px] sm:w-[210px] sm:-translate-x-1/2'
+                className='absolute top-3 left-4 block h-15 w-[138.425201px] translate-x-0 sm:top-[20.976112px] sm:left-1/2 sm:h-[91.023888px] sm:w-52.5 sm:-translate-x-1/2'
                 onClick={() => setOpen(false)}
               >
                 <Image
@@ -243,9 +244,9 @@ export function SiteHeader({
             </div>
             <nav
               aria-label={d.nav.menu}
-              className='flex h-[736px] w-full flex-[0_0_736px] flex-col items-center gap-16 p-[100px_16px] sm:h-auto sm:flex-auto sm:gap-[84px] sm:p-[100px_24px]'
+              className='flex h-184 w-full flex-[0_0_736px] flex-col items-center gap-16 p-[100px_16px] sm:h-auto sm:flex-auto sm:gap-21 sm:p-[100px_24px]'
             >
-              <div className='site-header-mobile-link-list flex w-[118px] flex-col items-center gap-7 sm:w-auto sm:gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-[45px] [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
+              <div className='site-header-mobile-link-list flex w-29.5 flex-col items-center gap-7 sm:w-auto sm:gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
                 {mobileNav.map(([label, href]) => (
                   <Link key={href} href={href} onClick={() => setOpen(false)}>
                     {label}
@@ -254,7 +255,7 @@ export function SiteHeader({
               </div>
               <ReservationLink
                 href={reservationUrl}
-                className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-[38px] font-bold text-warm-light no-underline'
+                className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'
               >
                 {d.nav.mobileReserve}
               </ReservationLink>

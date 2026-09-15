@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import type { Locale } from '@/lib/i18n';
 import { AnimatedEmphasisText } from './animations/animated-emphasis-text';
 import { entranceTransition } from './animations/config';

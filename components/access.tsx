@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import { siteConfig } from '@/lib/site-config';
 import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';

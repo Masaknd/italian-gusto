@@ -14,14 +14,14 @@ export function MenuPrice({
   return (
     <p className='gusto-menu-card__price mt-auto mb-0 flex w-full items-baseline justify-end leading-none font-normal text-black'>
       {/* PRICE EXCLUDED TAX */}
-      <div>
+      <span>
         <span className='gusto-menu-card__yen font-quaternary text-[24px] leading-[20px]'>
           ¥
         </span>
         <span className='font-primary text-2xl leading-6 tracking-[-0.25em] xl:text-[42px] xl:leading-[22px]'>
           {priceExcludingTax}
         </span>
-      </div>
+      </span>
       <span className='ml-1 text-[28px] xl:text-[42px]'>
         <small className='font-tertiary text-sm font-normal'>
           （{includingTaxLabel}

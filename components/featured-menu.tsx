@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
-import { animate, motion, useReducedMotion } from 'motion/react';
+import { animate, motion } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { FeaturedMenu } from '@/lib/microcms/types';
 import type { getDictionary } from '@/locales';

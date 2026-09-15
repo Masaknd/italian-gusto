@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import type { Variants } from 'motion/react';
 import { inViewTextDefaults } from './animations/config';
 

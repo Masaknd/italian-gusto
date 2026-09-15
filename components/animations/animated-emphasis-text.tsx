@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { motion, useAnimationControls, useReducedMotion } from 'motion/react';
+import { motion, useAnimationControls } from 'motion/react';
+import { useReducedMotion } from './use-reduced-motion';
 import type { Variants } from 'motion/react';
 import { entranceTransition } from './config';
 

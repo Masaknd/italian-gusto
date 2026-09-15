@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { HomeAccessSection } from '@/components/access';
 import { HomeFooter } from '@/components/footer';
@@ -59,20 +58,20 @@ export default async function MenuPage({
           className='relative w-full overflow-hidden text-ink'
           aria-labelledby='gusto-menu-title'
         >
-          <div className='flex w-full flex-col items-start gap-6 px-4 pb-[50px] sm:gap-[46px] sm:px-8 sm:pb-50 xl:px-24 3xl:px-60'>
+          <div className='flex w-full flex-col items-start gap-6 px-4 pb-12.5 sm:gap-11.5 sm:px-8 sm:pb-50 xl:px-24 3xl:px-60'>
             <InViewHeading
               as='h1'
               id='gusto-menu-title'
               className='gusto-menu__title m-0 box-border inline-flex items-end border-b-[3px] border-dashed border-coral font-display font-normal whitespace-nowrap text-coral'
             >
               <span
-                className='gusto-menu__title-prefix text-2xl leading-[30px] tracking-[-0.3em] sm:text-[32px] sm:leading-10 xl:text-5xl xl:leading-15'
+                className='gusto-menu__title-prefix text-2xl leading-7.5 tracking-[-0.3em] sm:text-[32px] sm:leading-10 xl:text-5xl xl:leading-15'
                 aria-hidden='true'
               >
                 {d.menu.titlePrefix}
               </span>
               <span
-                className='gusto-menu__title-main text-[40px] leading-10 tracking-[-0.25em] sm:text-[52px] sm:leading-[52px] xl:text-[80px] xl:leading-20'
+                className='gusto-menu__title-main text-[40px] leading-10 tracking-[-0.25em] sm:text-[52px] sm:leading-token-lg xl:text-[80px] xl:leading-20'
                 aria-hidden='true'
               >
                 {d.menu.titleMain}

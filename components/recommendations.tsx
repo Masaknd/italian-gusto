@@ -5,10 +5,10 @@ import Link from 'next/link';
 import {
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from 'motion/react';
+import { useReducedMotion } from './animations/use-reduced-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { WheelEvent } from 'react';
 import type { Locale } from '@/lib/i18n';
