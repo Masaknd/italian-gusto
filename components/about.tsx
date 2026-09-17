@@ -9,6 +9,7 @@ import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
+import { Locale } from '@/lib/i18n';
 const MotionLink = motion.create(Link);
 
 function AboutMoreLink({
@@ -43,10 +44,18 @@ function AboutMoreLink({
   );
 }
 
-export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
+export function HomeAboutSection({
+  copy,
+  locale,
+}: {
+  copy: HomePageCopy;
+  locale: Locale;
+}) {
   const linkRevealDelay =
     getInViewTextSequenceDuration(copy.home.aboutBody) +
     inViewTextDefaults.linkGap;
+  const other = locale === 'ja' ? 'en' : 'ja';
+  const switchLanguageFont = other === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -60,7 +69,7 @@ export function HomeAboutSection({ copy }: { copy: HomePageCopy }) {
               {copy.home.aboutTitle}
             </InViewHeading>
           </div>
-          <InViewTextGroup className='gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
+          <InViewTextGroup className='${switchLanguageFont} gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
             {copy.home.aboutBody}
           </InViewTextGroup>
           <AboutMoreLink revealDelay={linkRevealDelay}>

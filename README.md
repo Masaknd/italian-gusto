@@ -8,7 +8,7 @@ An App Router, TypeScript, Tailwind and microCMS foundation for the official Osa
 2. Copy `.env.local.example` to `.env.local` and fill in the required service values.
 3. Run `pnpm dev`, then visit `/ja` or `/en`. Run `pnpm lint`, `pnpm exec tsc --noEmit`, `pnpm build`, and `pnpm test:e2e` before release. Playwright’s browser installation, if needed, is `pnpm exec playwright install`.
 
-Never commit `.env.local`; `MICROCMS_API_KEY`, `REVALIDATE_SECRET`, and `DEEPL_API_KEY` remain server-only. `NEXT_PUBLIC_GA_MEASUREMENT_ID` is intentionally public and may be left blank. Set `NEXT_PUBLIC_SITE_URL` to the deployed HTTPS origin before every production build. An unset value is accepted only during development; production builds fail rather than publishing localhost or example.com canonicals. The tracked `.env.local.example` contains sanitized local defaults.
+Never commit `.env.local`; `MICROCMS_API_KEY`, `REVALIDATE_SECRET`, and `DEEPL_API_KEY` remain server-only. `NEXT_PUBLIC_GA_MEASUREMENT_ID` is intentionally public and may be left blank. Set `NEXT_PUBLIC_SITE_URL` to the deployed HTTPS origin for non-Vercel production builds or to override the Vercel production domain. Vercel builds otherwise use `VERCEL_PROJECT_PRODUCTION_URL`, so preview deployments also publish canonicals for the production domain. Production builds without either value fail rather than publishing localhost or example.com canonicals. The tracked `.env.local.example` contains sanitized local defaults.
 
 ## microCMS owner workflow
 
