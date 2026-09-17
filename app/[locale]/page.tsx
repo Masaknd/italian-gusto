@@ -33,16 +33,20 @@ export default async function HomePage({
     <>
       <main className='gusto-home gusto-page !overflow-clip'>
         <HomeHeroSection copy={copy} locale={locale} />
-        <HomeAboutSection copy={copy} />
+        <HomeAboutSection copy={copy} locale={locale} />
         <HomeWineSection copy={copy} locale={locale} />
         <HomeRecommendationsSection
           copy={copy}
           featured={featured}
           locale={locale}
         />
-        <HomeSocialSection copy={copy} socialCards={socialCards} />
+        <HomeSocialSection
+          copy={copy}
+          socialCards={socialCards}
+          locale={locale}
+        />
         <HomeReservationSection copy={copy} locale={locale} />
-        <HomeAccessSection copy={copy} />
+        <HomeAccessSection copy={copy} locale={locale} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />
     </>

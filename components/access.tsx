@@ -6,13 +6,21 @@ import { siteConfig } from '@/lib/site-config';
 import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
+import type { Locale } from '@/lib/i18n';
 
 const detailValueClass = 'm-0 list-none p-0 not-italic';
 const detailRowClass =
   'gusto-access-row grid grid-cols-[79px_1fr] sm:grid-cols-[100px_1fr] 3xl:grid-cols-[min(5.2083vw,100px)_1fr]';
 
-export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
+export function HomeAccessSection({
+  copy,
+  locale,
+}: {
+  copy: HomePageCopy;
+  locale: Locale;
+}) {
   const reduceMotion = useReducedMotion();
+  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -24,7 +32,7 @@ export function HomeAccessSection({ copy }: { copy: HomePageCopy }) {
           {copy.home.accessTitle}
         </InViewHeading>
         <motion.p
-          className="relative p-[0_0_10px] font-accent text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]"
+          className={`${languageFont} relative p-[0_0_10px] text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]`}
           {...getInViewFadeUpProps(reduceMotion, 0.2)}
           data-access-title-label
         >

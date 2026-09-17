@@ -25,11 +25,13 @@ function RecommendationMoreLink({
   menuCategory,
   locale,
   revealDelay,
+  languageFont,
 }: {
   children: React.ReactNode;
   menuCategory?: string;
   locale: Locale;
   revealDelay: number;
+  languageFont: 'font-label' | 'font-accent';
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -37,7 +39,7 @@ function RecommendationMoreLink({
     <MotionLink
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu${menuCategory ? `#${getMenuCategoryAnchor(menuCategory)}` : ''}`}
-      className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
+      className={`${languageFont} mt-8 flex items-center gap-8 text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
       <span>{children}</span>
       <svg
@@ -71,6 +73,7 @@ function Recommendation({
   const linkRevealDelay = item.description
     ? getInViewTextDuration(item.description) + inViewTextDefaults.linkGap
     : 0;
+  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <article
@@ -96,7 +99,7 @@ function Recommendation({
           </h3>
           {item.description && (
             <InViewText
-              className={`gusto-feature-description mt-4 font-accent text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
+              className={`${languageFont} gusto-feature-description mt-4 text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
             >
               {item.description}
             </InViewText>
@@ -105,6 +108,7 @@ function Recommendation({
             menuCategory={item.menuCategory}
             locale={locale}
             revealDelay={linkRevealDelay}
+            languageFont={languageFont}
           >
             {item.menuCategory
               ? (copy.featured.menuLinks[index - 1] ?? copy.menu.viewAll)

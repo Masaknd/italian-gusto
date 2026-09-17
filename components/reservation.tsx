@@ -17,6 +17,7 @@ export function HomeReservationSection({
   locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
+  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -44,7 +45,7 @@ export function HomeReservationSection({
             {copy.home.reservationTitle}
           </InViewHeading>
           <motion.p
-            className="relative pb-1 font-accent text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg"
+            className={`${languageFont} relative pb-1 text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
             {...getInViewFadeUpProps(reduceMotion, 0.2)}
             data-reservation-title-label
           >
@@ -58,7 +59,7 @@ export function HomeReservationSection({
         </ul>
         <ReservationLink
           href={`/${locale}/reserve`}
-          className='gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 font-accent text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg'
+          className={`${languageFont} gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
         >
           {copy.home.reservationCta}
         </ReservationLink>

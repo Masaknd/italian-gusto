@@ -42,9 +42,13 @@ export default async function AboutPage({
     <>
       <main className='gusto-home gusto-page'>
         <AboutPageHero copy={copy} />
-        <HomeSocialSection copy={copy} socialCards={socialCards} />
+        <HomeSocialSection
+          copy={copy}
+          socialCards={socialCards}
+          locale={locale}
+        />
         <HomeReservationSection copy={copy} locale={locale} />
-        <HomeAccessSection copy={copy} />
+        <HomeAccessSection copy={copy} locale={locale} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />
     </>

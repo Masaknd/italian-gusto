@@ -79,9 +79,9 @@ export default async function MenuPage({
             <MenuList menus={menus} copy={d} />
           </div>
         </section>
-        <HomeSocialSection copy={d} socialCards={socialCards} />
+        <HomeSocialSection copy={d} socialCards={socialCards} locale={locale} />
         <HomeReservationSection copy={d} locale={locale} />
-        <HomeAccessSection copy={d} />
+        <HomeAccessSection copy={d} locale={locale} />
       </main>
       <HomeFooter copy={d} locale={locale} socialCards={socialCards} />
     </>
