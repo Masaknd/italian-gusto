@@ -26,7 +26,7 @@ const heroClassNames = {
   ].join(' '),
   content: 'relative w-full',
   intro: [
-    'absolute flex w-max flex-col items-start gap-12 z-5',
+    'absolute z-5 flex w-[calc(100vw-32px)] max-w-full flex-col items-start gap-12 sm:w-max',
     'sm:top-0 sm:left-0',
     'lg:top-[calc(50dvh-180px)] lg:left-20 lg:gap-8',
     'xl:top-[calc(50dvh-132px)] xl:-translate-y-1/2 xl:gap-12',
@@ -34,7 +34,7 @@ const heroClassNames = {
     '3xl:left-10',
   ].join(' '),
   title: [
-    'text-center font-display text-5xl leading-[50px] font-normal tracking-[-0.2em] whitespace-pre-line text-coral',
+    'max-w-full text-center font-display text-5xl leading-[50px] font-normal tracking-[-0.2em] whitespace-pre-line break-words text-coral',
     'sm:text-left sm:text-[68px] sm:leading-[70px]',
     'lg:text-[52px] lg:leading-[50px]',
     'xl:text-[68px] xl:leading-[70px]',
@@ -95,7 +95,7 @@ export function HomeHeroSection({
         <div className={heroClassNames.intro}>
           <AnimatedEmphasisText
             as='h1'
-            className={heroClassNames.title}
+            className={`${heroClassNames.title} ${locale === 'en' ? 'text-[clamp(2rem,9vw,3rem)] leading-[1.1] tracking-[-0.06em] sm:max-w-[min(90vw,760px)] sm:tracking-normal' : ''}`}
             emphasizedSegmentClassName={heroClassNames.emphasizedTitleSegment}
             lines={copy.hero.titleSegments}
           />

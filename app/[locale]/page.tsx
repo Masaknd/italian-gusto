@@ -6,12 +6,10 @@ import { HomeHeroSection } from '@/components/hero';
 import { HomeRecommendationsSection } from '@/components/recommendations';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
-import type { SocialCard } from '@/components/types';
 import { HomeWineSection } from '@/components/wine';
 import { translateManagedFields } from '@/lib/deepl';
-import { homePreviewFeatured } from '@/lib/home-preview-content';
 import { isLocale } from '@/lib/i18n';
-import { siteConfig } from '@/lib/site-config';
+import { getSocialCards } from '@/lib/social-cards';
 import { getMenuContentForSite } from '@/lib/microcms/content';
 import { getDictionary } from '@/locales';
 
@@ -27,16 +25,9 @@ export default async function HomePage({
     locale === 'en'
       ? await translateManagedFields(content.featuredMenus)
       : content.featuredMenus;
-  const featured =
-    content.isPreview || cmsFeatured.length >= 3
-      ? cmsFeatured
-      : homePreviewFeatured;
+  const featured = cmsFeatured;
   const copy = getDictionary(locale);
-  const socialCards: SocialCard[] = [
-    { ...copy.home.social.twitter, icon: 'x' },
-    { ...copy.home.social.instagram, icon: 'instagram' },
-    { ...copy.home.social.blog, icon: 'drink' },
-  ];
+  const socialCards = getSocialCards(copy);
 
   return (
     <>
@@ -50,10 +41,7 @@ export default async function HomePage({
           locale={locale}
         />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
-        <HomeReservationSection
-          copy={copy}
-          reservationUrl={siteConfig.reservationUrl}
-        />
+        <HomeReservationSection copy={copy} locale={locale} />
         <HomeAccessSection copy={copy} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />

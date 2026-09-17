@@ -16,25 +16,18 @@ import type { FeaturedMenu } from '@/lib/microcms/types';
 import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
 import { getInViewTextDuration, InViewText } from './in-view-text';
 import type { HomePageCopy } from './types';
-
-type RecommendationIndex = 1 | 2 | 3;
+import { getMenuCategoryAnchor } from '@/lib/menu-category';
 
 const MotionLink = motion.create(Link);
 
-const menuCategoryByRecommendation: Record<RecommendationIndex, number> = {
-  1: 1,
-  2: 5,
-  3: 3,
-};
-
 function RecommendationMoreLink({
   children,
-  index,
+  menuCategory,
   locale,
   revealDelay,
 }: {
   children: React.ReactNode;
-  index: RecommendationIndex;
+  menuCategory?: string;
   locale: Locale;
   revealDelay: number;
 }) {
@@ -43,7 +36,7 @@ function RecommendationMoreLink({
   return (
     <MotionLink
       {...getInViewFadeProps(reduceMotion, revealDelay)}
-      href={`/${locale}/menu#category-${menuCategoryByRecommendation[index]}`}
+      href={`/${locale}/menu${menuCategory ? `#${getMenuCategoryAnchor(menuCategory)}` : ''}`}
       className={`mt-8 flex items-center gap-8 font-accent text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
       <span>{children}</span>
@@ -70,7 +63,7 @@ function Recommendation({
   locale,
 }: {
   item: FeaturedMenu;
-  index: RecommendationIndex;
+  index: number;
   copy: HomePageCopy;
   locale: Locale;
 }) {
@@ -90,7 +83,7 @@ function Recommendation({
             className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-14 xl:text-[80px] xl:leading-none 3xl:text-[80px]`}
           >
             {copy.featured.title}
-            {copy.featured.numberLabels[index - 1]}
+            {copy.featured.numberLabels[index - 1] ?? String(index)}
           </h3>
         </div>
         <div
@@ -109,11 +102,13 @@ function Recommendation({
             </InViewText>
           )}
           <RecommendationMoreLink
-            index={index}
+            menuCategory={item.menuCategory}
             locale={locale}
             revealDelay={linkRevealDelay}
           >
-            {copy.featured.menuLinks[index - 1]}
+            {item.menuCategory
+              ? (copy.featured.menuLinks[index - 1] ?? copy.menu.viewAll)
+              : copy.menu.viewAll}
           </RecommendationMoreLink>
         </div>
       </div>
@@ -164,7 +159,7 @@ export function HomeRecommendationsSection({
   const wheelGestureEnd = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [activeIndex, setActiveIndex] = useState(0);
   const reduceMotion = useReducedMotion();
-  const recommendations = featured.slice(0, 3);
+  const recommendations = featured.slice(0, 5);
   const { scrollYProgress } = useScroll({
     target: section,
     offset: ['start start', 'end end'],
@@ -261,7 +256,7 @@ export function HomeRecommendationsSection({
             >
               <Recommendation
                 item={item}
-                index={(index + 1) as RecommendationIndex}
+                index={index + 1}
                 copy={copy}
                 locale={locale}
               />

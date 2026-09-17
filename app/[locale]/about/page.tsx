@@ -5,9 +5,8 @@ import { HomeAccessSection } from '@/components/access';
 import { HomeFooter } from '@/components/footer';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
-import type { SocialCard } from '@/components/types';
 import { isLocale } from '@/lib/i18n';
-import { siteConfig } from '@/lib/site-config';
+import { getSocialCards } from '@/lib/social-cards';
 import { getDictionary } from '@/locales';
 
 export async function generateMetadata({
@@ -37,21 +36,14 @@ export default async function AboutPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const copy = getDictionary(locale);
-  const socialCards: SocialCard[] = [
-    { ...copy.home.social.twitter, icon: 'x' },
-    { ...copy.home.social.instagram, icon: 'instagram' },
-    { ...copy.home.social.blog, icon: 'drink' },
-  ];
+  const socialCards = getSocialCards(copy);
 
   return (
     <>
       <main className='gusto-home gusto-page'>
         <AboutPageHero copy={copy} />
         <HomeSocialSection copy={copy} socialCards={socialCards} />
-        <HomeReservationSection
-          copy={copy}
-          reservationUrl={siteConfig.reservationUrl}
-        />
+        <HomeReservationSection copy={copy} locale={locale} />
         <HomeAccessSection copy={copy} />
       </main>
       <HomeFooter copy={copy} locale={locale} socialCards={socialCards} />

@@ -8,7 +8,7 @@ An App Router, TypeScript, Tailwind and microCMS foundation for the official Osa
 2. Copy `.env.local.example` to `.env.local` and fill in the required service values.
 3. Run `pnpm dev`, then visit `/ja` or `/en`. Run `pnpm lint`, `pnpm exec tsc --noEmit`, `pnpm build`, and `pnpm test:e2e` before release. Playwright’s browser installation, if needed, is `pnpm exec playwright install`.
 
-Only the seven variables in `.env.local.example` are required by this project. Never commit `.env.local`; `MICROCMS_API_KEY`, `REVALIDATE_SECRET`, and `DEEPL_API_KEY` must remain server-only. `NEXT_PUBLIC_GA_MEASUREMENT_ID` is intentionally public. The optional `NEXT_PUBLIC_SITE_URL` may be set for production canonical URLs, but is not required for local operation.
+Never commit `.env.local`; `MICROCMS_API_KEY`, `REVALIDATE_SECRET`, and `DEEPL_API_KEY` remain server-only. `NEXT_PUBLIC_GA_MEASUREMENT_ID` is intentionally public and may be left blank. Set `NEXT_PUBLIC_SITE_URL` to the deployed HTTPS origin before every production build. An unset value is accepted only during development; production builds fail rather than publishing localhost or example.com canonicals. The tracked `.env.local.example` contains sanitized local defaults.
 
 ## microCMS owner workflow
 
@@ -29,7 +29,7 @@ The importer maps `menuName` to `name`, `price` to `priceExcludingTax`, and the 
 
 ### `featured-menus`
 
-Create fields: `name` (text, required), `description` (textarea), `image` (image, required), `sortOrder` (number, required), and `isAvailable` (boolean, required). Publish no more than the desired items; the website displays the first 3–5 available entries (up to 5).
+Create fields: `name` (text, required), `description` (textarea), `image` (image, required), `sortOrder` (number, required), and `isAvailable` (boolean, required). Optionally add `menuCategory` (select) with values matching the `menus` category options to link a recommendation to that category; without it, the recommendation links to the complete menu. The website displays up to five published, available entries. It does not insert sample recommendations in production.
 
 Configure a microCMS webhook after content publication to `POST https://YOUR-DOMAIN/api/revalidate?secret=YOUR_REVALIDATE_SECRET`, with the same secret in the `x-revalidate-secret` header if the webhook supports custom headers. This invalidates cached menu and translation content as well as all affected locale pages.
 
@@ -42,13 +42,13 @@ In each microCMS list API, open **API settings > Preview** and configure the mat
 
 The handler validates the secret and draft against microCMS before setting HTTP-only preview cookies. It then opens the Japanese page that renders that API. The on-page preview bar can end the session and return to the current page. For local testing, use the same URLs with `http://localhost:3000` while `pnpm dev` is running.
 
-Japanese is the sole owner-managed source. English natural-language menu fields are translated on the server through DeepL and cached with the CMS content tag; they fall back to Japanese if DeepL is unavailable. Food names and culinary descriptions require owner/maintainer review after automated translation before publishing.
+Japanese is the sole owner-managed source. English natural-language menu fields and category labels are translated on the server through DeepL and cached with the CMS content tag; transient translation failures fall back to Japanese and are retried on the next request. Food names and culinary descriptions require owner/maintainer review after automated translation before publishing.
 
 ## Reservations, analytics, and search
 
 Set `SELECTTYPE_RESERVATION_URL` to the public SelectType booking form. The MVP uses an accessible external link opened in a new tab; it neither embeds SelectType nor receives reservation data. If SelectType later provides a secure, accessible mobile embed, it may be confined to `/[locale]/reserve` only.
 
-GA4 is not loaded unless `NEXT_PUBLIC_GA_MEASUREMENT_ID` exists. Page views and reservation CTA clicks are tracked; reservation completion needs a separate SelectType/privacy review. Add the operator’s privacy/cookie disclosure before enabling production analytics.
+GA4 is loaded only when `NEXT_PUBLIC_GA_MEASUREMENT_ID` exists and the visitor opts in. The localized privacy page describes the site's analytics behavior and lets visitors change their choice. Page views and reservation CTA clicks are tracked after consent; reservation completion needs a separate SelectType/privacy review. In GA4, disable Enhanced Measurement page views based on browser history changes so route navigation is measured once by this application's manual page-view event. The operator should review the disclosure for the deployed analytics and booking settings before launch.
 
 Set `GOOGLE_SITE_VERIFICATION` to output the Google Search Console HTML meta verification. Alternatively use Search Console DNS verification, which requires no repository change. Submit `/sitemap.xml` after launch; `/robots.txt` is generated automatically. Canonicals and reciprocal `hreflang` links are generated for localized public pages.
 
@@ -58,4 +58,4 @@ Keep the initial project within the selected microCMS and SelectType free plans:
 
 ## Remaining design inputs
 
-The current project styles and implementation are the visual source of truth. Venue address, telephone number, hours, social URL, tax policy, and reservation destination are centralized in [`lib/site-config.ts`](./lib/site-config.ts).
+The current project styles and implementation are the visual source of truth. Venue address, telephone number, hours, tax policy, and reservation destination are centralized in [`lib/site-config.ts`](./lib/site-config.ts). Set each optional `SOCIAL_TWITTER_URL`, `SOCIAL_INSTAGRAM_URL`, and `SOCIAL_BLOG_URL` to the venue's real HTTPS destination; missing links are omitted.

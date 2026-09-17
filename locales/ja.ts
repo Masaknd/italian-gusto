@@ -4,6 +4,8 @@ export const ja = {
     home: 'ホーム',
     menu: 'メニュー',
     closeMenu: 'メニューを閉じる',
+    switchLanguage: 'Switch to English',
+    switchLanguageLabel: 'EN',
     backToTop: 'ページ上部へ戻る',
     mobileReserve: 'Reserve',
     access: '店舗情報',
@@ -28,6 +30,7 @@ export const ja = {
       menu: 'Menu',
       access: 'Access',
       reservation: 'Reservation',
+      privacy: 'Privacy Policy',
     },
     heroDishesAlt: 'パスタ、前菜、カルパッチョ',
     aboutLabel: 'About',
@@ -97,7 +100,7 @@ export const ja = {
   },
   featured: {
     title: 'うちのおすすめ',
-    numberLabels: ['１', '２', '３'],
+    numberLabels: ['１', '２', '３', '４', '５'],
     menuLinks: [
       'パスタメニューを見る',
       'ピザメニューを見る',
@@ -121,11 +124,12 @@ export const ja = {
       about: 'Our Story',
       access: 'Access',
       reservation: 'Reservation',
+      privacy: 'Privacy Policy',
     },
     socialExternal: '{name}を新しいタブで開きます',
     lunch: 'Lunch',
     dinner: 'Dinner',
-    copyright: '© 2023 Masa Kondo. All Rights Reserved.',
+    copyright: '© 2023 Italian Bar Gusto. All Rights Reserved.',
   },
   reserve: {
     title: 'ご予約',
@@ -134,6 +138,15 @@ export const ja = {
     external: '新しいタブで予約フォームを開きます',
     unavailable:
       '予約フォームはただいま準備中です。お電話でお問い合わせください。',
+  },
+  privacy: {
+    title: 'プライバシーとアクセス解析',
+    body: '当サイトでは、お客様が同意した場合にのみ Google Analytics を読み込みます。ページの閲覧と予約リンクのクリックを計測し、サイトの改善に利用します。Google が Cookie などを使用してデータを処理する場合があります。予約フォームは外部サービスの SelectType で提供されます。ご不明な点は店舗までお電話ください。',
+    consentTitle: 'アクセス解析への同意',
+    consentBody: 'サイト改善のため、同意後に Google Analytics を使用します。',
+    accept: '同意する',
+    reject: '同意しない',
+    change: 'アクセス解析の設定を変更する',
   },
   errors: {
     dynamic: '最新情報を読み込めませんでした。時間をおいて再度お試しください。',
@@ -148,5 +161,6 @@ export const ja = {
     aboutTitle: 'グストとは',
     menuTitle: 'メニュー',
     reserveTitle: 'ご予約',
+    privacyTitle: 'プライバシー',
   },
 } as const;

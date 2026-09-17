@@ -12,13 +12,7 @@ import { getDictionary } from '@/locales';
 import { entranceEasing } from './animations/config';
 import { ReservationLink } from './reservation-link';
 
-export function SiteHeader({
-  locale,
-  reservationUrl,
-}: {
-  locale: Locale;
-  reservationUrl?: string;
-}) {
+export function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const isHomePage = pathname === `/${locale}`;
   const isInnerPage =
@@ -30,6 +24,11 @@ export function SiteHeader({
   const reduceMotion = useReducedMotion();
   const d = getDictionary(locale);
   const other = locale === 'ja' ? 'en' : 'ja';
+  const otherPath = pathname.replace(/^\/(ja|en)(?=\/|$)/, `/${other}`);
+  const preserveFragment = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.currentTarget.href = `${window.location.origin}${otherPath}${window.location.hash}`;
+    setOpen(false);
+  };
   const desktopNav = [
     [d.nav.home, `/${locale}`],
     [d.nav.menu, `/${locale}/menu`],
@@ -38,8 +37,9 @@ export function SiteHeader({
   const mobileNav = [
     [d.home.heroNav.home, `/${locale}`],
     [d.home.heroNav.menu, `/${locale}/menu`],
-    [d.footer.nav.about, `/${locale}/about`],
+    [d.home.heroNav.about, `/${locale}/about`],
     [d.home.heroNav.access, `/${locale}#access`],
+    [d.home.heroNav.privacy, `/${locale}/privacy`],
   ];
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export function SiteHeader({
       className={[
         'bg-transparent shadow-none backdrop-filter-none',
         usesGustoHeader
-          ? 'z-40 h-21 border-0 p-[4px_0] sm:h-30 sm:p-[8px_0] lg:h-33 lg:p-0'
+          ? 'z-40 h-21 border-0 sm:h-30 lg:h-33'
           : 'sticky top-0 z-30 border-b border-ink/10',
         isHomePage ? 'relative inset-[0_0_auto] lg:absolute' : '',
         isInnerPage ? 'relative inset-auto' : '',
@@ -105,7 +105,7 @@ export function SiteHeader({
     >
       <div
         className={[
-          'site-header-inner mx-auto flex w-full items-center justify-between bg-transparent',
+          'site-header-inner relative mx-auto flex w-full items-center justify-between bg-transparent',
           usesGustoHeader
             ? 'h-19 max-w-none p-[8px_16px] sm:h-26 lg:h-33 lg:p-[16px_48px]'
             : 'max-w-(--layout-container) p-4 md:px-6 lg:px-24 3xl:px-60',
@@ -156,40 +156,59 @@ export function SiteHeader({
               {label}
             </Link>
           ))}
-          <Link
-            href={`/${other}`}
-            lang={other}
-            className='text-body-sm underline underline-offset-4'
-          >
-            {other.toUpperCase()}
-          </Link>
           <ReservationLink
-            href={reservationUrl}
+            href={`/${locale}/reserve`}
             className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-action-hover'
           >
             {d.nav.reserve}
           </ReservationLink>
         </nav>
-
-        <button
-          ref={menuButtonRef}
-          type='button'
-          aria-expanded={open}
-          aria-haspopup='dialog'
-          aria-controls='mobile-nav'
-          onClick={() => setOpen((current) => !current)}
-          className='relative z-1 mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
-        >
-          <span className='sr-only'>{d.nav.menu}</span>
-          <span
-            aria-hidden='true'
-            className='relative block size-8 [&_i]:absolute [&_i]:left-1.25 [&_i]:block [&_i]:h-0.75 [&_i]:w-5.5 [&_i]:bg-ink [&_i]:opacity-100 [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6'
+        <div className='top-0 right-0 hidden h-0 w-0 border-t-120 border-l-120 border-t-coral border-l-transparent lg:absolute lg:block'>
+          <a
+            href={otherPath}
+            lang={other}
+            onClick={preserveFragment}
+            className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-label text-2xl font-bold text-ink`}
+            aria-label={d.nav.switchLanguage}
           >
-            <i />
-            <i />
-            <i />
-          </span>
-        </button>
+            {d.nav.switchLanguageLabel}
+          </a>
+        </div>
+
+        {/* HEADER:MOBILE */}
+        <div className='flex items-center justify-center gap-8'>
+          <div className='block lg:hidden'>
+            <a
+              href={otherPath}
+              lang={other}
+              onClick={preserveFragment}
+              className={`font-label text-2xl font-bold text-ink`}
+              aria-label={d.nav.switchLanguage}
+            >
+              {d.nav.switchLanguageLabel}
+            </a>
+          </div>
+
+          <button
+            ref={menuButtonRef}
+            type='button'
+            aria-expanded={open}
+            aria-haspopup='dialog'
+            aria-controls='mobile-nav'
+            onClick={() => setOpen((current) => !current)}
+            className='relative z-1 mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
+          >
+            <span className='sr-only'>{d.nav.menu}</span>
+            <span
+              aria-hidden='true'
+              className='relative block size-8 [&_i]:absolute [&_i]:left-1.25 [&_i]:block [&_i]:h-0.75 [&_i]:w-5.5 [&_i]:bg-ink [&_i]:opacity-100 [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 [&_i:nth-child(3)]:top-6'
+            >
+              <i />
+              <i />
+              <i />
+            </span>
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -246,7 +265,7 @@ export function SiteHeader({
               aria-label={d.nav.menu}
               className='flex h-184 w-full flex-[0_0_736px] flex-col items-center gap-16 p-[100px_16px] sm:h-auto sm:flex-auto sm:gap-21 sm:p-[100px_24px]'
             >
-              <div className='site-header-mobile-link-list flex w-29.5 flex-col items-center gap-7 sm:w-auto sm:gap-12 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
+              <div className='site-header-mobile-link-list flex w-full flex-col items-center gap-6 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
                 {mobileNav.map(([label, href]) => (
                   <Link key={href} href={href} onClick={() => setOpen(false)}>
                     {label}
@@ -254,11 +273,19 @@ export function SiteHeader({
                 ))}
               </div>
               <ReservationLink
-                href={reservationUrl}
+                href={`/${locale}/reserve`}
                 className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'
               >
                 {d.nav.mobileReserve}
               </ReservationLink>
+              <a
+                href={otherPath}
+                lang={other}
+                onClick={preserveFragment}
+                className={`text-xl text-warm-light underline underline-offset-4`}
+              >
+                {d.nav.switchLanguageLabel}
+              </a>
             </nav>
           </motion.div>
         )}

@@ -7,13 +7,14 @@ import {
   inViewStagger,
   inViewViewport,
 } from './animations/config';
+import { getMenuCategoryAnchor } from '@/lib/menu-category';
 
 export function MenuCategoryNav({
   ariaLabel,
   categories,
 }: {
   ariaLabel: string;
-  categories: string[];
+  categories: { id: string; label: string }[];
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -37,7 +38,7 @@ export function MenuCategoryNav({
       {categories.map((category, index) => (
         <motion.span
           className='flex min-w-0 items-center justify-center'
-          key={category}
+          key={category.id}
           variants={{
             hidden: {
               opacity: 0,
@@ -57,16 +58,16 @@ export function MenuCategoryNav({
             />
           )}
           <a
-            href={`#category-${index + 1}`}
+            href={`#${getMenuCategoryAnchor(category.id)}`}
             className={[
               'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
               index === 0 ? 'text-[#c3a8a2]!' : '',
-              category.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
+              category.label.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
             ]
               .filter(Boolean)
               .join(' ')}
           >
-            {category}
+            {category.label}
           </a>
         </motion.span>
       ))}

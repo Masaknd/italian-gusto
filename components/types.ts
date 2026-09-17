@@ -6,4 +6,5 @@ export type SocialCard = {
   name: string;
   description: string;
   icon: SocialIconType;
+  url: string;
 };

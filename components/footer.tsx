@@ -18,11 +18,12 @@ export function HomeFooter({
   storyHref?: string;
 }) {
   const footerNav = [
-    [copy.home.heroNav.home, '#top'],
+    [copy.home.heroNav.home, `/${locale}`],
     [copy.footer.nav.menu, `/${locale}/menu`],
     [copy.footer.nav.about, storyHref ?? `/${locale}/about`],
     [copy.footer.nav.access, '#access'],
     [copy.footer.nav.reservation, '#reservation'],
+    [copy.footer.nav.privacy, `/${locale}/privacy`],
   ];
 
   return (
@@ -68,7 +69,7 @@ export function HomeFooter({
             <div className='gusto-footer-social flex items-center gap-[52px] xl:h-12'>
               {socialCards.map((card) => (
                 <a
-                  href={siteConfig.socialUrl}
+                  href={card.url}
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={copy.footer.socialExternal.replace(

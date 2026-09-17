@@ -7,13 +7,14 @@ import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 import { ReservationLink } from './reservation-link';
+import type { Locale } from '@/lib/i18n';
 
 export function HomeReservationSection({
   copy,
-  reservationUrl,
+  locale,
 }: {
   copy: HomePageCopy;
-  reservationUrl?: string;
+  locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -56,9 +57,8 @@ export function HomeReservationSection({
           ))}
         </ul>
         <ReservationLink
-          href={reservationUrl}
+          href={`/${locale}/reserve`}
           className='gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 font-accent text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg'
-          ariaLabel={copy.reserve.external}
         >
           {copy.home.reservationCta}
         </ReservationLink>

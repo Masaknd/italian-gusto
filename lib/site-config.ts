@@ -11,7 +11,6 @@ export const siteConfig = {
   mapEmbedUrl:
     'https://www.google.com/maps?q=Gusto%20Italian%20Bar%20%E5%A4%A7%E9%98%AA%E5%B8%82%E5%9F%8E%E6%9D%B1%E5%8C%BA%E6%88%90%E8%82%B25%E4%B8%81%E7%9B%AE23-17&output=embed',
   reservationUrl: process.env.SELECTTYPE_RESERVATION_URL,
-  socialUrl: 'https://www.instagram.com/',
 } as const;
 
 export const taxConfig = {

@@ -1,3 +1,4 @@
+import 'server-only';
 import { cacheLife, cacheTag } from 'next/cache';
 import { cookies, draftMode } from 'next/headers';
 import { getMicroCmsClient } from './client';
@@ -25,41 +26,65 @@ const normalizeCmsMenu = ({ category, ...menu }: CmsMenu): Menu => ({
   category: category[0] ?? '',
 });
 
-async function getMenuContent() {
-  'use cache';
-  cacheLife('hours');
-  cacheTag(CMS_TAG);
+async function getAllPublished<T>(endpoint: CmsEndpoint) {
   const client = getMicroCmsClient();
-  if (!client)
-    return {
-      menus: [] as Menu[],
-      featuredMenus: [] as FeaturedMenu[],
-      error: false,
-    };
-  try {
-    const [menus, featuredMenus] = await Promise.all([
-      client.getList<CmsMenu>({ endpoint: 'menus', queries: { limit: 100 } }),
-      client.getList<FeaturedMenu>({
-        endpoint: 'featured-menus',
-        queries: { limit: 100 },
-      }),
-    ]);
-    return {
-      menus: deterministicSort(menus.contents.map(normalizeCmsMenu)),
-      featuredMenus: deterministicSort(featuredMenus.contents).slice(0, 5),
-      error: false,
-    };
-  } catch (error) {
-    console.error(
-      'microCMS menu request failed',
-      error instanceof Error ? error.message : error,
-    );
-    return {
-      menus: [] as Menu[],
-      featuredMenus: [] as FeaturedMenu[],
-      error: true,
-    };
+  if (!client) return [] as T[];
+  const contents: T[] = [];
+  const limit = 100;
+  for (let offset = 0; ; offset += limit) {
+    const page = await client.getList<T>({
+      endpoint,
+      queries: { limit, offset },
+    });
+    contents.push(...page.contents);
+    if (contents.length >= page.totalCount || page.contents.length < limit)
+      break;
   }
+  return contents;
+}
+
+async function getPublishedMenus() {
+  'use cache';
+  cacheLife({ stale: 60, revalidate: 300, expire: 86400 });
+  cacheTag(CMS_TAG);
+  return deterministicSort(
+    (await getAllPublished<CmsMenu>('menus')).map(normalizeCmsMenu),
+  );
+}
+
+async function getPublishedFeatured() {
+  'use cache';
+  cacheLife({ stale: 60, revalidate: 300, expire: 86400 });
+  cacheTag(CMS_TAG);
+  return deterministicSort(
+    await getAllPublished<FeaturedMenu>('featured-menus'),
+  ).slice(0, 5);
+}
+
+async function getMenuContent() {
+  const [menus, featuredMenus] = await Promise.allSettled([
+    getPublishedMenus(),
+    getPublishedFeatured(),
+  ]);
+  for (const [endpoint, result] of [
+    ['menus', menus],
+    ['featured-menus', featuredMenus],
+  ] as const) {
+    if (result.status === 'rejected') {
+      console.error(
+        `microCMS ${endpoint} request failed`,
+        result.reason instanceof Error ? result.reason.message : result.reason,
+      );
+    }
+  }
+  return {
+    menus: menus.status === 'fulfilled' ? menus.value : ([] as Menu[]),
+    featuredMenus:
+      featuredMenus.status === 'fulfilled'
+        ? featuredMenus.value
+        : ([] as FeaturedMenu[]),
+    error: menus.status === 'rejected' || featuredMenus.status === 'rejected',
+  };
 }
 
 export async function getMenuContentForSite() {

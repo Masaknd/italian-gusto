@@ -6,10 +6,9 @@ import { InViewHeading } from '@/components/in-view-heading';
 import { MenuList } from '@/components/menu-list';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
-import type { SocialCard } from '@/components/types';
-import { translateManagedFields } from '@/lib/deepl';
+import { translateMenuFields } from '@/lib/deepl';
 import { isLocale } from '@/lib/i18n';
-import { siteConfig } from '@/lib/site-config';
+import { getSocialCards } from '@/lib/social-cards';
 import { getMenuContentForSite } from '@/lib/microcms/content';
 import { getDictionary } from '@/locales';
 export async function generateMetadata({
@@ -42,14 +41,8 @@ export default async function MenuPage({
   const d = getDictionary(locale);
   const content = await getMenuContentForSite();
   const menus =
-    locale === 'en'
-      ? await translateManagedFields(content.menus)
-      : content.menus;
-  const socialCards: SocialCard[] = [
-    { ...d.home.social.twitter, icon: 'x' },
-    { ...d.home.social.instagram, icon: 'instagram' },
-    { ...d.home.social.blog, icon: 'drink' },
-  ];
+    locale === 'en' ? await translateMenuFields(content.menus) : content.menus;
+  const socialCards = getSocialCards(d);
 
   return (
     <>
@@ -78,20 +71,16 @@ export default async function MenuPage({
               </span>
               <span className='sr-only'>{d.menu.title}</span>
             </InViewHeading>
-            {content.error ? (
+            {content.error && (
               <p className='m-0 text-muted' role='status'>
                 {d.errors.dynamic}
               </p>
-            ) : (
-              <MenuList menus={menus} copy={d} />
             )}
+            <MenuList menus={menus} copy={d} />
           </div>
         </section>
         <HomeSocialSection copy={d} socialCards={socialCards} />
-        <HomeReservationSection
-          copy={d}
-          reservationUrl={siteConfig.reservationUrl}
-        />
+        <HomeReservationSection copy={d} locale={locale} />
         <HomeAccessSection copy={d} />
       </main>
       <HomeFooter copy={d} locale={locale} socialCards={socialCards} />

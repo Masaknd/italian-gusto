@@ -45,6 +45,7 @@ export default async function ReservePage({
         <ReservationLink
           href={siteConfig.reservationUrl}
           ariaLabel={d.reserve.external}
+          external
           className='mt-8 inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-[var(--color-action-primary-hover)]'
         >
           {d.reserve.cta}

@@ -5,7 +5,9 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
     test.use({ reducedMotion });
 
     for (const locale of ['ja', 'en']) {
-      test(`${locale} pages hydrate without runtime errors`, async ({ page }) => {
+      test(`${locale} pages hydrate without runtime errors`, async ({
+        page,
+      }) => {
         const errors: string[] = [];
         page.on('pageerror', (error) => errors.push(error.message));
         page.on('console', (message) => {
@@ -17,7 +19,7 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
           }
         });
 
-        for (const route of ['', '/menu', '/about', '/reserve']) {
+        for (const route of ['', '/menu', '/about', '/reserve', '/privacy']) {
           const response = await page.goto(`/${locale}${route}`);
           expect(response?.status()).toBe(200);
           await expect(page.getByRole('heading', { level: 1 })).toBeVisible();

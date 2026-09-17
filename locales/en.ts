@@ -4,6 +4,8 @@ export const en = {
     home: 'Home',
     menu: 'Menu',
     closeMenu: 'Close menu',
+    switchLanguage: '日本語に切り替える',
+    switchLanguageLabel: 'JA',
     backToTop: 'Back to the top',
     mobileReserve: 'Reserve',
     access: 'Information',
@@ -24,6 +26,7 @@ export const en = {
       menu: 'Menu',
       access: 'Access',
       reservation: 'Reservation',
+      privacy: 'Privacy Policy',
     },
     heroDishesAlt: 'Pasta, antipasto, and carpaccio',
     aboutLabel: 'About',
@@ -96,7 +99,7 @@ export const en = {
   },
   featured: {
     title: 'Our recommendation ',
-    numberLabels: ['1', '2', '3'],
+    numberLabels: ['1', '2', '3', '4', '5'],
     menuLinks: ['View the pasta menu', 'View the pizza menu', 'View all menus'],
     previous: 'Previous recommendation',
     next: 'Next recommendation',
@@ -116,11 +119,12 @@ export const en = {
       about: 'Our Story',
       access: 'Access',
       reservation: 'Reservation',
+      privacy: 'Privacy',
     },
     socialExternal: 'Open {name} in a new tab',
     lunch: 'Lunch',
     dinner: 'Dinner',
-    copyright: '© 2023 Masa Kondo. All Rights Reserved.',
+    copyright: '© 2023 Italian Bar Gusto. All Rights Reserved.',
   },
   reserve: {
     title: 'Reservations',
@@ -129,6 +133,15 @@ export const en = {
     external: 'Opens the reservation form in a new tab',
     unavailable:
       'Our reservation form is being prepared. Please contact us by phone.',
+  },
+  privacy: {
+    title: 'Privacy and analytics',
+    body: 'We load Google Analytics only if you agree. We measure page visits and clicks on reservation links to improve this site. Google may use cookies and process this information. Our reservation form is provided by the external service SelectType. Please call the restaurant if you have questions.',
+    consentTitle: 'Analytics choice',
+    consentBody: 'If you agree, we use Google Analytics to improve this site.',
+    accept: 'Allow analytics',
+    reject: 'Decline analytics',
+    change: 'Change analytics choice',
   },
   errors: {
     dynamic:
@@ -141,5 +154,6 @@ export const en = {
     aboutTitle: 'About Gusto',
     menuTitle: 'Menu',
     reserveTitle: 'Reservations',
+    privacyTitle: 'Privacy',
   },
 } as const;
