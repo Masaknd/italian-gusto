@@ -7,6 +7,7 @@ import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 import type { Locale } from '@/lib/i18n';
+import { LanguageFont } from './language-font';
 
 const detailValueClass = 'm-0 list-none p-0 not-italic';
 const detailRowClass =
@@ -20,7 +21,6 @@ export function HomeAccessSection({
   locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
-  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -31,13 +31,15 @@ export function HomeAccessSection({
         <InViewHeading className='w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:text-[52px] 3xl:text-[min(2.7083vw,52px)]'>
           {copy.home.accessTitle}
         </InViewHeading>
-        <motion.p
-          className={`${languageFont} relative p-[0_0_10px] text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]`}
+        <LanguageFont
+          as={motion.p}
+          locale={locale}
+          className={`relative p-[0_0_10px] text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]`}
           {...getInViewFadeUpProps(reduceMotion, 0.2)}
           data-access-title-label
         >
           {copy.home.accessLabel}
-        </motion.p>
+        </LanguageFont>
       </div>
       <div className='gusto-access-grid grid w-full grid-rows-2 justify-center gap-6 text-left lg:w-[80%] lg:grid-cols-5 lg:grid-rows-none lg:gap-9 xl:gap-6 3xl:gap-[min(1.25vw,24px)]'>
         <div className='gusto-map [aspect-ratio:auto] h-auto w-full overflow-hidden bg-[var(--color-map-surface)] lg:col-span-3'>

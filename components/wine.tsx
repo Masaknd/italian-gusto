@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
 
 import type { Locale } from '@/lib/i18n';
+import { LanguageFont } from './language-font';
 import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
@@ -16,20 +17,20 @@ function WineMoreLink({
   children,
   locale,
   revealDelay,
-  languageFont,
 }: {
   children: React.ReactNode;
   locale: Locale;
   revealDelay: number;
-  languageFont: 'font-label' | 'font-accent';
 }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <MotionLink
+    <LanguageFont
+      as={MotionLink}
+      locale={locale}
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu`}
-      className={`${languageFont} gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
+      className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
@@ -44,7 +45,7 @@ function WineMoreLink({
           className='transform duration-200 group-hover:translate-x-6'
         />
       </svg>
-    </MotionLink>
+    </LanguageFont>
   );
 }
 
@@ -58,7 +59,6 @@ export function HomeWineSection({
   const linkRevealDelay =
     getInViewTextSequenceDuration(copy.home.wineBody) +
     inViewTextDefaults.linkGap;
-  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section id='wine' className='relative w-full overflow-hidden text-ink'>
@@ -87,16 +87,14 @@ export function HomeWineSection({
               {copy.home.wineTitle}
             </InViewHeading>
           </div>
-          <InViewTextGroup
-            className={`${languageFont} gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
+          <LanguageFont
+            as={InViewTextGroup}
+            locale={locale}
+            className={`gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
           >
             {copy.home.wineBody}
-          </InViewTextGroup>
-          <WineMoreLink
-            locale={locale}
-            revealDelay={linkRevealDelay}
-            languageFont={languageFont}
-          >
+          </LanguageFont>
+          <WineMoreLink locale={locale} revealDelay={linkRevealDelay}>
             {copy.home.wineMenu}
           </WineMoreLink>
         </div>

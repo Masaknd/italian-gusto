@@ -11,11 +11,19 @@ import {
 } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
+import { LanguageFont } from './language-font';
 import type { HomePageCopy } from './types';
+import type { Locale } from '@/lib/i18n';
 
 const MotionImage = motion.create(Image);
 
-export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
+export function AboutPageHero({
+  copy,
+  locale,
+}: {
+  copy: HomePageCopy;
+  locale: Locale;
+}) {
   const reduceMotion = useReducedMotion();
   const detailsRevealDelay =
     getInViewTextSequenceDuration(copy.home.aboutBody) +
@@ -40,9 +48,13 @@ export function AboutPageHero({ copy }: { copy: HomePageCopy }) {
             </InViewHeading>
           </div>
 
-          <InViewTextGroup className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible font-accent text-lg leading-6 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'>
+          <LanguageFont
+            as={InViewTextGroup}
+            locale={locale}
+            className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'
+          >
             {copy.home.aboutBody}
-          </InViewTextGroup>
+          </LanguageFont>
           <motion.dl
             className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-6 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
             {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}

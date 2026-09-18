@@ -10,24 +10,27 @@ import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
 import type { Locale } from '@/lib/i18n';
+import { LanguageFont } from './language-font';
 const MotionLink = motion.create(Link);
 
 function AboutMoreLink({
   children,
   revealDelay,
-  languageFont,
+  locale,
 }: {
   children: React.ReactNode;
   revealDelay: number;
-  languageFont: 'font-label' | 'font-accent';
+  locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <MotionLink
+    <LanguageFont
+      as={MotionLink}
+      locale={locale}
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href='#wine'
-      className={`${languageFont} gusto-about-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]`}
+      className={`gusto-about-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:text-[24px] 3xl:leading-[1.36]`}
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
@@ -42,7 +45,7 @@ function AboutMoreLink({
           className='transform duration-200 group-hover:translate-x-6'
         />
       </svg>
-    </MotionLink>
+    </LanguageFont>
   );
 }
 
@@ -56,7 +59,6 @@ export function HomeAboutSection({
   const linkRevealDelay =
     getInViewTextSequenceDuration(copy.home.aboutBody) +
     inViewTextDefaults.linkGap;
-  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -70,15 +72,14 @@ export function HomeAboutSection({
               {copy.home.aboutTitle}
             </InViewHeading>
           </div>
-          <InViewTextGroup
-            className={`${languageFont} gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
+          <LanguageFont
+            as={InViewTextGroup}
+            locale={locale}
+            className={`gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
           >
             {copy.home.aboutBody}
-          </InViewTextGroup>
-          <AboutMoreLink
-            revealDelay={linkRevealDelay}
-            languageFont={languageFont}
-          >
+          </LanguageFont>
+          <AboutMoreLink revealDelay={linkRevealDelay} locale={locale}>
             {copy.home.aboutMore}
           </AboutMoreLink>
           <Image

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { HomeSocialIcon } from './social-icon';
 import type { HomePageCopy, SocialCard } from './types';
 import type { Locale } from '@/lib/i18n';
+import { LanguageFont } from './language-font';
 
 const gallery = [
   'slide-3.jpg',
@@ -22,8 +23,6 @@ export function HomeSocialSection({
   socialCards: SocialCard[];
   locale: Locale;
 }) {
-  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
-
   return (
     <section
       id='social'
@@ -91,11 +90,13 @@ export function HomeSocialSection({
                     {card.name}
                   </span>
                 </div>
-                <p
-                  className={`${languageFont} overflow-hidden text-center text-sm leading-[19px] sm:leading-[1.36] xl:text-[22px] 3xl:text-[min(1.1458vw,22px)]`}
+                <LanguageFont
+                  as={'p'}
+                  locale={locale}
+                  className={`overflow-hidden text-center text-sm leading-[19px] sm:leading-[1.36] xl:text-[22px] 3xl:text-[min(1.1458vw,22px)]`}
                 >
                   {card.description}
-                </p>
+                </LanguageFont>
               </div>
               <HomeSocialIcon
                 animated

@@ -8,6 +8,7 @@ import { InViewHeading } from './in-view-heading';
 import type { HomePageCopy } from './types';
 import { ReservationLink } from './reservation-link';
 import type { Locale } from '@/lib/i18n';
+import { LanguageFont } from './language-font';
 
 export function HomeReservationSection({
   copy,
@@ -17,7 +18,6 @@ export function HomeReservationSection({
   locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
-  const languageFont = locale === 'en' ? 'font-label' : 'font-accent';
 
   return (
     <section
@@ -44,25 +44,29 @@ export function HomeReservationSection({
           <InViewHeading className='font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-coral sm:text-5xl sm:leading-8 lg:text-[42px] lg:leading-10 lg:tracking-[-0.288em] xl:text-[52px]'>
             {copy.home.reservationTitle}
           </InViewHeading>
-          <motion.p
-            className={`${languageFont} relative pb-1 text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
+          <LanguageFont
+            as={motion.p}
+            locale={locale}
+            className={`relative pb-1 text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
             {...getInViewFadeUpProps(reduceMotion, 0.2)}
             data-reservation-title-label
           >
             {copy.home.reservationLabel}
-          </motion.p>
+          </LanguageFont>
         </div>
         <ul className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-6.75 text-warm-light sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-10.5'>
           {copy.home.reservationNotes.map((note) => (
             <li key={note}>{note}</li>
           ))}
         </ul>
-        <ReservationLink
+        <LanguageFont
+          as={ReservationLink}
+          locale={locale}
           href={`/${locale}/reserve`}
-          className={`${languageFont} gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
+          className={`gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
         >
           {copy.home.reservationCta}
-        </ReservationLink>
+        </LanguageFont>
       </div>
       <Image
         src='/images/b-4.png'
