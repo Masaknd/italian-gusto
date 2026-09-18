@@ -140,8 +140,71 @@ export const en = {
       'Our reservation form is being prepared. Please contact us by phone.',
   },
   privacy: {
-    title: 'Privacy and analytics',
-    body: 'We load Google Analytics only if you agree. We measure page visits and clicks on reservation links to improve this site. Google may use cookies and process this information. Our reservation form is provided by the external service SelectType. Please call the restaurant if you have questions.',
+    title: 'Privacy Policy',
+    body: 'Gusto Italian Bar respects your privacy. This policy explains how we handle information when you browse our website, make a reservation, or contact the restaurant, and how you can manage your analytics preferences.',
+    contents: 'On this page',
+    sections: [
+      {
+        id: 'information',
+        title: 'Information we collect',
+        paragraphs: [
+          'When you make a reservation or contact us, we may receive your name, contact details, reservation details, and any information you choose to share. Please provide only what is needed for your request.',
+          'Website hosting services may process technical information, such as your IP address, browser details, and access logs, to deliver and protect the site. If you allow analytics, Google Analytics also processes information about your visit as described below.',
+        ],
+      },
+      {
+        id: 'use',
+        title: 'How we use information',
+        paragraphs: [
+          'We use information to manage reservations, respond to inquiries, communicate about your visit, and keep the website working securely. With your permission, we use website analytics to understand which pages and reservation links are helpful and improve the browsing experience.',
+        ],
+      },
+      {
+        id: 'sharing',
+        title: 'Service providers and sharing',
+        paragraphs: [
+          'Information may be handled by services that support our website and reservations, including our hosting provider, SelectType, and Google. These providers handle information under their own terms and privacy policies and may process it outside Japan. Information may also be disclosed where required by applicable law.',
+        ],
+      },
+      {
+        id: 'analytics',
+        title: 'Cookies and analytics',
+        paragraphs: [
+          'When analytics is enabled for this website, we load Google Analytics only after you choose to allow it. We measure page visits and clicks on reservation links. Google may use cookies and receive information such as the page URL, IP address, and browser or device details.',
+          'Your analytics choice is saved in this browser’s local storage. You can change it below at any time and continue using the site if you decline. Declining stops further Google Analytics measurement by this site in this browser; it does not delete information already collected or existing cookies. You can remove cookies and stored preferences in your browser settings. Choices apply separately to each browser and device.',
+        ],
+      },
+      {
+        id: 'external-services',
+        title: 'Reservations, maps, and external links',
+        paragraphs: [
+          'Online reservations, when available, open a form provided by SelectType. Information submitted there is handled according to the notices shown on that form and the provider’s privacy policy.',
+          'Our access section embeds Google Maps, which may receive technical information when the map loads. Maps and linked services, including social media and reservation websites, have their own privacy practices. The analytics preference on this page controls Google Analytics on our website; it does not control these other services.',
+        ],
+      },
+      {
+        id: 'your-information',
+        title: 'Questions about your information',
+        paragraphs: [
+          'If you would like to ask about, correct, or request deletion of personal information you have shared with the restaurant, please contact us by phone. We may need to confirm your identity and the details of your request. We will consider your request in accordance with applicable law and any record-keeping obligations.',
+          'For information held independently by an external service, please also refer to that provider’s privacy policy and contact options.',
+        ],
+      },
+      {
+        id: 'updates',
+        title: 'Changes to this policy',
+        paragraphs: [
+          'We may update this policy when our services or information-handling practices change. The current version will be published on this page.',
+        ],
+      },
+    ],
+    googlePrivacy: 'Google’s Privacy Policy',
+    googleDataUse: 'How Google uses information from sites and apps',
+    preferencesBody:
+      'Choose whether to allow Google Analytics in this browser. You can change your choice whenever you visit this page.',
+    contactTitle: 'Contact us',
+    contactBody:
+      'For questions about this policy or how the restaurant handles your information, please call Gusto Italian Bar.',
     consentTitle: 'Analytics choice',
     consentBody: 'If you agree, we use Google Analytics to improve this site.',
     accept: 'Allow analytics',

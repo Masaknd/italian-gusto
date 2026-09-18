@@ -11,18 +11,22 @@ export function HomeFooter({
   locale,
   socialCards,
   storyHref,
+  accessHref = '#access',
+  reservationHref = '#reservation',
 }: {
   copy: HomePageCopy;
   locale: Locale;
   socialCards: SocialCard[];
   storyHref?: string;
+  accessHref?: string;
+  reservationHref?: string;
 }) {
   const footerNav = [
     [copy.home.heroNav.home, `/${locale}`],
     [copy.footer.nav.menu, `/${locale}/menu`],
     [copy.footer.nav.about, storyHref ?? `/${locale}/about`],
-    [copy.footer.nav.access, '#access'],
-    [copy.footer.nav.reservation, '#reservation'],
+    [copy.footer.nav.access, accessHref],
+    [copy.footer.nav.reservation, reservationHref],
     [copy.footer.nav.privacy, `/${locale}/privacy`],
   ];
 

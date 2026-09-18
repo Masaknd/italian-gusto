@@ -68,11 +68,18 @@ test('privacy controls and localized footer home destination are available', asy
     .click();
   await expect(page).toHaveURL(/\/en\/privacy$/);
   await expect(
-    page.getByRole('heading', { level: 1, name: 'Privacy and analytics' }),
+    page.getByRole('heading', { level: 1, name: 'Privacy Policy' }),
   ).toBeVisible();
   await expect(
     page
-      .getByLabel('Change analytics choice')
+      .getByRole('group', { name: 'Change analytics choice' })
       .getByRole('button', { name: 'Allow analytics' }),
   ).toBeVisible();
+  const access = page.locator('#access');
+  await expect(
+    access.getByRole('heading', { level: 2, name: 'Access' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: 'Access' }),
+  ).toHaveAttribute('href', '#access');
 });

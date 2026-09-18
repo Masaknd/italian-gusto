@@ -16,7 +16,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const isHomePage = pathname === `/${locale}`;
   const isInnerPage =
-    pathname === `/${locale}/menu` || pathname === `/${locale}/about`;
+    pathname === `/${locale}/menu` ||
+    pathname === `/${locale}/about` ||
+    pathname === `/${locale}/privacy`;
   const usesGustoHeader = isHomePage || isInnerPage;
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -284,7 +286,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 onClick={preserveFragment}
                 className={`text-xl text-warm-light underline underline-offset-4`}
               >
-                {d.nav.switchLanguageLabel}
+                {d.nav.switchLanguage}: {d.nav.switchLanguageLabel}
               </a>
             </nav>
           </motion.div>
