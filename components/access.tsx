@@ -56,7 +56,7 @@ export function HomeAccessSection({
             <dt className='font-normal'>{copy.info.address}</dt>
             <dd className={detailValueClass}>
               <address className={detailValueClass}>
-                {siteConfig.address}
+                {locale === 'en' ? siteConfig.addressEn : siteConfig.address}
               </address>
               <a
                 href={siteConfig.mapUrl}

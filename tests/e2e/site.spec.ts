@@ -2525,7 +2525,21 @@ test("the About page is localized and linked from shared navigation", async ({ p
 
 test("Japanese and English pages use their matching dictionaries", async ({ page }) => { await page.goto("/ja"); await expect(page.getByRole("heading", { level: 1, name: "だれでも気軽に ワインと料理を 楽しめるバル" })).toBeVisible(); await page.goto("/en"); await expect(page.getByRole("heading", { level: 1, name: "Make tonight more delicious." })).toBeVisible(); });
 test("reservation section exposes localized guidance and its call to action", async ({ page }) => { await page.goto("/ja"); const reservation = page.locator("#reservation"); await expect(reservation.getByRole("heading", { level: 2, name: "Reservation" })).toBeVisible(); await expect(reservation.getByRole("listitem")).toHaveCount(4); await expect(reservation.getByText("ご予約・お問い合わせページに進む")).toBeVisible(); await page.goto("/en"); await expect(page.locator("#reservation").getByText("Reservations and inquiries", { exact: true })).toBeVisible(); });
-test("access section includes the map and complete localized travel details", async ({ page }) => { await page.goto("/ja"); const access = page.locator("#access"); await expect(access.getByRole("heading", { level: 2, name: "Access" })).toBeVisible(); await expect(access.getByTitle("グスト周辺の地図")).toBeVisible(); await expect(access.getByRole("link", { name: "Googleマップを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(access.getByText("大阪メトロ谷町線 関目高殿駅 3番出口 徒歩1分")).toBeVisible(); await expect(access.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); });
+test("access section includes the map and complete localized travel details", async ({ page }) => {
+  await page.goto("/ja");
+  const access = page.locator("#access");
+  await expect(access.getByRole("heading", { level: 2, name: "Access" })).toBeVisible();
+  await expect(access.getByTitle("グスト周辺の地図")).toBeVisible();
+  await expect(access.getByRole("link", { name: "Googleマップを新しいタブで開きます" })).toHaveAttribute("target", "_blank");
+  await expect(access.getByText("〒536-0007 大阪府大阪市城東区成育5丁目23-17 関目レジャービル1階")).toBeVisible();
+  await expect(access.getByText("大阪メトロ谷町線 関目高殿駅 3番出口 徒歩1分")).toBeVisible();
+  await expect(access.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059");
+
+  await page.goto("/en");
+  await expect(
+    page.locator("#access").getByText("1F Sekime Leisure Building, 5-23-17 Seiiku, Joto-ku, Osaka 536-0007, Japan"),
+  ).toBeVisible();
+});
 test("footer exposes navigation, social links, contact hours, and copyright", async ({ page }) => { await page.goto("/ja"); const footer = page.getByRole("contentinfo"); await expect(footer.getByRole("link", { name: "Gusto Italian Bar" })).toHaveAttribute("href", "/ja"); await expect(footer.getByRole("navigation", { name: "フッターナビゲーション" }).getByRole("link")).toHaveCount(4); await expect(footer.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); await expect(footer.getByRole("link", { name: "Twitterを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(footer.getByText("Lunch: 12:00～15:00")).toBeVisible(); await expect(footer.getByText("© 2023 Masa Kondo. All Rights Reserved.")).toBeVisible(); });
 test("configured reservation links stay clickable after hydration", async ({ page }, testInfo) => {
   test.skip(!reservationUrl, "SelectType URL is not configured");

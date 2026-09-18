@@ -71,7 +71,7 @@ export function HomeWineSection({
         className='gusto-wine-brush-top pointer-events-none absolute top-0 left-0 z-1 block h-auto w-full'
       />
       <div className='gusto-wine-inner relative flex h-full w-full flex-col items-center justify-center gap-x-0 gap-y-8 bg-coral p-[64px_16px_32px_16px] sm:flex-col sm:flex-nowrap sm:items-center sm:gap-8 sm:p-[120px_32px_64px_32px] lg:flex-row lg:items-start xl:p-[200px_96px_60px_96px] 3xl:gap-[min(1.6667vw,32px)] 3xl:p-[300px_240px_120px_240px]'>
-        <div className='gusto-wine-visual order-2 xl:order-1'>
+        <div className='gusto-wine-visual order-2 lg:order-1'>
           <Image
             src='/images/bottle-grapes.png'
             alt={copy.home.wineArtworkAlt}
@@ -81,7 +81,7 @@ export function HomeWineSection({
             className='h-auto object-contain'
           />
         </div>
-        <div className='gusto-wine-copy order-1 flex flex-col items-center gap-8 sm:gap-12 lg:items-start xl:order-2 xl:flex-none'>
+        <div className='gusto-wine-copy order-1 flex flex-col items-center gap-8 sm:gap-12 lg:order-2 lg:items-start xl:flex-none'>
           <div className='gusto-wine-title relative w-max'>
             <InViewHeading className="font-display text-4xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)]">
               {copy.home.wineTitle}

@@ -1,6 +1,8 @@
 export const siteConfig = {
   name: 'Gusto Italian Bar',
   address: '〒536-0007 大阪府大阪市城東区成育5丁目23-17 関目レジャービル1階',
+  addressEn:
+    '1F Sekime Leisure Building, 5-23-17 Seiiku, Joto-ku, Osaka 536-0007, Japan',
   phone: '06-6180-6059',
   phoneHref: 'tel:+81661806059',
   lunchHours: '12:00～15:00',

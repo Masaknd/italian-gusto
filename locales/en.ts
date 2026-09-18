@@ -13,8 +13,13 @@ export const en = {
   },
   hero: {
     eyebrow: 'OSAKA ITALIAN BAR',
-    title: 'Make tonight more delicious.',
-    titleSegments: [[{ text: 'Make tonight more delicious.' }]],
+    title: 'Walk\nright in,\nunwind,\nand enjoy!',
+    titleSegments: [
+      [{ text: 'Walk' }],
+      [{ text: 'Right', emphasis: true }, { text: ' in,' }],
+      [{ text: 'Unwind', emphasis: true }, { text: ',' }],
+      [{ text: 'and ' }, { text: 'Enjoy!', emphasis: true }],
+    ],
     body: 'From a casual drink to an unhurried meal, we are an Italian bar made for Osaka evenings.',
   },
   home: {
@@ -30,7 +35,7 @@ export const en = {
     },
     heroDishesAlt: 'Pasta, antipasto, and carpaccio',
     aboutLabel: 'About',
-    aboutTitle: 'About Gusto',
+    aboutTitle: 'Gusto',
     aboutBody: [
       'A café by day and a relaxed Italian bar by night.',
       'Our owner, a certified wine expert, keeps learning every day to create a bar where everyone can enjoy wine and food.',
@@ -40,7 +45,7 @@ export const en = {
     aboutMore: 'Read about our wine',
     aboutImageAlt: "Gusto's warmly lit interior",
     wineLabel: 'Menu',
-    wineTitle: 'About wine',
+    wineTitle: 'Wine',
     wineBody: [
       'Wine is made by fermenting grapes. Red and white wines differ through the grapes selected and the way they are produced.',
       'At Gusto, we keep a varied selection so you can find a glass that suits your meal and your mood.',
@@ -52,12 +57,12 @@ export const en = {
     gallery: 'Inside Gusto',
     galleryImageAlt: "Gusto's dining room and dishes",
     social: {
-      twitter: { name: 'Twitter', description: 'News and updates from Gusto' },
+      twitter: { name: 'Twitter', description: 'News and updates' },
       instagram: {
         name: 'Instagram',
-        description: 'See our latest menu additions',
+        description: 'See our latest menu',
       },
-      blog: { name: 'Blog', description: 'Notes from the owner' },
+      blog: { name: 'Blog', description: "Owner's notes" },
     },
     reservationTitle: 'Reservation',
     reservationLabel: 'Reservations and inquiries',
@@ -98,12 +103,12 @@ export const en = {
     marquee: 'Gusto Italian Bar',
   },
   featured: {
-    title: 'Our recommendation ',
+    title: 'Our Top Picks ',
     numberLabels: ['1', '2', '3', '4', '5'],
     menuLinks: ['View the pasta menu', 'View the pizza menu', 'View all menus'],
-    previous: 'Previous recommendation',
-    next: 'Next recommendation',
-    position: 'Recommendation {current} of {total}',
+    previous: 'Previous Picks',
+    next: 'Next Picks',
+    position: 'Picks {current} of {total}',
   },
   info: {
     title: 'Visit us',
