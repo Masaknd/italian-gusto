@@ -46,7 +46,7 @@ Japanese is the sole owner-managed source. English natural-language menu fields 
 
 ## Reservations, analytics, and search
 
-Set `SELECTTYPE_RESERVATION_URL` to the public SelectType booking form. The MVP uses an accessible external link opened in a new tab; it neither embeds SelectType nor receives reservation data. If SelectType later provides a secure, accessible mobile embed, it may be confined to `/[locale]/reserve` only.
+Reservation buttons link directly to the SelectType booking form at `https://select-type.com/rsv/?id=dfcuCU3lEUg`, configured by `reservationUrl` in `lib/site-config.ts`. The form opens in the same tab, and reservation details are submitted directly to SelectType. There is no embedded booking form or separate reservation page.
 
 GA4 is loaded only when `NEXT_PUBLIC_GA_MEASUREMENT_ID` exists and the visitor opts in. The localized privacy page describes the site's analytics behavior and lets visitors change their choice. Page views and reservation CTA clicks are tracked after consent; reservation completion needs a separate SelectType/privacy review. In GA4, disable Enhanced Measurement page views based on browser history changes so route navigation is measured once by this application's manual page-view event. The operator should review the disclosure for the deployed analytics and booking settings before launch.
 

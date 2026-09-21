@@ -159,7 +159,6 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </Link>
           ))}
           <ReservationLink
-            href={`/${locale}/reserve`}
             className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-action-hover'
           >
             {d.nav.reserve}
@@ -275,7 +274,6 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 ))}
               </div>
               <ReservationLink
-                href={`/${locale}/reserve`}
                 className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'
               >
                 {d.nav.mobileReserve}

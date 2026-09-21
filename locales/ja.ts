@@ -131,14 +131,6 @@ export const ja = {
     dinner: 'Dinner',
     copyright: '© 2023 Italian Bar Gusto. All Rights Reserved.',
   },
-  reserve: {
-    title: 'ご予約',
-    body: 'お席のご予約は、予約フォームから承ります。',
-    cta: '予約フォームを開く',
-    external: '新しいタブで予約フォームを開きます',
-    unavailable:
-      '予約フォームはただいま準備中です。お電話でお問い合わせください。',
-  },
   privacy: {
     title: 'プライバシーポリシー',
     body: 'Gusto Italian Bar（以下「当店」）は、お客様のプライバシーを大切にしています。本ポリシーでは、当サイトの閲覧、ご予約、お問い合わせに伴う情報の取り扱いと、アクセス解析の設定についてご案内します。',
@@ -178,7 +170,7 @@ export const ja = {
         id: 'external-services',
         title: '予約・地図・外部リンク',
         paragraphs: [
-          'オンライン予約をご利用いただける場合、SelectType が提供する外部の予約フォームを開きます。フォームに入力する情報の取り扱いは、フォーム上の案内および同サービスのプライバシーポリシーをご確認ください。',
+          '予約リンクから SelectType が提供する外部の予約フォームを開きます。フォームに入力する情報の取り扱いは、フォーム上の案内および同サービスのプライバシーポリシーをご確認ください。',
           'アクセス案内には Google マップを埋め込んでおり、地図の読み込み時に技術情報が Google に送信される場合があります。地図、SNS、予約サイトなどの外部サービスには、それぞれのプライバシーに関する規定が適用されます。このページのアクセス解析設定は、当サイトの Google Analytics を対象とするもので、これらの外部サービスを制御するものではありません。',
         ],
       },
@@ -223,7 +215,6 @@ export const ja = {
     homeDescription: '大阪で気軽に楽しめるイタリアンバー、Gusto Italian Bar。',
     aboutTitle: 'グストとは',
     menuTitle: 'メニュー',
-    reserveTitle: 'ご予約',
     privacyTitle: 'プライバシー',
   },
 } as const;

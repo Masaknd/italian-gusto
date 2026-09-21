@@ -9,8 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/about',
     '/ja/menu',
     '/en/menu',
-    '/ja/reserve',
-    '/en/reserve',
     '/ja/privacy',
     '/en/privacy',
   ].map((path) => ({

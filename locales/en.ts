@@ -131,14 +131,6 @@ export const en = {
     dinner: 'Dinner',
     copyright: '© 2023 Italian Bar Gusto. All Rights Reserved.',
   },
-  reserve: {
-    title: 'Reservations',
-    body: 'Reserve your table through our reservation form.',
-    cta: 'Open reservation form',
-    external: 'Opens the reservation form in a new tab',
-    unavailable:
-      'Our reservation form is being prepared. Please contact us by phone.',
-  },
   privacy: {
     title: 'Privacy Policy',
     body: 'Gusto Italian Bar respects your privacy. This policy explains how we handle information when you browse our website, make a reservation, or contact the restaurant, and how you can manage your analytics preferences.',
@@ -178,7 +170,7 @@ export const en = {
         id: 'external-services',
         title: 'Reservations, maps, and external links',
         paragraphs: [
-          'Online reservations, when available, open a form provided by SelectType. Information submitted there is handled according to the notices shown on that form and the provider’s privacy policy.',
+          'Our reservation links open an external form provided by SelectType. Information submitted there is handled according to the notices shown on that form and the provider’s privacy policy.',
           'Our access section embeds Google Maps, which may receive technical information when the map loads. Maps and linked services, including social media and reservation websites, have their own privacy practices. The analytics preference on this page controls Google Analytics on our website; it does not control these other services.',
         ],
       },
@@ -221,7 +213,6 @@ export const en = {
     homeDescription: 'Gusto Italian Bar, a relaxed Italian bar in Osaka.',
     aboutTitle: 'About Gusto',
     menuTitle: 'Menu',
-    reserveTitle: 'Reservations',
     privacyTitle: 'Privacy',
   },
 } as const;

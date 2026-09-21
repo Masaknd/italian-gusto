@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('booking controls stay actionable and route through the localized booking page', async ({
+test('booking controls stay actionable and link directly to SelectType', async ({
   page,
 }, testInfo) => {
   await page.goto('/en');
@@ -8,26 +8,14 @@ test('booking controls stay actionable and route through the localized booking p
     page
       .locator('#reservation')
       .getByRole('link', { name: /reservations and inquiries/i }),
-  ).toHaveAttribute('href', '/en/reserve');
+  ).toHaveAttribute('href', 'https://select-type.com/rsv/?id=dfcuCU3lEUg');
 
   if (testInfo.project.name === 'mobile') {
     await page.getByRole('button', { name: 'Menu' }).click();
     await expect(
       page.locator('#mobile-nav').getByRole('link', { name: 'Reserve' }),
-    ).toHaveAttribute('href', '/en/reserve');
+    ).toHaveAttribute('href', 'https://select-type.com/rsv/?id=dfcuCU3lEUg');
   }
-
-  await page.goto('/en/reserve');
-  const externalBooking = page.getByRole('link', {
-    name: /opens the reservation form/i,
-  });
-  const phoneFallback = page.getByRole('link', { name: '06-6180-6059' });
-  expect((await externalBooking.count()) + (await phoneFallback.count())).toBe(
-    1,
-  );
-  if (await externalBooking.count())
-    await expect(externalBooking).toHaveAttribute('href', /^https:\/\//);
-  else await expect(phoneFallback).toHaveAttribute('href', 'tel:+81661806059');
 });
 
 test('locale switch preserves the current route and fragment', async ({

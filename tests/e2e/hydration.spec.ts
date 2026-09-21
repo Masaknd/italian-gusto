@@ -19,7 +19,7 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
           }
         });
 
-        for (const route of ['', '/menu', '/about', '/reserve', '/privacy']) {
+        for (const route of ['', '/menu', '/about', '/privacy']) {
           const response = await page.goto(`/${locale}${route}`);
           expect(response?.status()).toBe(200);
           await expect(page.getByRole('heading', { level: 1 })).toBeVisible();

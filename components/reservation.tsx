@@ -62,7 +62,6 @@ export function HomeReservationSection({
         <LanguageFont
           as={ReservationLink}
           locale={locale}
-          href={`/${locale}/reserve`}
           className={`gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-warm-light no-underline transition-[filter] duration-150 ease-in-out hover:brightness-[0.92] sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
         >
           {copy.home.reservationCta}

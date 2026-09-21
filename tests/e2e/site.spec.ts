@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { loadEnvConfig } from "@next/env";
 
 loadEnvConfig(process.cwd());
-const reservationUrl = process.env.SELECTTYPE_RESERVATION_URL;
+const reservationUrl = "https://select-type.com/rsv/?id=dfcuCU3lEUg";
 
 test("one mouse-wheel step advances a full-width recommendation", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Mouse-wheel interaction check");
@@ -2542,32 +2542,25 @@ test("access section includes the map and complete localized travel details", as
 });
 test("footer exposes navigation, social links, contact hours, and copyright", async ({ page }) => { await page.goto("/ja"); const footer = page.getByRole("contentinfo"); await expect(footer.getByRole("link", { name: "Gusto Italian Bar" })).toHaveAttribute("href", "/ja"); await expect(footer.getByRole("navigation", { name: "フッターナビゲーション" }).getByRole("link")).toHaveCount(4); await expect(footer.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); await expect(footer.getByRole("link", { name: "Twitterを新しいタブで開きます" })).toHaveAttribute("target", "_blank"); await expect(footer.getByText("Lunch: 12:00～15:00")).toBeVisible(); await expect(footer.getByText("© 2023 Masa Kondo. All Rights Reserved.")).toBeVisible(); });
 test("configured reservation links stay clickable after hydration", async ({ page }, testInfo) => {
-  test.skip(!reservationUrl, "SelectType URL is not configured");
 
   for (const path of ["/ja", "/ja/menu", "/ja/about", "/en"]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("#reservation .gusto-booking-button")).toHaveAttribute("href", reservationUrl!);
-    await expect(page.locator("#reservation .gusto-booking-button")).toHaveAttribute("target", "_blank");
+    await expect(page.locator("#reservation .gusto-booking-button")).toHaveAttribute("href", reservationUrl);
   }
 
-  await page.goto("/ja/reserve");
+  await page.goto("/ja");
   await page.waitForLoadState("networkidle");
-  if (testInfo.project.name === "desktop") {
-    await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "予約する" })).toHaveAttribute("href", reservationUrl!);
-  } else {
+  if (testInfo.project.name === "mobile") {
     await page.getByRole("button", { name: "メニュー" }).click();
-    await expect(page.locator("#mobile-nav").getByRole("link", { name: "Reserve" })).toHaveAttribute("href", reservationUrl!);
+    await expect(page.locator("#mobile-nav").getByRole("link", { name: "Reserve" })).toHaveAttribute("href", reservationUrl);
     await page.getByRole("button", { name: "メニューを閉じる" }).click();
   }
-  const bookingLink = page.getByRole("link", { name: "新しいタブで予約フォームを開きます" });
-  await expect(bookingLink).toHaveAttribute("href", reservationUrl!);
-  const popupPromise = page.waitForEvent("popup");
-  await bookingLink.click();
-  const popup = await popupPromise;
-  await expect(popup).toHaveURL(reservationUrl!);
+  await page.route(reservationUrl, (route) => route.fulfill({ body: 'Booking service' }));
+  await page.locator('#reservation .gusto-booking-button').click();
+  await expect(page).toHaveURL(reservationUrl);
 });
-test("reservation page provides a graceful phone fallback without configuration", async ({ page }) => { test.skip(!!reservationUrl, "SelectType URL is configured"); await page.goto("/ja/reserve"); await expect(page.getByRole("link", { name: "06-6180-6059" })).toHaveAttribute("href", "tel:+81661806059"); });
+
 test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "Menu" })).toHaveAttribute("href", "/ja/menu"); });
 
 test("the localized scroll-to-top button is shared by every page", async ({
@@ -2575,7 +2568,7 @@ test("the localized scroll-to-top button is shared by every page", async ({
 }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop interaction check");
 
-  for (const path of ["/ja", "/ja/menu", "/ja/about", "/ja/reserve"]) {
+  for (const path of ["/ja", "/ja/menu", "/ja/about"]) {
     await page.goto(path);
 
     const scrollToTop = page.locator(".gusto-scroll-to-top");

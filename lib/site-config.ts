@@ -12,7 +12,7 @@ export const siteConfig = {
     'https://www.google.com/maps/search/?api=1&query=Gusto%20Italian%20Bar%20%E5%A4%A7%E9%98%AA%E5%B8%82%E5%9F%8E%E6%9D%B1%E5%8C%BA%E6%88%90%E8%82%B25%E4%B8%81%E7%9B%AE23-17',
   mapEmbedUrl:
     'https://www.google.com/maps?q=Gusto%20Italian%20Bar%20%E5%A4%A7%E9%98%AA%E5%B8%82%E5%9F%8E%E6%9D%B1%E5%8C%BA%E6%88%90%E8%82%B25%E4%B8%81%E7%9B%AE23-17&output=embed',
-  reservationUrl: process.env.SELECTTYPE_RESERVATION_URL,
+  reservationUrl: 'https://select-type.com/rsv/?id=dfcuCU3lEUg',
 } as const;
 
 export const taxConfig = {
