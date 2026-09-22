@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
+import type { Locale } from '@/lib/i18n';
 import type { Menu } from '@/lib/microcms/types';
 import {
   getEntranceTransition,
@@ -10,16 +11,18 @@ import {
   inViewViewport,
 } from './animations/config';
 import { MenuPrice } from './menu-price';
+import { LanguageFont } from './language-font';
 
-const drinkCategory = (category: string) => /drink|ドリンク/i.test(category);
 const menuGridViewport = { ...inViewViewport, amount: 0 } as const;
 
 export function MenuCardGrid({
   includingTaxLabel,
   items,
+  locale,
 }: {
   includingTaxLabel: string;
   items: Menu[];
+  locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -40,16 +43,13 @@ export function MenuCardGrid({
       data-in-view-stagger
     >
       {items.map((item) => {
-        const drink = drinkCategory(item.category);
+        const imageUrl = item.image?.url.trim();
+        const hasDescription = Boolean(item.description?.trim());
 
         return (
           <motion.article
             key={item.id}
-            className={
-              drink
-                ? 'gusto-menu-card flex h-auto min-h-0 min-w-0 flex-row items-baseline justify-between gap-6 bg-transparent p-0'
-                : 'gusto-menu-card flex min-w-0 flex-col items-start gap-4 rounded-2xl bg-[#fbece6] p-6'
-            }
+            className='gusto-menu-card flex min-w-0 flex-col items-start gap-4 rounded-2xl bg-[#fbece6] p-6'
             variants={{
               hidden: {
                 opacity: 0,
@@ -62,11 +62,11 @@ export function MenuCardGrid({
               },
             }}
           >
-            {!drink && item.image?.url.trim() && (
+            {imageUrl && (
               <div className='gusto-menu-card__image relative aspect-[414/412.25] w-full flex-none'>
                 <Image
-                  src={item.image.url.trim()}
-                  alt={item.image.alt ?? item.name}
+                  src={imageUrl}
+                  alt={item.image?.alt ?? item.name}
                   fill
                   sizes='(max-width: 767px) calc(100vw - 80px), (max-width: 1023px) 300px, (max-width: 1599px) 352px, 416px'
                   className='object-contain'
@@ -74,33 +74,23 @@ export function MenuCardGrid({
               </div>
             )}
             <div className='flex min-h-0 w-full flex-1 flex-col gap-2'>
-              <h3
-                className={
-                  drink
-                    ? 'm-0 font-display text-base leading-[50px] font-normal tracking-[-0.25em] text-ink'
-                    : 'm-0 font-display text-[28px] leading-[34px] font-normal tracking-[-0.25em] text-coral xl:text-4xl xl:leading-[43px] 3xl:text-[42px]! 3xl:leading-[50px]!'
-                }
-              >
+              <h3 className='m-0 font-display text-[28px] leading-[34px] font-normal tracking-[-0.25em] text-coral xl:text-4xl xl:leading-[43px] 3xl:text-[42px]! 3xl:leading-[50px]!'>
                 {item.name}
               </h3>
-              {!drink && item.description && (
-                <p className='m-0 font-accent text-sm leading-[1.5] font-normal whitespace-pre-line text-black xl:text-lg xl:leading-[1.36]'>
+              {hasDescription && (
+                <LanguageFont
+                  as='p'
+                  locale={locale}
+                  className='gusto-menu-card__description m-0 text-sm leading-[1.5] font-normal whitespace-pre-line text-black xl:text-lg xl:leading-[1.36]'
+                >
                   {item.description}
-                </p>
+                </LanguageFont>
               )}
-              {!drink && (
-                <MenuPrice
-                  includingTaxLabel={includingTaxLabel}
-                  priceExcludingTax={item.priceExcludingTax}
-                />
-              )}
-            </div>
-            {drink && (
               <MenuPrice
                 includingTaxLabel={includingTaxLabel}
                 priceExcludingTax={item.priceExcludingTax}
               />
-            )}
+            </div>
           </motion.article>
         );
       })}

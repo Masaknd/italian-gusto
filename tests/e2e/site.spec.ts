@@ -243,6 +243,38 @@ test("menu card yen symbols have an independent sizing hook", async ({ page }) =
   await expect(yenSymbols.nth(1)).toHaveText("¥");
 });
 
+test("the drink category is last and its cards omit empty optional content", async ({ page }) => {
+  await page.goto("/ja/menu");
+
+  const categoryLinks = page.locator(".gusto-menu__category-nav a");
+  const groups = page.locator(".gusto-menu__group");
+  const drinkGroup = groups.last();
+  const drinkCard = drinkGroup.locator(".gusto-menu-card").first();
+
+  await expect(categoryLinks.last()).toHaveText("ドリンク");
+  await expect(drinkGroup.getByRole("heading", { level: 2 })).toHaveText("ドリンク");
+  await expect(drinkCard).toHaveCSS("padding", "24px");
+  await expect(drinkCard).toHaveCSS("border-radius", "16px");
+  await expect(drinkCard).toHaveCSS("background-color", "rgb(251, 236, 230)");
+  await expect(drinkCard.locator(".gusto-menu-card__image")).toHaveCount(0);
+  await expect(drinkCard.locator("p:not(.gusto-menu-card__price)")).toHaveCount(0);
+  await expect(drinkCard.locator(".gusto-menu-card__price")).toBeVisible();
+});
+
+test("menu card descriptions use the locale-specific typeface", async ({ page }) => {
+  await page.goto("/en/menu");
+  const englishDescription = page.locator(".gusto-menu-card__description").first();
+  await expect(englishDescription).toBeVisible();
+  await expect(englishDescription).toHaveClass(/\bfont-label\b/);
+  await expect(englishDescription).not.toHaveClass(/\bfont-accent\b/);
+
+  await page.goto("/ja/menu");
+  const japaneseDescription = page.locator(".gusto-menu-card__description").first();
+  await expect(japaneseDescription).toBeVisible();
+  await expect(japaneseDescription).toHaveClass(/\bfont-accent\b/);
+  await expect(japaneseDescription).not.toHaveClass(/\bfont-label\b/);
+});
+
 test("the 768px home header uses small-screen navigation at the breakpoint", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
   await page.setViewportSize({ width: 768, height: 1024 });

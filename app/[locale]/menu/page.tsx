@@ -78,7 +78,7 @@ export default async function MenuPage({
             {content.omittedMenus > 0 && (
               <TranslationAvailabilityNotice copy={d} />
             )}
-            <MenuList menus={menus} copy={d} />
+            <MenuList menus={menus} copy={d} locale={locale} />
           </div>
         </section>
         <HomeSocialSection copy={d} socialCards={socialCards} locale={locale} />

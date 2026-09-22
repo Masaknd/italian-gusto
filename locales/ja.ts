@@ -108,6 +108,8 @@ export const ja = {
       ピザ: 'ピザ',
       dessert: 'デザート',
       デザート: 'デザート',
+      drink: 'ドリンク',
+      ドリンク: 'ドリンク',
       other: 'その他',
     },
     categoryNavigation: 'メニューカテゴリー',
