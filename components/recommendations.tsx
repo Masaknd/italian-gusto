@@ -111,9 +111,7 @@ function Recommendation({
             locale={locale}
             revealDelay={linkRevealDelay}
           >
-            {item.menuCategory
-              ? (copy.featured.menuLinks[index - 1] ?? copy.menu.viewAll)
-              : copy.menu.viewAll}
+            {copy.menu.viewAll}
           </RecommendationMoreLink>
         </div>
       </div>
@@ -150,15 +148,22 @@ function Recommendation({
   );
 }
 
-export function HomeRecommendationsSection({
-  copy,
-  featured,
-  locale,
-}: {
+type RecommendationsProps = {
   copy: HomePageCopy;
   featured: FeaturedMenu[];
   locale: Locale;
-}) {
+};
+
+export function HomeRecommendationsSection(props: RecommendationsProps) {
+  if (!props.featured.length) return null;
+  return <RecommendationsCarousel {...props} />;
+}
+
+function RecommendationsCarousel({
+  copy,
+  featured,
+  locale,
+}: RecommendationsProps) {
   const section = useRef<HTMLElement>(null);
   const wheelGestureActive = useRef(false);
   const wheelGestureEnd = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -230,8 +235,6 @@ export function HomeRecommendationsSection({
       behavior: 'auto',
     });
   };
-
-  if (!recommendations.length) return null;
 
   return (
     <section

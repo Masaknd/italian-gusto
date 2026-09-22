@@ -7,7 +7,7 @@ import { HomeRecommendationsSection } from '@/components/recommendations';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
 import { HomeWineSection } from '@/components/wine';
-import { translateManagedFields } from '@/lib/deepl';
+import { TranslationAvailabilityNotice } from '@/components/translation-availability-notice';
 import { isLocale } from '@/lib/i18n';
 import { getSocialCards } from '@/lib/social-cards';
 import { getMenuContentForSite } from '@/lib/microcms/content';
@@ -20,12 +20,8 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const content = await getMenuContentForSite();
-  const cmsFeatured =
-    locale === 'en'
-      ? await translateManagedFields(content.featuredMenus)
-      : content.featuredMenus;
-  const featured = cmsFeatured;
+  const content = await getMenuContentForSite(locale);
+  const featured = content.featuredMenus;
   const copy = getDictionary(locale);
   const socialCards = getSocialCards(copy);
 
@@ -40,6 +36,11 @@ export default async function HomePage({
           featured={featured}
           locale={locale}
         />
+        {content.omittedFeaturedMenus > 0 && (
+          <div className='px-4 py-8 sm:px-8 xl:px-24 3xl:px-60'>
+            <TranslationAvailabilityNotice copy={copy} />
+          </div>
+        )}
         <HomeSocialSection
           copy={copy}
           socialCards={socialCards}

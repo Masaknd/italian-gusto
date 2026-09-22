@@ -6,7 +6,7 @@ import { InViewHeading } from '@/components/in-view-heading';
 import { MenuList } from '@/components/menu-list';
 import { HomeReservationSection } from '@/components/reservation';
 import { HomeSocialSection } from '@/components/social';
-import { translateMenuFields } from '@/lib/deepl';
+import { TranslationAvailabilityNotice } from '@/components/translation-availability-notice';
 import { isLocale } from '@/lib/i18n';
 import { getSocialCards } from '@/lib/social-cards';
 import { getMenuContentForSite } from '@/lib/microcms/content';
@@ -39,9 +39,8 @@ export default async function MenuPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
-  const content = await getMenuContentForSite();
-  const menus =
-    locale === 'en' ? await translateMenuFields(content.menus) : content.menus;
+  const content = await getMenuContentForSite(locale);
+  const menus = content.menus;
   const socialCards = getSocialCards(d);
 
   return (
@@ -75,6 +74,9 @@ export default async function MenuPage({
               <p className='m-0 text-muted' role='status'>
                 {d.errors.dynamic}
               </p>
+            )}
+            {content.omittedMenus > 0 && (
+              <TranslationAvailabilityNotice copy={d} />
             )}
             <MenuList menus={menus} copy={d} />
           </div>

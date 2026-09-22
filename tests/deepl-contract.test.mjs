@@ -10,7 +10,7 @@ test('DeepL request declares and sends JSON with ordered text', async () => {
   let received;
   const translated = await requestDeepLTranslation(
     ['料理', 'ワイン'],
-    'test-key',
+    'test-key:fx',
     async (url, options) => {
       received = { url, options };
       return new Response(
@@ -45,7 +45,7 @@ test('upstream errors reject instead of returning source text as a translation',
   await assert.rejects(
     requestDeepLTranslation(
       ['料理'],
-      'test-key',
+      'test-key:fx',
       async () => new Response('Unavailable', { status: 503 }),
     ),
     /DeepL responded 503/,

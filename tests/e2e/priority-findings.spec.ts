@@ -23,7 +23,7 @@ test('locale switch preserves the current route and fragment', async ({
 }) => {
   await page.goto('/en/menu#category-pasta');
   const switcher = page
-    .getByRole('link', { name: 'Switch to Japanese' })
+    .getByRole('link', { name: '日本語に切り替える' })
     .first();
   await expect(switcher).toBeVisible();
   await switcher.click();

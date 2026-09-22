@@ -31,7 +31,7 @@ The importer maps `menuName` to `name`, `price` to `priceExcludingTax`, and the 
 
 Create fields: `name` (text, required), `description` (textarea), `image` (image, required), `sortOrder` (number, required), and `isAvailable` (boolean, required). Optionally add `menuCategory` (select) with values matching the `menus` category options to link a recommendation to that category; without it, the recommendation links to the complete menu. The website displays up to five published, available entries. It does not insert sample recommendations in production.
 
-Configure a microCMS webhook after content publication to `POST https://YOUR-DOMAIN/api/revalidate?secret=YOUR_REVALIDATE_SECRET`, with the same secret in the `x-revalidate-secret` header if the webhook supports custom headers. This invalidates cached menu and translation content as well as all affected locale pages.
+Configure a signed custom microCMS webhook for both APIs at `POST https://YOUR-DOMAIN/api/microcms/webhook`. Draft saves enqueue translation; publication, deletion, and status events invalidate both locale caches. Follow the [bilingual content setup and migration guide](docs/bilingual-content.md) for fields, credentials, event selection, and QStash setup. The existing secret-protected `/api/revalidate` endpoint remains available for cache invalidation only.
 
 ### Draft preview
 
@@ -42,7 +42,7 @@ In each microCMS list API, open **API settings > Preview** and configure the mat
 
 The handler validates the secret and draft against microCMS before setting HTTP-only preview cookies. It then opens the Japanese page that renders that API. The on-page preview bar can end the session and return to the current page. For local testing, use the same URLs with `http://localhost:3000` while `pnpm dev` is running.
 
-Japanese is the sole owner-managed source. English natural-language menu fields and category labels are translated on the server through DeepL and cached with the CMS content tag; transient translation failures fall back to Japanese and are retried on the next request. Food names and culinary descriptions require owner/maintainer review after automated translation before publishing.
+Japanese is the sole source language. The same CMS record stores `nameEn`, `descriptionEn`, `englishStatus`, and `englishSourceHash`. QStash delivers translation jobs to a server-only worker, which uses DeepL and saves English to a draft for review. Public English pages render only complete, approved translations matching the current Japanese text; missing or stale items are omitted with a Japanese-menu link. Switching languages reads stored content and never calls DeepL. Category display labels live in `locales/`, while CMS category values remain stable for anchors. See the [bilingual content guide](docs/bilingual-content.md) before enabling this migration. Node 24 is required for the translation audit and unit test commands.
 
 ## Reservations, analytics, and search
 

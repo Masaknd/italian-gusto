@@ -37,8 +37,11 @@ export async function requestDeepLTranslation(
   apiKey: string,
   fetcher: typeof fetch = fetch,
 ) {
-  const response = await fetcher('https://api-free.deepl.com/v2/translate', {
+  if (!apiKey) throw new Error('DeepL API key is missing');
+  const host = apiKey.endsWith(':fx') ? 'api-free.deepl.com' : 'api.deepl.com';
+  const response = await fetcher(`https://${host}/v2/translate`, {
     method: 'POST',
+    signal: AbortSignal.timeout(15000),
     headers: {
       Authorization: `DeepL-Auth-Key ${apiKey}`,
       'Content-Type': 'application/json',

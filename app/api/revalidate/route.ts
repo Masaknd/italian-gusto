@@ -1,6 +1,5 @@
-import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
-import { CMS_TAG } from '@/lib/microcms/content';
+import { revalidateMenuContent } from '@/lib/microcms/revalidate';
 
 export async function POST(request: Request) {
   const secret =
@@ -11,9 +10,6 @@ export async function POST(request: Request) {
     secret !== process.env.REVALIDATE_SECRET
   )
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
-  revalidateTag(CMS_TAG, 'max');
-  ['/ja', '/en', '/ja/menu', '/en/menu'].forEach((path) =>
-    revalidatePath(path),
-  );
+  revalidateMenuContent();
   return NextResponse.json({ revalidated: true });
 }

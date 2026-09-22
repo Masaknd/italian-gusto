@@ -2,7 +2,10 @@ import 'server-only';
 import { cacheLife, cacheTag } from 'next/cache';
 import { cookies, draftMode } from 'next/headers';
 import { getMicroCmsClient } from './client';
-import type { CmsMenu, FeaturedMenu, Menu } from './types';
+import type { CmsMenu, CmsFeaturedMenu } from './types';
+import type { Locale } from '../i18n';
+import { getDictionary } from '@/locales';
+import { localizeMenuContent } from './localization';
 
 export const CMS_TAG = 'gusto-menu-content';
 export const CMS_ENDPOINTS = ['menus', 'featured-menus'] as const;
@@ -20,11 +23,6 @@ const deterministicSort = <
   items
     .filter((item) => item.isAvailable)
     .sort((a, b) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id));
-
-const normalizeCmsMenu = ({ category, ...menu }: CmsMenu): Menu => ({
-  ...menu,
-  category: category[0] ?? '',
-});
 
 async function getAllPublished<T>(endpoint: CmsEndpoint) {
   const client = getMicroCmsClient();
@@ -47,9 +45,7 @@ async function getPublishedMenus() {
   'use cache';
   cacheLife({ stale: 60, revalidate: 300, expire: 86400 });
   cacheTag(CMS_TAG);
-  return deterministicSort(
-    (await getAllPublished<CmsMenu>('menus')).map(normalizeCmsMenu),
-  );
+  return deterministicSort(await getAllPublished<CmsMenu>('menus'));
 }
 
 async function getPublishedFeatured() {
@@ -57,8 +53,8 @@ async function getPublishedFeatured() {
   cacheLife({ stale: 60, revalidate: 300, expire: 86400 });
   cacheTag(CMS_TAG);
   return deterministicSort(
-    await getAllPublished<FeaturedMenu>('featured-menus'),
-  ).slice(0, 5);
+    await getAllPublished<CmsFeaturedMenu>('featured-menus'),
+  );
 }
 
 async function getMenuContent() {
@@ -78,20 +74,21 @@ async function getMenuContent() {
     }
   }
   return {
-    menus: menus.status === 'fulfilled' ? menus.value : ([] as Menu[]),
+    menus: menus.status === 'fulfilled' ? menus.value : ([] as CmsMenu[]),
     featuredMenus:
       featuredMenus.status === 'fulfilled'
         ? featuredMenus.value
-        : ([] as FeaturedMenu[]),
+        : ([] as CmsFeaturedMenu[]),
     error: menus.status === 'rejected' || featuredMenus.status === 'rejected',
   };
 }
 
-export async function getMenuContentForSite() {
+async function getRawMenuContentForSite() {
   const content = await getMenuContent();
   const draft = await draftMode();
 
-  if (!draft.isEnabled) return { ...content, isPreview: false };
+  if (!draft.isEnabled)
+    return { ...content, isPreview: false, previewTarget: undefined };
 
   const jar = await cookies();
   const draftKey = jar.get('microcms-draft-key')?.value;
@@ -100,27 +97,26 @@ export async function getMenuContentForSite() {
   const client = getMicroCmsClient();
 
   if (!draftKey || !contentId || !isCmsEndpoint(endpoint) || !client) {
-    return { ...content, isPreview: true };
+    return { ...content, isPreview: true, previewTarget: undefined };
   }
 
   try {
     if (endpoint === 'menus') {
-      const draftMenu = normalizeCmsMenu(
-        await client.getListDetail<CmsMenu>({
-          endpoint,
-          contentId,
-          queries: { draftKey },
-        }),
-      );
+      const draftMenu = await client.getListDetail<CmsMenu>({
+        endpoint,
+        contentId,
+        queries: { draftKey },
+      });
       const menus = content.menus.filter((menu) => menu.id !== draftMenu.id);
       return {
         ...content,
         menus: deterministicSort([...menus, draftMenu]),
+        previewTarget: { endpoint: 'menus' as const, id: draftMenu.id },
         isPreview: true,
       };
     }
 
-    const draftFeaturedMenu = await client.getListDetail<FeaturedMenu>({
+    const draftFeaturedMenu = await client.getListDetail<CmsFeaturedMenu>({
       endpoint,
       contentId,
       queries: { draftKey },
@@ -130,10 +126,11 @@ export async function getMenuContentForSite() {
     );
     return {
       ...content,
-      featuredMenus: deterministicSort([
-        ...featuredMenus,
-        draftFeaturedMenu,
-      ]).slice(0, 5),
+      featuredMenus: deterministicSort([...featuredMenus, draftFeaturedMenu]),
+      previewTarget: {
+        endpoint: 'featured-menus' as const,
+        id: draftFeaturedMenu.id,
+      },
       isPreview: true,
     };
   } catch (error) {
@@ -141,6 +138,26 @@ export async function getMenuContentForSite() {
       'microCMS draft request failed',
       error instanceof Error ? error.message : error,
     );
-    return { ...content, error: true, isPreview: true };
+    return {
+      ...content,
+      error: true,
+      isPreview: true,
+      previewTarget: undefined,
+    };
   }
+}
+
+/** Select stored locale fields after draft replacement, never translating in the request path. */
+export async function getMenuContentForSite(locale: Locale = 'ja') {
+  const content = await getRawMenuContentForSite();
+  return {
+    ...localizeMenuContent(
+      content,
+      locale,
+      getDictionary(locale).menu.categories,
+      content.previewTarget,
+    ),
+    error: content.error,
+    isPreview: content.isPreview,
+  };
 }

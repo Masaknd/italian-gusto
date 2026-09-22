@@ -99,6 +99,21 @@ export const en = {
     unavailable: 'Our menu is being prepared.',
     excludingTax: 'excl. tax',
     includingTax: 'incl. tax',
+    categories: {
+      appetizer: 'Appetizers',
+      アパタイザー: 'Appetizers',
+      'a la carte': 'À la carte',
+      アラカルト: 'À la carte',
+      salad: 'Salads',
+      サラダ: 'Salads',
+      pasta: 'Pasta',
+      パスタ: 'Pasta',
+      pizza: 'Pizza',
+      ピザ: 'Pizza',
+      dessert: 'Desserts',
+      デザート: 'Desserts',
+      other: 'Other',
+    },
     categoryNavigation: 'Menu categories',
     marquee: 'Gusto Italian Bar',
   },
@@ -202,6 +217,10 @@ export const en = {
     accept: 'Allow analytics',
     reject: 'Decline analytics',
     change: 'Change analytics choice',
+  },
+  translations: {
+    unavailable: 'Some items are not yet available in English.',
+    viewJapaneseMenu: 'View the complete Japanese menu',
   },
   errors: {
     dynamic:

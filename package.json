@@ -10,11 +10,14 @@
     "format": "prettier --write \"app/**/*.tsx\" \"components/**/*.tsx\"",
     "format:check": "prettier --check \"app/**/*.tsx\" \"components/**/*.tsx\"",
     "import:menus": "node scripts/import-menus.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:unit": "node --test tests/*.test.mjs",
+    "translations:audit": "node scripts/menu-translations.mjs"
   },
   "dependencies": {
     "@next/env": "16.3.5",
     "@phosphor-icons/react": "^2.1.10",
+    "@upstash/qstash": "^2.11.3",
     "microcms-js-sdk": "^3.5.0",
     "motion": "^13.3.0",
     "next": "16.3.5",

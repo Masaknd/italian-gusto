@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Isolate the deterministic browser fixture server from normal development.
+  distDir: process.env.GUSTO_TEST_DIST_DIR || '.next',
   async redirects() {
     return [{ source: '/', destination: '/ja', permanent: false }];
   },

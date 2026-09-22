@@ -15,7 +15,15 @@ export type Menu = {
   sortOrder: number;
   isAvailable: boolean;
 };
-export type CmsMenu = Omit<Menu, 'category'> & { category: string[] };
+export type EnglishStatus = 'pending' | 'needs-review' | 'approved' | 'failed';
+export type CmsTranslationFields = {
+  nameEn?: string;
+  descriptionEn?: string;
+  englishStatus?: EnglishStatus[];
+  englishSourceHash?: string;
+};
+export type CmsMenu = Omit<Menu, 'category' | 'categoryLabel'> &
+  CmsTranslationFields & { category: string[] };
 export type FeaturedMenu = {
   id: string;
   name: string;
@@ -25,7 +33,5 @@ export type FeaturedMenu = {
   sortOrder: number;
   isAvailable: boolean;
 };
-export type Translated<T extends { name: string; description?: string }> = T & {
-  name: string;
-  description?: string;
-};
+export type CmsFeaturedMenu = Omit<FeaturedMenu, 'menuCategory'> &
+  CmsTranslationFields & { menuCategory?: string[] | string };
