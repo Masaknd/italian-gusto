@@ -48,7 +48,7 @@ const heroClassNames = {
     '3xl:text-[126px]',
   ].join(' '),
   navigation: [
-    'gusto-hero-nav relative hidden gap-4.5 font-label text-[28px] leading-6 font-bold',
+    'gusto-hero-nav relative hidden gap-4.5 text-ink font-label text-[28px] leading-6 font-bold',
     'lg:flex lg:flex-col lg:gap-3 lg:text-[24px]',
     'xl:gap-4.5 xl:text-[28px]',
   ].join(' '),
@@ -135,6 +135,7 @@ export function HomeHeroSection({
                     transition: entranceTransition,
                   },
                 }}
+                className='transition-colors hover:text-brand-ink-hover'
               >
                 {label}
               </motion.a>

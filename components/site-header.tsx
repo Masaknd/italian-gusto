@@ -158,18 +158,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               {label}
             </Link>
           ))}
-          <ReservationLink
-            className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-action-hover'
-          >
+          <ReservationLink className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 font-sans text-body-sm font-bold text-white no-underline transition-[background-color,transform] duration-150 ease-in-out hover:-translate-y-px hover:bg-action-hover'>
             {d.nav.reserve}
           </ReservationLink>
         </nav>
-        <div className='top-0 right-0 hidden h-0 w-0 border-t-120 border-l-120 border-t-coral border-l-transparent lg:absolute lg:block'>
+        <div className='group top-0 right-0 hidden h-0 w-0 cursor-pointer border-t-120 border-l-120 border-t-coral border-l-transparent hover:border-t-ink lg:absolute lg:block'>
           <a
             href={otherPath}
             lang={other}
             onClick={preserveFragment}
-            className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-label text-2xl font-bold text-ink`}
+            className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-label text-2xl font-bold text-ink transition-colors group-hover:text-coral`}
             aria-label={d.nav.switchLanguage}
           >
             {d.nav.switchLanguageLabel}
@@ -273,9 +271,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   </Link>
                 ))}
               </div>
-              <ReservationLink
-                className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'
-              >
+              <ReservationLink className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'>
                 {d.nav.mobileReserve}
               </ReservationLink>
               <a

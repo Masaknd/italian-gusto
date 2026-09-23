@@ -51,7 +51,7 @@ export function MenuList({
             >
               <InViewHeading
                 id={`menu-category-heading-${index + 1}`}
-                className='gusto-menu__category-title m-0 flex w-fit items-center border-b-[3px] border-dashed border-coral font-display text-[24px] leading-[24px] font-normal tracking-[-0.25em] text-coral sm:text-[40px] sm:leading-[40px] xl:text-5xl xl:leading-12'
+                className='gusto-menu__category-title m-0 flex w-fit items-center border-b-[3px] border-dashed border-ink font-display text-[24px] leading-[24px] font-normal tracking-[-0.25em] text-ink sm:text-[40px] sm:leading-[40px] xl:text-5xl xl:leading-12'
               >
                 {items?.[0]?.categoryLabel ?? category}
               </InViewHeading>
