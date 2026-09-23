@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { HoverJumpText } from './animations/hover-jump-text';
 import { useReducedMotion } from './animations/use-reduced-motion';
 import {
   getEntranceTransition,
@@ -61,13 +62,13 @@ export function MenuCategoryNav({
             href={`#${getMenuCategoryAnchor(category.id)}`}
             className={[
               'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-ink no-underline transition-colors hover:text-[#c3a8a2] sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
-              index === 0 ? 'text-brand-ink-hover!' : '',
+              // index === 0 ? 'text-brand-ink-hover!' : '',
               category.label.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
             ]
               .filter(Boolean)
               .join(' ')}
           >
-            {category.label}
+            <HoverJumpText text={category.label} />
           </a>
         </motion.span>
       ))}
