@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'motion/react';
 import { useReducedMotion } from './use-reduced-motion';
 
@@ -81,26 +81,53 @@ function JumpingCharacter({
 
 export function HoverJumpText({
   className,
+  groupHover = false,
   text,
 }: {
   className?: string;
+  groupHover?: boolean;
   text: string;
 }) {
   const reduceMotion = useReducedMotion();
   const [animationRun, setAnimationRun] = useState(0);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const startAnimation = useCallback(() => {
+    if (!reduceMotion) {
+      setAnimationRun((currentRun) => currentRun + 1);
+    }
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    if (!groupHover) return;
+
+    const group = textRef.current?.closest('.group');
+    if (!group) return;
+
+    const handlePointerEnter = (event: Event) => {
+      if (event instanceof PointerEvent && event.pointerType === 'touch')
+        return;
+      startAnimation();
+    };
+    const handleFocusIn = () => startAnimation();
+
+    group.addEventListener('pointerenter', handlePointerEnter);
+    group.addEventListener('focusin', handleFocusIn);
+
+    return () => {
+      group.removeEventListener('pointerenter', handlePointerEnter);
+      group.removeEventListener('focusin', handleFocusIn);
+    };
+  }, [groupHover, startAnimation]);
 
   return (
     <motion.span
+      ref={textRef}
       aria-label={text}
       className={['inline-block whitespace-nowrap', className]
         .filter(Boolean)
         .join(' ')}
       data-hover-jump-text
-      onHoverStart={() => {
-        if (!reduceMotion) {
-          setAnimationRun((currentRun) => currentRun + 1);
-        }
-      }}
+      onHoverStart={groupHover ? undefined : startAnimation}
     >
       {Array.from(text).map((character, index) => (
         <JumpingCharacter

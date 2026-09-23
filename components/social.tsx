@@ -88,8 +88,9 @@ export function HomeSocialSection({
                     className='aspect-auto h-6 w-[43.2px] sm:h-8 sm:w-[57.6px] 3xl:h-[min(1.6667vw,32px)] 3xl:w-[min(3vw,57.6px)]'
                   />
                   <HoverJumpText
-                    text={card.name}
                     className='h-6 font-display text-lg leading-6 font-normal tracking-[-0.2em] whitespace-nowrap transition-transform group-hover:scale-125 sm:text-2xl sm:tracking-[-0.25em] xl:h-7 xl:text-[28px] 3xl:h-[min(1.4583vw,28px)] 3xl:text-[min(1.4583vw,28px)] 3xl:leading-none 3xl:tracking-[-8px]'
+                    groupHover
+                    text={card.name}
                   />
                 </div>
                 <LanguageFont
