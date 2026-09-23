@@ -93,11 +93,11 @@ export default async function PrivacyPage({
                     ))}
                   </div>
                   {section.id === 'analytics' && (
-                    <ul className='mt-4 space-y-2 text-sm leading-7'>
+                    <ul className='leading- mt-4 space-y-2 text-sm'>
                       <li>
                         <a
                           href={`https://policies.google.com/privacy?hl=${locale}`}
-                          className='underline underline-offset-4'
+                          className='underline underline-offset-4 hover:text-ink/50'
                         >
                           {policy.googlePrivacy}
                         </a>
@@ -105,7 +105,7 @@ export default async function PrivacyPage({
                       <li>
                         <a
                           href={`https://policies.google.com/technologies/partner-sites?hl=${locale}`}
-                          className='underline underline-offset-4'
+                          className='underline underline-offset-4 hover:text-ink/50'
                         >
                           {policy.googleDataUse}
                         </a>

@@ -17,14 +17,14 @@ export function PrivacyPreferences({
       <button
         type='button'
         onClick={() => setAnalyticsConsent(false)}
-        className='min-h-11 rounded-md border border-ink px-5 py-3 text-sm font-bold transition-colors hover:bg-ink/5'
+        className='min-h-11 cursor-pointer rounded-md border border-ink px-5 py-3 text-sm font-bold transition-colors hover:bg-ink/50'
       >
         {copy.reject}
       </button>
       <button
         type='button'
         onClick={() => setAnalyticsConsent(true)}
-        className='min-h-11 rounded-md border border-ink bg-ink px-5 py-3 text-sm font-bold text-warm-light transition-colors hover:bg-action-hover'
+        className='min-h-11 cursor-pointer rounded-md border border-ink bg-ink px-5 py-3 text-sm font-bold text-warm-light transition-colors hover:border-action-hover hover:bg-action-hover'
       >
         {copy.accept}
       </button>
