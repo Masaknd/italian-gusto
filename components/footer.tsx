@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
 import { siteConfig } from '@/lib/site-config';
+import { HoverJumpText } from './animations/hover-jump-text';
 import { HomeSocialIcon } from './social-icon';
 import type { HomePageCopy, SocialCard } from './types';
 
@@ -63,10 +64,10 @@ export function HomeFooter({
               {footerNav.map(([label, href]) => (
                 <Link
                   href={href}
-                  className='h-auto border-0 px-4 font-label text-xl leading-4 font-bold text-warm-light no-underline sm:h-5 sm:border-l sm:border-content sm:text-xl sm:leading-5 sm:last:border-r lg:h-5 lg:text-xl lg:leading-5 2xl:h-5.5 2xl:text-2xl 2xl:leading-5.5'
+                  className='h-auto border-0 px-4 font-label text-xl leading-4 font-bold text-warm-light no-underline transition-colors hover:text-brand-ink-hover sm:h-5 sm:border-l sm:border-content sm:text-xl sm:leading-5 sm:last:border-r lg:h-5 lg:text-xl lg:leading-5 2xl:h-5.5 2xl:text-2xl 2xl:leading-5.5'
                   key={href}
                 >
-                  {label}
+                  <HoverJumpText text={label} />
                 </Link>
               ))}
             </nav>

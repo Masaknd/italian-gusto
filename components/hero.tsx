@@ -8,6 +8,7 @@ import { AnimatedEmphasisText } from './animations/animated-emphasis-text';
 import { entranceTransition } from './animations/config';
 import { AnimatedMarquee } from './animated-marquee';
 import type { HomePageCopy } from './types';
+import { HoverJumpText } from './animations/hover-jump-text';
 
 const heroClassNames = {
   root: [
@@ -137,7 +138,7 @@ export function HomeHeroSection({
                 }}
                 className='transition-colors hover:text-brand-ink-hover'
               >
-                {label}
+                <HoverJumpText text={label} />
               </motion.a>
             ))}
           </motion.nav>

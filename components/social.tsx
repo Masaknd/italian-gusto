@@ -3,6 +3,7 @@ import { HomeSocialIcon } from './social-icon';
 import type { HomePageCopy, SocialCard } from './types';
 import type { Locale } from '@/lib/i18n';
 import { LanguageFont } from './language-font';
+import { HoverJumpText } from './animations/hover-jump-text';
 
 const gallery = [
   'slide-3.jpg',
@@ -74,10 +75,10 @@ export function HomeSocialSection({
                 '{name}',
                 card.name,
               )}
-              className='flex w-full min-w-0 flex-col items-center gap-4 border-r border-warm-light px-2 text-inherit no-underline last:border-0 sm:gap-6 sm:px-0'
+              className='group flex w-full min-w-0 flex-col items-center gap-4 border-r border-warm-light px-2 text-inherit no-underline last:border-0 sm:gap-6 sm:px-0'
               key={card.name}
             >
-              <div className='gusto-social-copy w-full'>
+              <div className='gusto-social-copy w-full transition-transform group-hover:scale-125'>
                 <div className='gusto-social-heading flex flex-col items-center gap-4 3xl:gap-[min(0.8333vw,16px)]'>
                   <Image
                     src='/images/deco-1.png'
@@ -86,14 +87,15 @@ export function HomeSocialSection({
                     height={120}
                     className='aspect-auto h-6 w-[43.2px] sm:h-8 sm:w-[57.6px] 3xl:h-[min(1.6667vw,32px)] 3xl:w-[min(3vw,57.6px)]'
                   />
-                  <span className='h-6 font-display text-lg leading-6 font-normal tracking-[-0.2em] whitespace-nowrap sm:text-2xl sm:tracking-[-0.25em] xl:h-7 xl:text-[28px] 3xl:h-[min(1.4583vw,28px)] 3xl:text-[min(1.4583vw,28px)] 3xl:leading-none 3xl:tracking-[-8px]'>
-                    {card.name}
-                  </span>
+                  <HoverJumpText
+                    text={card.name}
+                    className='h-6 font-display text-lg leading-6 font-normal tracking-[-0.2em] whitespace-nowrap transition-transform group-hover:scale-125 sm:text-2xl sm:tracking-[-0.25em] xl:h-7 xl:text-[28px] 3xl:h-[min(1.4583vw,28px)] 3xl:text-[min(1.4583vw,28px)] 3xl:leading-none 3xl:tracking-[-8px]'
+                  />
                 </div>
                 <LanguageFont
                   as={'p'}
                   locale={locale}
-                  className={`overflow-hidden text-center text-sm leading-[19px] sm:leading-[1.36] xl:text-[22px] 3xl:text-[min(1.1458vw,22px)]`}
+                  className={`overflow-hidden text-center text-sm leading-[19px] transition-transform group-hover:scale-125 sm:leading-[1.36] xl:text-[22px] 3xl:text-[min(1.1458vw,22px)]`}
                 >
                   {card.description}
                 </LanguageFont>
@@ -101,7 +103,7 @@ export function HomeSocialSection({
               <HomeSocialIcon
                 animated
                 type={card.icon}
-                className='h-8 w-8 flex-[0_0_32px] origin-bottom text-current sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'
+                className='h-8 w-8 flex-[0_0_32px] origin-bottom text-current transition-transform group-hover:scale-125 sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'
               />
             </a>
           ))}
