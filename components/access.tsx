@@ -63,7 +63,7 @@ export function HomeAccessSection({
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={copy.home.accessMapExternal}
-                className='text-inherit underline underline-offset-4'
+                className='text-inherit underline underline-offset-4 transition-colors hover:text-ink'
               >
                 {copy.home.accessMap}
               </a>
@@ -86,7 +86,7 @@ export function HomeAccessSection({
             <dd className={detailValueClass}>
               <a
                 href={siteConfig.phoneHref}
-                className='text-inherit underline underline-offset-4'
+                className='text-inherit underline underline-offset-4 transition-colors hover:text-ink'
               >
                 {siteConfig.phone}
               </a>
