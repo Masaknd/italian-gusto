@@ -53,14 +53,14 @@ export function MenuCategoryNav({
         >
           {index > 0 && (
             <span
-              className='mr-2 block h-5 w-0 self-center border-l-2 border-dashed border-coral sm:h-[24px] xl:mr-4 xl:h-8'
+              className='mr-2 block h-5 w-0 self-center border-l-2 border-dashed border-ink sm:h-[24px] xl:mr-4 xl:h-8'
               aria-hidden='true'
             />
           )}
           <a
             href={`#${getMenuCategoryAnchor(category.id)}`}
             className={[
-              'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-coral no-underline sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
+              'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-ink no-underline transition-colors hover:text-[#c3a8a2] sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
               index === 0 ? 'text-[#c3a8a2]!' : '',
               category.label.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
             ]

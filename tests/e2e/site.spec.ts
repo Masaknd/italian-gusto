@@ -232,6 +232,21 @@ test("the appetizer cards follow the current responsive geometry", async ({ page
   }
 });
 
+test("every menu card has the menu card shadow", async ({ page }) => {
+  await page.goto("/ja/menu");
+
+  const cards = page.locator(".gusto-menu-card");
+  const cardCount = await cards.count();
+  expect(cardCount).toBeGreaterThan(0);
+
+  for (let index = 0; index < cardCount; index += 1) {
+    await expect(cards.nth(index)).toHaveCSS(
+      "box-shadow",
+      "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+    );
+  }
+});
+
 test("menu card yen symbols have an independent sizing hook", async ({ page }) => {
   await page.goto("/ja/menu");
 
