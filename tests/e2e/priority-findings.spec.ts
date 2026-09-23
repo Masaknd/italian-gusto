@@ -71,3 +71,22 @@ test('privacy controls and localized footer home destination are available', asy
     page.getByRole('contentinfo').getByRole('link', { name: 'Access' }),
   ).toHaveAttribute('href', '#access');
 });
+
+test('privacy content is centered while its introduction stays left aligned', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/en/privacy');
+
+  const content = page.locator('.gusto-privacy-content');
+  const intro = page.locator('.gusto-privacy-intro');
+  const contentBox = await content.boundingBox();
+
+  expect(contentBox).not.toBeNull();
+  expect(contentBox!.x).toBeCloseTo((1440 - contentBox!.width) / 2, 1);
+  await expect(intro.getByRole('heading', { level: 1 })).toHaveCSS(
+    'text-align',
+    'left',
+  );
+  await expect(intro.locator('p')).toHaveCSS('text-align', 'left');
+});

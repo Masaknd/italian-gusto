@@ -4,7 +4,6 @@ import { HomeAccessSection } from '@/components/access';
 import { HomeFooter } from '@/components/footer';
 import { PrivacyPreferences } from '@/components/privacy-preferences';
 import { isLocale } from '@/lib/i18n';
-import { siteConfig } from '@/lib/site-config';
 import { getSocialCards } from '@/lib/social-cards';
 import { getDictionary } from '@/locales';
 
@@ -42,8 +41,8 @@ export default async function PrivacyPage({
   return (
     <>
       <main className='gusto-home gusto-page'>
-        <div className='px-4 pt-6 pb-16 sm:px-8 sm:pt-8 sm:pb-24 xl:px-24 3xl:px-60'>
-          <div className='mb-10 sm:mb-16'>
+        <div className='mx-auto grid w-full place-items-center px-4 pt-6 pb-16 sm:px-8 sm:pt-8 sm:pb-24 xl:px-24 3xl:px-60'>
+          <div className='gusto-privacy-intro mb-10 w-full max-w-[960px] text-left sm:mb-16'>
             <h1
               className={`m-0 w-fit max-w-full border-b-[3px] border-dashed border-coral pb-3 text-4xl leading-tight tracking-[-0.2em] text-balance text-coral sm:text-5xl xl:text-7xl ${locale === 'ja' ? 'font-display font-normal' : 'font-display font-bold'}`}
             >
@@ -54,7 +53,7 @@ export default async function PrivacyPage({
             </p>
           </div>
 
-          <div className='grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-16 xl:gap-24'>
+          <div className='gusto-privacy-content grid w-full max-w-[960px] items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-16 xl:gap-24'>
             <nav
               aria-label={policy.contents}
               className='border-t border-ink/20 pt-5'
@@ -145,20 +144,6 @@ export default async function PrivacyPage({
                   {policy.contactTitle}
                 </h2>
                 <p className='mt-4 text-base leading-8'>{policy.contactBody}</p>
-                <address className='mt-5 space-y-2 leading-8 not-italic'>
-                  <p className='font-bold'>{siteConfig.name}</p>
-                  <p>
-                    {locale === 'ja'
-                      ? siteConfig.address
-                      : siteConfig.addressEn}
-                  </p>
-                  <a
-                    href={siteConfig.phoneHref}
-                    className='inline-block py-2 font-label text-2xl font-bold underline underline-offset-4'
-                  >
-                    {siteConfig.phone}
-                  </a>
-                </address>
               </section>
             </div>
           </div>
