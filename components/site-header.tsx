@@ -167,7 +167,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             href={otherPath}
             lang={other}
             onClick={preserveFragment}
-            className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-label text-2xl font-bold text-ink transition-colors group-hover:text-coral`}
+            className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-display text-2xl font-bold tracking-[-0.25em] text-ink transition-colors group-hover:text-coral`}
             aria-label={d.nav.switchLanguage}
           >
             {d.nav.switchLanguageLabel}

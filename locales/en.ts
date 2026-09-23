@@ -23,7 +23,7 @@ export const en = {
     body: 'From a casual drink to an unhurried meal, we are an Italian bar made for Osaka evenings.',
   },
   home: {
-    verticalTitle: 'Italian bar',
+    verticalTitle: 'ITALIAN BAR',
     heroNavLabel: 'Home page navigation',
     heroNav: {
       home: 'Home',
