@@ -30,7 +30,7 @@ function WineMoreLink({
       locale={locale}
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu`}
-      className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
+      className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:leading-[1.36]`}
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
@@ -81,7 +81,7 @@ export function HomeWineSection({
             className='h-auto object-contain'
           />
         </div>
-        <div className='gusto-wine-copy order-1 flex flex-col items-center gap-8 sm:gap-12 lg:order-2 lg:items-start xl:flex-none'>
+        <div className='gusto-wine-copy order-1 flex flex-col items-start gap-8 sm:gap-12 lg:order-2 xl:flex-none'>
           <div className='gusto-wine-title relative w-max'>
             <InViewHeading className="font-display text-4xl leading-12 font-normal tracking-[-0.25em] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-5xl sm:leading-16 xl:text-[80px] xl:leading-none 3xl:text-[min(4.1667vw,80px)]">
               {copy.home.wineTitle}
