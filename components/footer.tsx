@@ -81,7 +81,7 @@ export function HomeFooter({
                     '{name}',
                     card.name,
                   )}
-                  className='block h-8 w-8 text-inherit lg:h-10 lg:w-10 3xl:h-12 3xl:w-12'
+                  className='block h-8 w-8 text-inherit transition-transform hover:-translate-y-4 hover:scale-125 lg:h-10 lg:w-10 3xl:h-12 3xl:w-12'
                   key={card.name}
                 >
                   <HomeSocialIcon
