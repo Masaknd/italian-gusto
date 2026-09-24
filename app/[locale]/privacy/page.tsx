@@ -48,7 +48,7 @@ export default async function PrivacyPage({
             >
               {policy.title}
             </h1>
-            <p className='mt-6 max-w-[70ch] text-base leading-8 sm:mt-8 sm:text-lg'>
+            <p className='mt-6 max-w-full text-base leading-8 sm:mt-8 sm:text-lg'>
               {policy.body}
             </p>
           </div>
@@ -73,7 +73,7 @@ export default async function PrivacyPage({
               </ul>
             </nav>
 
-            <div className='max-w-[70ch] min-w-0 space-y-10 sm:space-y-12'>
+            <div className='max-w-full min-w-0 space-y-10 sm:space-y-12'>
               {policy.sections.map((section) => (
                 <section
                   key={section.id}
