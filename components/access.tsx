@@ -27,14 +27,14 @@ export function HomeAccessSection({
       id='access'
       className='gusto-access relative flex flex-col items-center gap-4 bg-coral p-[32px_16px] text-center text-content sm:gap-8 sm:p-[64px_86px] lg:gap-12 lg:p-[72px_max(24px,9vw)] xl:gap-[57px] xl:p-[50px_96px] 3xl:gap-[min(2.9688vw,57px)] 3xl:p-[min(4.375vw,84px)_min(12.5vw,240px)]'
     >
-      <div className='gusto-access-title flex w-full -translate-x-1 flex-col items-center gap-[min(0.4167vw,8px)] sm:-translate-x-2 sm:gap-2 md:-translate-x-2.5'>
-        <InViewHeading className='w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[52px] sm:leading-[52px] sm:tracking-[-15px] lg:text-[46px] lg:leading-none lg:tracking-[-0.288em] xl:text-[52px] 3xl:text-[min(2.7083vw,52px)]'>
+      <div className='gusto-access-title gusto-booking-title flex w-full flex-col items-center gap-1'>
+        <InViewHeading className='w-full font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-5xl sm:leading-8 sm:tracking-[-15px] lg:text-[42px] lg:leading-10 lg:tracking-[-0.288em] xl:text-[52px]'>
           {copy.home.accessTitle}
         </InViewHeading>
         <LanguageFont
           as={motion.p}
           locale={locale}
-          className={`relative p-[0_0_10px] text-sm leading-[14px] whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:p-[0_0_10.248497px] sm:text-lg sm:leading-6 lg:pb-2 lg:text-[17px] lg:leading-[1.36] xl:pb-[10.248497px] xl:text-lg 3xl:pb-[min(0.4167vw,8px)] 3xl:text-[min(0.9375vw,18px)]`}
+          className={`relative pb-1 text-sm leading-3.5 whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-0.75 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
           {...getInViewFadeUpProps(reduceMotion, 0.2)}
           data-access-title-label
         >
