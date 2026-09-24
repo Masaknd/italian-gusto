@@ -135,7 +135,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             }}
           >
             <Image
-              src='/images/logo-w2@2x.png'
+              src='/images/logo-@2x.png'
               alt={siteConfig.name}
               width={692}
               height={300}
