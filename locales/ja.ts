@@ -60,7 +60,7 @@ export const ja = {
       instagram: { name: 'Instagram', description: '新メニューなどを掲載中！' },
       blog: { name: 'Blog', description: '店主の日記       ' },
     },
-    reservationLabel: 'ご予約・お問い合わせについて',
+    reservationLabel: 'ご予約について',
     reservationNotes: [
       'グストのご予約は、オンライン予約のみ受け付けております。',
       '利用日の前日まで対応可能です。',
@@ -68,7 +68,7 @@ export const ja = {
       'ご利用時間は、他のお客様のご迷惑にならないよう、ご予約の時間より2時間制になります。',
     ],
     reservationTitle: 'Reservation',
-    reservationCta: 'ご予約・お問い合わせページに進む',
+    reservationCta: 'ご予約ページに進む',
     accessTitle: 'Access',
     accessLabel: 'お店までの道のり',
     accessMap: 'Googleマップで見る',
@@ -232,7 +232,7 @@ export const ja = {
     exit: 'プレビューを終了',
   },
   seo: {
-    homeTitle: '大阪のイタリアンバー',
+    homeTitle: '大阪のイタリアンバー | グスト',
     homeDescription: '大阪で気軽に楽しめるイタリアンバー、Gusto Italian Bar。',
     aboutTitle: 'グストとは',
     menuTitle: 'メニュー',

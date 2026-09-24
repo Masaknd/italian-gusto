@@ -72,7 +72,7 @@ export const en = {
       'If online reservations are full, a limited number of same-day seats may still be available. Please visit us directly; if every seat is occupied, you may enjoy the standing area until a table becomes available.',
       'To avoid inconveniencing other guests, reservations are limited to two hours from the booked time.',
     ],
-    reservationCta: 'Continue to reservations and inquiries',
+    reservationCta: 'Continue to reservations',
     accessTitle: 'Access',
     accessLabel: 'How to find us',
     accessMap: 'View on Google Maps',
@@ -230,7 +230,7 @@ export const en = {
   },
   preview: { active: 'Draft preview is active.', exit: 'Exit preview' },
   seo: {
-    homeTitle: 'Italian bar in Osaka',
+    homeTitle: 'Italian bar in Osaka | Gusto',
     homeDescription: 'Gusto Italian Bar, a relaxed Italian bar in Osaka.',
     aboutTitle: 'About Gusto',
     menuTitle: 'Menu',
