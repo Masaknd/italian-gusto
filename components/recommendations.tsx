@@ -10,8 +10,7 @@ import {
   useTransform,
 } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
-import { useEffect, useRef, useState } from 'react';
-import type { WheelEvent } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { LanguageFont } from './language-font';
 import type { FeaturedMenu } from '@/lib/microcms/types';
@@ -21,6 +20,7 @@ import type { HomePageCopy } from './types';
 import { getMenuCategoryAnchor } from '@/lib/menu-category';
 
 const MotionLink = motion.create(Link);
+const WHEEL_COOLDOWN_MS = 500;
 
 function RecommendationMoreLink({
   children,
@@ -127,7 +127,7 @@ function Recommendation({
           />
         )}
       </div>
-      {index === 1 && (
+      {index === 2 && (
         <Image
           src='/images/two-veggies.png'
           alt=''
@@ -168,6 +168,7 @@ function RecommendationsCarousel({
   const section = useRef<HTMLElement>(null);
   const wheelGestureActive = useRef(false);
   const wheelGestureEnd = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const wheelTargetX = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const reduceMotion = useReducedMotion();
   const recommendations = featured.slice(0, 5);
@@ -175,12 +176,6 @@ function RecommendationsCarousel({
     target: section,
     offset: ['start start', 'end end'],
   });
-  // const trackX = useTransform(
-  //   scrollYProgress,
-  //   [0, 1],
-  //   ['0vw', `-${Math.max(recommendations.length - 1, 0) * 100}vw`],
-  // );
-
   const trackX = useTransform(
     scrollYProgress,
     [0, 1],
@@ -188,12 +183,23 @@ function RecommendationsCarousel({
   );
 
   const smoothTrackX = useSpring(trackX, {
-    stiffness: 45, // lower = slower movement
-    damping: 18, // higher = less overshoot
+    stiffness: 90, // lower = slower movement
+    damping: 15, // higher = less overshoot
     mass: 1.2, // higher = heavier/slower feeling
   });
 
   const renderedTrackX = useTransform(smoothTrackX, (value) => `${value}vw`);
+
+  useMotionValueEvent(smoothTrackX, 'change', (value) => {
+    if (wheelTargetX.current === null) return;
+    if (Math.abs(value - wheelTargetX.current) > 0.05) return;
+
+    // Start the reading pause only once the incoming panel has settled.
+    wheelTargetX.current = null;
+    wheelGestureEnd.current = setTimeout(() => {
+      wheelGestureActive.current = false;
+    }, WHEEL_COOLDOWN_MS);
+  });
 
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
     if (wheelGestureActive.current) return;
@@ -210,48 +216,50 @@ function RecommendationsCarousel({
     [],
   );
 
-  const handleWheel = (event: WheelEvent<HTMLElement>) => {
-    if (reduceMotion) return;
+  const handleWheel = useCallback(
+    (event: WheelEvent) => {
+      if (reduceMotion) return;
 
-    const delta =
-      Math.abs(event.deltaY) >= Math.abs(event.deltaX)
-        ? event.deltaY
-        : event.deltaX;
-    if (!delta) return;
+      const delta =
+        Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+          ? event.deltaY
+          : event.deltaX;
+      if (!delta) return;
 
-    const WHEEL_COOLDOWN_MS = 800;
+      if (wheelGestureActive.current) {
+        event.preventDefault();
+        return;
+      }
 
-    if (wheelGestureActive.current) {
+      const direction = delta > 0 ? 1 : -1;
+      const nextIndex = activeIndex + direction;
+      const canAdvance = nextIndex >= 0 && nextIndex < recommendations.length;
+
+      if (!canAdvance) return;
+
       event.preventDefault();
       clearTimeout(wheelGestureEnd.current);
-      wheelGestureEnd.current = setTimeout(() => {
-        wheelGestureActive.current = false;
-      }, WHEEL_COOLDOWN_MS);
-      return;
-    }
+      wheelTargetX.current = -nextIndex * 100;
+      wheelGestureActive.current = true;
+      setActiveIndex(nextIndex);
 
-    const direction = delta > 0 ? 1 : -1;
-    const nextIndex = activeIndex + direction;
-    const canAdvance = nextIndex >= 0 && nextIndex < recommendations.length;
+      const sectionTop =
+        window.scrollY + (section.current?.getBoundingClientRect().top ?? 0);
+      window.scrollTo({
+        top: sectionTop + nextIndex * window.innerHeight,
+        behavior: 'instant',
+      });
+    },
+    [activeIndex, recommendations.length, reduceMotion],
+  );
 
-    if (!canAdvance) return;
+  useEffect(() => {
+    const element = section.current;
+    if (!element) return;
 
-    event.preventDefault();
-    clearTimeout(wheelGestureEnd.current);
-    wheelGestureEnd.current = setTimeout(() => {
-      wheelGestureActive.current = false;
-    }, 180);
-
-    wheelGestureActive.current = true;
-    setActiveIndex(nextIndex);
-
-    const sectionTop =
-      window.scrollY + (section.current?.getBoundingClientRect().top ?? 0);
-    window.scrollTo({
-      top: sectionTop + nextIndex * window.innerHeight,
-      behavior: 'auto',
-    });
-  };
+    element.addEventListener('wheel', handleWheel, { passive: false });
+    return () => element.removeEventListener('wheel', handleWheel);
+  }, [handleWheel]);
 
   return (
     <section
@@ -259,7 +267,6 @@ function RecommendationsCarousel({
       id='recommendations'
       className='motion-reduce:h-auto!'
       style={{ height: `${recommendations.length * 100}vh` }}
-      onWheel={handleWheel}
     >
       <div className='sticky top-0 h-screen overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible'>
         <motion.div

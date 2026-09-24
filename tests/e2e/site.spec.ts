@@ -28,12 +28,10 @@ test("recommendations settle with a spring and respect the wheel cooldown", asyn
   await page.mouse.wheel(0, 100);
 
   await page.waitForTimeout(120);
-  const inFlightScrollY = await getSectionScrollY();
-  expect(inFlightScrollY).toBeGreaterThan(0);
-  expect(inFlightScrollY).toBeLessThan(900);
+  expect(await getSectionScrollY()).toBeCloseTo(900, 0);
   const inFlightTrackX = await getTrackX();
   expect(inFlightTrackX).toBeLessThanOrEqual(0);
-  expect(inFlightTrackX).toBeGreaterThan((-inFlightScrollY / 900) * 1440);
+  expect(inFlightTrackX).toBeGreaterThan(-1440);
 
   // A second step halfway through the 800 ms cooldown must be ignored.
   await page.waitForTimeout(380);
@@ -54,8 +52,10 @@ test("recommendations settle with a spring and respect the wheel cooldown", asyn
   expect(vegetablesBox!.y + vegetablesBox!.height).toBeGreaterThan(0);
   expect(vegetablesBox!.y).toBeLessThan(900);
 
+  await page.waitForTimeout(850);
   await page.mouse.wheel(0, 100);
 
+  expect(await getSectionScrollY()).toBeCloseTo(1800, 0);
   await expect.poll(getTrackX).toBeCloseTo(-2880, 0);
   await expect
     .poll(async () => (await page.locator("#recommendation-3").boundingBox())?.x)
@@ -68,6 +68,59 @@ test("recommendations settle with a spring and respect the wheel cooldown", asyn
   expect(olivesBox!.x).toBeLessThan(1440);
   expect(olivesBox!.y + olivesBox!.height).toBeGreaterThan(0);
   expect(olivesBox!.y).toBeLessThan(900);
+});
+
+test("continuous wheel input pauses to read every recommendation without getting stuck", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Mouse-wheel interaction check");
+  test.setTimeout(60000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/ja");
+
+  const section = page.locator("#recommendations");
+  const getSectionScrollY = () =>
+    section.evaluate((element) => -element.getBoundingClientRect().top);
+  const track = page.getByTestId("recommendations-track");
+  const getTrackX = () => track.evaluate(
+    (element) => new DOMMatrix(getComputedStyle(element).transform).m41,
+  );
+
+  await section.evaluate((element) => element.scrollIntoView());
+  await expect.poll(getSectionScrollY).toBeCloseTo(0, 0);
+  await page.mouse.move(720, 450);
+  await page.mouse.wheel(0, 100);
+  expect(await getSectionScrollY()).toBeCloseTo(900, 0);
+
+  const count = await section.locator("article").count();
+  expect(count).toBeGreaterThanOrEqual(3);
+  const forward = Array.from({ length: count - 2 }, (_, index) => index + 2);
+  const backward = Array.from({ length: count - 1 }, (_, index) => count - index - 2);
+  let currentIndex = 1;
+  for (const nextIndex of [...forward, ...backward]) {
+    let panelVisibleAt: number | undefined;
+    let advanced = false;
+    const direction = Math.sign(nextIndex - currentIndex);
+    for (let step = 0; step < 60; step += 1) {
+      await page.waitForTimeout(100);
+      if (panelVisibleAt === undefined && Math.abs(await getTrackX() + currentIndex * 1440) < 2) {
+        panelVisibleAt = Date.now();
+      }
+      await page.mouse.wheel(0, direction * 40);
+      if (Math.abs(await getSectionScrollY() - currentIndex * 900) > 100) {
+        expect(panelVisibleAt, `Panel ${currentIndex + 1} must settle before advancing`).toBeDefined();
+        expect(Date.now() - panelVisibleAt!).toBeGreaterThanOrEqual(700);
+        advanced = true;
+        break;
+      }
+    }
+    expect(advanced, `Panel ${currentIndex + 1} must not remain locked`).toBe(true);
+    expect(await getSectionScrollY()).toBeCloseTo(nextIndex * 900, 0);
+    currentIndex = nextIndex;
+  }
+
+  await expect.poll(getTrackX).toBeCloseTo(0, 0);
+  await page.waitForTimeout(850);
+  await page.mouse.wheel(0, -100);
+  await expect.poll(getSectionScrollY).toBeLessThan(-50);
 });
 
 test("the 1440px home header matches the desktop design frame", async ({ page }, testInfo) => {
