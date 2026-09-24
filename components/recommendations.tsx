@@ -6,6 +6,7 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
+  useSpring,
   useTransform,
 } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
@@ -174,11 +175,25 @@ function RecommendationsCarousel({
     target: section,
     offset: ['start start', 'end end'],
   });
+  // const trackX = useTransform(
+  //   scrollYProgress,
+  //   [0, 1],
+  //   ['0vw', `-${Math.max(recommendations.length - 1, 0) * 100}vw`],
+  // );
+
   const trackX = useTransform(
     scrollYProgress,
     [0, 1],
-    ['0vw', `-${Math.max(recommendations.length - 1, 0) * 100}vw`],
+    [0, -Math.max(recommendations.length - 1, 0) * 100],
   );
+
+  const smoothTrackX = useSpring(trackX, {
+    stiffness: 45, // lower = slower movement
+    damping: 18, // higher = less overshoot
+    mass: 1.2, // higher = heavier/slower feeling
+  });
+
+  const renderedTrackX = useTransform(smoothTrackX, (value) => `${value}vw`);
 
   useMotionValueEvent(scrollYProgress, 'change', (progress) => {
     if (wheelGestureActive.current) return;
@@ -204,12 +219,14 @@ function RecommendationsCarousel({
         : event.deltaX;
     if (!delta) return;
 
+    const WHEEL_COOLDOWN_MS = 800;
+
     if (wheelGestureActive.current) {
       event.preventDefault();
       clearTimeout(wheelGestureEnd.current);
       wheelGestureEnd.current = setTimeout(() => {
         wheelGestureActive.current = false;
-      }, 180);
+      }, WHEEL_COOLDOWN_MS);
       return;
     }
 
@@ -240,14 +257,14 @@ function RecommendationsCarousel({
     <section
       ref={section}
       id='recommendations'
-      className='motion-reduce:!h-auto'
+      className='motion-reduce:h-auto!'
       style={{ height: `${recommendations.length * 100}vh` }}
       onWheel={handleWheel}
     >
       <div className='sticky top-0 h-screen overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible'>
         <motion.div
-          className='flex h-full will-change-transform motion-reduce:!transform-none motion-reduce:flex-col'
-          style={{ x: trackX }}
+          className='flex h-full will-change-transform motion-reduce:transform-none! motion-reduce:flex-col'
+          style={{ x: renderedTrackX }}
           data-testid='recommendations-track'
         >
           {recommendations.map((item, index) => (

@@ -4,54 +4,44 @@ import { loadEnvConfig } from "@next/env";
 loadEnvConfig(process.cwd());
 const reservationUrl = "https://select-type.com/rsv/?id=dfcuCU3lEUg";
 
-test("one mouse-wheel step advances a full-width recommendation", async ({ page }, testInfo) => {
+test("recommendations settle with a spring and respect the wheel cooldown", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Mouse-wheel interaction check");
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/ja");
 
   const section = page.locator("#recommendations");
   const track = page.getByTestId("recommendations-track");
+  const getTrackX = () =>
+    track.evaluate(
+      (element) => new DOMMatrix(getComputedStyle(element).transform).m41,
+    );
+  const getSectionScrollY = () =>
+    section.evaluate((element) => -element.getBoundingClientRect().top);
+
   await section.evaluate((element) => element.scrollIntoView());
   await expect
     .poll(async () => (await page.locator("#recommendation-1").boundingBox())?.x)
     .toBeCloseTo(0, 0);
-  await page.waitForTimeout(500);
+  await expect.poll(getSectionScrollY).toBeCloseTo(0, 0);
 
   await page.mouse.move(720, 450);
   await page.mouse.wheel(0, 100);
-  await page.mouse.wheel(0, 40);
 
   await page.waitForTimeout(120);
-  const inFlightPosition = await page.evaluate(() => {
-    const sectionElement = document.querySelector("#recommendations");
-    const trackElement = document.querySelector(
-      '[data-testid="recommendations-track"]',
-    );
+  const inFlightScrollY = await getSectionScrollY();
+  expect(inFlightScrollY).toBeGreaterThan(0);
+  expect(inFlightScrollY).toBeLessThan(900);
+  const inFlightTrackX = await getTrackX();
+  expect(inFlightTrackX).toBeLessThanOrEqual(0);
+  expect(inFlightTrackX).toBeGreaterThan((-inFlightScrollY / 900) * 1440);
 
-    if (!sectionElement || !trackElement) return null;
+  // A second step halfway through the 800 ms cooldown must be ignored.
+  await page.waitForTimeout(380);
+  await page.mouse.wheel(0, 100);
+  await page.waitForTimeout(850);
+  expect(await getSectionScrollY()).toBeCloseTo(900, 0);
 
-    const sectionTop =
-      window.scrollY + sectionElement.getBoundingClientRect().top;
-
-    return {
-      horizontal: new DOMMatrix(getComputedStyle(trackElement).transform).m41,
-      vertical: window.scrollY - sectionTop,
-    };
-  });
-
-  expect(inFlightPosition).not.toBeNull();
-  expect(inFlightPosition!.vertical).toBeGreaterThan(0);
-  expect(inFlightPosition!.vertical).toBeLessThan(900);
-  expect(inFlightPosition!.horizontal).toBeCloseTo(
-    (-inFlightPosition!.vertical / 900) * 1440,
-    -1,
-  );
-
-  await expect
-    .poll(() =>
-      track.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).m41),
-    )
-    .toBeCloseTo(-1440, 0);
+  await expect.poll(getTrackX).toBeCloseTo(-1440, 0);
   await expect
     .poll(async () => (await page.locator("#recommendation-2").boundingBox())?.x)
     .toBeCloseTo(0, 0);
@@ -64,14 +54,9 @@ test("one mouse-wheel step advances a full-width recommendation", async ({ page 
   expect(vegetablesBox!.y + vegetablesBox!.height).toBeGreaterThan(0);
   expect(vegetablesBox!.y).toBeLessThan(900);
 
-  await page.waitForTimeout(250);
   await page.mouse.wheel(0, 100);
 
-  await expect
-    .poll(() =>
-      track.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).m41),
-    )
-    .toBeCloseTo(-2880, 0);
+  await expect.poll(getTrackX).toBeCloseTo(-2880, 0);
   await expect
     .poll(async () => (await page.locator("#recommendation-3").boundingBox())?.x)
     .toBeCloseTo(0, 0);
