@@ -96,7 +96,7 @@ export function HomeHeroSection({
         <div className={heroClassNames.intro}>
           <AnimatedEmphasisText
             as='h1'
-            className={`${heroClassNames.title} ${locale === 'en' ? 'text-left text-[clamp(2rem,9vw,3rem)] leading-[1.1] tracking-[-0.25em] sm:max-w-[min(90vw,760px)] 3xl:tracking-[-0.3em] [&>span:nth-child(2)>span:first-child>span:nth-child(4)]:-ml-[0.15em]' : ''}`}
+            className={`${heroClassNames.title} ${locale === 'en' ? 'text-left text-[clamp(2rem,9vw,3rem)] leading-[1.1] tracking-[-0.25em] sm:max-w-[min(90vw,760px)] 3xl:tracking-[-0.3em] [&>span:nth-child(2)>span:first-child>span:nth-child(4)]:ml-[-0.15em]' : ''}`}
             emphasizedSegmentClassName={heroClassNames.emphasizedTitleSegment}
             lines={copy.hero.titleSegments}
           />
