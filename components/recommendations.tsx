@@ -183,7 +183,7 @@ function RecommendationsCarousel({
   );
 
   const smoothTrackX = useSpring(trackX, {
-    stiffness: 90, // lower = slower movement
+    stiffness: 85, // lower = slower movement
     damping: 15, // higher = less overshoot
     mass: 1.2, // higher = heavier/slower feeling
   });
