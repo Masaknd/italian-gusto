@@ -40,7 +40,7 @@ function RecommendationMoreLink({
       locale={locale}
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu${menuCategory ? `#${getMenuCategoryAnchor(menuCategory)}` : ''}`}
-      className={`mt-8 flex items-center gap-8 text-lg leading-6 text-ink no-underline sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
+      className={`mt-8 flex items-center gap-8 text-lg leading-6 text-ink underline underline-offset-4 sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:gap-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] sm:[&_span]:h-6 sm:[&_span]:flex-none sm:[&_span]:whitespace-nowrap`}
     >
       <span>{children}</span>
       <svg
@@ -101,7 +101,7 @@ function Recommendation({
             <LanguageFont
               as={InViewText}
               locale={locale}
-              className={`gusto-feature-description mt-4 text-lg leading-6 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
+              className={`gusto-feature-description mt-4 text-lg leading-8 whitespace-pre-line text-ink sm:text-[22px] xl:text-2xl 3xl:mt-[min(1.6667vw,32px)] 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]`}
             >
               {item.description}
             </LanguageFont>

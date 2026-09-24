@@ -30,7 +30,7 @@ function WineMoreLink({
       locale={locale}
       {...getInViewFadeProps(reduceMotion, revealDelay)}
       href={`/${locale}/menu`}
-      className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light no-underline sm:w-max sm:text-[22px] xl:text-2xl xl:underline xl:underline-offset-4 3xl:leading-[1.36]`}
+      className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-warm-light underline underline-offset-4 sm:w-max sm:text-[22px] xl:text-2xl 3xl:leading-[1.36]`}
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
       <svg
@@ -90,7 +90,7 @@ export function HomeWineSection({
           <LanguageFont
             as={InViewTextGroup}
             locale={locale}
-            className={`gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
+            className={`gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-8 text-warm-light sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
           >
             {copy.home.wineBody}
           </LanguageFont>

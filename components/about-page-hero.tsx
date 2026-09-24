@@ -51,12 +51,12 @@ export function AboutPageHero({
           <LanguageFont
             as={InViewTextGroup}
             locale={locale}
-            className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-6 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]'
+            className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-8 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
           >
             {copy.home.aboutBody}
           </LanguageFont>
           <motion.dl
-            className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-6 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
+            className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-8 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
             {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}
             data-about-details-animation
           >
