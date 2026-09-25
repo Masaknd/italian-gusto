@@ -262,9 +262,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </div>
             <nav
               aria-label={d.nav.menu}
-              className='flex h-184 w-full flex-[0_0_736px] flex-col items-center gap-16 p-[100px_16px] sm:h-auto sm:flex-auto sm:gap-21 sm:p-[100px_24px]'
+              className='flex h-full w-full flex-[0_0_736px] flex-col items-center gap-12 p-[32px_16px] sm:h-auto sm:flex-auto sm:gap-16 sm:p-[64px_24px]'
             >
-              <div className='site-header-mobile-link-list flex w-full flex-col items-center gap-6 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
+              <div className='site-header-mobile-link-list flex w-full flex-col items-center gap-4 sm:gap-6 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
                 {mobileNav.map(([label, href]) => (
                   <Link key={href} href={href} onClick={() => setOpen(false)}>
                     {label}
