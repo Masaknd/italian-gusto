@@ -4,11 +4,7 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
 import { siteConfig } from '@/lib/site-config';
-import {
-  getInViewFadeUpProps,
-  inViewStagger,
-  inViewTextDefaults,
-} from './animations/config';
+import { getInViewFadeUpProps, inViewTextDefaults } from './animations/config';
 import { InViewHeading } from './in-view-heading';
 import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import { LanguageFont } from './language-font';
@@ -28,7 +24,6 @@ export function AboutPageHero({
   const detailsRevealDelay =
     getInViewTextSequenceDuration(copy.home.aboutBody) +
     inViewTextDefaults.linkGap;
-  const barrelRevealDelay = detailsRevealDelay + inViewStagger;
 
   return (
     <section
@@ -91,7 +86,7 @@ export function AboutPageHero({
             height={256}
             sizes='276px'
             className='gusto-about-page-barrel h-auto w-[300px] object-contain xl:w-[360px]'
-            {...getInViewFadeUpProps(reduceMotion, barrelRevealDelay)}
+            {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}
             data-about-barrel-animation
           />
         </div>
@@ -99,7 +94,7 @@ export function AboutPageHero({
 
       <div className='gusto-about-page-interior gusto-about-right'>
         <div className='gusto-about-image w-full'>
-          <Image
+          <MotionImage
             src='/images/inside.png'
             alt={copy.home.aboutImageAlt}
             width={1944}
@@ -107,6 +102,7 @@ export function AboutPageHero({
             priority
             sizes='(max-width: 768px) 92vw, 51vw'
             className='h-auto object-contain'
+            {...getInViewFadeUpProps(reduceMotion)}
           />
         </div>
       </div>
