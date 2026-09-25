@@ -21,7 +21,7 @@ export function MenuCategoryNav({
 
   return (
     <motion.nav
-      className='gusto-menu__category-nav flex w-full flex-wrap content-center items-center gap-2 gap-y-2 sm:content-normal sm:gap-4 lg:flex lg:items-end lg:justify-start lg:gap-6 3xl:gap-8'
+      className='gusto-menu__category-nav flex w-full flex-wrap content-center items-center gap-2 gap-y-0 sm:content-normal sm:gap-4 lg:flex lg:items-end lg:justify-start lg:gap-6 3xl:gap-8'
       aria-label={ariaLabel}
       initial={reduceMotion ? false : 'hidden'}
       whileInView='visible'
