@@ -101,11 +101,13 @@ export function HomeSocialSection({
                   {card.description}
                 </LanguageFont>
               </div>
-              <HomeSocialIcon
-                animated
-                type={card.icon}
-                className='h-8 w-8 flex-[0_0_32px] origin-bottom text-current transition-transform group-hover:scale-125 sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'
-              />
+              <span className='h-8 w-8 flex-[0_0_32px] origin-bottom transition-transform group-hover:scale-125 sm:h-16 sm:w-16 sm:flex-auto xl:h-12 xl:w-12 3xl:h-[min(2.5vw,48px)] 3xl:w-[min(2.5vw,48px)]'>
+                <HomeSocialIcon
+                  animated
+                  type={card.icon}
+                  className='block h-full w-full origin-bottom text-current'
+                />
+              </span>
             </a>
           ))}
         </div>

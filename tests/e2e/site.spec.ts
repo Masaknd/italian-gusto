@@ -1724,7 +1724,7 @@ test("the 393px social section follows the current project layout", async ({ pag
   const firstDecoration = firstHeading.locator("img");
   const firstTitle = firstHeading.locator("span");
   const firstDescription = firstCopy.locator("p");
-  const firstIcon = firstLink.locator(":scope > svg");
+  const firstIcon = firstLink.locator(":scope > span > svg");
 
   const socialBox = await social.boundingBox();
   const brushBox = await brush.boundingBox();
@@ -1791,7 +1791,7 @@ test("the 768px social section follows the current project layout", async ({ pag
   const firstDecoration = firstHeading.locator("img");
   const firstTitle = firstHeading.locator("span");
   const firstDescription = firstCopy.locator("p");
-  const firstIcon = firstLink.locator(":scope > svg");
+  const firstIcon = firstLink.locator(":scope > span > svg");
 
   const socialBox = await social.boundingBox();
   const brushBox = await brush.boundingBox();
@@ -1853,7 +1853,7 @@ test("the 1440px social links remain centered", async ({ page }, testInfo) => {
   const links = social.locator(".gusto-social-links");
   const firstLink = links.locator("a").first();
   const firstCopy = firstLink.locator(".gusto-social-copy");
-  const firstIcon = firstLink.locator(":scope > svg");
+  const firstIcon = firstLink.locator(":scope > span > svg");
 
   const socialBox = await social.boundingBox();
   const brushBox = await brush.boundingBox();
