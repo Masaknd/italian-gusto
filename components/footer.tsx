@@ -97,7 +97,7 @@ export function HomeFooter({
         <div className='gusto-footer-lower bg-orange p-[16px_0] lg:px-6 xl:px-24 3xl:px-60'>
           <div className='gusto-footer-lower-inner flex h-[77px] w-full flex-col items-center justify-start gap-2 sm:h-[88px] xl:h-8 xl:flex-row xl:justify-between xl:gap-0'>
             <a
-              className='gusto-footer-phone flex items-center gap-1 font-label text-base leading-4 font-bold text-inherit text-warm-light no-underline sm:text-lg sm:leading-6 lg:text-xl lg:leading-5 2xl:text-2xl 2xl:leading-5.5'
+              className='gusto-footer-phone flex items-center gap-1 font-label text-base leading-4 font-bold text-inherit text-ink no-underline sm:text-lg sm:leading-6 lg:text-xl lg:leading-5 2xl:text-2xl 2xl:leading-5.5'
               href={siteConfig.phoneHref}
             >
               <PhoneIcon
@@ -107,7 +107,7 @@ export function HomeFooter({
               />
               <span>{siteConfig.phone}</span>
             </a>
-            <div className='gusto-footer-hours grid grid-cols-[16px_auto] items-center gap-x-1 gap-y-px font-label text-base leading-4 font-bold text-warm-light sm:flex sm:gap-0 sm:text-lg sm:leading-6 lg:text-xl lg:leading-5 2xl:text-2xl 2xl:leading-5.5'>
+            <div className='gusto-footer-hours grid grid-cols-[16px_auto] items-center gap-x-1 gap-y-px font-label text-base leading-4 font-bold text-ink sm:flex sm:gap-0 sm:text-lg sm:leading-6 lg:text-xl lg:leading-5 2xl:text-2xl 2xl:leading-5.5'>
               <ClockIcon
                 aria-hidden='true'
                 weight='regular'
@@ -120,7 +120,7 @@ export function HomeFooter({
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
-            <p className='gusto-footer-copyright text-center font-secondary text-xs leading-3.5 whitespace-nowrap text-warm-light sm:text-center xl:text-right xl:text-sm'>
+            <p className='gusto-footer-copyright text-center font-secondary text-xs leading-3.5 whitespace-nowrap text-ink sm:text-center xl:text-right xl:text-sm'>
               {copy.footer.copyright}
             </p>
           </div>

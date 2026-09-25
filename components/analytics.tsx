@@ -74,14 +74,14 @@ export function Analytics({ locale }: { locale: Locale }) {
             <button
               type='button'
               onClick={() => setAnalyticsConsent(false)}
-              className='min-h-11 rounded-md border border-warm-light px-4'
+              className='min-h-11 cursor-pointer rounded-md border border-warm-light px-4 hover:bg-warm-light/30'
             >
               {copy.privacy.reject}
             </button>
             <button
               type='button'
               onClick={() => setAnalyticsConsent(true)}
-              className='min-h-11 rounded-md bg-coral px-4'
+              className='min-h-11 cursor-pointer rounded-md bg-coral px-4 text-ink hover:bg-coral/70'
             >
               {copy.privacy.accept}
             </button>

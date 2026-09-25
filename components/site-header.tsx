@@ -162,17 +162,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             {d.nav.reserve}
           </ReservationLink>
         </nav>
-        <div className='group top-0 right-0 hidden h-0 w-0 cursor-pointer border-t-120 border-l-120 border-t-coral border-l-transparent hover:border-t-ink lg:absolute lg:block'>
-          <a
-            href={otherPath}
-            lang={other}
-            onClick={preserveFragment}
+        <Link
+          href={otherPath}
+          lang={other}
+          onClick={preserveFragment}
+          aria-label={d.nav.switchLanguage}
+          className='group top-0 right-0 hidden h-0 w-0 cursor-pointer border-t-120 border-l-120 border-t-coral border-l-transparent hover:border-t-ink lg:absolute lg:block'
+        >
+          <span
             className={`absolute -top-20 right-10 translate-x-1/2 -translate-y-1/2 font-display text-2xl font-bold tracking-[-0.25em] text-ink transition-colors group-hover:text-coral`}
-            aria-label={d.nav.switchLanguage}
           >
             {d.nav.switchLanguageLabel}
-          </a>
-        </div>
+          </span>
+        </Link>
 
         {/* HEADER:MOBILE */}
         <div className='flex items-center justify-center gap-8'>

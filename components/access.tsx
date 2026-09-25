@@ -51,7 +51,7 @@ export function HomeAccessSection({
             className='block h-full w-full border-0'
           />
         </div>
-        <dl className='gusto-access-details text-base leading-[32px] text-warm-light sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'>
+        <dl className='gusto-access-details text-base leading-[32px] text-ink sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'>
           <div className={detailRowClass}>
             <dt className='font-normal'>{copy.info.address}</dt>
             <dd className={detailValueClass}>
@@ -63,7 +63,7 @@ export function HomeAccessSection({
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={copy.home.accessMapExternal}
-                className='text-inherit underline underline-offset-4 transition-colors hover:text-ink'
+                className='text-inherit underline underline-offset-4 transition-colors hover:text-warm-light'
               >
                 {copy.home.accessMap}
               </a>
@@ -86,7 +86,7 @@ export function HomeAccessSection({
             <dd className={detailValueClass}>
               <a
                 href={siteConfig.phoneHref}
-                className='text-inherit underline underline-offset-4 transition-colors hover:text-ink'
+                className='text-inherit underline underline-offset-4 transition-colors hover:text-warm-light'
               >
                 {siteConfig.phone}
               </a>
