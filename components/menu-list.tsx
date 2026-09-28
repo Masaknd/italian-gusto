@@ -56,7 +56,7 @@ export function MenuList({
                 {items?.[0]?.categoryLabel ?? category}
               </InViewHeading>
               <MenuCardGrid
-                includingTaxLabel={copy.menu.includingTax}
+                excludingTaxLabel={copy.menu.excludingTax}
                 items={items ?? []}
                 locale={locale}
               />

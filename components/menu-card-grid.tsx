@@ -16,11 +16,11 @@ import { LanguageFont } from './language-font';
 const menuGridViewport = { ...inViewViewport, amount: 0 } as const;
 
 export function MenuCardGrid({
-  includingTaxLabel,
+  excludingTaxLabel,
   items,
   locale,
 }: {
-  includingTaxLabel: string;
+  excludingTaxLabel: string;
   items: Menu[];
   locale: Locale;
 }) {
@@ -87,7 +87,7 @@ export function MenuCardGrid({
                 </LanguageFont>
               )}
               <MenuPrice
-                includingTaxLabel={includingTaxLabel}
+                excludingTaxLabel={excludingTaxLabel}
                 priceExcludingTax={item.priceExcludingTax}
               />
             </div>

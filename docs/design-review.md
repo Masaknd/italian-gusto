@@ -122,11 +122,11 @@ The reduced-motion mode already changes the track to a column, which is a useful
 
 **Improve:** Use comfortably padded category buttons or a compact sticky category control with a visible current category. Avoid compressing glyphs. Keep anchor destinations clear of the sticky control.
 
-`components/menu-price.tsx:15` — Pre-tax and tax-inclusive amounts compete visually, while the tax explanation is much smaller and tightly packed. The English label uses the Japanese accent font. Values such as 1078 lack grouping.
+<!-- `components/menu-price.tsx:15` — Pre-tax and tax-inclusive amounts compete visually, while the tax explanation is much smaller and tightly packed. The English label uses the Japanese accent font. Values such as 1078 lack grouping. -->
 
-**Improve:** Make the total payable price the primary number, with a readable “incl. tax” label. Present any additional price secondarily. Use locale-aware number formatting and a legible, consistent numeral style. This is a hierarchy recommendation, not a legal assessment of price display.
+<!-- **Improve:** Make the total payable price the primary number, with a readable “incl. tax” label. Present any additional price secondarily. Use locale-aware number formatting and a legible, consistent numeral style. This is a hierarchy recommendation, not a legal assessment of price display. -->
 
-[Screenshot: phone menu and pricing](design-review/gusto-en-menu-mobile.png)
+<!-- [Screenshot: phone menu and pricing](design-review/gusto-en-menu-mobile.png) -->
 
 ### 9. Mobile navigation has an ambiguous close affordance — P2, confirmed
 
