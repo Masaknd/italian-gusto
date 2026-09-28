@@ -55,20 +55,20 @@ export function AboutPageHero({
             ))}
           </LanguageFont>
           <motion.dl
-            className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-8 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
+            className='flex w-full flex-col gap-4 font-sans text-[16px] leading-8 font-normal text-ink italic sm:text-[18px] xl:w-[30vw] xl:text-xl 3xl:text-[min(1.25vw,20px)] 3xl:leading-[1.36]'
             {...getInViewFadeUpProps(reduceMotion, revealDelays.table)}
             data-about-details-animation
           >
             <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
-              <dt className='m-0 font-[inherit]'>{copy.info.hours}</dt>
-              <dd className='m-0 font-[inherit]'>
+              <dt>{copy.info.hours}</dt>
+              <dd>
                 <span className='block'>{siteConfig.lunchHours}</span>
                 <span className='block'>{siteConfig.dinnerHours}</span>
               </dd>
             </div>
             <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
-              <dt className='m-0 font-[inherit]'>{copy.info.phone}</dt>
-              <dd className='m-0 font-[inherit]'>
+              <dt>{copy.info.phone}</dt>
+              <dd>
                 <a
                   className='text-inherit no-underline'
                   href={siteConfig.phoneHref}
@@ -78,8 +78,8 @@ export function AboutPageHero({
               </dd>
             </div>
             <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
-              <dt className='m-0 font-[inherit]'>{copy.home.paymentLabel}</dt>
-              <dd className='m-0 font-[inherit]'>{copy.home.paymentMethods}</dd>
+              <dt>{copy.home.paymentLabel}</dt>
+              <dd>{copy.home.paymentMethods}</dd>
             </div>
           </motion.dl>
 

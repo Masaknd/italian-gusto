@@ -55,13 +55,16 @@ P1 means address in the next design iteration; P2 means follow immediately after
 
 ### 2. Several core color combinations have insufficient contrast — P1, confirmed
 
-`components/access.tsx:54`, `components/wine.tsx:93`, `components/reservation.tsx:65`, `components/analytics.tsx:84`, `components/menu-card-grid.tsx:77` — Cream text on coral, and coral menu names on cream cards, measure **2.46:1** using `#f6e6e0` and `#f26c4f`. These are below both the normal-text and large-text thresholds. Coral on the nominal paper color measures about **2.66:1**, although the actual textured and photographic backgrounds vary.
+<!-- `components/access.tsx:54`, `components/wine.tsx:93`, `components/reservation.tsx:65`, `components/analytics.tsx:84`,  -->
 
-[WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) requires at least 4.5:1 for ordinary text and 3:1 for qualifying large text. The issue affects useful information, including addresses, travel instructions, dish names, and booking button labels.
+`components/menu-card-grid.tsx:77`
+<!-- — Cream text on coral, and coral menu names on cream cards, measure **2.46:1** using `#f6e6e0` and `#f26c4f`. These are below both the normal-text and large-text thresholds. Coral on the nominal paper color measures about **2.66:1**, although the actual textured and photographic backgrounds vary. -->
 
-**Improve:** Use existing dark green text on coral; that combination measures about **5.15:1**. Give text on pale surfaces a darker coral variant, while retaining the existing coral for decoration. Review the footer's cream-on-orange strip (`components/footer.tsx:97`) and the brown focus outline on dark green (`app/globals.css:660`) as part of the same palette pass. Introduce text/action color roles so decorative colors are not automatically reused for readable text.
+<!-- [WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) requires at least 4.5:1 for ordinary text and 3:1 for qualifying large text. The issue affects useful information, including addresses, travel instructions, dish names, and booking button labels. -->
 
-**Acceptance:** Verify final colors on all actual surfaces, including hover and focus states; normal text reaches 4.5:1 and large text reaches 3:1.
+<!-- **Improve:** Use existing dark green text on coral; that combination measures about **5.15:1**. Give text on pale surfaces a darker coral variant, while retaining the existing coral for decoration. Review the footer's cream-on-orange strip (`components/footer.tsx:97`) and the brown focus outline on dark green (`app/globals.css:660`) as part of the same palette pass. Introduce text/action color roles so decorative colors are not automatically reused for readable text. -->
+
+<!-- **Acceptance:** Verify final colors on all actual surfaces, including hover and focus states; normal text reaches 4.5:1 and large text reaches 3:1. -->
 
 [Screenshot: directions](design-review/gusto-access-mobile.png) · [Screenshot: footer](design-review/gusto-footer-mobile.png)
 
@@ -77,11 +80,11 @@ P1 means address in the next design iteration; P2 means follow immediately after
 
 ### 4. Useful content waits for lengthy text animations — P1, confirmed in source
 
-`components/animations/config.ts:19`, `components/about.tsx:59`, `components/wine.tsx:59`, `components/about-page-hero.tsx:24` — Text reveals letter by letter at 35 ms per unit, with sequential paragraphs. The calculated delay passed to the English story link/business details is about **10.0 seconds**, and to the wine link about **10.5 seconds**, before their own fade animation. Japanese equivalents are about 6.2 and 6.8 seconds. These are configured delays after the relevant in-view trigger, not measured network load times.
+<!-- `components/animations/config.ts:19`, `components/about.tsx:59`, `components/wine.tsx:59`, `components/about-page-hero.tsx:24` — Text reveals letter by letter at 35 ms per unit, with sequential paragraphs. The calculated delay passed to the English story link/business details is about **10.0 seconds**, and to the wine link about **10.5 seconds**, before their own fade animation. Japanese equivalents are about 6.2 and 6.8 seconds. These are configured delays after the relevant in-view trigger, not measured network load times. -->
 
-**Improve:** Show paragraphs and practical details immediately, or use a brief group fade. Keep character animation for short decorative headings. Do not gate links, hours, or phone numbers behind the length of a paragraph.
+<!-- **Improve:** Show paragraphs and practical details immediately, or use a brief group fade. Keep character animation for short decorative headings. Do not gate links, hours, or phone numbers behind the length of a paragraph. -->
 
-**Acceptance:** All essential information and actions are legible within roughly half a second of entering view; reduced-motion behavior remains supported.
+<!-- **Acceptance:** All essential information and actions are legible within roughly half a second of entering view; reduced-motion behavior remains supported. -->
 
 ### 5. Recommendations change the meaning of page scrolling — P1, confirmed design risk
 
@@ -97,21 +100,21 @@ The reduced-motion mode already changes the track to a column, which is a useful
 
 `components/hero.tsx:18`, `components/hero.tsx:43`, `components/hero.tsx:65` — The hero fills a viewport, with absolutely positioned imagery and title. On desktop, the title crosses the central plate; on phones, the English title overlays the upper dish. The phone hero offers no visible menu or booking action outside the hamburger. The introductory location copy exists in the dictionaries but is not rendered here.
 
-**Improve:** Give the title a quieter area, reduce the image overlap, and add a brief Osaka/location descriptor. Place “View menu” and a primary reservation action under the heading. Size the phone hero around its content so the next section is discoverable. Retain the food collage and brand lettering.
+<!-- **Improve:** Give the title a quieter area, reduce the image overlap, and add a brief Osaka/location descriptor. Place “View menu” and a primary reservation action under the heading. Size the phone hero around its content so the next section is discoverable. Retain the food collage and brand lettering. -->
 
-**Acceptance:** At phone and tablet widths, visitors can identify the restaurant's location and reach the menu or booking without opening navigation.
+<!-- **Acceptance:** At phone and tablet widths, visitors can identify the restaurant's location and reach the menu or booking without opening navigation. -->
 
-[Screenshot: phone hero](design-review/gusto-en-mobile.png) · [Screenshot: tablet hero](design-review/gusto-ja-tablet.png)
+<!-- [Screenshot: phone hero](design-review/gusto-en-mobile.png) · [Screenshot: tablet hero](design-review/gusto-ja-tablet.png) -->
 
 ### 7. Handwritten typography is carrying too much body content — P2, visual judgment
 
-`components/language-font.tsx:17` — English paragraphs use Kalam Bold and Japanese paragraphs use Yamafont across stories, menu descriptions, and other content. These fonts add personality, but dense paragraphs and small menu details become harder to scan. The English About page's business details also use the Japanese accent font directly (`components/about-page-hero.tsx:54`).
+<!-- `components/language-font.tsx:17` — English paragraphs use Kalam Bold and Japanese paragraphs use Yamafont across stories, menu descriptions, and other content. These fonts add personality, but dense paragraphs and small menu details become harder to scan. The English About page's business details also use the Japanese accent font directly (`components/about-page-hero.tsx:54`). -->
 
-**Improve:** Use the existing sans-serif for descriptions, practical details, and long paragraphs. Keep handwritten fonts for headings, short labels, and occasional emphasis. Establish a consistent body size and line height, then review Japanese and English independently. Reduce texture behind long passages if needed.
+<!-- **Improve:** Use the existing sans-serif for descriptions, practical details, and long paragraphs. Keep handwritten fonts for headings, short labels, and occasional emphasis. Establish a consistent body size and line height, then review Japanese and English independently. Reduce texture behind long passages if needed. -->
 
-The privacy page already demonstrates a clearer body-text treatment that can guide this change.
+<!-- The privacy page already demonstrates a clearer body-text treatment that can guide this change. -->
 
-[Screenshot: About body text](design-review/gusto-en-about-mobile.png) · [Screenshot: privacy typography](design-review/gusto-privacy-desktop.png)
+<!-- [Screenshot: About body text](design-review/gusto-en-about-mobile.png) · [Screenshot: privacy typography](design-review/gusto-privacy-desktop.png) -->
 
 ### 8. Category navigation and prices need clearer hierarchy — P2, confirmed and visual judgment
 
