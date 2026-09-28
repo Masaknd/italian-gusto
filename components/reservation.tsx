@@ -10,6 +10,12 @@ import { ReservationLink } from './reservation-link';
 import type { Locale } from '@/lib/i18n';
 import { LanguageFont } from './language-font';
 
+const revealDelays = {
+  label: 0.2,
+  body: 0.4,
+  button: 0.8,
+} as const;
+
 export function HomeReservationSection({
   copy,
   locale,
@@ -48,24 +54,32 @@ export function HomeReservationSection({
             as={motion.p}
             locale={locale}
             className={`relative pb-1 text-sm leading-3.5 whitespace-nowrap text-coral after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
-            {...getInViewFadeUpProps(reduceMotion, 0.2)}
+            {...getInViewFadeUpProps(reduceMotion, revealDelays.label)}
             data-reservation-title-label
           >
             {copy.home.reservationLabel}
           </LanguageFont>
         </div>
-        <ul className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-6.75 text-warm-light sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-10.5'>
+        <motion.ul
+          className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-6.75 text-warm-light sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-10.5'
+          {...getInViewFadeUpProps(reduceMotion, revealDelays.body)}
+        >
           {copy.home.reservationNotes.map((note) => (
             <li key={note}>{note}</li>
           ))}
-        </ul>
-        <LanguageFont
-          as={ReservationLink}
-          locale={locale}
-          className={`gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-ink no-underline transition-colors duration-150 ease-in-out hover:bg-coral/70 sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
+        </motion.ul>
+        <motion.div
+          {...getInViewFadeUpProps(reduceMotion, revealDelays.button)}
+          data-reservation-button-animation
         >
-          {copy.home.reservationCta}
-        </LanguageFont>
+          <LanguageFont
+            as={ReservationLink}
+            locale={locale}
+            className={`gusto-booking-button inline-flex cursor-pointer items-center justify-center rounded-full bg-coral p-4 text-sm leading-3.5 text-ink no-underline transition-colors duration-150 ease-in-out hover:bg-coral/70 sm:p-[16px_32px] sm:text-lg sm:leading-6 lg:p-[12px_24px] lg:text-base xl:text-lg`}
+          >
+            {copy.home.reservationCta}
+          </LanguageFont>
+        </motion.div>
       </div>
       <Image
         src='/images/b-4.png'
