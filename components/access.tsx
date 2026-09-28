@@ -12,6 +12,11 @@ import { LanguageFont } from './language-font';
 const detailValueClass = 'm-0 list-none p-0 not-italic';
 const detailRowClass =
   'gusto-access-row grid grid-cols-[79px_1fr] sm:grid-cols-[100px_1fr] 3xl:grid-cols-[min(5.2083vw,100px)_1fr]';
+const revealDelays = {
+  label: 0.2,
+  map: 0.4,
+  details: 0.8,
+} as const;
 
 export function HomeAccessSection({
   copy,
@@ -35,14 +40,17 @@ export function HomeAccessSection({
           as={motion.p}
           locale={locale}
           className={`relative pb-1 text-sm leading-3.5 whitespace-nowrap text-ink after:absolute after:bottom-0 after:left-0 after:h-0.75 after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-ink)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-lg sm:leading-6 lg:text-base lg:leading-[1.36] xl:text-lg`}
-          {...getInViewFadeUpProps(reduceMotion, 0.2)}
+          {...getInViewFadeUpProps(reduceMotion, revealDelays.label)}
           data-access-title-label
         >
           {copy.home.accessLabel}
         </LanguageFont>
       </div>
       <div className='gusto-access-grid grid w-full grid-rows-2 justify-center gap-6 text-left lg:w-[80%] lg:grid-cols-5 lg:grid-rows-none lg:gap-9 xl:gap-6 3xl:gap-[min(1.25vw,24px)]'>
-        <div className='gusto-map [aspect-ratio:auto] h-auto w-full overflow-hidden bg-[var(--color-map-surface)] lg:col-span-3'>
+        <motion.div
+          className='gusto-map [aspect-ratio:auto] h-auto w-full overflow-hidden bg-[var(--color-map-surface)] lg:col-span-3'
+          {...getInViewFadeUpProps(reduceMotion, revealDelays.map)}
+        >
           <iframe
             src={siteConfig.mapEmbedUrl}
             title={copy.home.accessMapTitle}
@@ -50,8 +58,11 @@ export function HomeAccessSection({
             referrerPolicy='no-referrer-when-downgrade'
             className='block h-full w-full border-0'
           />
-        </div>
-        <dl className='gusto-access-details text-base leading-[32px] text-ink sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'>
+        </motion.div>
+        <motion.dl
+          className='gusto-access-details text-base leading-[32px] text-ink sm:leading-[42px] lg:col-span-2 lg:text-[15px] lg:leading-[2.2] xl:text-base xl:leading-[42px]'
+          {...getInViewFadeUpProps(reduceMotion, revealDelays.details)}
+        >
           <div className={detailRowClass}>
             <dt className='font-normal'>{copy.info.address}</dt>
             <dd className={detailValueClass}>
@@ -100,7 +111,7 @@ export function HomeAccessSection({
             <dt className='font-normal'>{copy.home.paymentLabel}</dt>
             <dd className={detailValueClass}>{copy.home.paymentMethods}</dd>
           </div>
-        </dl>
+        </motion.dl>
       </div>
     </section>
   );
