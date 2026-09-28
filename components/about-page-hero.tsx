@@ -4,14 +4,18 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { useReducedMotion } from './animations/use-reduced-motion';
 import { siteConfig } from '@/lib/site-config';
-import { getInViewFadeUpProps, inViewTextDefaults } from './animations/config';
+import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
-import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import { LanguageFont } from './language-font';
 import type { HomePageCopy } from './types';
 import type { Locale } from '@/lib/i18n';
 
 const MotionImage = motion.create(Image);
+const revealDelays = {
+  body: 0.4,
+  table: 0.8,
+  image: 1.2,
+} as const;
 
 export function AboutPageHero({
   copy,
@@ -21,9 +25,6 @@ export function AboutPageHero({
   locale: Locale;
 }) {
   const reduceMotion = useReducedMotion();
-  const detailsRevealDelay =
-    getInViewTextSequenceDuration(copy.home.aboutBody) +
-    inViewTextDefaults.linkGap;
 
   return (
     <section
@@ -44,15 +45,18 @@ export function AboutPageHero({
           </div>
 
           <LanguageFont
-            as={InViewTextGroup}
+            as={motion.div}
             locale={locale}
+            {...getInViewFadeUpProps(reduceMotion, revealDelays.body)}
             className='gusto-about-page-copy gusto-about-body flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-8 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
           >
-            {copy.home.aboutBody}
+            {copy.home.aboutBody.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </LanguageFont>
           <motion.dl
             className='m-0 flex w-full flex-col gap-4 font-accent text-lg leading-8 font-normal text-ink sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36]'
-            {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}
+            {...getInViewFadeUpProps(reduceMotion, revealDelays.table)}
             data-about-details-animation
           >
             <div className='grid grid-cols-[96px_minmax(0,1fr)] xl:grid-cols-[112px_minmax(0,1fr)]'>
@@ -86,7 +90,7 @@ export function AboutPageHero({
             height={256}
             sizes='276px'
             className='gusto-about-page-barrel h-auto w-[300px] object-contain xl:w-[360px]'
-            {...getInViewFadeUpProps(reduceMotion, detailsRevealDelay)}
+            {...getInViewFadeUpProps(reduceMotion, revealDelays.image)}
             data-about-barrel-animation
           />
         </div>

@@ -7,20 +7,18 @@ import { useReducedMotion } from './animations/use-reduced-motion';
 
 import type { Locale } from '@/lib/i18n';
 import { LanguageFont } from './language-font';
-import { getInViewFadeProps, inViewTextDefaults } from './animations/config';
+import { getInViewFadeUpProps } from './animations/config';
 import { InViewHeading } from './in-view-heading';
-import { getInViewTextSequenceDuration, InViewTextGroup } from './in-view-text';
 import type { HomePageCopy } from './types';
 const MotionLink = motion.create(Link);
+const MotionImage = motion.create(Image);
 
 function WineMoreLink({
   children,
   locale,
-  revealDelay,
 }: {
   children: React.ReactNode;
   locale: Locale;
-  revealDelay: number;
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -28,7 +26,7 @@ function WineMoreLink({
     <LanguageFont
       as={MotionLink}
       locale={locale}
-      {...getInViewFadeProps(reduceMotion, revealDelay)}
+      {...getInViewFadeUpProps(reduceMotion)}
       href={`/${locale}/menu`}
       className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-ink underline underline-offset-4 sm:w-max sm:text-[22px] xl:text-2xl 3xl:leading-[1.36]`}
     >
@@ -56,9 +54,7 @@ export function HomeWineSection({
   copy: HomePageCopy;
   locale: Locale;
 }) {
-  const linkRevealDelay =
-    getInViewTextSequenceDuration(copy.home.wineBody) +
-    inViewTextDefaults.linkGap;
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id='wine' className='relative w-full overflow-hidden text-ink'>
@@ -72,13 +68,14 @@ export function HomeWineSection({
       />
       <div className='gusto-wine-inner relative flex h-full w-full flex-col items-center justify-center gap-x-0 gap-y-8 bg-coral p-[64px_16px_32px_16px] sm:flex-col sm:flex-nowrap sm:items-center sm:gap-8 sm:p-[120px_32px_64px_32px] lg:flex-row lg:items-start xl:p-[200px_96px_60px_96px] 3xl:gap-[min(1.6667vw,32px)] 3xl:p-[300px_240px_120px_240px]'>
         <div className='gusto-wine-visual order-2 lg:order-1'>
-          <Image
+          <MotionImage
             src='/images/bottle-grapes.png'
             alt={copy.home.wineArtworkAlt}
             width={1660}
             height={1511}
             sizes='(max-width: 768px) 82vw, 43.23vw'
             className='h-auto object-contain invert-100'
+            {...getInViewFadeUpProps(reduceMotion)}
           />
         </div>
         <div className='gusto-wine-copy order-1 flex flex-col items-start gap-8 sm:gap-12 lg:order-2 xl:flex-none'>
@@ -88,15 +85,16 @@ export function HomeWineSection({
             </InViewHeading>
           </div>
           <LanguageFont
-            as={InViewTextGroup}
+            as={motion.div}
             locale={locale}
+            {...getInViewFadeUpProps(reduceMotion)}
             className={`gusto-wine-text flex h-auto w-full flex-col gap-6 overflow-visible text-lg leading-8 text-ink sm:gap-8 sm:overflow-hidden sm:text-[22px] xl:w-[30vw] xl:text-2xl 3xl:text-[min(1.25vw,24px)] 3xl:leading-[1.36] [&_p]:leading-[inherit]`}
           >
-            {copy.home.wineBody}
+            {copy.home.wineBody.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </LanguageFont>
-          <WineMoreLink locale={locale} revealDelay={linkRevealDelay}>
-            {copy.home.wineMenu}
-          </WineMoreLink>
+          <WineMoreLink locale={locale}>{copy.home.wineMenu}</WineMoreLink>
         </div>
       </div>
       <Image
