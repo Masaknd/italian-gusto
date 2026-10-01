@@ -10,6 +10,9 @@ export const en = {
     mobileReserve: 'Reserve',
     access: 'Information',
     reserve: 'Reserve',
+    about: 'About',
+    directions: 'Directions',
+    privacy: 'Privacy Policy',
   },
   hero: {
     eyebrow: 'OSAKA ITALIAN BAR',

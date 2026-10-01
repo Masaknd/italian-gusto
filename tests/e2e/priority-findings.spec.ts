@@ -7,7 +7,7 @@ test('booking controls stay actionable and link directly to SelectType', async (
   await expect(
     page
       .locator('#reservation')
-      .getByRole('link', { name: /reservations and inquiries/i }),
+      .getByRole('link', { name: /continue to reservations/i }),
   ).toHaveAttribute('href', 'https://select-type.com/rsv/?id=dfcuCU3lEUg');
 
   if (testInfo.project.name === 'mobile') {
@@ -29,6 +29,105 @@ test('locale switch preserves the current route and fragment', async ({
   await switcher.click();
   await expect(page).toHaveURL(/\/ja\/menu#category-pasta$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+});
+
+test('mobile menu has a clear close control, localized links, and keyboard focus restoration', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'Mobile navigation check');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/ja/menu');
+
+  const trigger = page.getByRole('button', { name: 'メニュー' });
+  const triggerBox = await trigger.boundingBox();
+  expect(triggerBox?.width).toBeGreaterThanOrEqual(44);
+  expect(triggerBox?.height).toBeGreaterThanOrEqual(44);
+
+  await trigger.click();
+  const dialog = page.getByRole('dialog', { name: 'メニュー' });
+  const close = dialog.getByRole('button', { name: 'メニューを閉じる' });
+  const closeBox = await close.boundingBox();
+  expect(closeBox?.width).toBeGreaterThanOrEqual(44);
+  expect(closeBox?.height).toBeGreaterThanOrEqual(44);
+  await expect(close.locator('svg path')).toHaveCount(2);
+  await expect(dialog.locator('.site-header-mobile-link-list a')).toHaveText([
+    'ホーム',
+    'メニュー',
+    'グストについて',
+    'アクセス',
+    'プライバシーポリシー',
+  ]);
+  const currentLink = dialog.getByRole('link', { name: 'メニュー' });
+  await expect(currentLink).toHaveAttribute('aria-current', 'page');
+  await expect(currentLink).toHaveCSS('text-decoration-line', 'underline');
+  await expect(currentLink).toHaveCSS('font-family', /yamafont/i);
+  await expect(dialog).toHaveCSS('transform', 'none');
+  await page.evaluate(() => document.fonts.ready);
+  const overflowingLinks = () =>
+    dialog.locator('.site-header-mobile-link-list a').evaluateAll((links) =>
+      links.flatMap((link) => {
+        const { left, right } = link.getBoundingClientRect();
+        return left >= 0 && right <= window.innerWidth
+          ? []
+          : [
+              {
+                text: link.textContent,
+                left,
+                right,
+                viewport: window.innerWidth,
+              },
+            ];
+      }),
+    );
+  expect(await overflowingLinks()).toEqual([]);
+  await expect(dialog.getByRole('link', { name: 'アクセス' })).toHaveAttribute(
+    'href',
+    '/ja#access',
+  );
+  const reserve = dialog.getByRole('link', { name: '予約する' });
+  await expect(reserve).toHaveCSS('font-family', /yamafont/i);
+  await expect(reserve).toHaveAttribute(
+    'href',
+    'https://select-type.com/rsv/?id=dfcuCU3lEUg',
+  );
+  await expect(close).toBeFocused();
+
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await expect(currentLink).toHaveCSS('font-family', /yamafont/i);
+  await expect(reserve).toHaveCSS('font-family', /yamafont/i);
+  expect(await overflowingLinks()).toEqual([]);
+
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
+test('English mobile menu marks the current page', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'Mobile navigation check');
+  await page.goto('/en/about');
+  await page.getByRole('button', { name: 'Menu' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Menu' });
+  await expect(dialog.getByRole('link', { name: 'About' })).toHaveCSS(
+    'font-family',
+    /kalam/i,
+  );
+  await expect(dialog.getByRole('link', { name: 'Reserve' })).toHaveCSS(
+    'font-family',
+    /kalam/i,
+  );
+  await expect(dialog.getByRole('link', { name: 'About' })).toHaveAttribute(
+    'aria-current',
+    'page',
+  );
+  await expect(
+    dialog.getByRole('link', { name: 'Directions' }),
+  ).toHaveAttribute('href', '/en#access');
+  await dialog.getByRole('button', { name: 'Close menu' }).click();
+  await expect(
+    page.getByRole('button', { name: 'Menu', exact: true }),
+  ).toBeFocused();
 });
 
 test('English mobile headline fits within the viewport', async ({ page }) => {

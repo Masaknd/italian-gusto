@@ -7,9 +7,12 @@ export const ja = {
     switchLanguage: 'Switch to English',
     switchLanguageLabel: 'EN',
     backToTop: 'ページ上部へ戻る',
-    mobileReserve: 'Reserve',
+    mobileReserve: '予約する',
     access: '店舗情報',
     reserve: '予約する',
+    about: 'グストについて',
+    directions: 'アクセス',
+    privacy: 'プライバシーポリシー',
   },
   hero: {
     eyebrow: 'OSAKA ITALIAN BAR',

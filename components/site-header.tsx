@@ -37,15 +37,15 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     [d.nav.access, `/${locale}#access`],
   ];
   const mobileNav = [
-    [d.home.heroNav.home, `/${locale}`],
-    [d.home.heroNav.menu, `/${locale}/menu`],
-    [d.home.heroNav.about, `/${locale}/about`],
-    [d.home.heroNav.access, `/${locale}#access`],
-    [d.home.heroNav.privacy, `/${locale}/privacy`],
+    [d.nav.home, `/${locale}`],
+    [d.nav.menu, `/${locale}/menu`],
+    [d.nav.about, `/${locale}/about`],
+    [d.nav.directions, `/${locale}#access`],
+    [d.nav.privacy, `/${locale}/privacy`],
   ];
 
   useEffect(() => {
-    const mobileMenu = window.matchMedia('(max-width: 991px)');
+    const mobileMenu = window.matchMedia('(max-width: 1023px)');
     const closeOutsideMobile = (event: MediaQueryListEvent) => {
       if (!event.matches) setOpen(false);
     };
@@ -197,7 +197,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-haspopup='dialog'
             aria-controls='mobile-nav'
             onClick={() => setOpen((current) => !current)}
-            className='relative z-1 mr-[-8px] ml-auto flex size-8 flex-[0_0_32px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
+            className='relative z-1 mr-[-8px] ml-auto flex size-11 flex-[0_0_44px] items-center justify-center border-0 bg-none p-0 text-ink sm:mr-0 lg:hidden'
           >
             <span className='sr-only'>{d.nav.menu}</span>
             <span
@@ -221,6 +221,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             aria-modal='true'
             aria-label={d.nav.menu}
             className='fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto bg-ink text-warm-light will-change-[opacity,transform] lg:hidden'
+            style={{
+              paddingTop: 'env(safe-area-inset-top)',
+              paddingRight: 'env(safe-area-inset-right)',
+              paddingBottom: 'env(safe-area-inset-bottom)',
+              paddingLeft: 'env(safe-area-inset-left)',
+            }}
             initial={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reduceMotion ? 0 : '100%' }}
@@ -236,17 +242,21 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   setOpen(false);
                   menuButtonRef.current?.focus();
                 }}
-                className='absolute top-6.5 right-2 flex size-8 items-center justify-center border-0 bg-transparent p-0 text-warm-light sm:top-11 sm:right-4'
+                className='absolute top-5 right-2 flex size-11 items-center justify-center border-0 bg-transparent p-0 text-warm-light sm:top-9.5 sm:right-4'
               >
                 <span className='sr-only'>{d.nav.closeMenu}</span>
-                <span
+                <svg
                   aria-hidden='true'
-                  className='relative block size-8 [&_i]:absolute [&_i]:left-1.25 [&_i]:block [&_i]:h-0.75 [&_i]:w-5.5 [&_i]:rotate-0! [&_i]:bg-current sm:[&_i]:top-[14.5px] sm:[&_i]:left-1.75 sm:[&_i]:w-4.5 sm:[&_i:first-child]:rotate-45! sm:[&_i:last-child]:-rotate-45! [&_i:nth-child(1)]:top-2 [&_i:nth-child(2)]:top-4 sm:[&_i:nth-child(2)]:hidden [&_i:nth-child(3)]:top-6'
+                  className='size-6'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2.5'
+                  strokeLinecap='round'
                 >
-                  <i />
-                  <i />
-                  <i />
-                </span>
+                  <path d='M5 5 19 19' />
+                  <path d='M19 5 5 19' />
+                </svg>
               </button>
               <Link
                 href={`/${locale}`}
@@ -266,14 +276,28 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               aria-label={d.nav.menu}
               className='flex h-full w-full flex-[0_0_736px] flex-col items-center gap-12 p-[32px_16px] sm:h-auto sm:flex-auto sm:gap-16 sm:p-[64px_24px]'
             >
-              <div className='site-header-mobile-link-list flex w-full flex-col items-center gap-4 sm:gap-6 [&_a]:font-label [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit [&_a]:no-underline'>
+              <div
+                className={`site-header-mobile-link-list flex w-full flex-col items-center gap-4 sm:gap-6 [&_a]:text-[28px] [&_a]:leading-11.25 [&_a]:font-bold [&_a]:text-inherit ${locale === 'ja' ? '[&_a]:font-tertiary' : '[&_a]:font-label'}`}
+              >
                 {mobileNav.map(([label, href]) => (
-                  <Link key={href} href={href} onClick={() => setOpen(false)}>
+                  <Link
+                    key={href}
+                    href={href}
+                    aria-current={pathname === href ? 'page' : undefined}
+                    className={
+                      pathname === href
+                        ? 'underline decoration-coral decoration-3 underline-offset-8'
+                        : 'no-underline'
+                    }
+                    onClick={() => setOpen(false)}
+                  >
                     {label}
                   </Link>
                 ))}
               </div>
-              <ReservationLink className='flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] font-label text-2xl leading-9.5 font-bold text-warm-light no-underline'>
+              <ReservationLink
+                className={`flex flex-[0_0_54px] items-center justify-center rounded-md bg-coral p-[8px_64px] text-2xl leading-9.5 font-bold text-warm-light no-underline ${locale === 'ja' ? 'font-tertiary' : 'font-label'}`}
+              >
                 {d.nav.mobileReserve}
               </ReservationLink>
               <a

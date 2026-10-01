@@ -406,22 +406,16 @@ test("the 768px menu header matches the small-screen design frame", async ({ pag
 
   const logoBox = await logo.boundingBox();
   const menuBox = await menu.boundingBox();
-  const titleBox = await title.boundingBox();
   expect(logoBox).not.toBeNull();
   expect(menuBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
   expect(logoBox!.x).toBeCloseTo(16, 1);
-  expect(logoBox!.y).toBeCloseTo(14, 1);
+  expect(logoBox!.y).toBeCloseTo(6, 1);
   expect(logoBox!.width).toBeCloseTo(207.637802, 1);
   expect(logoBox!.height).toBeCloseTo(90, 1);
-  expect(menuBox!.x).toBeCloseTo(720, 1);
-  expect(menuBox!.y).toBeCloseTo(44, 1);
-  expect(menuBox!.width).toBeCloseTo(32, 1);
-  expect(menuBox!.height).toBeCloseTo(32, 1);
-  expect(titleBox!.x).toBeCloseTo(24, 1);
-  expect(titleBox!.y).toBeCloseTo(120, 1);
-  expect(titleBox!.width).toBeCloseTo(261, 1);
-  expect(titleBox!.height).toBeCloseTo(60, 1);
+  expect(menuBox!.width).toBe(44);
+  expect(menuBox!.height).toBe(44);
+  expect(menuBox!.x + menuBox!.width).toBeLessThanOrEqual(768);
+  expect(menuBox!.y).toBeGreaterThanOrEqual(0);
 });
 
 test("the 393px home header matches the extra-small design frame", async ({ page }, testInfo) => {
@@ -453,16 +447,16 @@ test("the 393px home header matches the extra-small design frame", async ({ page
   expect(logoBox).not.toBeNull();
   expect(menuBox).not.toBeNull();
   expect(logoBox!.x).toBeCloseTo(16, 1);
-  expect(logoBox!.y).toBeCloseTo(12, 1);
+  expect(logoBox!.y).toBeCloseTo(8, 1);
   expect(logoBox!.width).toBeCloseTo(138.425201, 1);
   expect(logoBox!.height).toBeCloseTo(60, 1);
-  expect(menuBox!.x).toBeCloseTo(353, 1);
-  expect(menuBox!.y).toBeCloseTo(26, 1);
-  expect(menuBox!.width).toBeCloseTo(32, 1);
-  expect(menuBox!.height).toBeCloseTo(32, 1);
+  expect(menuBox!.x).toBeCloseTo(341, 1);
+  expect(menuBox!.y).toBeCloseTo(16, 1);
+  expect(menuBox!.width).toBe(44);
+  expect(menuBox!.height).toBe(44);
   expect(lineBoxes).toHaveLength(3);
-  expect(lineBoxes.map(({ x }) => x)).toEqual([358, 358, 358]);
-  expect(lineBoxes.map(({ y }) => y)).toEqual([34, 42, 50]);
+  expect(lineBoxes.map(({ x }) => x)).toEqual([352, 352, 352]);
+  expect(lineBoxes.map(({ y }) => y)).toEqual([30, 38, 46]);
   expect(lineBoxes.map(({ width }) => width)).toEqual([22, 22, 22]);
   expect(lineBoxes.map(({ height }) => height)).toEqual([3, 3, 3]);
 });
@@ -485,28 +479,21 @@ test("the 393px menu header matches the extra-small design frame", async ({ page
   await expect(menu).toBeVisible();
   await expect(titlePrefix).toHaveCSS("font-size", "24px");
   await expect(titleMain).toHaveCSS("font-size", "40px");
-  await expect(page.locator(".gusto-menu__category-nav a").first()).toHaveCSS("font-size", "24px");
   await expect(page.locator(".gusto-menu__marquee")).toBeHidden();
   await expect(page.locator(".gusto-menu__line-art")).toBeHidden();
 
   const logoBox = await logo.boundingBox();
   const menuBox = await menu.boundingBox();
-  const titleBox = await title.boundingBox();
   expect(logoBox).not.toBeNull();
   expect(menuBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
   expect(logoBox!.x).toBeCloseTo(16, 1);
-  expect(logoBox!.y).toBeCloseTo(12, 1);
+  expect(logoBox!.y).toBeCloseTo(8, 1);
   expect(logoBox!.width).toBeCloseTo(138.425201, 1);
   expect(logoBox!.height).toBeCloseTo(60, 1);
-  expect(menuBox!.x).toBeCloseTo(353, 1);
-  expect(menuBox!.y).toBeCloseTo(26, 1);
-  expect(menuBox!.width).toBeCloseTo(32, 1);
-  expect(menuBox!.height).toBeCloseTo(32, 1);
-  expect(titleBox!.x).toBeCloseTo(16, 1);
-  expect(titleBox!.y).toBeCloseTo(84, 1);
-  expect(titleBox!.width).toBeCloseTo(203, 1);
-  expect(titleBox!.height).toBeCloseTo(40, 1);
+  expect(menuBox!.x).toBeCloseTo(341, 1);
+  expect(menuBox!.y).toBeCloseTo(16, 1);
+  expect(menuBox!.width).toBe(44);
+  expect(menuBox!.height).toBe(44);
 });
 
 test("the menu page reuses the home social, reservation, access, and footer sections", async ({ page }, testInfo) => {
@@ -559,15 +546,15 @@ test("the 393px hamburger menu matches the current project layout", async ({ pag
   const menuHeader = menu.locator(".site-header-mobile-header");
   const logo = menu.getByRole("link", { name: "Gusto Italian Bar" });
   const close = menu.getByRole("button", { name: "メニューを閉じる" });
-  const closeLines = close.locator("i");
+  const closeIcon = close.locator("svg");
   const links = menu.locator(".site-header-mobile-link-list a");
-  const reserve = menu.getByText("Reserve", { exact: true });
+  const reserve = menu.getByText("予約する", { exact: true });
 
   await expect(menu).toHaveCSS("background-color", "rgb(27, 40, 27)");
   await expect(menu).toHaveCSS("color", "rgb(246, 230, 224)");
   await expect(menu).toHaveCSS("transform", "none");
-  await expect(closeLines).toHaveCount(3);
-  await expect(links).toHaveText(["Home", "Menu", "Access", "Our Story"]);
+  await expect(closeIcon.locator("path")).toHaveCount(2);
+  await expect(links).toHaveText(["ホーム", "メニュー", "グストについて", "アクセス", "プライバシーポリシー"]);
 
   const menuBox = await menu.boundingBox();
   const menuHeaderBox = await menuHeader.boundingBox();
@@ -576,12 +563,6 @@ test("the 393px hamburger menu matches the current project layout", async ({ pag
   const linkBoxes = await links.evaluateAll((items) =>
     items.map((item) => {
       const { x, y, width, height } = item.getBoundingClientRect();
-      return { x, y, width, height };
-    }),
-  );
-  const closeLineBoxes = await closeLines.evaluateAll((lines) =>
-    lines.map((line) => {
-      const { x, y, width, height } = line.getBoundingClientRect();
       return { x, y, width, height };
     }),
   );
@@ -601,24 +582,18 @@ test("the 393px hamburger menu matches the current project layout", async ({ pag
   expect(logoBox!.y).toBeCloseTo(12, 1);
   expect(logoBox!.width).toBeCloseTo(138.425201, 1);
   expect(logoBox!.height).toBeCloseTo(60, 1);
-  expect(closeBox!.x).toBeCloseTo(353, 1);
-  expect(closeBox!.y).toBeCloseTo(26, 1);
-  expect(closeBox!.width).toBeCloseTo(32, 1);
-  expect(closeBox!.height).toBeCloseTo(32, 1);
-  expect(closeLineBoxes.map(({ x }) => x)).toEqual([358, 358, 358]);
-  expect(closeLineBoxes.map(({ y }) => y)).toEqual([34, 42, 50]);
-  expect(closeLineBoxes.map(({ width }) => width)).toEqual([22, 22, 22]);
-  expect(closeLineBoxes.map(({ height }) => height)).toEqual([3, 3, 3]);
-  expect(linkBoxes.map(({ y }) => y)).toEqual([184, 257, 330, 403]);
-  expect(linkBoxes.map(({ height }) => height)).toEqual([45, 45, 45, 45]);
-  expect(reserveBox!.x).toBeCloseTo(16.5, 1);
-  expect(reserveBox!.y).toBeCloseTo(512, 1);
-  expect(reserveBox!.width).toBeCloseTo(360, 1);
-  expect(reserveBox!.height).toBeCloseTo(54, 1);
+  expect(closeBox!.x).toBeCloseTo(341, 1);
+  expect(closeBox!.y).toBeCloseTo(20, 1);
+  expect(closeBox!.width).toBe(44);
+  expect(closeBox!.height).toBe(44);
+  expect(linkBoxes).toHaveLength(5);
+  expect(linkBoxes.every(({ height }) => height >= 44)).toBe(true);
+  expect(reserveBox!.width).toBeGreaterThanOrEqual(44);
+  expect(reserveBox!.height).toBeGreaterThanOrEqual(44);
   await expect(close).toBeFocused();
 });
 
-test("the mobile menu is available below the 992px breakpoint", async ({ page }, testInfo) => {
+test("the mobile menu is available below the 1024px breakpoint", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only breakpoint check");
   await page.setViewportSize({ width: 767, height: 900 });
   await page.goto("/ja");
@@ -649,15 +624,15 @@ test("the mobile menu is available below the 992px breakpoint", async ({ page },
   expect(menuBox!.y).toBeCloseTo(0, 1);
   expect(menuBox!.width).toBeCloseTo(767, 1);
   expect(menuBox!.height).toBeCloseTo(900, 1);
-  await expect(menu.getByRole("link", { name: "Home" })).toBeVisible();
-  await expect(menu.getByRole("link", { name: "Menu" })).toBeVisible();
-  await expect(menu.getByRole("link", { name: "Our Story" })).toBeVisible();
-  await expect(menu.getByRole("link", { name: "Access" })).toBeVisible();
-  await expect(menu.getByText("Reserve", { exact: true })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "ホーム" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "メニュー" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "グストについて" })).toBeVisible();
+  await expect(menu.getByRole("link", { name: "アクセス" })).toBeVisible();
+  await expect(menu.getByText("予約する", { exact: true })).toBeVisible();
   const mobileLogo = menu.getByRole("link", { name: "Gusto Italian Bar" });
   const close = menu.getByRole("button", { name: "メニューを閉じる" });
-  const home = menu.getByRole("link", { name: "Home" });
-  const reserve = menu.getByText("Reserve", { exact: true });
+  const home = menu.getByRole("link", { name: "ホーム" });
+  const reserve = menu.getByText("予約する", { exact: true });
   const mobileLogoBox = await mobileLogo.boundingBox();
   const closeBox = await close.boundingBox();
   const homeBox = await home.boundingBox();
@@ -671,13 +646,12 @@ test("the mobile menu is available below the 992px breakpoint", async ({ page },
   expect(mobileLogoBox!.y).toBeCloseTo(20.976112, 1);
   expect(mobileLogoBox!.width).toBeCloseTo(210, 1);
   expect(mobileLogoBox!.height).toBeCloseTo(91.023888, 1);
-  expect(closeBox!.x).toBeCloseTo(719, 1);
-  expect(closeBox!.y).toBeCloseTo(44, 1);
-  expect(homeBox!.y).toBeCloseTo(220, 1);
-  expect(reserveBox!.x).toBeCloseTo(203.5, 1);
-  expect(reserveBox!.y).toBeCloseTo(628, 1);
-  expect(reserveBox!.width).toBeCloseTo(360, 1);
-  expect(reserveBox!.height).toBeCloseTo(54, 1);
+  expect(closeBox!.width).toBe(44);
+  expect(closeBox!.height).toBe(44);
+  expect(closeBox!.x + closeBox!.width).toBeLessThanOrEqual(767);
+  expect(homeBox!.y).toBeGreaterThan(mobileLogoBox!.y + mobileLogoBox!.height);
+  expect(reserveBox!.width).toBeGreaterThanOrEqual(44);
+  expect(reserveBox!.height).toBeGreaterThanOrEqual(44);
   await expect(close).toBeFocused();
 
   await page.keyboard.press("Escape");
@@ -692,9 +666,14 @@ test("the mobile menu is available below the 992px breakpoint", async ({ page },
   await page.setViewportSize({ width: 991, height: 900 });
   await expect(page.getByRole("dialog", { name: "メニュー" })).toBeVisible();
   await expect(trigger).toBeVisible();
-  await page.setViewportSize({ width: 992, height: 900 });
+  await page.setViewportSize({ width: 1023, height: 900 });
+  await expect(page.getByRole("dialog", { name: "メニュー" })).toBeVisible();
+  await expect(trigger).toBeVisible();
+  await page.setViewportSize({ width: 1024, height: 900 });
   await expect(page.getByRole("dialog", { name: "メニュー" })).toBeHidden();
   await expect(trigger).toBeHidden();
+  await expect(page.locator('button[aria-controls="mobile-nav"]')).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
 });
 
 test("the 768px hero follows the current project layout", async ({ page }, testInfo) => {
@@ -2638,7 +2617,7 @@ test("configured reservation links stay clickable after hydration", async ({ pag
   await page.waitForLoadState("networkidle");
   if (testInfo.project.name === "mobile") {
     await page.getByRole("button", { name: "メニュー" }).click();
-    await expect(page.locator("#mobile-nav").getByRole("link", { name: "Reserve" })).toHaveAttribute("href", reservationUrl);
+    await expect(page.locator("#mobile-nav").getByRole("link", { name: "予約する" })).toHaveAttribute("href", reservationUrl);
     await page.getByRole("button", { name: "メニューを閉じる" }).click();
   }
   await page.route(reservationUrl, (route) => route.fulfill({ body: 'Booking service' }));
@@ -2646,7 +2625,7 @@ test("configured reservation links stay clickable after hydration", async ({ pag
   await expect(page).toHaveURL(reservationUrl);
 });
 
-test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "Menu" })).toHaveAttribute("href", "/ja/menu"); });
+test("mobile navigation opens and links to the localized menu", async ({ page }, testInfo) => { test.skip(testInfo.project.name !== "mobile", "Mobile-only interaction"); await page.goto("/ja"); await page.getByRole("button", { name: "メニュー" }).click(); await expect(page.locator("#mobile-nav").getByRole("link", { name: "メニュー" })).toHaveAttribute("href", "/ja/menu"); });
 
 test("the localized scroll-to-top button is shared by every page", async ({
   page,

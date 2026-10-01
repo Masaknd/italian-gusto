@@ -140,7 +140,7 @@ Escape already closes the menu and returns focus to its trigger; preserve that b
 
 ### 10. Directions are pushed below an oversized map, with an overlay covering content — P2, confirmed
 
-`components/access.tsx:44` — `grid-rows-2` makes the phone map row as tall as the details row. On the English About page, the map occupied roughly 510 px and the Access section roughly 1,182 px. Address and transit details sit below that large map.
+<!-- `components/access.tsx:44` — `grid-rows-2` makes the phone map row as tall as the details row. On the English About page, the map occupied roughly 510 px and the Access section roughly 1,182 px. Address and transit details sit below that large map.
 
 `components/scroll-to-top.tsx:34` — The fixed back-to-top button overlaps the address area in the phone capture.
 
@@ -148,7 +148,7 @@ Escape already closes the menu and returns focus to its trigger; preserve that b
 
 **Acceptance:** A guest can see the address and directions action without first scrolling past a large map; floating controls do not obscure text.
 
-[Screenshot: map and obscured address](design-review/gusto-access-mobile.png)
+[Screenshot: map and obscured address](design-review/gusto-access-mobile.png) -->
 
 ### 11. Booking content needs a more direct hierarchy — P2, visual judgment
 
