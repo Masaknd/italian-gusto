@@ -79,9 +79,9 @@ function Recommendation({
   return (
     <article
       id={`recommendation-${index}`}
-      className={`relative flex h-full w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] lg:flex-row lg:items-center lg:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
+      className={`relative flex h-auto w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] xl:h-full xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
-      <div className={`gusto-feature-copy h-max`}>
+      <div className={`gusto-feature-copy h-max w-full xl:w-auto`}>
         <div className={`gusto-feature-heading w-max`}>
           <h3
             className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-14 xl:text-[80px] xl:leading-none 3xl:text-[80px]`}
@@ -116,13 +116,13 @@ function Recommendation({
           </RecommendationMoreLink>
         </div>
       </div>
-      <div className={`gusto-feature-image relative size-full`}>
+      <div className='gusto-feature-image relative h-[clamp(240px,56vw,480px)] w-full shrink-0 xl:h-full xl:shrink motion-reduce:xl:h-[min(65vh,620px)]'>
         {imageSrc && (
           <Image
             src={imageSrc}
             alt={item.image.alt ?? item.name}
             fill
-            sizes='(max-width: 768px) 80vw, 36vw'
+            sizes='(max-width: 480px) calc(100vw - 32px), (max-width: 1199px) calc(100vw - 172px), 36vw'
             className={`pointer-events-none object-contain`}
           />
         )}
@@ -218,7 +218,8 @@ function RecommendationsCarousel({
 
   const handleWheel = useCallback(
     (event: WheelEvent) => {
-      if (reduceMotion) return;
+      if (reduceMotion || !window.matchMedia('(min-width: 75rem)').matches)
+        return;
 
       const delta =
         Math.abs(event.deltaY) >= Math.abs(event.deltaX)
@@ -265,18 +266,18 @@ function RecommendationsCarousel({
     <section
       ref={section}
       id='recommendations'
-      className='motion-reduce:h-auto!'
+      className='motion-reduce:h-auto! max-xl:h-auto!'
       style={{ height: `${recommendations.length * 100}vh` }}
     >
-      <div className='sticky top-0 h-screen overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible'>
+      <div className='sticky top-0 h-screen overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible max-xl:static max-xl:h-auto max-xl:overflow-visible'>
         <motion.div
-          className='flex h-full will-change-transform motion-reduce:transform-none! motion-reduce:flex-col'
+          className='flex h-full will-change-transform motion-reduce:transform-none! motion-reduce:flex-col max-xl:transform-none! max-xl:flex-col max-xl:will-change-auto'
           style={{ x: renderedTrackX }}
           data-testid='recommendations-track'
         >
           {recommendations.map((item, index) => (
             <motion.div
-              className='h-screen w-screen shrink-0'
+              className='h-auto w-full shrink-0 motion-reduce:h-auto! xl:h-screen xl:w-screen'
               initial={reduceMotion ? false : { opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ amount: 0.2 }}

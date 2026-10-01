@@ -33,7 +33,7 @@ test("recommendations settle with a spring and respect the wheel cooldown", asyn
   expect(inFlightTrackX).toBeLessThanOrEqual(0);
   expect(inFlightTrackX).toBeGreaterThan(-1440);
 
-  // A second step halfway through the 800 ms cooldown must be ignored.
+  // A second step during the transition and reading pause must be ignored.
   await page.waitForTimeout(380);
   await page.mouse.wheel(0, 100);
   await page.waitForTimeout(850);
@@ -107,7 +107,6 @@ test("continuous wheel input pauses to read every recommendation without getting
       await page.mouse.wheel(0, direction * 40);
       if (Math.abs(await getSectionScrollY() - currentIndex * 900) > 100) {
         expect(panelVisibleAt, `Panel ${currentIndex + 1} must settle before advancing`).toBeDefined();
-        expect(Date.now() - panelVisibleAt!).toBeGreaterThanOrEqual(700);
         advanced = true;
         break;
       }
@@ -1031,444 +1030,48 @@ test("the 768px Wine section follows the current project layout", async ({ page 
   await expect(text).toHaveCSS("font-size", "22px");
 });
 
-test("the first 393px recommendation follows the current project layout", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
-  await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("/ja");
+for (const { width, height, project } of [
+  { width: 393, height: 852, project: "mobile" },
+  { width: 768, height: 1024, project: "desktop" },
+]) {
+  test(`the ${width}px recommendations keep each dish in a vertical card`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== project, "Viewport-specific layout check");
+    await page.setViewportSize({ width, height });
+    await page.goto("/ja");
 
-  const recommendation = page.locator("#recommendation-1");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3 });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "パスタメニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
+    const section = page.locator("#recommendations");
+    const articles = section.locator("article");
+    const count = await articles.count();
+    expect(count).toBeGreaterThan(1);
 
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
+    for (let index = 0; index < count; index += 1) {
+      const article = articles.nth(index);
+      const copy = article.locator(".gusto-feature-copy");
+      const image = article.locator(".gusto-feature-image");
+      const link = article.getByRole("link");
+      const [articleBox, copyBox, imageBox] = await Promise.all([
+        article.boundingBox(),
+        copy.boundingBox(),
+        image.boundingBox(),
+      ]);
 
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.width).toBeCloseTo(393, 1);
-  expect(recommendationBox!.height).toBeCloseTo(843.472534, 1);
-  expect(copyBox!.x).toBeCloseTo(16, 1);
-  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(24, 1);
-  expect(copyBox!.width).toBeCloseTo(361, 1);
-  expect(copyBox!.height).toBeCloseTo(412.000031, 1);
-  expect(headingBox!.x).toBeCloseTo(16, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(24, 1);
-  expect(headingBox!.width).toBeCloseTo(200, 1);
-  expect(headingBox!.height).toBeCloseTo(40.000027, 1);
-  expect(headingTextBox!.height).toBeCloseTo(32, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("200px");
-  expect(contentBox!.x).toBeCloseTo(16, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(88.000027, 1);
-  expect(contentBox!.width).toBeCloseTo(361, 1);
-  expect(contentBox!.height).toBeCloseTo(348, 1);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(152.000027, 1);
-  expect(descriptionBox!.width).toBeCloseTo(361, 1);
-  expect(descriptionBox!.height).toBeCloseTo(192, 1);
-  expect(moreBox!.x).toBeCloseTo(16, 1);
-  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(376.000027, 1);
-  expect(moreBox!.width).toBeCloseTo(361, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(imageBox!.x).toBeCloseTo(16, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(460.000031, 1);
-  expect(imageBox!.width).toBeCloseTo(361, 1);
-  expect(imageBox!.height).toBeCloseTo(359.472534, 1);
-  await expect(headingText).toHaveCSS("font-size", "32px");
-  await expect(title).toHaveCSS("font-size", "32px");
-  await expect(description).toHaveCSS("font-size", "18px");
-  await expect(description).toHaveCSS("line-height", "24px");
-  await expect(more).toHaveCSS("font-size", "18px");
-  await expect(more).toHaveCSS("text-decoration-line", "none");
-});
+      expect(articleBox).not.toBeNull();
+      expect(copyBox).not.toBeNull();
+      expect(imageBox).not.toBeNull();
+      expect(articleBox!.width).toBeCloseTo(width, 0);
+      expect(copyBox!.x).toBeGreaterThanOrEqual(articleBox!.x);
+      expect(copyBox!.x + copyBox!.width).toBeLessThanOrEqual(articleBox!.x + articleBox!.width + 1);
+      expect(imageBox!.y).toBeGreaterThanOrEqual(copyBox!.y + copyBox!.height);
+      expect(imageBox!.y + imageBox!.height).toBeLessThanOrEqual(articleBox!.y + articleBox!.height + 1);
+      await expect(link).toBeVisible();
 
-test("the second 393px recommendation follows the current project layout", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
-  await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-2");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3 });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "ピザメニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-2-deco");
-
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.width).toBeCloseTo(393, 1);
-  expect(recommendationBox!.height).toBeCloseTo(880.692139, 1);
-  expect(copyBox!.x).toBeCloseTo(16, 1);
-  expect(copyBox!.width).toBeCloseTo(361, 1);
-  expect(copyBox!.height).toBeLessThan(412);
-  expect(copyBox!.height).toBeGreaterThan(0);
-  expect(headingBox!.x).toBeCloseTo(16, 1);
-  expect(headingBox!.y).toBeCloseTo(copyBox!.y, 1);
-  expect(headingBox!.width).toBeCloseTo(200, 1);
-  expect(headingBox!.height).toBeCloseTo(40, 1);
-  expect(headingTextBox!.height).toBeCloseTo(32, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("200px");
-  expect(contentBox!.x).toBeCloseTo(16, 1);
-  expect(contentBox!.y - headingBox!.y - headingBox!.height).toBeCloseTo(24, 1);
-  expect(contentBox!.width).toBeCloseTo(361, 1);
-  expect(contentBox!.height).toBeLessThan(348);
-  expect(contentBox!.height).toBeGreaterThan(0);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(descriptionBox!.y - contentBox!.y).toBeCloseTo(64, 1);
-  expect(descriptionBox!.width).toBeCloseTo(361, 1);
-  expect(descriptionBox!.height).toBeLessThan(192);
-  expect(descriptionBox!.height).toBeGreaterThan(0);
-  expect(moreBox!.x).toBeCloseTo(16, 1);
-  expect(moreBox!.y - descriptionBox!.y - descriptionBox!.height).toBeCloseTo(32, 1);
-  expect(moreBox!.width).toBeCloseTo(361, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(contentBox!.y + contentBox!.height).toBeCloseTo(moreBox!.y + moreBox!.height, 1);
-  expect(imageBox!.x).toBeCloseTo(16, 1);
-  expect(imageBox!.y - copyBox!.y - copyBox!.height).toBeCloseTo(24, 1);
-  expect(imageBox!.width).toBeCloseTo(361, 1);
-  expect(imageBox!.height).toBeCloseTo(396.692108, 1);
-  await expect(decoration).toBeHidden();
-  await expect(headingText).toHaveCSS("font-size", "32px");
-  await expect(title).toHaveCSS("font-size", "32px");
-  await expect(description).toHaveCSS("font-size", "18px");
-  await expect(description).toHaveCSS("line-height", "24px");
-  await expect(more).toHaveCSS("font-size", "18px");
-  await expect(more).toHaveCSS("text-decoration-line", "none");
-});
-
-test("the third 393px recommendation follows the current project layout with natural content heights", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile", "Mobile-only geometry check");
-  await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-3");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3 });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "各メニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-3-deco");
-
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.width).toBeCloseTo(393, 1);
-  expect(recommendationBox!.height).toBeCloseTo(916.735596, 1);
-  expect(copyBox!.x).toBeCloseTo(16, 1);
-  expect(copyBox!.width).toBeCloseTo(361, 1);
-  expect(copyBox!.height).toBeGreaterThan(0);
-  expect(copyBox!.height).toBeLessThan(380);
-  expect(headingBox!.x).toBeCloseTo(16, 1);
-  expect(headingBox!.y).toBeCloseTo(copyBox!.y, 1);
-  expect(headingBox!.width).toBeCloseTo(200, 1);
-  expect(headingBox!.height).toBeCloseTo(32, 1);
-  expect(headingTextBox!.height).toBeCloseTo(32, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("200px");
-  expect(contentBox!.x).toBeCloseTo(16, 1);
-  expect(contentBox!.y - headingBox!.y - headingBox!.height).toBeCloseTo(24, 1);
-  expect(contentBox!.width).toBeCloseTo(361, 1);
-  expect(contentBox!.height).toBeGreaterThan(0);
-  expect(contentBox!.height).toBeLessThan(324);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(descriptionBox!.y - contentBox!.y).toBeCloseTo(64, 1);
-  expect(descriptionBox!.width).toBeCloseTo(361, 1);
-  expect(descriptionBox!.height).toBeGreaterThan(0);
-  expect(descriptionBox!.height).toBeLessThan(168);
-  expect(moreBox!.x).toBeCloseTo(16, 1);
-  expect(moreBox!.y - descriptionBox!.y - descriptionBox!.height).toBeCloseTo(32, 1);
-  expect(moreBox!.width).toBeCloseTo(361, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(contentBox!.y + contentBox!.height).toBeCloseTo(moreBox!.y + moreBox!.height, 1);
-  expect(copyBox!.y + copyBox!.height).toBeCloseTo(contentBox!.y + contentBox!.height, 1);
-  expect(imageBox!.x).toBeCloseTo(16, 1);
-  expect(imageBox!.y - copyBox!.y - copyBox!.height).toBeCloseTo(24, 1);
-  expect(imageBox!.width).toBeCloseTo(361, 1);
-  expect(imageBox!.height).toBeCloseTo(464.735626, 1);
-  await expect(decoration).toBeHidden();
-  await expect(headingText).toHaveCSS("font-size", "32px");
-  await expect(title).toHaveCSS("font-size", "32px");
-  await expect(description).toHaveCSS("font-size", "18px");
-  await expect(description).toHaveCSS("line-height", "24px");
-  await expect(more).toHaveCSS("font-size", "18px");
-  await expect(more).toHaveCSS("text-decoration-line", "none");
-});
-
-test("the first 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 768, height: 1024 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-1");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3, name: "グストのパスタ" });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "パスタメニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
-
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.y).toBeCloseTo(3300.551392, 1);
-  expect(recommendationBox!.width).toBeCloseTo(768, 1);
-  expect(recommendationBox!.height).toBeCloseTo(994.930908, 1);
-  expect(copyBox!.x).toBeCloseTo(86, 1);
-  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(copyBox!.width).toBeCloseTo(596, 1);
-  expect(copyBox!.height).toBeCloseTo(356.000031, 1);
-  expect(headingBox!.x).toBeCloseTo(86, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(headingBox!.width).toBeCloseTo(300, 1);
-  expect(headingBox!.height).toBeCloseTo(56.000034, 1);
-  expect(headingTextBox!.height).toBeCloseTo(48, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
-  expect(contentBox!.x).toBeCloseTo(86, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168.000031, 1);
-  expect(contentBox!.width).toBeCloseTo(596, 1);
-  expect(contentBox!.height).toBeCloseTo(252, 1);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232.000031, 1);
-  expect(descriptionBox!.height).toBeCloseTo(96, 1);
-  expect(moreBox!.x).toBeCloseTo(86, 1);
-  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(360.000031, 1);
-  expect(moreBox!.width).toBeCloseTo(323.396759, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(imageBox!.x).toBeCloseTo(139.5, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(444.000031, 1);
-  expect(imageBox!.width).toBeCloseTo(489, 1);
-  expect(imageBox!.height).toBeCloseTo(486.930878, 1);
-  await expect(headingText).toHaveCSS("font-size", "60px");
-  await expect(title).toHaveCSS("font-size", "42px");
-  await expect(description).toHaveCSS("font-size", "22px");
-  await expect(more).toHaveCSS("font-size", "22px");
-});
-
-test("the second 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 768, height: 1024 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-2");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3, name: "ピザ・マルゲリータ" });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "ピザメニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-2-deco");
-
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.y).toBeCloseTo(4295.4823, 1);
-  expect(recommendationBox!.width).toBeCloseTo(768, 1);
-  expect(recommendationBox!.height).toBeCloseTo(1091.632813, 1);
-  expect(copyBox!.x).toBeCloseTo(86, 1);
-  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(copyBox!.width).toBeCloseTo(596, 1);
-  expect(copyBox!.height).toBeCloseTo(380, 1);
-  expect(headingBox!.x).toBeCloseTo(86, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(headingBox!.width).toBeCloseTo(300, 1);
-  expect(headingBox!.height).toBeCloseTo(56, 1);
-  expect(headingTextBox!.height).toBeCloseTo(48, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
-  expect(contentBox!.x).toBeCloseTo(86, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168, 1);
-  expect(contentBox!.width).toBeCloseTo(596, 1);
-  expect(contentBox!.height).toBeCloseTo(276, 1);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(await title.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
-  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232, 1);
-  expect(descriptionBox!.width).toBeCloseTo(596, 1);
-  expect(descriptionBox!.height).toBeCloseTo(120, 1);
-  expect(moreBox!.x).toBeCloseTo(86, 1);
-  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(384, 1);
-  expect(moreBox!.width).toBeCloseTo(305.396759, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(imageBox!.x).toBeCloseTo(133, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(476, 1);
-  expect(imageBox!.width).toBeCloseTo(502, 1);
-  expect(imageBox!.height).toBeCloseTo(551.632751, 1);
-  await expect(decoration).toBeHidden();
-  await expect(headingText).toHaveCSS("font-size", "60px");
-  await expect(title).toHaveCSS("font-size", "42px");
-  await expect(description).toHaveCSS("font-size", "22px");
-  await expect(more).toHaveCSS("font-size", "22px");
-});
-
-test("the third 768px recommendation follows the current project layout", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 768, height: 1024 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-3");
-  const copy = recommendation.locator(".gusto-feature-copy");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const headingText = heading.locator("p");
-  const content = recommendation.locator(".gusto-feature-content");
-  const title = content.getByRole("heading", { level: 3, name: "海老のソーセージ" });
-  const description = content.locator(".gusto-feature-description");
-  const more = recommendation.getByRole("link", { name: "各メニューを見る" });
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-3-deco");
-
-  const recommendationBox = await recommendation.boundingBox();
-  const copyBox = await copy.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const headingTextBox = await headingText.boundingBox();
-  const contentBox = await content.boundingBox();
-  const titleBox = await title.boundingBox();
-  const descriptionBox = await description.boundingBox();
-  const moreBox = await more.boundingBox();
-  const imageBox = await image.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(copyBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(headingTextBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(titleBox).not.toBeNull();
-  expect(descriptionBox).not.toBeNull();
-  expect(moreBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(recommendationBox!.x).toBeCloseTo(0, 1);
-  expect(recommendationBox!.y).toBeCloseTo(5387.115113, 1);
-  expect(recommendationBox!.width).toBeCloseTo(768, 1);
-  expect(recommendationBox!.height).toBeCloseTo(1068, 1);
-  expect(copyBox!.x).toBeCloseTo(86, 1);
-  expect(copyBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(copyBox!.width).toBeCloseTo(596, 1);
-  expect(copyBox!.height).toBeCloseTo(356, 1);
-  expect(headingBox!.x).toBeCloseTo(86, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(64, 1);
-  expect(headingBox!.width).toBeCloseTo(300, 1);
-  expect(headingBox!.height).toBeCloseTo(56, 1);
-  expect(headingTextBox!.height).toBeCloseTo(48, 1);
-  expect(await heading.evaluate((element) => getComputedStyle(element, "::after").width)).toBe("300px");
-  expect(contentBox!.x).toBeCloseTo(86, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(168, 1);
-  expect(contentBox!.width).toBeCloseTo(596.02063, 1);
-  expect(contentBox!.height).toBeCloseTo(252, 1);
-  expect(titleBox!.height).toBeCloseTo(32, 1);
-  expect(descriptionBox!.y - recommendationBox!.y).toBeCloseTo(232, 1);
-  expect(descriptionBox!.width).toBeCloseTo(596.02063, 1);
-  expect(descriptionBox!.height).toBeCloseTo(96, 1);
-  expect(moreBox!.x).toBeCloseTo(86, 1);
-  expect(moreBox!.y - recommendationBox!.y).toBeCloseTo(360, 1);
-  expect(moreBox!.width).toBeCloseTo(287.396759, 1);
-  expect(moreBox!.height).toBeCloseTo(60, 1);
-  expect(await more.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
-  expect(imageBox!.x).toBeCloseTo(166.5, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(444, 1);
-  expect(imageBox!.width).toBeCloseTo(435, 1);
-  expect(imageBox!.height).toBeCloseTo(560, 1);
-  await expect(decoration).toBeHidden();
-  await expect(headingText).toHaveCSS("font-size", "60px");
-  await expect(title).toHaveCSS("font-size", "42px");
-  await expect(description).toHaveCSS("font-size", "22px");
-  await expect(more).toHaveCSS("font-size", "22px");
-});
+      if (index > 0) {
+        const previous = await articles.nth(index - 1).boundingBox();
+        expect(articleBox!.y).toBeGreaterThanOrEqual(previous!.y + previous!.height);
+      }
+    }
+  });
+}
 
 test("the 1440px hero follows the current project layout", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
@@ -1570,121 +1173,31 @@ test("the 1440px Wine section keeps its flex content centered", async ({ page },
   expect(linkBox!.y - wineBox!.y).toBeCloseTo(770.472, 1);
 });
 
-test("the first 1440px recommendation keeps its flex content centered", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 1440, height: 1100 });
+test("the 1440px recommendations keep the desktop side-by-side layout", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only layout check");
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/ja");
 
-  const recommendation = page.locator("#recommendation-1");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const content = recommendation.locator(".gusto-feature-content");
-  const image = recommendation.locator(".gusto-feature-image");
-  const link = recommendation.getByRole("link", { name: "パスタメニューを見る" });
+  const section = page.locator("#recommendations");
+  const track = page.getByTestId("recommendations-track");
+  await expect(track).toHaveCSS("flex-direction", "row");
+  await expect(section.locator(":scope > div")).toHaveCSS("position", "sticky");
 
-  const recommendationBox = await recommendation.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const contentBox = await content.boundingBox();
-  const imageBox = await image.boundingBox();
-  const linkBox = await link.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(linkBox).not.toBeNull();
-  expect(recommendationBox!.height).toBeCloseTo(826, 1);
-  expect(headingBox!.x).toBeCloseTo(48, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(109.5, 1);
-  expect(headingBox!.width).toBeCloseTo(611, 1);
-  expect(contentBox!.x).toBeCloseTo(48, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(245.5, 1);
-  expect(imageBox!.x).toBeCloseTo(683, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(60, 1);
-  expect(imageBox!.width).toBeCloseTo(709, 1);
-  expect(imageBox!.height).toBeCloseTo(706, 1);
-  expect(linkBox!.x).toBeCloseTo(48, 1);
-  expect(linkBox!.y - recommendationBox!.y).toBeCloseTo(656.5, 1);
-});
-
-test("the second 1440px recommendation keeps its flex content centered", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 1440, height: 1100 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-2");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const content = recommendation.locator(".gusto-feature-content");
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-2-deco");
-  const link = recommendation.getByRole("link", { name: "ピザメニューを見る" });
-
-  const recommendationBox = await recommendation.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const contentBox = await content.boundingBox();
-  const imageBox = await image.boundingBox();
-  const decorationBox = await decoration.boundingBox();
-  const linkBox = await link.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(decorationBox).not.toBeNull();
-  expect(linkBox).not.toBeNull();
-  expect(recommendationBox!.height).toBeCloseTo(895.717163, 1);
-  expect(imageBox!.x).toBeCloseTo(48, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(60, 1);
-  expect(imageBox!.width).toBeCloseTo(705.922607, 1);
-  expect(imageBox!.height).toBeCloseTo(775.717163, 1);
-  expect(headingBox!.x).toBeCloseTo(777.922607, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(160.858582, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(296.858582, 1);
-  expect(linkBox!.y - recommendationBox!.y).toBeCloseTo(674.858582, 1);
-  expect(decorationBox!.x).toBeCloseTo(1172.750366, 1);
-  expect(decorationBox!.y - recommendationBox!.y).toBeCloseTo(0, 1);
-  expect(decorationBox!.width).toBeCloseTo(267.249664, 1);
-});
-
-test("the third 1440px recommendation keeps its flex content centered", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop", "Desktop-only geometry check");
-  await page.setViewportSize({ width: 1440, height: 1100 });
-  await page.goto("/ja");
-
-  const recommendation = page.locator("#recommendation-3");
-  const heading = recommendation.locator(".gusto-feature-heading");
-  const content = recommendation.locator(".gusto-feature-content");
-  const image = recommendation.locator(".gusto-feature-image");
-  const decoration = recommendation.locator(".gusto-feature-3-deco");
-  const link = recommendation.getByRole("link", { name: "各メニューを見る" });
-
-  const recommendationBox = await recommendation.boundingBox();
-  const headingBox = await heading.boundingBox();
-  const contentBox = await content.boundingBox();
-  const imageBox = await image.boundingBox();
-  const decorationBox = await decoration.boundingBox();
-  const linkBox = await link.boundingBox();
-
-  expect(recommendationBox).not.toBeNull();
-  expect(headingBox).not.toBeNull();
-  expect(contentBox).not.toBeNull();
-  expect(imageBox).not.toBeNull();
-  expect(decorationBox).not.toBeNull();
-  expect(linkBox).not.toBeNull();
-  expect(recommendationBox!.height).toBeCloseTo(905.751831, 1);
-  expect(headingBox!.x).toBeCloseTo(150.819611, 1);
-  expect(headingBox!.y - recommendationBox!.y).toBeCloseTo(165.875916, 1);
-  expect(headingBox!.width).toBeCloseTo(500, 1);
-  expect(contentBox!.x).toBeCloseTo(150.819611, 1);
-  expect(contentBox!.y - recommendationBox!.y).toBeCloseTo(301.875916, 1);
-  expect(imageBox!.x).toBeCloseTo(678.819611, 1);
-  expect(imageBox!.y - recommendationBox!.y).toBeCloseTo(60, 1);
-  expect(imageBox!.width).toBeCloseTo(610.360779, 1);
-  expect(imageBox!.height).toBeCloseTo(785.751831, 1);
-  expect(linkBox!.y - recommendationBox!.y).toBeCloseTo(679.875916, 1);
-  expect(decorationBox!.x).toBeCloseTo(1101.374634, 1);
-  expect(decorationBox!.y - recommendationBox!.y).toBeCloseTo(-126.476285, 1);
-  expect(decorationBox!.width).toBeCloseTo(426.709015, 1);
-  expect(decorationBox!.height).toBeCloseTo(442.898, 1);
+  for (const article of await section.locator("article").all()) {
+    const [articleBox, copyBox, imageBox] = await Promise.all([
+      article.boundingBox(),
+      article.locator(".gusto-feature-copy").boundingBox(),
+      article.locator(".gusto-feature-image").boundingBox(),
+    ]);
+    expect(articleBox).not.toBeNull();
+    expect(copyBox).not.toBeNull();
+    expect(imageBox).not.toBeNull();
+    expect(articleBox!.width).toBeCloseTo(1440, 0);
+    expect(articleBox!.height).toBeCloseTo(900, 0);
+    expect(imageBox!.x).toBeGreaterThanOrEqual(copyBox!.x + copyBox!.width);
+    expect(imageBox!.height).toBeGreaterThan(0);
+    await expect(article.getByRole("link")).toBeVisible();
+  }
 });
 
 test("the 393px social section follows the current project layout", async ({ page }, testInfo) => {

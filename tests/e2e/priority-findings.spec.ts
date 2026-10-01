@@ -1,5 +1,108 @@
 import { expect, test } from '@playwright/test';
 
+test('recommendations scroll vertically on phone and tablet widths', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop');
+
+  for (const { locale, width, height } of [
+    { locale: 'ja', width: 393, height: 852 },
+    { locale: 'ja', width: 393, height: 600 },
+    { locale: 'ja', width: 768, height: 1024 },
+    { locale: 'ja', width: 1024, height: 768 },
+    { locale: 'ja', width: 1199, height: 800 },
+    { locale: 'en', width: 393, height: 600 },
+    { locale: 'en', width: 768, height: 1024 },
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto(`/${locale}`);
+
+    const section = page.locator('#recommendations');
+    const track = page.getByTestId('recommendations-track');
+    const panels = section.locator('article');
+    expect(await panels.count()).toBeGreaterThan(1);
+    await expect(track).toHaveCSS('flex-direction', 'column');
+    await expect(track).toHaveCSS('transform', 'none');
+    await expect(section.locator(':scope > div')).toHaveCSS(
+      'position',
+      'static',
+    );
+
+    const first = await panels.nth(0).boundingBox();
+    const second = await panels.nth(1).boundingBox();
+    expect(first).not.toBeNull();
+    expect(second).not.toBeNull();
+    expect(second!.x).toBeCloseTo(first!.x, 0);
+    expect(second!.y).toBeGreaterThanOrEqual(first!.y + first!.height);
+    const image = await panels
+      .nth(0)
+      .locator('.gusto-feature-image')
+      .boundingBox();
+    expect(image).not.toBeNull();
+    expect(image!.height).toBeGreaterThan(200);
+    expect(image!.y + image!.height).toBeLessThanOrEqual(
+      first!.y + first!.height + 1,
+    );
+    const sectionBox = await section.boundingBox();
+    const last = await panels.last().boundingBox();
+    expect(sectionBox).not.toBeNull();
+    expect(last).not.toBeNull();
+    expect(sectionBox!.y + sectionBox!.height).toBeCloseTo(
+      last!.y + last!.height,
+      0,
+    );
+
+    await section.evaluate((element) =>
+      element.scrollIntoView({ behavior: 'instant' }),
+    );
+    const before = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(width / 2, height / 2);
+    await page.mouse.wheel(0, 160);
+    await expect
+      .poll(async () => (await page.evaluate(() => window.scrollY)) - before)
+      .toBeGreaterThan(50);
+    const delta = (await page.evaluate(() => window.scrollY)) - before;
+    expect(delta).toBeLessThan(350);
+  }
+});
+
+test('recommendations remain horizontal at the laptop breakpoint', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop');
+  await page.setViewportSize({ width: 1200, height: 800 });
+  await page.goto('/ja');
+
+  const section = page.locator('#recommendations');
+  const track = page.getByTestId('recommendations-track');
+  const first = await section.locator('article').nth(0).boundingBox();
+  const second = await section.locator('article').nth(1).boundingBox();
+  expect(first).not.toBeNull();
+  expect(second).not.toBeNull();
+  await expect(track).toHaveCSS('flex-direction', 'row');
+  await expect(section.locator(':scope > div')).toHaveCSS('position', 'sticky');
+  expect(second!.x).toBeGreaterThan(first!.x + first!.width - 1);
+});
+
+test('reduced motion keeps recommendation cards in natural page flow', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/ja');
+
+  const section = page.locator('#recommendations');
+  const track = page.getByTestId('recommendations-track');
+  await expect(track).toHaveCSS('flex-direction', 'column');
+  await expect(track).toHaveCSS('transform', 'none');
+  const first = await section.locator('article').nth(0).boundingBox();
+  const second = await section.locator('article').nth(1).boundingBox();
+  expect(first).not.toBeNull();
+  expect(second).not.toBeNull();
+  expect(second!.y).toBeGreaterThanOrEqual(first!.y + first!.height);
+});
+
 for (const { locale, label } of [
   { locale: 'ja', label: '本文へスキップ' },
   { locale: 'en', label: 'Skip to main content' },
