@@ -130,13 +130,13 @@ The reduced-motion mode already changes the track to a column, which is a useful
 
 ### 9. Mobile navigation has an ambiguous close affordance — P2, confirmed
 
-`components/site-header.tsx:242` — The close icon becomes an X only from the `sm` breakpoint. At 390 px it remains three horizontal lines, so the open state still displays a hamburger. Open and close targets are 32 × 32 px (`components/site-header.tsx:198`, `components/site-header.tsx:237`).
+<!-- `components/site-header.tsx:242` — The close icon becomes an X only from the `sm` breakpoint. At 390 px it remains three horizontal lines, so the open state still displays a hamburger. Open and close targets are 32 × 32 px (`components/site-header.tsx:198`, `components/site-header.tsx:237`).
 
 **Improve:** Use an X at every open-menu size and increase controls to a comfortable 44 × 44 px target. Add current-page styling. Consider Japanese or bilingual navigation labels on `/ja`, particularly for reservations and directions; the current Japanese navigation uses English labels throughout. Add safe-area padding for the fullscreen panel.
 
 Escape already closes the menu and returns focus to its trigger; preserve that behavior.
 
-[Screenshot: open mobile navigation](design-review/gusto-mobile-nav-settled.png)
+[Screenshot: open mobile navigation](design-review/gusto-mobile-nav-settled.png) -->
 
 ### 10. Directions are pushed below an oversized map, with an overlay covering content — P2, confirmed
 
@@ -152,27 +152,27 @@ Escape already closes the menu and returns focus to its trigger; preserve that b
 
 ### 11. Booking content needs a more direct hierarchy — P2, visual judgment
 
-`components/reservation.tsx:57` — Four policy notes appear as a continuous block before the button. On desktop the section is 914 px tall, and 16 px notes use 42 px line height. This produces an unusually tall block with a comparatively modest action at the bottom.
+<!-- `components/reservation.tsx:57` — Four policy notes appear as a continuous block before the button. On desktop the section is 914 px tall, and 16 px notes use 42 px line height. This produces an unusually tall block with a comparatively modest action at the bottom.
 
 **Improve:** Make the reservation action prominent near the heading. Summarize the key conditions in distinct, readable points, with longer same-day seating details below. Use consistent paragraph spacing and a more moderate line height. Retain the warm restaurant photograph and sufficient background contrast.
 
-[Screenshot: reservation section](design-review/gusto-reservation-desktop.png)
+[Screenshot: reservation section](design-review/gusto-reservation-desktop.png) -->
 
 ### 12. Privacy choices give no confirmation or current state — P2, confirmed
 
-`components/privacy-preferences.tsx:19` — Clicking decline writes consent, but the preferences component does not display a selected state, the current choice, or a saved confirmation. The browser review reproduced the absence of a confirmation after declining.
+<!-- `components/privacy-preferences.tsx:19` — Clicking decline writes consent, but the preferences component does not display a selected state, the current choice, or a saved confirmation. The browser review reproduced the absence of a confirmation after declining.
 
 **Improve:** Show the current choice, make selection explicit, and announce a short confirmation through a polite live region. Keep allow and decline understandable as separate choices. On phones, consider collapsing the long privacy contents list so users can reach the policy introduction and first section sooner.
 
-[Screenshot: preferences after decline](design-review/gusto-privacy-feedback.png)
+[Screenshot: preferences after decline](design-review/gusto-privacy-feedback.png) -->
 
 ### 13. Motion and keyboard access need a final accessibility pass — P2, source confirmed
 
-`app/globals.css:681`, `components/social.tsx:44` — The gallery moves continuously on a 60-second loop, with no pause control. Reduced-motion support already stops it, but users with the normal motion setting still need control. [W3C pause/stop/hide guidance](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html) covers automatically moving content lasting over five seconds alongside other content.
+<!-- `app/globals.css:681`, `components/social.tsx:44` — The gallery moves continuously on a 60-second loop, with no pause control. Reduced-motion support already stops it, but users with the normal motion setting still need control. [W3C pause/stop/hide guidance](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html) covers automatically moving content lasting over five seconds alongside other content.
 
 `app/[locale]/layout.tsx:91` — There is no skip-to-content link. Add one before the header and a stable main-content target on each page.
 
-**Improve:** Provide a persistent gallery pause/resume control or use a static gallery. Keep existing semantic links, labelled controls, screen-reader text for animated copy, and reduced-motion support. Review CSS hover transforms in social/footer components under reduced motion as well.
+**Improve:** Provide a persistent gallery pause/resume control or use a static gallery. Keep existing semantic links, labelled controls, screen-reader text for animated copy, and reduced-motion support. Review CSS hover transforms in social/footer components under reduced motion as well. -->
 
 ## Additional refinements — P3
 

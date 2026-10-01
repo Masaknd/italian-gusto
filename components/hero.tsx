@@ -118,7 +118,7 @@ export function HomeHeroSection({
             {[
               [copy.home.heroNav.home, ''],
               [copy.home.heroNav.about, `/${locale}/about`],
-              [copy.home.heroNav.menu, '#recommendations'],
+              [copy.home.heroNav.menu, `/${locale}/menu`],
               [copy.home.heroNav.access, '#access'],
               [copy.home.heroNav.reservation, '#reservation'],
             ].map(([label, href]) => (
