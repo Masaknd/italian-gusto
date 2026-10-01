@@ -61,11 +61,13 @@ export function HomeReservationSection({
           </LanguageFont>
         </div>
         <motion.ul
-          className='gusto-booking-notes w-auto overflow-hidden text-left text-sm leading-6.75 text-warm-light sm:w-[60vw] lg:w-[30vw] lg:leading-[1.75] xl:text-base xl:leading-10.5'
+          className='gusto-booking-notes w-auto list-disc overflow-hidden pl-4 text-left text-sm leading-relaxed text-warm-light sm:w-[60vw] lg:w-[30vw] xl:text-base'
           {...getInViewFadeUpProps(reduceMotion, revealDelays.body)}
         >
           {copy.home.reservationNotes.map((note) => (
-            <li key={note}>{note}</li>
+            <li key={note} className='mb-4'>
+              {note}
+            </li>
           ))}
         </motion.ul>
         <motion.div
