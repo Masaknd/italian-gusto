@@ -176,13 +176,18 @@ Escape already closes the menu and returns focus to its trigger; preserve that b
 
 ## Additional refinements — P3
 
-- `components/hero.tsx:155` — The homepage “Menu” link goes to recommendations, whereas mobile navigation and footer “Menu” links go to the full menu. Use the same destination for the same label; name the showcase separately.
+<!-- - `components/hero.tsx:155` — The homepage “Menu” link goes to recommendations, whereas mobile navigation and footer “Menu” links go to the full menu. Use the same destination for the same label; name the showcase separately. -->
+
 - `components/wine.tsx:32` — “View the wine menu” opens the general menu at the top. The reviewed English Drink category contains only Ginger Ale. Confirm the real wine offering, then link directly to it or change the promise in both dictionaries.
 - `components/menu-list.tsx:29` and `app/[locale]/menu/page.tsx:78` — Empty/error menu states are brief paragraphs without a strong recovery action. Add useful next steps, such as retrying or opening restaurant contact details. Preserve the existing Japanese-menu link for missing English translations. These states were reviewed in source only.
-- `components/social.tsx:87` — Hover scaling is applied to the wrapper and again to nested text, creating compounded enlargement. Use a smaller, single hover treatment and equivalent focus feedback.
-- `components/footer.tsx:67` — Phone footer links have 16 px line height with no vertical padding. Increase their hit areas while keeping the footer compact.
+
+<!-- - `components/social.tsx:87` — Hover scaling is applied to the wrapper and again to nested text, creating compounded enlargement. Use a smaller, single hover treatment and equivalent focus feedback. -->
+<!-- - `components/footer.tsx:67` — Phone footer links have 16 px line height with no vertical padding. Increase their hit areas while keeping the footer compact. -->
+
 - `app/[locale]/about/page.tsx:49` — About repeats the homepage story, then the same gallery/reservation/access sequence. Give this page additional useful content: owner expertise, atmosphere, seating, and visit expectations using verified restaurant information.
-- `components/about.tsx:89` — A fixed English image alternative bypasses the Japanese dictionary. Localize it, or use an empty alternative if the illustration is purely decorative.
+
+<!-- - `components/about.tsx:89` — A fixed English image alternative bypasses the Japanese dictionary. Localize it, or use an empty alternative if the illustration is purely decorative. -->
+
 - `components/preview-banner.tsx:13` — The fixed draft banner has no corresponding reserved page space. Check its interaction with the consent banner and last footer controls during a future draft-preview pass.
 
 ## What to preserve

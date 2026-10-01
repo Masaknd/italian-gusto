@@ -16,7 +16,7 @@ export async function PreviewBanner({ locale }: { locale: Locale }) {
       <span>{copy.active}</span>
       <form action='/api/draft' method='post'>
         <button
-          className='rounded border border-white px-3 py-1 font-semibold transition-colors hover:bg-white hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+          className='cursor-pointer rounded border border-white px-3 py-1 font-semibold transition-colors hover:bg-white hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
           type='submit'
         >
           {copy.exit}
