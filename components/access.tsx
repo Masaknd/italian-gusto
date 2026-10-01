@@ -48,7 +48,7 @@ export function HomeAccessSection({
       </div>
       <div className='gusto-access-grid grid w-full grid-rows-2 justify-center gap-6 text-left lg:w-[80%] lg:grid-cols-5 lg:grid-rows-none lg:gap-9 xl:gap-6 3xl:gap-[min(1.25vw,24px)]'>
         <motion.div
-          className='gusto-map [aspect-ratio:auto] h-auto w-full overflow-hidden bg-[var(--color-map-surface)] lg:col-span-3'
+          className='gusto-map aspect-auto h-auto w-full overflow-hidden bg-[var(--color-map-surface)] lg:col-span-3'
           {...getInViewFadeUpProps(reduceMotion, revealDelays.map)}
         >
           <iframe
