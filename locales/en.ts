@@ -222,6 +222,10 @@ export const en = {
     accept: 'Allow analytics',
     reject: 'Decline analytics',
     change: 'Change analytics choice',
+    currentChoice: 'Current choice:',
+    noChoice: 'No choice saved yet',
+    savedAccept: 'Saved: analytics allowed.',
+    savedReject: 'Saved: analytics declined.',
   },
   translations: {
     unavailable: 'Some items are not yet available in English.',

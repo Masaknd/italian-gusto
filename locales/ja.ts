@@ -222,6 +222,10 @@ export const ja = {
     accept: '同意する',
     reject: '同意しない',
     change: 'アクセス解析の設定を変更する',
+    currentChoice: '現在の設定：',
+    noChoice: '未選択',
+    savedAccept: 'アクセス解析への同意を保存しました。',
+    savedReject: 'アクセス解析を利用しない設定を保存しました。',
   },
   translations: {
     unavailable: '一部のメニューは英語版を準備中です。',

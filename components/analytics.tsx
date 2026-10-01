@@ -21,20 +21,30 @@ export function setAnalyticsConsent(allowed: boolean) {
   window.dispatchEvent(new Event(consentEvent));
 }
 
-export function Analytics({ locale }: { locale: Locale }) {
-  const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const pathname = usePathname();
-  const copy = getDictionary(locale);
+export function useAnalyticsConsent() {
   const [consent, setConsent] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-  const lastPageView = useRef<string | null>(null);
 
   useEffect(() => {
     const sync = () => setConsent(window.localStorage.getItem(consentKey));
     sync();
     window.addEventListener(consentEvent, sync);
-    return () => window.removeEventListener(consentEvent, sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener(consentEvent, sync);
+      window.removeEventListener('storage', sync);
+    };
   }, []);
+
+  return consent;
+}
+
+export function Analytics({ locale }: { locale: Locale }) {
+  const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const pathname = usePathname();
+  const copy = getDictionary(locale);
+  const consent = useAnalyticsConsent();
+  const [ready, setReady] = useState(false);
+  const lastPageView = useRef<string | null>(null);
 
   useEffect(() => {
     if (id) {

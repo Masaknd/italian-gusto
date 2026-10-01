@@ -171,6 +171,99 @@ test('privacy controls and localized footer home destination are available', asy
   ).toHaveAttribute('href', '#access');
 });
 
+for (const {
+  locale,
+  change,
+  allow,
+  decline,
+  currentLabel,
+  none,
+  savedAllow,
+  savedDecline,
+} of [
+  {
+    locale: 'en',
+    change: 'Change analytics choice',
+    allow: 'Allow analytics',
+    decline: 'Decline analytics',
+    currentLabel: 'Current choice:',
+    none: 'No choice saved yet',
+    savedAllow: 'Saved: analytics allowed.',
+    savedDecline: 'Saved: analytics declined.',
+  },
+  {
+    locale: 'ja',
+    change: 'アクセス解析の設定を変更する',
+    allow: '同意する',
+    decline: '同意しない',
+    currentLabel: '現在の設定：',
+    none: '未選択',
+    savedAllow: 'アクセス解析への同意を保存しました。',
+    savedDecline: 'アクセス解析を利用しない設定を保存しました。',
+  },
+]) {
+  test(`${locale} privacy choice shows its saved state and confirmation`, async ({
+    page,
+  }) => {
+    await page.goto(`/${locale}/privacy`);
+    const preferences = page.locator('#preferences');
+    const choices = preferences.getByRole('group', { name: change });
+    const currentChoice = preferences.getByText(currentLabel, { exact: false });
+    const allowButton = choices.getByRole('button', { name: allow });
+    const declineButton = choices.getByRole('button', { name: decline });
+
+    await expect(currentChoice).toContainText(none);
+    await expect(allowButton).toHaveAttribute('aria-pressed', 'false');
+    await expect(declineButton).toHaveAttribute('aria-pressed', 'false');
+
+    await allowButton.click();
+    await expect(currentChoice).toContainText(allow);
+    await expect(allowButton).toHaveAttribute('aria-pressed', 'true');
+    await expect(preferences.getByRole('status')).toHaveText(savedAllow);
+    await expect
+      .poll(() =>
+        page.evaluate(() => localStorage.getItem('gusto-analytics-consent')),
+      )
+      .toBe('yes');
+
+    await page.reload();
+    await expect(allowButton).toHaveAttribute('aria-pressed', 'true');
+    await expect(currentChoice).toContainText(allow);
+    await expect(preferences.getByRole('status')).toBeEmpty();
+
+    await declineButton.click();
+    await expect(currentChoice).toContainText(decline);
+    await expect(declineButton).toHaveAttribute('aria-pressed', 'true');
+    await expect(allowButton).toHaveAttribute('aria-pressed', 'false');
+    await expect(preferences.getByRole('status')).toHaveText(savedDecline);
+    await expect
+      .poll(() =>
+        page.evaluate(() => localStorage.getItem('gusto-analytics-consent')),
+      )
+      .toBe('no');
+  });
+}
+
+test('phone privacy contents can expand without hiding the policy introduction', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile');
+  await page.goto('/en/privacy');
+
+  const contents = page.getByRole('navigation', { name: 'On this page' });
+  const summary = contents.locator('summary');
+  const firstLink = contents.getByRole('link', {
+    name: 'Information we collect',
+  });
+  await expect(summary).toBeVisible();
+  await expect(firstLink).toBeHidden();
+  await expect(
+    page.getByRole('heading', { name: 'Information we collect' }),
+  ).toBeVisible();
+  await summary.click();
+  await expect(firstLink).toBeVisible();
+});
+
 test('privacy content is centered while its introduction stays left aligned', async ({
   page,
 }) => {

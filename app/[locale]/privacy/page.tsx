@@ -38,6 +38,16 @@ export default async function PrivacyPage({
     { id: 'preferences', title: policy.change },
     { id: 'contact', title: policy.contactTitle },
   ];
+  const contentsLinks = contents.map((section) => (
+    <li key={section.id}>
+      <a
+        href={`#${section.id}`}
+        className='inline-block py-2 text-sm leading-6 underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink'
+      >
+        {section.title}
+      </a>
+    </li>
+  ));
   return (
     <>
       <main className='gusto-home gusto-page'>
@@ -58,19 +68,20 @@ export default async function PrivacyPage({
               aria-label={policy.contents}
               className='border-t border-ink/20 pt-5'
             >
-              <p className='mb-3 text-lg font-bold'>{policy.contents}</p>
-              <ul className='m-0 flex list-none flex-col gap-1 p-0'>
-                {contents.map((section) => (
-                  <li key={section.id}>
-                    <a
-                      href={`#${section.id}`}
-                      className='inline-block py-2 text-sm leading-6 underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink'
-                    >
-                      {section.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <details className='sm:hidden'>
+                <summary className='min-h-11 cursor-pointer py-2 text-lg font-bold'>
+                  {policy.contents}
+                </summary>
+                <ul className='m-0 flex list-none flex-col gap-1 p-0'>
+                  {contentsLinks}
+                </ul>
+              </details>
+              <div className='hidden sm:block'>
+                <p className='mb-3 text-lg font-bold'>{policy.contents}</p>
+                <ul className='m-0 flex list-none flex-col gap-1 p-0'>
+                  {contentsLinks}
+                </ul>
+              </div>
             </nav>
 
             <div className='max-w-full min-w-0 space-y-10 sm:space-y-12'>
