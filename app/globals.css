@@ -683,6 +683,10 @@
   will-change: transform;
 }
 
+.gusto-gallery:hover .gusto-gallery-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -1,5 +1,31 @@
 import { expect, test } from '@playwright/test';
 
+test('gallery pauses on hover and resumes after the pointer leaves', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/en');
+
+  const gallery = page.locator('#social .gusto-gallery');
+  const track = gallery.locator('.gusto-gallery-track');
+  await expect(track).toHaveCSS('animation-play-state', 'running');
+
+  await gallery.hover();
+  await expect(track).toHaveCSS('animation-play-state', 'paused');
+  const position = () =>
+    track.evaluate(
+      (element) => new DOMMatrix(getComputedStyle(element).transform).m41,
+    );
+  const pausedX = await position();
+  await page.waitForTimeout(300);
+  expect(await position()).toBeCloseTo(pausedX, 1);
+
+  await page.mouse.move(0, 0);
+  await expect(track).toHaveCSS('animation-play-state', 'running');
+  await expect.poll(position).toBeGreaterThan(pausedX + 1);
+});
+
 test('booking controls stay actionable and link directly to SelectType', async ({
   page,
 }, testInfo) => {
