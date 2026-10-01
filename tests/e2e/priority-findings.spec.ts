@@ -1,5 +1,36 @@
 import { expect, test } from '@playwright/test';
 
+for (const { locale, label } of [
+  { locale: 'ja', label: '本文へスキップ' },
+  { locale: 'en', label: 'Skip to main content' },
+]) {
+  test(`${locale} skip link reaches main content on every page`, async ({
+    page,
+  }, testInfo) => {
+    for (const route of ['', '/menu', '/about', '/privacy']) {
+      await page.goto(`/${locale}${route}`);
+      const skipLink = page.getByRole('link', { name: label });
+      await expect(skipLink).toHaveAttribute('href', '#main-content');
+      await expect(page.locator('body a[href]').first()).toHaveAttribute(
+        'href',
+        '#main-content',
+      );
+
+      if (testInfo.project.name === 'mobile') {
+        await skipLink.focus();
+      } else {
+        await page.keyboard.press('Tab');
+      }
+      await expect(skipLink).toBeFocused();
+      await expect(skipLink).toBeInViewport();
+
+      await page.keyboard.press('Enter');
+      await expect(page).toHaveURL(/#main-content$/);
+      await expect(page.locator('main#main-content')).toBeFocused();
+    }
+  });
+}
+
 test('gallery pauses on hover and resumes after the pointer leaves', async ({
   page,
 }, testInfo) => {

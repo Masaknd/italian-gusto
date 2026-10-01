@@ -2,6 +2,7 @@ export const ja = {
   locale: 'ja',
   nav: {
     home: 'ホーム',
+    skipToContent: '本文へスキップ',
     menu: 'メニュー',
     closeMenu: 'メニューを閉じる',
     switchLanguage: 'Switch to English',

@@ -77,6 +77,12 @@ export default async function LocaleLayout({
       className={`${notoSansJp.variable} ${kirigirisu.variable} ${kalam.variable} ${yamafont.variable} h-full antialiased`}
     >
       <body className='flex min-h-full flex-col'>
+        <a
+          href='#main-content'
+          className='fixed top-4 left-4 z-[100] -translate-y-[calc(100%+2rem)] rounded-md bg-ink px-5 py-3 text-sm font-bold text-warm-light shadow-lg focus:translate-y-0 focus-visible:outline-coral'
+        >
+          {d.nav.skipToContent}
+        </a>
         <Analytics locale={locale} />
         <SiteHeader locale={locale} />
         {children}

@@ -2,6 +2,7 @@ export const en = {
   locale: 'en',
   nav: {
     home: 'Home',
+    skipToContent: 'Skip to main content',
     menu: 'Menu',
     closeMenu: 'Close menu',
     switchLanguage: '日本語に切り替える',

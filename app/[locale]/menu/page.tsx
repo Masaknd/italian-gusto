@@ -45,7 +45,7 @@ export default async function MenuPage({
 
   return (
     <>
-      <main className='gusto-home gusto-page'>
+      <main id='main-content' tabIndex={-1} className='gusto-home gusto-page'>
         <section
           className='relative w-full overflow-hidden text-ink'
           aria-labelledby='gusto-menu-title'

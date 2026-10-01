@@ -40,7 +40,7 @@ export default async function AboutPage({
 
   return (
     <>
-      <main className='gusto-home gusto-page'>
+      <main id='main-content' tabIndex={-1} className='gusto-home gusto-page'>
         <AboutPageHero copy={copy} locale={locale} />
         <HomeSocialSection
           copy={copy}

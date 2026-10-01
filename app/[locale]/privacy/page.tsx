@@ -50,7 +50,7 @@ export default async function PrivacyPage({
   ));
   return (
     <>
-      <main className='gusto-home gusto-page'>
+      <main id='main-content' tabIndex={-1} className='gusto-home gusto-page'>
         <div className='mx-auto grid w-full place-items-center px-4 pt-6 pb-16 sm:px-8 sm:pt-8 sm:pb-24 xl:px-24 3xl:px-60'>
           <div className='gusto-privacy-intro mb-10 w-full max-w-[960px] text-left sm:mb-16'>
             <h1
