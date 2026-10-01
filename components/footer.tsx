@@ -113,10 +113,10 @@ export function HomeFooter({
                 weight='regular'
                 className='col-start-1 row-start-1 size-4 sm:static sm:size-6 xl:size-8'
               />
-              <p className='col-start-2 m-0 border-0 p-0 whitespace-nowrap sm:pr-4 sm:pl-2 sm:leading-4 lg:pr-2 lg:pl-1 xl:pr-4 xl:pl-2'>
+              <p className='col-start-2 m-0 p-0 whitespace-nowrap sm:pr-4 sm:pl-2 sm:leading-4 lg:pr-2 lg:pl-1 xl:pr-4 xl:pl-2'>
                 {copy.footer.lunch}: {siteConfig.lunchHours}
               </p>
-              <p className='col-start-2 m-0 border-0 p-0 whitespace-nowrap sm:border-l sm:border-content sm:px-4 sm:leading-4 lg:px-2 xl:px-4'>
+              <p className='col-start-2 m-0 border-0 p-0 whitespace-nowrap sm:border-l sm:border-l-ink sm:px-4 sm:leading-4 lg:px-2 xl:px-4'>
                 {copy.footer.dinner}: {siteConfig.dinnerHours}
               </p>
             </div>
