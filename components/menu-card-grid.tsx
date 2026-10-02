@@ -49,7 +49,7 @@ export function MenuCardGrid({
         return (
           <motion.article
             key={item.id}
-            className='gusto-menu-card flex min-w-0 flex-col items-start gap-4 rounded-2xl bg-warm-light p-6 [box-shadow:rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.06)_0px_2px_4px_-1px]'
+            className='gusto-menu-card flex min-w-0 flex-col items-start gap-4 rounded-2xl bg-brand-paper p-6 [box-shadow:rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.06)_0px_2px_4px_-1px]'
             variants={{
               hidden: {
                 opacity: 0,

@@ -43,21 +43,21 @@ P1 means address in the next design iteration; P2 means follow immediately after
 
 ### 1. Desktop inner pages lose primary navigation — P1, confirmed
 
-`components/site-header.tsx:150` — The desktop navigation receives `hidden` on every current main page. The hamburger is also hidden at desktop widths. The homepage supplies its own hero navigation, but Menu, About, and Privacy have only the logo and language switch at the top. Reaching another section requires returning home or finding the footer.
+<!-- `components/site-header.tsx:150` — The desktop navigation receives `hidden` on every current main page. The hamburger is also hidden at desktop widths. The homepage supplies its own hero navigation, but Menu, About, and Privacy have only the logo and language switch at the top. Reaching another section requires returning home or finding the footer.
 
-**Improve:** Add a consistent desktop header with Menu, About, Directions, and a clearly emphasized reservation link. Add a current-page indicator.
+**Improve:** Add a consistent desktop header with Menu, About, Directions, and a clearly emphasized reservation link. Add a current-page indicator. -->
 
  <!-- Keep the language switch visible and make its entire visual target clickable; currently the large triangular area advertises interaction while only the text link performs navigation (`components/site-header.tsx:165`). -->
 
-**Acceptance:** From the top of each inner page, a guest can reach the menu, directions, and reservations in one click.
+<!-- **Acceptance:** From the top of each inner page, a guest can reach the menu, directions, and reservations in one click.
 
-[Screenshot: desktop menu](design-review/gusto-en-menu.png)
+[Screenshot: desktop menu](design-review/gusto-en-menu.png) -->
 
 ### 2. Several core color combinations have insufficient contrast — P1, confirmed
 
 <!-- `components/access.tsx:54`, `components/wine.tsx:93`, `components/reservation.tsx:65`, `components/analytics.tsx:84`,  -->
 
-`components/menu-card-grid.tsx:77`
+<!-- `components/menu-card-grid.tsx:77` -->
 <!-- — Cream text on coral, and coral menu names on cream cards, measure **2.46:1** using `#f6e6e0` and `#f26c4f`. These are below both the normal-text and large-text thresholds. Coral on the nominal paper color measures about **2.66:1**, although the actual textured and photographic backgrounds vary. -->
 
 <!-- [WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) requires at least 4.5:1 for ordinary text and 3:1 for qualifying large text. The issue affects useful information, including addresses, travel instructions, dish names, and booking button labels. -->
@@ -66,17 +66,17 @@ P1 means address in the next design iteration; P2 means follow immediately after
 
 <!-- **Acceptance:** Verify final colors on all actual surfaces, including hover and focus states; normal text reaches 4.5:1 and large text reaches 3:1. -->
 
-[Screenshot: directions](design-review/gusto-access-mobile.png) · [Screenshot: footer](design-review/gusto-footer-mobile.png)
+<!-- [Screenshot: directions](design-review/gusto-access-mobile.png) · [Screenshot: footer](design-review/gusto-footer-mobile.png) -->
 
 ### 3. The menu looks unfinished and takes too much scrolling — P1, confirmed with local content
 
-`components/menu-card-grid.tsx:65` — The English page rendered **61 cards**, with **59 images pointing to the same `mock.png` empty-plate asset**. At 390 × 844, the whole page measured **38,123 CSS pixels**, approximately 45 viewport heights. Every placeholder consumes a large square image area.
+<!-- `components/menu-card-grid.tsx:65` — The English page rendered **61 cards**, with **59 images pointing to the same `mock.png` empty-plate asset**. At 390 × 844, the whole page measured **38,123 CSS pixels**, approximately 45 viewport heights. Every placeholder consumes a large square image area.
 
 **Improve:** Publish real dish photography where available. For dishes without photography, use a deliberate compact name/description/price layout rather than a repeated empty plate. Reserve large photographic cards for a small set of featured dishes. Keep remaining items in easily compared rows or compact cards grouped by category.
 
 **Acceptance:** Every image represents its dish or is clearly decorative; a missing photograph does not create a large empty visual block. Guests can compare several items within one phone viewport.
 
-[Screenshot: repeated placeholder plates](design-review/gusto-en-menu.png)
+[Screenshot: repeated placeholder plates](design-review/gusto-en-menu.png) -->
 
 ### 4. Useful content waits for lengthy text animations — P1, confirmed in source
 
@@ -88,17 +88,17 @@ P1 means address in the next design iteration; P2 means follow immediately after
 
 ### 5. Recommendations change the meaning of page scrolling — P1, confirmed design risk
 
-`components/recommendations.tsx:229` — Wheel events are intercepted, the window jumps by viewport increments, and subsequent wheel input is blocked while the horizontal transition settles and for a further 500 ms. The section has no visible previous/next controls or position indicator. Users looking for reservations must traverse the showcase before continuing down the page.
+<!-- `components/recommendations.tsx:229` — Wheel events are intercepted, the window jumps by viewport increments, and subsequent wheel input is blocked while the horizontal transition settles and for a further 500 ms. The section has no visible previous/next controls or position indicator. Users looking for reservations must traverse the showcase before continuing down the page.
 
 **Improve:** Prefer a normal vertical featured-dish sequence on phones. If retaining a desktop carousel, provide previous/next buttons, a current/total indicator, and a direct way to continue to the next section. Keep page scrolling predictable. Check keyboard focus in translated offscreen panels and short-height windows when implementing the change.
 
 **Acceptance:** Every dish can be reached with explicit controls and keyboard input; moving toward reservations never requires guessing how the scroll effect works.
 
-The reduced-motion mode already changes the track to a column, which is a useful foundation. Its children still use `h-screen` (`components/recommendations.tsx:279`); allow content-driven heights in that mode to accommodate long copy and larger text. Clipping at enlarged text was not separately reproduced.
+The reduced-motion mode already changes the track to a column, which is a useful foundation. Its children still use `h-screen` (`components/recommendations.tsx:279`); allow content-driven heights in that mode to accommodate long copy and larger text. Clipping at enlarged text was not separately reproduced. -->
 
 ### 6. The hero gives imagery more priority than orientation and action — P2, visual judgment
 
-`components/hero.tsx:18`, `components/hero.tsx:43`, `components/hero.tsx:65` — The hero fills a viewport, with absolutely positioned imagery and title. On desktop, the title crosses the central plate; on phones, the English title overlays the upper dish. The phone hero offers no visible menu or booking action outside the hamburger. The introductory location copy exists in the dictionaries but is not rendered here.
+<!-- `components/hero.tsx:18`, `components/hero.tsx:43`, `components/hero.tsx:65` — The hero fills a viewport, with absolutely positioned imagery and title. On desktop, the title crosses the central plate; on phones, the English title overlays the upper dish. The phone hero offers no visible menu or booking action outside the hamburger. The introductory location copy exists in the dictionaries but is not rendered here. -->
 
 <!-- **Improve:** Give the title a quieter area, reduce the image overlap, and add a brief Osaka/location descriptor. Place “View menu” and a primary reservation action under the heading. Size the phone hero around its content so the next section is discoverable. Retain the food collage and brand lettering. -->
 
@@ -118,9 +118,9 @@ The reduced-motion mode already changes the track to a column, which is a useful
 
 ### 8. Category navigation and prices need clearer hierarchy — P2, confirmed and visual judgment
 
-`components/menu-category-nav.tsx:24` — Wrapped category links retain leading separators, leaving a dangling divider at the start of a new line. The category bar scrolls away on a very long menu. Long labels are horizontally compressed (`components/menu-category-nav.tsx:66`).
+<!-- `components/menu-category-nav.tsx:24` — Wrapped category links retain leading separators, leaving a dangling divider at the start of a new line. The category bar scrolls away on a very long menu. Long labels are horizontally compressed (`components/menu-category-nav.tsx:66`).
 
-**Improve:** Use comfortably padded category buttons or a compact sticky category control with a visible current category. Avoid compressing glyphs. Keep anchor destinations clear of the sticky control.
+**Improve:** Use comfortably padded category buttons or a compact sticky category control with a visible current category. Avoid compressing glyphs. Keep anchor destinations clear of the sticky control. -->
 
 <!-- `components/menu-price.tsx:15` — Pre-tax and tax-inclusive amounts compete visually, while the tax explanation is much smaller and tightly packed. The English label uses the Japanese accent font. Values such as 1078 lack grouping. -->
 
@@ -188,7 +188,7 @@ Escape already closes the menu and returns focus to its trigger; preserve that b
 
 <!-- - `components/about.tsx:89` — A fixed English image alternative bypasses the Japanese dictionary. Localize it, or use an empty alternative if the illustration is purely decorative. -->
 
-- `components/preview-banner.tsx:13` — The fixed draft banner has no corresponding reserved page space. Check its interaction with the consent banner and last footer controls during a future draft-preview pass.
+<!-- - `components/preview-banner.tsx:13` — The fixed draft banner has no corresponding reserved page space. Check its interaction with the consent banner and last footer controls during a future draft-preview pass. -->
 
 ## What to preserve
 
