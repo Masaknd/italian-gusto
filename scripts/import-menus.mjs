@@ -7,7 +7,6 @@ import nextEnv from '@next/env';
 import { createClient } from 'microcms-js-sdk';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const sourcePath = resolve(projectRoot, 'app/sample-menu-list.json');
 const endpoint = 'menus';
 const { loadEnvConfig } = nextEnv;
 const categoryMap = new Map([
@@ -19,6 +18,7 @@ const categoryMap = new Map([
   ['pizza', 'Pizza'],
   ['desert', 'dessert'],
   ['dessert', 'dessert'],
+  ['drink', 'ドリンク'],
 ]);
 
 /** @typedef {{ url: string, width?: number, height?: number }} SourceImage */
@@ -26,6 +26,8 @@ const categoryMap = new Map([
  * @typedef {object} SourceMenu
  * @property {string} menuName
  * @property {string} category
+ * @property {string=} subCategory
+ * @property {string=} subSubCategory
  * @property {number} price
  * @property {string=} description
  * @property {SourceImage=} image
@@ -36,6 +38,8 @@ const categoryMap = new Map([
  * @typedef {object} MenuWriteContent
  * @property {string} name
  * @property {string[]} category
+ * @property {string=} subCategory
+ * @property {string=} type
  * @property {number} priceExcludingTax
  * @property {string=} description
  * @property {SourceImage=} image
@@ -45,13 +49,16 @@ const categoryMap = new Map([
 /** @typedef {MenuWriteContent & { id: string }} ExistingMenu */
 
 function usage() {
-  console.log(`Import app/sample-menu-list.json into the microCMS "menus" API.
+  console.log(`Import sample menu JSON into the microCMS "menus" API.
 
 Usage:
   pnpm import:menus           Validate and preview changes (no writes)
   pnpm import:menus --write   Create missing menu content with POST
   pnpm import:menus --write --allow-updates
                               Apply changes to existing content with PATCH
+  pnpm import:drinks          Preview app/sample-drink-menu-list.json
+  pnpm import:drinks --write --allow-updates
+                              Create and update drink menu content
 
 The command loads MICROCMS_SERVICE_DOMAIN and MICROCMS_API_KEY from the same
 .env files as Next.js. GET and POST are required; PATCH is required only with
@@ -118,6 +125,18 @@ export function parseSourceMenu(value, index) {
 
   if (description) content.description = description;
 
+  for (const [sourceField, cmsField] of /** @type {const} */ ([
+    ['subCategory', 'subCategory'],
+    ['subSubCategory', 'type'],
+  ])) {
+    if (item[sourceField] !== undefined) {
+      if (typeof item[sourceField] !== 'string') {
+        throw new Error(`Item ${index + 1}.${sourceField} must be a string`);
+      }
+      content[cmsField] = item[sourceField].trim();
+    }
+  }
+
   // Only microCMS media-library URLs are valid for a microCMS image field.
   // Placeholder values in the sample JSON are intentionally ignored.
   if (item.image && typeof item.image === 'object' && !Array.isArray(item.image)) {
@@ -165,6 +184,10 @@ export function parseSource(value) {
 function needsUpdate(desired, existing) {
   return Object.entries(desired).some(([key, value]) => {
     const current = existing[/** @type {keyof MenuWriteContent} */ (key)];
+    // Optional text may be omitted or null when it is empty in microCMS.
+    if ((key === 'subCategory' || key === 'type') && value === '') {
+      return current != null && current !== '';
+    }
     return JSON.stringify(current) !== JSON.stringify(value);
   });
 }
@@ -202,7 +225,7 @@ async function main() {
   }
 
   const unknownArgs = [...args].filter(
-    (arg) => arg !== '--write' && arg !== '--allow-updates',
+    (arg) => arg !== '--write' && arg !== '--allow-updates' && arg !== '--drinks',
   );
   if (unknownArgs.length > 0) {
     throw new Error(`Unknown argument: ${unknownArgs.join(', ')}`);
@@ -217,6 +240,12 @@ async function main() {
     );
   }
 
+  const sourcePath = resolve(
+    projectRoot,
+    args.has('--drinks')
+      ? 'app/sample-drink-menu-list.json'
+      : 'app/sample-menu-list.json',
+  );
   const source = JSON.parse(await readFile(sourcePath, 'utf8'));
   const menus = parseSource(source);
   const client = createClient({ serviceDomain, apiKey });

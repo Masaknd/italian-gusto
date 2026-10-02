@@ -27,6 +27,15 @@ pnpm import:menus --write
 
 The importer maps `menuName` to `name`, `price` to `priceExcludingTax`, and the sample category strings to the configured microCMS select-option labels. It matches existing content by its unique Japanese menu name, creates missing content through the POST API, verifies the stored values after writing, and leaves unrelated content untouched. If the dry run reports updates, grant PATCH access and explicitly apply them with `pnpm import:menus --write --allow-updates`. The placeholder image URLs in the sample file are omitted; replace them with media-library URLs beginning with `https://images.microcms-assets.io/assets/` to import images.
 
+To import `app/sample-drink-menu-list.json`, use the same `menus` API and credentials. Its `category` select must include `ドリンク`. Add optional **text** fields with field IDs `subCategory` and `type` to preserve the source's drink groups and wine styles. The importer maps JSON `subCategory` to CMS `subCategory` and JSON `subSubCategory` to CMS `type`. These fields store the source values as strings (including an empty wine style for non-wine drinks); the website continues to display the entries in its existing drink section.
+
+```sh
+pnpm import:drinks
+pnpm import:drinks --write --allow-updates
+```
+
+The drink importer maps `drink` to the existing CMS label `ドリンク`. GET and POST permissions are required; PATCH is also required when an existing drink differs from the source. Source names and sort orders must be unique. Empty image URLs are omitted. The import preserves English translation fields; new drinks still need the existing translation and review workflow before appearing on `/en/menu`.
+
 ### `featured-menus`
 
 Create fields: `name` (text, required), `description` (textarea), `image` (image, required), `sortOrder` (number, required), and `isAvailable` (boolean, required). Optionally add `menuCategory` (select) with values matching the `menus` category options to link a recommendation to that category; without it, the recommendation links to the complete menu. The website displays up to five published, available entries. It does not insert sample recommendations in production.

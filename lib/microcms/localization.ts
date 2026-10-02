@@ -68,6 +68,8 @@ export function localizeMenu(
     categoryLabel:
       labels[category.toLowerCase()] ??
       (locale === 'ja' ? category : labels.other),
+    subCategory: item.subCategory,
+    type: item.type,
     priceExcludingTax: item.priceExcludingTax,
     image: item.image
       ? localizedImage(item.image, locale, text.name)

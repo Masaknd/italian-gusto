@@ -121,6 +121,22 @@ export const en = {
       other: 'Other',
     },
     categoryNavigation: 'Menu categories',
+    drinkSubCategories: {
+      wine: 'Wine',
+      beer: 'Beer',
+      hiball: 'Highballs',
+      highball: 'Highballs',
+      cocktail: 'Cocktails',
+      sour: 'Sours',
+      'none-alcohol': 'Non-alcoholic',
+      'non-alcohol': 'Non-alcoholic',
+      'soft-drink': 'Soft drinks',
+    },
+    drinkTypes: {
+      sparkling: 'Sparkling',
+      white: 'White wine',
+      red: 'Red wine',
+    },
     marquee: 'Gusto Italian Bar',
   },
   featured: {

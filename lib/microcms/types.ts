@@ -9,6 +9,8 @@ export type Menu = {
   name: string;
   category: string;
   categoryLabel?: string;
+  subCategory?: string;
+  type?: string;
   priceExcludingTax: number;
   description?: string;
   image?: CmsImage;

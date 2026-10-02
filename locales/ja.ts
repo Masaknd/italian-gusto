@@ -117,6 +117,22 @@ export const ja = {
       other: 'その他',
     },
     categoryNavigation: 'メニューカテゴリー',
+    drinkSubCategories: {
+      wine: 'ワイン',
+      beer: 'ビール',
+      hiball: 'ハイボール',
+      highball: 'ハイボール',
+      cocktail: 'カクテル',
+      sour: 'サワー',
+      'none-alcohol': 'ノンアルコール',
+      'non-alcohol': 'ノンアルコール',
+      'soft-drink': 'ソフトドリンク',
+    },
+    drinkTypes: {
+      sparkling: 'スパークリング',
+      white: '白ワイン',
+      red: '赤ワイン',
+    },
     marquee: 'イタリアンバル グスト',
   },
   featured: {

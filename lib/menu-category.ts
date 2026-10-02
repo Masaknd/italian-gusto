@@ -23,3 +23,16 @@ export function getMenuCategoryAnchor(category: string) {
     .replace(/^-+|-+$/g, '');
   return `category-${slug || 'menu'}`;
 }
+
+export function groupDrinkMenus<
+  T extends { subCategory?: string; type?: string },
+>(menus: T[]) {
+  return Object.entries(
+    Object.groupBy(menus, (menu) => menu.subCategory?.trim() ?? ''),
+  ).map(([subCategory, items]) => ({
+    subCategory,
+    types: Object.entries(
+      Object.groupBy(items ?? [], (menu) => menu.type?.trim() ?? ''),
+    ).map(([type, typeItems]) => ({ type, items: typeItems ?? [] })),
+  }));
+}

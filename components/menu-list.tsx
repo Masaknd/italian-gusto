@@ -4,9 +4,11 @@ import type { getDictionary } from '@/locales';
 import { AnimatedMarquee } from './animated-marquee';
 import { InViewHeading } from './in-view-heading';
 import { MenuCardGrid } from './menu-card-grid';
+import { DrinkMenuList } from './drink-menu-list';
 import { MenuCategoryNav } from './menu-category-nav';
 import {
   getMenuCategoryAnchor,
+  isDrinkMenuCategory,
   putDrinkMenuCategoryLast,
 } from '@/lib/menu-category';
 
@@ -55,11 +57,19 @@ export function MenuList({
               >
                 {items?.[0]?.categoryLabel ?? category}
               </InViewHeading>
-              <MenuCardGrid
-                excludingTaxLabel={copy.menu.excludingTax}
-                items={items ?? []}
-                locale={locale}
-              />
+              {isDrinkMenuCategory(category) ? (
+                <DrinkMenuList
+                  items={items ?? []}
+                  copy={copy}
+                  locale={locale}
+                />
+              ) : (
+                <MenuCardGrid
+                  excludingTaxLabel={copy.menu.excludingTax}
+                  items={items ?? []}
+                  locale={locale}
+                />
+              )}
             </section>
           );
         })}

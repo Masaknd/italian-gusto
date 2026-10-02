@@ -31,6 +31,21 @@ const item = {
   englishSourceHash: sourceHash(source),
 };
 
+test('drink subcategory and type reach the menu list in both locales', () => {
+  for (const [locale, dictionary] of [
+    ['ja', ja],
+    ['en', en],
+  ]) {
+    const drink = localizeMenu(
+      { ...item, category: ['ドリンク'], subCategory: 'wine', type: 'red' },
+      locale,
+      dictionary.menu.categories,
+    );
+    assert.equal(drink.subCategory, 'wine');
+    assert.equal(drink.type, 'red');
+  }
+});
+
 test('Japanese is the default, independent of translation status', () => {
   const result = localizeMenu(
     { ...item, englishStatus: ['failed'] },

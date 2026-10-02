@@ -74,6 +74,34 @@ const preview = makeRecord(
   3,
   'needs-review',
 );
+const drinkRecords = [
+  ['sparkling-1', 'スパークリングＡ', 'Sparkling A', 'wine', 'sparkling'],
+  ['beer-1', 'ビールＡ', 'Beer A', 'beer', ''],
+  ['white-1', '白ワインＡ', 'White A', 'wine', 'white'],
+  ['sparkling-2', 'スパークリングＢ', 'Sparkling B', 'wine', 'sparkling'],
+  ['red-1', '赤ワインＡ', 'Red A', 'wine', 'red'],
+  ['soft-1', 'オレンジジュース', 'Orange juice', 'soft-drink', ''],
+  ['house-wine', 'ハウスワイン', 'House wine', 'wine', ''],
+  ['ungrouped', '本日のドリンク', 'Daily drink', undefined, undefined],
+  [
+    'type-only',
+    'グラススパークリング',
+    'Sparkling glass',
+    undefined,
+    'sparkling',
+  ],
+].map(([id, name, nameEn, subCategory, type], index) => {
+  const record = makeRecord(id, name, nameEn, 'ドリンク', index + 5);
+  return {
+    ...record,
+    description: '',
+    descriptionEn: '',
+    image: undefined,
+    subCategory,
+    type,
+    englishSourceHash: hash({ name, description: '' }),
+  };
+});
 const originalFetch = globalThis.fetch;
 
 globalThis.fetch = async (input, init) => {
@@ -118,9 +146,13 @@ globalThis.fetch = async (input, init) => {
   }
   const offset = Number(url.searchParams.get('offset') ?? 0);
   const limit = Number(url.searchParams.get('limit') ?? 100);
+  const contents =
+    process.env.GUSTO_DRINK_FIXTURES === '1' && match[1] === 'menus'
+      ? [...records, ...drinkRecords]
+      : records;
   return Response.json({
-    contents: records.slice(offset, offset + limit),
-    totalCount: records.length,
+    contents: contents.slice(offset, offset + limit),
+    totalCount: contents.length,
     offset,
     limit,
   });

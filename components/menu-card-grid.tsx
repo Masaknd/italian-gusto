@@ -19,12 +19,15 @@ export function MenuCardGrid({
   excludingTaxLabel,
   items,
   locale,
+  headingAs = 'h3',
 }: {
   excludingTaxLabel: string;
   items: Menu[];
   locale: Locale;
+  headingAs?: 'h3' | 'h4' | 'h5';
 }) {
   const reduceMotion = useReducedMotion();
+  const CardHeading = headingAs;
 
   return (
     <motion.div
@@ -74,9 +77,9 @@ export function MenuCardGrid({
               </div>
             )}
             <div className='flex min-h-0 w-full flex-1 flex-col gap-2'>
-              <h3 className='m-0 font-display text-[28px] leading-[34px] font-normal tracking-[-0.25em] text-coral xl:text-4xl xl:leading-[43px] 3xl:text-[42px]! 3xl:leading-[50px]!'>
+              <CardHeading className='m-0 font-display text-[28px] leading-[34px] font-normal tracking-[-0.25em] text-coral xl:text-4xl xl:leading-[43px] 3xl:text-[42px]! 3xl:leading-[50px]!'>
                 {item.name}
-              </h3>
+              </CardHeading>
               {hasDescription && (
                 <LanguageFont
                   as='p'
