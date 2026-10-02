@@ -81,8 +81,10 @@ function Recommendation({
       id={`recommendation-${index}`}
       className={`relative flex h-auto w-full flex-col items-start gap-6 p-[24px_16px] sm:p-[24px_86px] xl:h-full xl:flex-row xl:items-center xl:justify-center xl:p-[60px_120px] 3xl:gap-20 3xl:p-[min(3.125vw,60px)_min(12.5vw,240px)]`}
     >
-      <div className={`gusto-feature-copy h-max w-full xl:w-auto`}>
-        <div className={`gusto-feature-heading w-max`}>
+      <div
+        className={`gusto-feature-copy order-2 h-max w-full xl:order-1 xl:w-auto`}
+      >
+        <div className={`gusto-feature-heading hidden w-max xl:block`}>
           <h3
             className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-14 xl:text-[80px] xl:leading-none 3xl:text-[80px]`}
           >
@@ -91,7 +93,7 @@ function Recommendation({
           </h3>
         </div>
         <div
-          className={`gusto-feature-content mt-4 sm:mt-6 xl:mt-12 3xl:mt-[min(2.3438vw,45px)]`}
+          className={`gusto-feature-content xl:mt-12 3xl:mt-[min(2.3438vw,45px)]`}
         >
           <h3
             className={`m-0 font-display text-[32px] leading-8 font-normal tracking-[-0.25em] text-ink sm:text-[42px] xl:text-[52px] xl:leading-[1.596] 3xl:text-[min(2.7083vw,52px)] 3xl:leading-[1.596]`}
@@ -116,14 +118,23 @@ function Recommendation({
           </RecommendationMoreLink>
         </div>
       </div>
-      <div className='gusto-feature-image relative h-[clamp(240px,56vw,480px)] w-full shrink-0 xl:h-full xl:shrink motion-reduce:xl:h-[min(65vh,620px)]'>
+      <div className='gusto-feature-image relative order-1 flex w-full shrink-0 flex-col items-start gap-6 xl:order-2 xl:block xl:h-full xl:shrink motion-reduce:xl:h-[min(65vh,620px)]'>
+        <div className={`gusto-feature-heading w-max xl:hidden`}>
+          <h3
+            className={`relative font-display text-[32px] leading-8 font-normal tracking-[-0.25em] whitespace-nowrap text-coral after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-[repeating-linear-gradient(90deg,var(--color-brand-coral)_0_8px,transparent_8px_16px)] after:content-[''] sm:text-[60px] sm:leading-14 xl:text-[80px] xl:leading-none 3xl:text-[80px]`}
+          >
+            {copy.featured.title}
+            {copy.featured.numberLabels[index - 1] ?? String(index)}
+          </h3>
+        </div>
         {imageSrc && (
           <Image
             src={imageSrc}
             alt={item.image.alt ?? item.name}
-            fill
+            width={item.image.width || 1200}
+            height={item.image.height || 1200}
             sizes='(max-width: 480px) calc(100vw - 32px), (max-width: 1199px) calc(100vw - 172px), 36vw'
-            className={`pointer-events-none object-contain`}
+            className='pointer-events-none mx-auto block h-auto w-full object-contain xl:absolute xl:inset-0 xl:h-full'
           />
         )}
       </div>

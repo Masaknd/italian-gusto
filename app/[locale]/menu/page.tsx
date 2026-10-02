@@ -11,6 +11,7 @@ import { isLocale } from '@/lib/i18n';
 import { getSocialCards } from '@/lib/social-cards';
 import { getMenuContentForSite } from '@/lib/microcms/content';
 import { getDictionary } from '@/locales';
+
 export async function generateMetadata({
   params,
 }: {

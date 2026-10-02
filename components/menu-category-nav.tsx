@@ -21,7 +21,7 @@ export function MenuCategoryNav({
 
   return (
     <motion.nav
-      className='gusto-menu__category-nav flex w-full flex-wrap content-center items-center gap-x-2 gap-y-0 sm:content-normal sm:gap-x-4 lg:flex lg:items-end lg:justify-start lg:gap-x-6 3xl:gap-x-8'
+      className='gusto-menu__category-nav flex w-full flex-wrap items-center gap-2 sm:gap-3'
       aria-label={ariaLabel}
       initial={reduceMotion ? false : 'hidden'}
       whileInView='visible'
@@ -36,9 +36,9 @@ export function MenuCategoryNav({
       }}
       data-in-view-stagger
     >
-      {categories.map((category, index) => (
+      {categories.map((category) => (
         <motion.span
-          className='flex min-w-0 items-center justify-center'
+          className='flex items-center'
           key={category.id}
           variants={{
             hidden: {
@@ -52,21 +52,9 @@ export function MenuCategoryNav({
             },
           }}
         >
-          {index > 0 && (
-            <span
-              className='mr-2 block h-5 w-0 self-center border-l-2 border-dashed border-ink sm:h-[24px] xl:mr-4 xl:h-8'
-              aria-hidden='true'
-            />
-          )}
           <a
             href={`#${getMenuCategoryAnchor(category.id)}`}
-            className={[
-              'inline-flex items-center justify-center font-display text-xl leading-[29px] font-normal tracking-[-0.25em] whitespace-nowrap text-ink no-underline transition-colors hover:text-[#c3a8a2] sm:text-[32px] sm:leading-[40px] xl:text-[40px] xl:leading-[40px]',
-              // index === 0 ? 'text-brand-ink-hover!' : '',
-              category.label.length > 7 ? 'scale-x-[0.82] sm:scale-x-100' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
+            className='inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-4 py-2.5 font-display text-xl leading-6 font-normal tracking-normal whitespace-nowrap text-coral no-underline transition-colors hover:bg-coral hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-coral sm:px-5 sm:py-3 sm:text-2xl sm:leading-7 3xl:px-6 3xl:text-[28px] 3xl:leading-9'
           >
             <HoverJumpText text={category.label} />
           </a>

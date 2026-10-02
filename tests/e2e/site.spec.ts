@@ -196,9 +196,10 @@ test("the 1920px menu hero uses the supplied title, nav, marquee, and botanical 
   await expect(mainWord).toHaveCSS("font-size", "80px");
   await expect(mainWord).toHaveCSS("line-height", "96px");
   await expect(mainWord).toHaveCSS("letter-spacing", "-20px");
-  await expect(firstCategory).toHaveCSS("font-size", "60px");
-  await expect(firstCategory).toHaveCSS("line-height", "72px");
-  await expect(firstCategory).toHaveCSS("color", "rgb(195, 168, 162)");
+  await expect(firstCategory).toHaveCSS("font-size", "28px");
+  await expect(firstCategory).toHaveCSS("line-height", "36px");
+  await expect(firstCategory).toHaveCSS("background-color", "rgb(27, 40, 27)");
+  await expect(firstCategory).toHaveCSS("color", "rgb(242, 108, 79)");
   await expect(marquee).toHaveCSS("font-size", "86px");
   await expect(marquee).toHaveCSS("line-height", "90px");
   await expect(marquee).toHaveCSS("letter-spacing", "-21.5px");
@@ -399,7 +400,7 @@ test("the 768px menu header matches the small-screen design frame", async ({ pag
   await expect(menu).toBeVisible();
   await expect(titlePrefix).toHaveCSS("font-size", "32px");
   await expect(titleMain).toHaveCSS("font-size", "52px");
-  await expect(page.locator(".gusto-menu__category-nav a").first()).toHaveCSS("font-size", "32px");
+  await expect(page.locator(".gusto-menu__category-nav a").first()).toHaveCSS("font-size", "24px");
   await expect(page.locator(".gusto-menu__marquee")).toBeHidden();
   await expect(page.locator(".gusto-menu__line-art")).toBeHidden();
 
@@ -1048,20 +1049,30 @@ for (const { width, height, project } of [
       const article = articles.nth(index);
       const copy = article.locator(".gusto-feature-copy");
       const image = article.locator(".gusto-feature-image");
+      const title = image.locator(".gusto-feature-heading");
+      const photo = image.locator("img");
       const link = article.getByRole("link");
-      const [articleBox, copyBox, imageBox] = await Promise.all([
+      const [articleBox, copyBox, imageBox, titleBox, photoBox] = await Promise.all([
         article.boundingBox(),
         copy.boundingBox(),
         image.boundingBox(),
+        title.boundingBox(),
+        photo.boundingBox(),
       ]);
 
       expect(articleBox).not.toBeNull();
       expect(copyBox).not.toBeNull();
       expect(imageBox).not.toBeNull();
+      expect(titleBox).not.toBeNull();
+      expect(photoBox).not.toBeNull();
       expect(articleBox!.width).toBeCloseTo(width, 0);
       expect(copyBox!.x).toBeGreaterThanOrEqual(articleBox!.x);
       expect(copyBox!.x + copyBox!.width).toBeLessThanOrEqual(articleBox!.x + articleBox!.width + 1);
-      expect(imageBox!.y).toBeGreaterThanOrEqual(copyBox!.y + copyBox!.height);
+      expect(titleBox!.x).toBeCloseTo(imageBox!.x, 0);
+      expect(photoBox!.y).toBeGreaterThanOrEqual(titleBox!.y + titleBox!.height);
+      expect(photoBox!.width).toBeCloseTo(imageBox!.width, 0);
+      expect(photoBox!.x + photoBox!.width / 2).toBeCloseTo(imageBox!.x + imageBox!.width / 2, 0);
+      expect(copyBox!.y).toBeGreaterThanOrEqual(imageBox!.y + imageBox!.height);
       expect(imageBox!.y + imageBox!.height).toBeLessThanOrEqual(articleBox!.y + articleBox!.height + 1);
       await expect(link).toBeVisible();
 
