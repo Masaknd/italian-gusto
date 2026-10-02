@@ -27,7 +27,7 @@ function WineMoreLink({
       as={MotionLink}
       locale={locale}
       {...getInViewFadeUpProps(reduceMotion)}
-      href={`/${locale}/menu`}
+      href={`/${locale}/menu#category-ドリンク`}
       className={`gusto-wine-more flex w-full items-center justify-start gap-8 text-lg leading-6 text-ink underline underline-offset-4 sm:w-max sm:text-[22px] xl:text-2xl 3xl:leading-[1.36]`}
     >
       <span className='min-w-0 flex-1 sm:flex-none'>{children}</span>
