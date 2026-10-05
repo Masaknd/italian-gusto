@@ -93,16 +93,16 @@ export function useRepeatingEmphasisAnimation(enabled = true) {
   };
 }
 
-export type EmphasisTextSegment = {
+type EmphasisTextSegment = {
   text: string;
   emphasis?: boolean;
 };
 
-export type EmphasisTextLines = readonly (readonly EmphasisTextSegment[])[];
+type EmphasisTextLines = readonly (readonly EmphasisTextSegment[])[];
 
-export type EmphasisTextElement = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
+type EmphasisTextElement = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
-export type AnimatedEmphasisTextProps = {
+type AnimatedEmphasisTextProps = {
   as?: EmphasisTextElement;
   className?: string;
   emphasizedSegmentClassName?: string;

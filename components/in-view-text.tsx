@@ -7,7 +7,6 @@ import { inViewTextDefaults } from './animations/config';
 
 type InViewTextElement = 'div' | 'p' | 'span';
 type InViewTextUnit = 'letter' | 'word';
-type InViewTextTrigger = 'parent' | 'self';
 
 type InViewTextProps = {
   children: string;
@@ -17,18 +16,6 @@ type InViewTextProps = {
   delay?: number;
   duration?: number;
   stagger?: number;
-  amount?: number;
-  once?: boolean;
-  trigger?: InViewTextTrigger;
-};
-
-type InViewTextGroupProps = {
-  children: readonly string[];
-  className?: string;
-  delay?: number;
-  duration?: number;
-  stagger?: number;
-  paragraphPause?: number;
   amount?: number;
   once?: boolean;
 };
@@ -75,33 +62,6 @@ export function getInViewTextDuration(
   return unitCount === 0 ? 0 : (unitCount - 1) * stagger + duration;
 }
 
-export function getInViewTextSequenceDuration(
-  paragraphs: readonly string[],
-  {
-    by = 'letter',
-    delay = 0,
-    duration = inViewTextDefaults.duration,
-    stagger = by === 'word'
-      ? inViewTextDefaults.wordStagger
-      : inViewTextDefaults.letterStagger,
-    paragraphPause = inViewTextDefaults.paragraphPause,
-  }: {
-    by?: InViewTextUnit;
-    delay?: number;
-    duration?: number;
-    stagger?: number;
-    paragraphPause?: number;
-  } = {},
-) {
-  return paragraphs.reduce(
-    (total, paragraph, index) =>
-      total +
-      getInViewTextDuration(paragraph, { by, duration, stagger }) +
-      (index < paragraphs.length - 1 ? paragraphPause : 0),
-    delay,
-  );
-}
-
 export function InViewText({
   children,
   as = 'p',
@@ -114,7 +74,6 @@ export function InViewText({
     : inViewTextDefaults.letterStagger,
   amount = 0.3,
   once = true,
-  trigger = 'self',
 }: InViewTextProps) {
   const reduceMotion = useReducedMotion();
   const Component = motionElements[as];
@@ -187,64 +146,13 @@ export function InViewText({
   return (
     <Component
       className={className}
-      initial={
-        trigger === 'self' ? (reduceMotion ? false : 'hidden') : undefined
-      }
-      whileInView={trigger === 'self' ? 'visible' : undefined}
-      viewport={trigger === 'self' ? { amount, once } : undefined}
+      initial={reduceMotion ? false : 'hidden'}
+      whileInView='visible'
+      viewport={{ amount, once }}
       data-in-view-text={by}
     >
       <span className='sr-only'>{children}</span>
       <span aria-hidden='true'>{animatedText}</span>
     </Component>
-  );
-}
-
-export function InViewTextGroup({
-  children,
-  className,
-  delay = 0,
-  duration = inViewTextDefaults.duration,
-  stagger = inViewTextDefaults.letterStagger,
-  paragraphPause = inViewTextDefaults.paragraphPause,
-  amount = 0.3,
-  once = true,
-}: InViewTextGroupProps) {
-  const reduceMotion = useReducedMotion();
-
-  const paragraphs = children.map((paragraph, index) => {
-    const currentDelay = children
-      .slice(0, index)
-      .reduce(
-        (total, previousParagraph) =>
-          total +
-          getInViewTextDuration(previousParagraph, { duration, stagger }) +
-          paragraphPause,
-        delay,
-      );
-
-    return (
-      <InViewText
-        key={`${index}-${paragraph}`}
-        delay={currentDelay}
-        duration={duration}
-        stagger={stagger}
-        trigger='parent'
-      >
-        {paragraph}
-      </InViewText>
-    );
-  });
-
-  return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : 'hidden'}
-      whileInView='visible'
-      viewport={{ amount, once }}
-      data-in-view-text-group
-    >
-      {paragraphs}
-    </motion.div>
   );
 }

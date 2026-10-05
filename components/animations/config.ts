@@ -18,7 +18,6 @@ export const inViewTextDefaults = {
   duration: 0.25,
   letterStagger: 0.035,
   wordStagger: 0.1,
-  paragraphPause: 0.12,
   linkGap: 0.2,
 } as const;
 

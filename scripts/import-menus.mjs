@@ -82,7 +82,7 @@ function requireNonNegativeInteger(value, field) {
 }
 
 /** @param {unknown} value @param {number} index */
-export function parseSourceMenu(value, index) {
+function parseSourceMenu(value, index) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new Error(`Item ${index + 1} must be an object`);
   }

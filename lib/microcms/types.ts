@@ -17,7 +17,7 @@ export type Menu = {
   sortOrder: number;
   isAvailable: boolean;
 };
-export type EnglishStatus = 'pending' | 'needs-review' | 'approved' | 'failed';
+type EnglishStatus = 'pending' | 'needs-review' | 'approved' | 'failed';
 export type CmsTranslationFields = {
   nameEn?: string;
   descriptionEn?: string;

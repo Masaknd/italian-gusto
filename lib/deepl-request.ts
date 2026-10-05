@@ -1,7 +1,7 @@
 const maxBodyBytes = 100 * 1024;
 const maxTextsPerRequest = 50;
 
-export function createTranslationBody(texts: string[]) {
+function createTranslationBody(texts: string[]) {
   return JSON.stringify({ text: texts, target_lang: 'EN', source_lang: 'JA' });
 }
 

@@ -8,8 +8,8 @@ import { getDictionary } from '@/locales';
 import { localizeMenuContent } from './localization';
 
 export const CMS_TAG = 'gusto-menu-content';
-export const CMS_ENDPOINTS = ['menus', 'featured-menus'] as const;
-export type CmsEndpoint = (typeof CMS_ENDPOINTS)[number];
+const CMS_ENDPOINTS = ['menus', 'featured-menus'] as const;
+type CmsEndpoint = (typeof CMS_ENDPOINTS)[number];
 
 export function isCmsEndpoint(value: string | undefined): value is CmsEndpoint {
   return CMS_ENDPOINTS.some((endpoint) => endpoint === value);

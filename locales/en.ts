@@ -142,10 +142,6 @@ export const en = {
   featured: {
     title: 'Our Top Picks ',
     numberLabels: ['1', '2', '3', '4', '5'],
-    menuLinks: ['View the pasta menu', 'View the pizza menu', 'View all menus'],
-    previous: 'Previous Picks',
-    next: 'Next Picks',
-    position: 'Picks {current} of {total}',
   },
   info: {
     title: 'Visit us',

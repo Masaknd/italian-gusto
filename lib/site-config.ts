@@ -15,7 +15,7 @@ export const siteConfig = {
   reservationUrl: 'https://select-type.com/rsv/?id=dfcuCU3lEUg',
 } as const;
 
-export const taxConfig = {
+const taxConfig = {
   // tax rate 10%
   rate: 0.1,
   rounding: 'round' as const,

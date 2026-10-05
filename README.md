@@ -4,7 +4,7 @@ An App Router, TypeScript, Tailwind and microCMS foundation for the official Osa
 
 ## Local setup
 
-1. Use Node.js 20.9+ and pnpm 10.
+1. Use Node.js 24 and pnpm 10 (the unit tests and translation tooling require Node 24).
 2. Copy `.env.local.example` to `.env.local` and fill in the required service values.
 3. Run `pnpm dev`, then visit `/ja` or `/en`. Run `pnpm lint`, `pnpm exec tsc --noEmit`, `pnpm build`, and `pnpm test:e2e` before release. Playwright’s browser installation, if needed, is `pnpm exec playwright install`.
 

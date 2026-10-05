@@ -2,7 +2,7 @@ import { sourceHash } from '../translation-source';
 import type { CmsTranslationFields } from '../microcms/types';
 import type { Snapshot, TranslationEndpoint } from './contracts';
 
-export type TranslationDependencies = {
+type TranslationDependencies = {
   read: (endpoint: TranslationEndpoint, id: string) => Promise<Snapshot | null>;
   patchDraft: (
     endpoint: TranslationEndpoint,

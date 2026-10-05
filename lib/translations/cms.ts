@@ -7,7 +7,7 @@ import {
   type TranslationRecord,
 } from './contracts';
 
-export type CmsTranslationConfig = { serviceDomain: string; apiKey: string };
+type CmsTranslationConfig = { serviceDomain: string; apiKey: string };
 
 export function createTranslationCms(
   config: CmsTranslationConfig,

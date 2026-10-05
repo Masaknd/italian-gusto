@@ -138,14 +138,6 @@ export const ja = {
   featured: {
     title: 'うちのおすすめ',
     numberLabels: ['１', '２', '３', '４', '５'],
-    menuLinks: [
-      'パスタメニューを見る',
-      'ピザメニューを見る',
-      '各メニューを見る',
-    ],
-    previous: '前のおすすめ',
-    next: '次のおすすめ',
-    position: 'おすすめ {current} / {total}',
   },
   info: {
     title: '店舗情報',

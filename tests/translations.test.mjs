@@ -1,18 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
-import { registerHooks } from 'node:module';
+import '../scripts/register-ts.mjs';
 import { test } from 'node:test';
 
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    return nextResolve(
-      specifier.startsWith('.') && !/\.[a-z]+$/i.test(specifier)
-        ? `${specifier}.ts`
-        : specifier,
-      context,
-    );
-  },
-});
 const { sourceHash } = await import('../lib/translation-source.ts');
 const { parseJob, isActive } = await import('../lib/translations/contracts.ts');
 const { needsTranslation, translateRecord } =

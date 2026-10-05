@@ -1,7 +1,7 @@
 import { Client, Receiver } from '@upstash/qstash';
 import type { TranslationJob } from './contracts';
 
-export type QueueConfig = {
+type QueueConfig = {
   token: string;
   baseUrl?: string;
   destination: string;

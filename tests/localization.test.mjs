@@ -1,15 +1,7 @@
 import assert from 'node:assert/strict';
-import { registerHooks } from 'node:module';
+import '../scripts/register-ts.mjs';
 import { test } from 'node:test';
 
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    if (specifier.startsWith('.') && !/\.[a-z]+$/i.test(specifier)) {
-      return nextResolve(`${specifier}.ts`, context);
-    }
-    return nextResolve(specifier, context);
-  },
-});
 const { sourceHash } = await import('../lib/translation-source.ts');
 const { localizeMenu, localizeFeaturedMenu, localizeMenuContent } =
   await import('../lib/microcms/localization.ts');
