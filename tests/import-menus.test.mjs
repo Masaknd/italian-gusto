@@ -1,6 +1,26 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { buildPlan, parseSource } from '../scripts/import-menus.mjs';
+
+test('the shared sample contains all food and drinks with unique import identities', async () => {
+  const source = JSON.parse(await readFile(new URL('../app/sample-menu-list.json', import.meta.url), 'utf8'));
+  const menus = parseSource(source);
+  const drinks = parseSource(source, { drinksOnly: true });
+
+  assert.equal(menus.length, 103);
+  assert.equal(drinks.length, 43);
+  assert.equal(menus.filter((menu) => !menu.category.includes('ドリンク')).length, 60);
+  assert.deepEqual(menus.map((menu) => menu.sortOrder), Array.from({ length: 103 }, (_, i) => i + 1));
+  assert.deepEqual(drinks, menus.slice(60));
+  assert.ok(drinks.every((menu) => typeof menu.subCategory === 'string' && typeof menu.type === 'string'));
+});
+
+test('drinks-only imports exclude food regardless of its position in the source', () => {
+  const food = { ...drink, menuName: 'ピザ', category: 'pizza', sortOrder: 2 };
+  assert.deepEqual(parseSource([drink, food], { drinksOnly: true }), parseSource([drink]));
+  assert.deepEqual(parseSource([food], { drinksOnly: true }), []);
+});
 
 const drink = {
   menuName: 'ジンジャーエール',

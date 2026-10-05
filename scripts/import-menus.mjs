@@ -52,11 +52,11 @@ function usage() {
   console.log(`Import sample menu JSON into the microCMS "menus" API.
 
 Usage:
-  pnpm import:menus           Validate and preview changes (no writes)
+  pnpm import:menus           Preview all food and drink changes (no writes)
   pnpm import:menus --write   Create missing menu content with POST
   pnpm import:menus --write --allow-updates
                               Apply changes to existing content with PATCH
-  pnpm import:drinks          Preview app/sample-drink-menu-list.json
+  pnpm import:drinks          Preview only drinks from the shared sample file
   pnpm import:drinks --write --allow-updates
                               Create and update drink menu content
 
@@ -156,8 +156,8 @@ function parseSourceMenu(value, index) {
   return content;
 }
 
-/** @param {unknown} value */
-export function parseSource(value) {
+/** @param {unknown} value @param {{ drinksOnly?: boolean }} [options] */
+export function parseSource(value, { drinksOnly = false } = {}) {
   if (!Array.isArray(value) || value.length === 0) {
     throw new Error('The sample menu source must be a non-empty array');
   }
@@ -177,7 +177,9 @@ export function parseSource(value) {
     sortOrders.add(menu.sortOrder);
   }
 
-  return menus;
+  return drinksOnly
+    ? menus.filter((menu) => menu.category.includes('ドリンク'))
+    : menus;
 }
 
 /** @param {MenuWriteContent} desired @param {ExistingMenu} existing */
@@ -240,14 +242,9 @@ async function main() {
     );
   }
 
-  const sourcePath = resolve(
-    projectRoot,
-    args.has('--drinks')
-      ? 'app/sample-drink-menu-list.json'
-      : 'app/sample-menu-list.json',
-  );
+  const sourcePath = resolve(projectRoot, 'app/sample-menu-list.json');
   const source = JSON.parse(await readFile(sourcePath, 'utf8'));
-  const menus = parseSource(source);
+  const menus = parseSource(source, { drinksOnly: args.has('--drinks') });
   const client = createClient({ serviceDomain, apiKey });
   const existingMenus = /** @type {ExistingMenu[]} */ (
     await client.getAllContents({ endpoint })
